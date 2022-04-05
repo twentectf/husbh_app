@@ -10,7 +10,7 @@ Husbh, is an Arabic application for children from age 6-8 to learn math operatio
 - Technology:
 We used Flutter, which is a framework that uses Dart language.
 
-- Launching instructions:
+- Launching instructions:\
 1- Download Android emulator\
 2- Copy the URL of the project code\
 3-Open Visual Studio to run the code\
