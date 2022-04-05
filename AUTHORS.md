@@ -3,7 +3,7 @@
 - Razan Almansour
 - Banan Alolah
 - Amani Albatati
-- Sarah Alabaddi
+- Sarah Alabbadi
 
 ## Supervised by:
 - Dr. Lama Alzaben
