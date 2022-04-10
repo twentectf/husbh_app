@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:husbh_app/screens/home_page.dart';
+import 'package:husbh_app/screens/multiplication_video.dart';
 import 'package:husbh_app/screens/profile.dart';
 
 //import whats needed for styling & properties
@@ -14,6 +15,9 @@ import 'package:nice_buttons/nice_buttons.dart';
 //import project's files
 import 'WaitingScreen.dart';
 import 'addition_video.dart';
+import 'division_video.dart';
+import 'subtraction_video.dart';
+import 'multiplication_video.dart';
 
 void main() async {
   //calling to use firebase
@@ -229,11 +233,12 @@ class _learnpageState extends State<learn_page> {
                           borderThickness: 6,
                           gradientOrientation: GradientOrientation.Horizontal,
                           onTap: (finish) {
-                            /*   Navigator.push( //Navigate to subtraction video
-                                context,
-                                 MaterialPageRoute(
-                                     builder: (context) => subVideo()),
-                               ); */
+                            Navigator.push(
+                              //Navigate to subtraction video
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => subtractionVideo()),
+                            );
                           },
                           child: Text('-',
                               textAlign: TextAlign.center,
@@ -259,11 +264,12 @@ class _learnpageState extends State<learn_page> {
                           borderThickness: 6,
                           gradientOrientation: GradientOrientation.Horizontal,
                           onTap: (finish) {
-                            /*   Navigator.push( //Navigate to multiplication video
-                                 context,
-                                 MaterialPageRoute(
-                                     builder: (context) => multiVideo()),
-                               ); */
+                            Navigator.push(
+                              //Navigate to multiplication video
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => multiplicationVideo()),
+                            );
                           },
                           child: Text('×',
                               textAlign: TextAlign.center,
@@ -289,11 +295,12 @@ class _learnpageState extends State<learn_page> {
                           borderThickness: 6,
                           gradientOrientation: GradientOrientation.Horizontal,
                           onTap: (finish) {
-                            /*   Navigator.push( //Navigate to division video
-                                 context,
-                                 MaterialPageRoute(
-                                     builder: (context) => divisionVideo()),
-                               ); */
+                            Navigator.push(
+                              //Navigate to division video
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => divisionVideo()),
+                            );
                           },
                           child: Text('\u00F7',
                               textAlign: TextAlign.center,

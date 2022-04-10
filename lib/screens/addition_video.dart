@@ -19,13 +19,13 @@ void main() {
 // ignore: camel_case_types
 class additionVideo extends StatefulWidget {
   const additionVideo({Key? key}) : super(key: key);
-
   @override
   _VideoAppState createState() => _VideoAppState();
 }
 
 class _VideoAppState extends State<additionVideo> {
   late VideoPlayerController _controller; //the controller of the video player
+
   late Timer timer; //timer for the video duration
   @override
   void initState() {
