@@ -7,7 +7,7 @@ import 'package:video_player/video_player.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'home_screen.dart';
+import 'questions_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,13 +19,13 @@ void main() {
 // ignore: camel_case_types
 class additionVideo extends StatefulWidget {
   const additionVideo({Key? key}) : super(key: key);
-
   @override
   _VideoAppState createState() => _VideoAppState();
 }
 
 class _VideoAppState extends State<additionVideo> {
   late VideoPlayerController _controller; //the controller of the video player
+
   late Timer timer; //timer for the video duration
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _VideoAppState extends State<additionVideo> {
             () => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
+                  builder: (context) => const QuestionsScreen(),
                 )));
 
         setState(() {});
@@ -84,7 +84,8 @@ class _VideoAppState extends State<additionVideo> {
                   //Navigate to the questions page
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const QuestionsScreen()),
                   );
                   _controller
                       .pause(); //stop the video when naviagte to the questions page
