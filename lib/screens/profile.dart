@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:husbh_app/screens/login_screen.dart';
 import 'package:husbh_app/widgets/my_button.dart';
 import 'package:nice_buttons/nice_buttons.dart';
-import '../widgets/back_arrow.dart';
 import 'WaitingScreen.dart';
 
 
@@ -101,6 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
               builder: (context, snapshot) => snapshot.connectionState ==
                       ConnectionState.waiting
                   ? Scaffold(
+                    
                       body: Stack(
                         children: [
                           Container(
@@ -123,9 +123,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   : Directionality(
                       textDirection: TextDirection.rtl,
                       child: Scaffold(
-                          backgroundColor: Colors.amber,
+                          backgroundColor: Colors.amber[300],
+                          // backgroundColor: Color.fromARGB(255, 190, 247, 125),
                           extendBodyBehindAppBar: true,
                           appBar: AppBar(
+                            
                             centerTitle: true,
                             title: Padding(
                               padding: EdgeInsets.only(left: 330),
@@ -148,600 +150,493 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             elevation: 0,
                             backgroundColor: Colors.amber[300],
+                            // backgroundColor: Color.fromARGB(255, 190, 247, 125),
                           ), //c
-                          body: Stack(
-                            children: <Widget>[
-                              Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(40),
-                                    topRight: Radius.circular(40),
-                                  ),
-                                ),
-                                height: double.infinity,
-                                child: Row(
-                                  children: [
-                                    SizedBox(width: 15, height: 15),
-                                    Expanded(
-                                      child: Container(
-                                        // الكونتينر الجهه على اليمين
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        margin: EdgeInsets.only(top: 70),
-                                        height:
-                                            MediaQuery.of(context).size.height,
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              //mainAxisAlignment: MainAxisAlignment.start,
-                                              children: [
-                                                //SizedBox(width: 50, height: 50),
-                                                Container(
-                                                  // حق صورة البروفايل
-                                                  margin:
-                                                      EdgeInsets.only(top: 45),
-                                                  width: 100,
-                                                  height: 100,
-                                                  decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        image: sex == "boy"
-                                                            ? AssetImage(
-                                                                "images/husbh_boy.png")
-                                                            : AssetImage(
-                                                                "images/husbh_girl.png"),
-                                                        scale: 0.02,
-                                                      ),
-                                                      border: Border.all(
-                                                        // color:
-                                                        //     Color.fromARGB(
-                                                        //         255,
-                                                        //         248,
-                                                        //         240,
-                                                        //         170),
-                                                        color: Colors
-                                                            .amber.shade200,
-                                                        width: 2,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          // color: Colors
-                                                          //     .yellow
-                                                          //     .shade100,
-                                                          color: Colors
-                                                              .amber.shade300,
-                                                        )
-                                                      ]),
-                                                ),
-                                                Container(
-                                                  //color: Colors.black,
-                                                  margin:
-                                                      EdgeInsets.only(top: 30),
-                                                  // padding: EdgeInsets.only(left: 130),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                          body: SafeArea(
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(top: 0.0),
+                                     decoration: BoxDecoration(
+                                      color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(40),
+                                            topRight: Radius.circular(40),
+                                          ),
+                                        ),
+
+                                    // decoration: const BoxDecoration(
+                                    //   color: Colors.white,
+                                    //   borderRadius: BorderRadius.only(
+                                    //     topLeft: Radius.circular(40),
+                                    //     topRight: Radius.circular(40),
+                                    //   ),
+                                    // ),
+                                    // height: double.infinity,
+                                    child:  SingleChildScrollView(
+                                      child: Row(
+                                        children: [
+                                          SizedBox(width: 15, height: 15),
+                                          Expanded(
+                                            child: Container(
+                                              // الكونتينر الجهه على اليمين
+                                              // width:
+                                              //     MediaQuery.of(context).size.width /
+                                              //         2,
+                                              margin: EdgeInsets.only(bottom: 70),
+                                              // height:
+                                              //     MediaQuery.of(context).size.height,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    //mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
-                                                      //SizedBox(width: 30, height: 30),
-                                                      Column(
-                                                        children: [
-                                                          SizedBox(
-                                                              width: 20,
-                                                              height: 20),
-                                                          Container(
-                                                            //كونتينر الاسم
-                                                            height: 30,
-                                                            width: 250,
-                                                            margin:
-                                                                EdgeInsets.all(
-                                                                    7),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                    border:
-                                                                        Border
-                                                                            .all(
-                                                                      // color: Color.fromARGB(
-                                                                      //     255, 214, 212, 214),
-                                                                      color: Colors
-                                                                          .grey
-                                                                          .shade300,
-                                                                      width: 2,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            20),
-                                                                    boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade100,
-                                                                  )
-                                                                ]),
-                                                            child: Row(
-                                                              //mainAxisAlignment:
-                                                              // MainAxisAlignment.center,
+                                                      //SizedBox(width: 50, height: 50),
+                                                      Container(
+                                                        // حق صورة البروفايل
+                                                        margin:
+                                                            EdgeInsets.only(top: 45),
+                                                        width: 100,
+                                                        height: 100,
+                                                        decoration: BoxDecoration(
+                                                            image: DecorationImage(
+                                                              image: sex == "boy"
+                                                                  ? AssetImage(
+                                                                      "images/husbh_boy.png")
+                                                                  : AssetImage(
+                                                                      "images/husbh_girl.png"),
+                                                              scale: 0.02,
+                                                            ),
+                                                            border: Border.all(
+                                                              // color:
+                                                              //     Color.fromARGB(
+                                                              //         255,
+                                                              //         248,
+                                                              //         240,
+                                                              //         170),
+                                                              color: Colors
+                                                                  .amber.shade200,
+                                                              width: 2,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    15),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                // color: Colors
+                                                                //     .yellow
+                                                                //     .shade100,
+                                                                color: Colors
+                                                                    .amber.shade300,
+                                                              )
+                                                            ]),
+                                                      ),
+                                                      Container(
+                                                        //color: Colors.black,
+                                                        margin:
+                                                            EdgeInsets.only(top: 30),
+                                                        // padding: EdgeInsets.only(left: 130),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            //SizedBox(width: 30, height: 30),
+                                                            Column(
                                                               children: [
                                                                 SizedBox(
-                                                                    width: 20,
+                                                                    width: 10,
                                                                     height: 20),
-                                                                Text(
-                                                                  "  الاسم : ",
-                                                                  style: TextStyle(
-                                                                      fontFamily: 'ReadexPro',
-                                                                      // background:
-                                                                      color: Colors.brown,
-                                                                      fontSize: 15,
-                                                                      fontWeight: FontWeight.w800),
-                                                                  softWrap:
-                                                                      false,
-                                                                  maxLines: 1,
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                ),
-                                                                Text(
-                                                                  name,
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .brown,
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontFamily:
-                                                                          'ReadexPro',
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700),
-                                                                  softWrap:
-                                                                      false,
-                                                                  maxLines: 1,
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                ),
+                                                                Container(
+                                                                  //كونتينر الاسم
+                                                                  height: 30,
+                                                                  width: 250,
+                                                                  margin:
+                                                                      EdgeInsets.all(
+                                                                          7),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          border:
+                                                                              Border
+                                                                                  .all(
+                                                                            // color: Color.fromARGB(
+                                                                            //     255, 214, 212, 214),
+                                                                            color: Colors
+                                                                                .grey
+                                                                                .shade300,
+                                                                            width: 2,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(
+                                                                                  20),
+                                                                          boxShadow: [
+                                                                        BoxShadow(
+                                                                          color: Colors
+                                                                              .grey
+                                                                              .shade100,
+                                                                        )
+                                                                      ]),
+                                                                  child: Row(
+                                                                    //mainAxisAlignment:
+                                                                    // MainAxisAlignment.center,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                          width: 10,
+                                                                          height: 20),
+                                                                      Text(
+                                                                        "  الاسم : ",
+                                                                        style: TextStyle(
+                                                                            fontFamily: 'ReadexPro',
+                                                                            // background:
+                                                                            color: Colors.brown,
+                                                                            fontSize: 15,
+                                                                            fontWeight: FontWeight.w800),
+                                                                        softWrap:
+                                                                            false,
+                                                                        maxLines: 1,
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .ellipsis,
+                                                                      ),
+                                                                      Text(
+                                                                        name,
+                                                                        style: TextStyle(
+                                                                            color: Colors
+                                                                                .brown,
+                                                                            fontSize:
+                                                                                15,
+                                                                            fontFamily:
+                                                                                'ReadexPro',
+                                                                            fontWeight:
+                                                                                FontWeight
+                                                                                    .w700),
+                                                                        softWrap:
+                                                                            false,
+                                                                        maxLines: 1,
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .ellipsis,
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )
                                                               ],
                                                             ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Container(
-                                                        //كونتير العمر
-                                                        // width: MediaQuery.of(context).size.width / 2,
-                                                        width: 250,
-                                                        height: 30,
-                                                        margin:
-                                                            EdgeInsets.all(7),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                border:
-                                                                    Border.all(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade300,
-                                                                  width: 2,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20),
-                                                                boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade100,
-                                                              )
-                                                            ]),
-                                                        child: Row(
-                                                          children: [
-                                                            SizedBox(
-                                                                width: 20,
-                                                                height: 20),
-                                                            Text(
-                                                              " العمر: ",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .brown,
-                                                                  fontSize: 15,
-                                                                  fontFamily:
-                                                                      'ReadexPro',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700),
+                                                            
+                                                            Container(
+                                                              //كونتير العمر
+                                                              // width: MediaQuery.of(context).size.width / 2,
+                                                              width: 250,
+                                                              height: 30,
+                                                              margin:
+                                                                  EdgeInsets.all(7),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      border:
+                                                                          Border.all(
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade300,
+                                                                        width: 2,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .circular(
+                                                                                  20),
+                                                                      boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .shade100,
+                                                                    )
+                                                                  ]),
+                                                              child: Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                      width: 10,
+                                                                      height: 20),
+                                                                  Text(
+                                                                    " العمر: ",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .brown,
+                                                                        fontSize: 15,
+                                                                        fontFamily:
+                                                                            'ReadexPro',
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w700),
+                                                                  ),
+                                                                  Text(age,
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .brown,
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontFamily:
+                                                                              'ReadexPro',
+                                                                          fontWeight:
+                                                                              FontWeight
+                                                                                  .w700))
+                                                                ],
+                                                              ),
                                                             ),
-                                                            Text(age,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .brown,
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontFamily:
-                                                                        'ReadexPro',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700))
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        //كونتينر الايميل
-                                                        width: 250,
-                                                        height: 30,
-                                                        margin:
-                                                            EdgeInsets.all(7),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                //shape: BoxShape.rectangle,
-                                                                border:
-                                                                    Border.all(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade300,
-                                                                  width: 2,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20),
-                                                                boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade100,
-                                                              )
-                                                            ]),
-                                                        child: Row(
-                                                          //mainAxisAlignment:
-                                                          //  MainAxisAlignment.start,
-                                                          children: [
-                                                            SizedBox(
-                                                                width: 20,
-                                                                height: 20),
-                                                            Text(
-                                                              " الايميل : ",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .brown,
-                                                                  fontSize: 15,
-                                                                  fontFamily:
-                                                                      'ReadexPro',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700),
+                                                            Container(
+                                                              //كونتينر الايميل
+                                                              width: 250,
+                                                              height: 30,
+                                                              margin:
+                                                                  EdgeInsets.all(7),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      //shape: BoxShape.rectangle,
+                                                                      border:
+                                                                          Border.all(
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade300,
+                                                                        width: 2,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .circular(
+                                                                                  20),
+                                                                      boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .shade100,
+                                                                    )
+                                                                  ]),
+                                                              child: Wrap (
+                                                                //mainAxisAlignment:
+                                                                //  MainAxisAlignment.start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                      width: 10,
+                                                                      height: 20),
+                                                                  Text(
+                                                                    " الايميل : ",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .brown,
+                                                                        fontSize: 15,
+                                                                        fontFamily:
+                                                                            'ReadexPro',
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w700),
+                                                                  ),
+                                                                  Text(email,
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .brown,
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontFamily:
+                                                                              'ReadexPro',
+                                                                          fontWeight:
+                                                                              FontWeight
+                                                                                  .w700))
+                                                                ],
+                                                              ),
                                                             ),
-                                                            Text(email,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .brown,
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontFamily:
-                                                                        'ReadexPro',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700))
                                                           ],
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            //SizedBox(width: 100, height: 70),
-
-                                            NiceButtons(
-                                              startColor: Colors.amber,
-                                              endColor: Colors.amber.shade400,
-                                              borderColor:Color.fromARGB(255, 231, 162, 0),
-                                              stretch: false,
-                                                // style: ElevatedButton.styleFrom(
-                                                //   elevation: 8,
-                                                //   onSurface: Colors.black,
-                                                //    primary: Colors.amber.shade400,
-                                                //    // onPrimary:Colors.amber,
-                                                //     shadowColor: Color.fromARGB(255, 231, 162, 0),
-                                                    
-                                                //   shape: RoundedRectangleBorder(
-                                                //     borderRadius: BorderRadius.circular(40),
-                                                //   ),
-                                                // //  side: BorderSide(
-                                                // //   // width: 0.5,
-                                                // //   // color:Color.fromARGB(255, 231, 162, 0),
-
-                                                // //  )
-                                                //     ),
-                                                    
-                                                child: Text(
-                                                  'تسجيل خروج',
-                                                  style: TextStyle(
-                                                    color:
-                                                        Colors.brown.shade600,
-                                                    decoration:
-                                                        TextDecoration.none,
-                                                    fontSize: 28.0,
-                                                    fontFamily:
-                                                        'ReadexPro-Regular',
-                                                  ),
-                                                ),
-                                                onTap: (finish) {
-                                                  AwesomeDialog(
-                                                    //if there is missing info this will be displayed
-                                                    context: context,
-                                                    dialogType:
-                                                        DialogType.WARNING,
-                                                    borderSide: BorderSide(
-                                                        color: Colors.green,
-                                                        width: 2),
-                                                    width: 280,
-
-                                                    buttonsBorderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(2)),
-                                                    headerAnimationLoop: false,
-                                                    animType:
-                                                        AnimType.BOTTOMSLIDE,
-                                                    title: 'تسجيل خروج',
-                                                    btnCancelText: "إلغاء",
-                                                    btnOkText: "نعم",
-                                                    desc: 'هل أنت متأكد؟',
-                                                    btnCancelOnPress: () {},
-                                                    btnOkOnPress: () {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                LoginScreen()),
-                                                      );
-                                                    },
-                                                    showCloseIcon: true,
-                                                  ).show();
-                                                }),
-                                          ],
-                                        ),
-                                        //الي فيه الصوره
-
-                                        //color: Colors.red,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      //  الي على اليسار الجهه الرصاصي
-
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                          left: 10, //الي يحرك المربع الرصاصي
-                                          top: 30, // الي ينزله ويرقيه
-                                        ),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            color: Colors.grey[100],
-                                          ),
-
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              2,
-
-                                          // alignment: Alignment.center,
-
-                                          child: SingleChildScrollView(
-                                            child: Center(
-                                              child: Row(children: [
-                                                Expanded(
-                                                  //هذا الي يحرك المربعات داخل الرصاصي
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                      right: 30,
-                                                      // right: 25,
-                                                      // left: 40,
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                            top: 10,
-                                                          ),
-                                                          child: Text(
-                                                            'أدائي',
-                                                            style: TextStyle(
-                                                                fontSize: 24,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .brown),
-                                                          ),
+                                                  //SizedBox(width: 100, height: 70),
+                                                        SizedBox(height: 8,),
+                                                  NiceButtons(
+                                                    startColor: Colors.amber,
+                                                    endColor: Colors.amber.shade400,
+                                                    borderColor:Color.fromARGB(255, 231, 162, 0),
+                                                    stretch: false,
+                                                      // style: ElevatedButton.styleFrom(
+                                                      //   elevation: 8,
+                                                      //   onSurface: Colors.black,
+                                                      //    primary: Colors.amber.shade400,
+                                                      //    // onPrimary:Colors.amber,
+                                                      //     shadowColor: Color.fromARGB(255, 231, 162, 0),
+                                                          
+                                                      //   shape: RoundedRectangleBorder(
+                                                      //     borderRadius: BorderRadius.circular(40),
+                                                      //   ),
+                                                      // //  side: BorderSide(
+                                                      // //   // width: 0.5,
+                                                      // //   // color:Color.fromARGB(255, 231, 162, 0),
+                                                        
+                                                      // //  )
+                                                      //     ),
+                                                          
+                                                      child: Text(
+                                                        'تسجيل خروج',
+                                                        style: TextStyle(
+                                                          color:
+                                                              Colors.brown.shade600,
+                                                          decoration:
+                                                              TextDecoration.none,
+                                                          fontSize: 28.0,
+                                                          fontFamily:
+                                                              'ReadexPro-Regular',
                                                         ),
-                                                        Padding(
-                                                          //اخر مربعين
+                                                      ),
+                                                      onTap: (finish) {
+                                                        AwesomeDialog(
+                                                          //if there is missing info this will be displayed
+                                                          context: context,
+                                                          dialogType:
+                                                              DialogType.WARNING,
+                                                          borderSide: BorderSide(
+                                                              color: Colors.green,
+                                                              width: 2),
+                                                          width: 280,
+                                                        
+                                                          buttonsBorderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(2)),
+                                                          headerAnimationLoop: false,
+                                                          animType:
+                                                              AnimType.BOTTOMSLIDE,
+                                                          title: 'تسجيل خروج',
+                                                          btnCancelText: "إلغاء",
+                                                          btnOkText: "نعم",
+                                                          desc: 'هل أنت متأكد؟',
+                                                          btnCancelOnPress: () {},
+                                                          btnOkOnPress: () {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      LoginScreen()),
+                                                            );
+                                                          },
+                                                          showCloseIcon: true,
+                                                        ).show();
+                                                      }),
+                                                ],
+                                              ),
+                                              //الي فيه الصوره
+                                                        
+                                              //color: Colors.red,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            //  الي على اليسار الجهه الرصاصي
+                                                        
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 15, //الي يحرك المربع الرصاصي
+                                                top: 0, // الي ينزله ويرقيه
+                                              ),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                  color: Colors.grey[100],
+                                                ),
+                                                        
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    2,
+                                                        
+                                                // alignment: Alignment.center,
+                                                        
+                                                child: SingleChildScrollView(
+                                                  child: Center(
+                                                    child: Row(children: [
+                                                      Expanded(
+                                                        //هذا الي يحرك المربعات داخل الرصاصي
+                                                        child: Padding(
                                                           padding:
-                                                              EdgeInsets.only(
-                                                            top: 5,
-                                                            // bottom: 5,
+                                                              const EdgeInsets.only(
+                                                            right: 30,
+                                                            // right: 25,
+                                                            // left: 40,
                                                           ),
-
-                                                          child:
-                                                              SingleChildScrollView(
-                                                            child: Row(
-                                                              children: [
-                                                                Container(
-                                                                  width: 80,
-                                                                  height: 80,
-                                                                  child: Align(
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .center,
-                                                                    child: Card(
-                                                                      elevation:
-                                                                          10,
-                                                                      shape:
-                                                                          RoundedRectangleBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(20),
-                                                                      ),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            EdgeInsets.all(20),
-                                                                        child:
-                                                                            DecoratedBox(
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            color:
-                                                                                Color(0xffE8F2F7),
-                                                                            shape:
-                                                                                BoxShape.circle,
-                                                                          ),
-                                                                          child:
-                                                                              Padding(
-                                                                            padding:
-                                                                                EdgeInsets.all(2),
-                                                                            child:
-                                                                                DecoratedBox(
-                                                                              decoration: BoxDecoration(
-                                                                                //color: Color(0xff7AC1E7),
-                                                                                color: Colors.brown,
-                                                                                shape: BoxShape.circle,
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: EdgeInsets.all(7),
-                                                                                child: Icon(
-                                                                                  Icons.add,
-                                                                                  color: Colors.white,
-                                                                                  size: 15,
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
+                                                          child: Column(
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                  top: 10,
                                                                 ),
-                                                                // SizedBox(
-                                                                //     width: 3, height: 3),
-                                                                Container(
-                                                                  width: 80,
-                                                                  height: 80,
-                                                                  child:
-                                                                      DecoratedBox(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                            // color: Color(0xffEBECF1),
-                                                                            ),
-                                                                    child:
-                                                                        Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .center,
-                                                                      child:
-                                                                          Card(
-                                                                        elevation:
-                                                                            10,
-                                                                        shape:
-                                                                            RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(20),
-                                                                        ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding:
-                                                                              EdgeInsets.all(20),
-                                                                          child:
-                                                                              DecoratedBox(
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              color: Color(0xffE8F2F7),
-                                                                              shape: BoxShape.circle,
-                                                                            ),
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: EdgeInsets.all(2),
-                                                                              child: DecoratedBox(
-                                                                                decoration: BoxDecoration(
-                                                                                  //color: Color(0xff7AC1E7),
-                                                                                  color: Colors.brown,
-                                                                                  shape: BoxShape.circle,
-                                                                                ),
-                                                                                child: Padding(
-                                                                                  padding: EdgeInsets.all(7),
-                                                                                  child: Icon(
-                                                                                    Icons.remove,
-                                                                                    color: Colors.white,
-                                                                                    size: 15,
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
+                                                                child: Text(
+                                                                  'أدائي',
+                                                                  style: TextStyle(
+                                                                      fontSize: 24,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .brown),
                                                                 ),
-
-                                                                Container(
-                                                                  margin:
-                                                                      EdgeInsets
-                                                                          .only(
-                                                                    left: 17,
-                                                                  ),
+                                                              ),
+                                                              Padding(
+                                                                //اخر مربعين
+                                                                padding:
+                                                                    EdgeInsets.only(
+                                                                  top: 5,
+                                                                  // bottom: 5,
+                                                                ),
+                                                        
+                                                                child:
+                                                                    SingleChildScrollView(
                                                                   child: Row(
                                                                     children: [
                                                                       Container(
-                                                                        width:
-                                                                            80,
-                                                                        height:
-                                                                            80,
-                                                                        child:
-                                                                            DecoratedBox(
-                                                                          decoration: BoxDecoration(
-                                                                              // color: Color(0xffEBECF1),
-                                                                              ),
-                                                                          child:
-                                                                              Align(
-                                                                            alignment:
-                                                                                Alignment.center,
+                                                                        width: 80,
+                                                                        height: 80,
+                                                                        child: Align(
+                                                                          alignment:
+                                                                              Alignment
+                                                                                  .center,
+                                                                          child: Card(
+                                                                            elevation:
+                                                                                10,
+                                                                            shape:
+                                                                                RoundedRectangleBorder(
+                                                                              borderRadius:
+                                                                                  BorderRadius.circular(20),
+                                                                            ),
                                                                             child:
-                                                                                Card(
-                                                                              elevation: 10,
-                                                                              shape: RoundedRectangleBorder(
-                                                                                borderRadius: BorderRadius.circular(20),
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: EdgeInsets.all(20),
-                                                                                child: DecoratedBox(
-                                                                                  decoration: BoxDecoration(
-                                                                                    color: Color(0xffE8F2F7),
-                                                                                    shape: BoxShape.circle,
-                                                                                  ),
-                                                                                  child: Padding(
-                                                                                    padding: EdgeInsets.all(2),
-                                                                                    child: DecoratedBox(
-                                                                                      decoration: BoxDecoration(
-                                                                                        //color: Color(0xff7AC1E7),
-                                                                                        color: Colors.brown,
-                                                                                        shape: BoxShape.circle,
-                                                                                      ),
-                                                                                      child: Padding(
-                                                                                        padding: EdgeInsets.all(7),
-                                                                                        child: Icon(
-                                                                                          Icons.close_rounded,
-                                                                                          color: Colors.white,
-                                                                                          size: 15,
-                                                                                        ),
+                                                                                Padding(
+                                                                              padding:
+                                                                                  EdgeInsets.all(20),
+                                                                              child:
+                                                                                  DecoratedBox(
+                                                                                decoration:
+                                                                                    BoxDecoration(
+                                                                                  color:
+                                                                                      Color(0xffE8F2F7),
+                                                                                  shape:
+                                                                                      BoxShape.circle,
+                                                                                ),
+                                                                                child:
+                                                                                    Padding(
+                                                                                  padding:
+                                                                                      EdgeInsets.all(2),
+                                                                                  child:
+                                                                                      DecoratedBox(
+                                                                                    decoration: BoxDecoration(
+                                                                                      //color: Color(0xff7AC1E7),
+                                                                                      color: Colors.brown,
+                                                                                      shape: BoxShape.circle,
+                                                                                    ),
+                                                                                    child: Padding(
+                                                                                      padding: EdgeInsets.all(7),
+                                                                                      child: Icon(
+                                                                                        Icons.add,
+                                                                                        color: Colors.white,
+                                                                                        size: 15,
                                                                                       ),
                                                                                     ),
                                                                                   ),
@@ -754,33 +649,41 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                       // SizedBox(
                                                                       //     width: 3, height: 3),
                                                                       Container(
-                                                                        width:
-                                                                            80,
-                                                                        height:
-                                                                            80,
+                                                                        width: 80,
+                                                                        height: 80,
                                                                         child:
                                                                             DecoratedBox(
-                                                                          decoration: BoxDecoration(
-                                                                              // color: Color(0xffEBECF1),
-                                                                              ),
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                                  // color: Color(0xffEBECF1),
+                                                                                  ),
                                                                           child:
                                                                               Align(
                                                                             alignment:
-                                                                                Alignment.center,
+                                                                                Alignment
+                                                                                    .center,
                                                                             child:
                                                                                 Card(
-                                                                              elevation: 10,
-                                                                              shape: RoundedRectangleBorder(
-                                                                                borderRadius: BorderRadius.circular(20),
+                                                                              elevation:
+                                                                                  10,
+                                                                              shape:
+                                                                                  RoundedRectangleBorder(
+                                                                                borderRadius:
+                                                                                    BorderRadius.circular(20),
                                                                               ),
-                                                                              child: Padding(
-                                                                                padding: EdgeInsets.all(20),
-                                                                                child: DecoratedBox(
-                                                                                  decoration: BoxDecoration(
+                                                                              child:
+                                                                                  Padding(
+                                                                                padding:
+                                                                                    EdgeInsets.all(20),
+                                                                                child:
+                                                                                    DecoratedBox(
+                                                                                  decoration:
+                                                                                      BoxDecoration(
                                                                                     color: Color(0xffE8F2F7),
                                                                                     shape: BoxShape.circle,
                                                                                   ),
-                                                                                  child: Padding(
+                                                                                  child:
+                                                                                      Padding(
                                                                                     padding: EdgeInsets.all(2),
                                                                                     child: DecoratedBox(
                                                                                       decoration: BoxDecoration(
@@ -790,9 +693,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                                       ),
                                                                                       child: Padding(
                                                                                         padding: EdgeInsets.all(7),
-                                                                                        child: Image.asset(
-                                                                                          ('images/divide.png'),
+                                                                                        child: Icon(
+                                                                                          Icons.remove,
                                                                                           color: Colors.white,
+                                                                                          size: 15,
                                                                                         ),
                                                                                       ),
                                                                                     ),
@@ -803,32 +707,147 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                           ),
                                                                         ),
                                                                       ),
+                                                        
+                                                                      Container(
+                                                                        margin:
+                                                                            EdgeInsets
+                                                                                .only(
+                                                                          left: 17,
+                                                                        ),
+                                                                        child: Row(
+                                                                          children: [
+                                                                            Container(
+                                                                              width:
+                                                                                  80,
+                                                                              height:
+                                                                                  80,
+                                                                              child:
+                                                                                  DecoratedBox(
+                                                                                decoration: BoxDecoration(
+                                                                                    // color: Color(0xffEBECF1),
+                                                                                    ),
+                                                                                child:
+                                                                                    Align(
+                                                                                  alignment:
+                                                                                      Alignment.center,
+                                                                                  child:
+                                                                                      Card(
+                                                                                    elevation: 10,
+                                                                                    shape: RoundedRectangleBorder(
+                                                                                      borderRadius: BorderRadius.circular(20),
+                                                                                    ),
+                                                                                    child: Padding(
+                                                                                      padding: EdgeInsets.all(20),
+                                                                                      child: DecoratedBox(
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: Color(0xffE8F2F7),
+                                                                                          shape: BoxShape.circle,
+                                                                                        ),
+                                                                                        child: Padding(
+                                                                                          padding: EdgeInsets.all(2),
+                                                                                          child: DecoratedBox(
+                                                                                            decoration: BoxDecoration(
+                                                                                              //color: Color(0xff7AC1E7),
+                                                                                              color: Colors.brown,
+                                                                                              shape: BoxShape.circle,
+                                                                                            ),
+                                                                                            child: Padding(
+                                                                                              padding: EdgeInsets.all(7),
+                                                                                              child: Icon(
+                                                                                                Icons.close_rounded,
+                                                                                                color: Colors.white,
+                                                                                                size: 15,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                            // SizedBox(
+                                                                            //     width: 3, height: 3),
+                                                                            Container(
+                                                                              width:
+                                                                                  80,
+                                                                              height:
+                                                                                  80,
+                                                                              child:
+                                                                                  DecoratedBox(
+                                                                                decoration: BoxDecoration(
+                                                                                    // color: Color(0xffEBECF1),
+                                                                                    ),
+                                                                                child:
+                                                                                    Align(
+                                                                                  alignment:
+                                                                                      Alignment.center,
+                                                                                  child:
+                                                                                      Card(
+                                                                                    elevation: 10,
+                                                                                    shape: RoundedRectangleBorder(
+                                                                                      borderRadius: BorderRadius.circular(20),
+                                                                                    ),
+                                                                                    child: Padding(
+                                                                                      padding: EdgeInsets.all(20),
+                                                                                      child: DecoratedBox(
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: Color(0xffE8F2F7),
+                                                                                          shape: BoxShape.circle,
+                                                                                        ),
+                                                                                        child: Padding(
+                                                                                          padding: EdgeInsets.all(2),
+                                                                                          child: DecoratedBox(
+                                                                                            decoration: BoxDecoration(
+                                                                                              //color: Color(0xff7AC1E7),
+                                                                                              color: Colors.brown,
+                                                                                              shape: BoxShape.circle,
+                                                                                            ),
+                                                                                            child: Padding(
+                                                                                              padding: EdgeInsets.all(7),
+                                                                                              child: Image.asset(
+                                                                                                ('images/divide.png'),
+                                                                                                color: Colors.white,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      )
                                                                     ],
                                                                   ),
-                                                                )
-                                                              ],
-                                                            ),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                        
+                                                      // حق الباتون الي تحت
+                                                    ]),
                                                   ),
                                                 ),
-
-                                                // حق الباتون الي تحت
-                                              ]),
+                                                // margin: EdgeInsets.only(
+                                                //     top: 100, left: 20),
+                                                // width: MediaQuery.of(context).size.width / 2,
+                                              ),
                                             ),
                                           ),
-                                          // margin: EdgeInsets.only(
-                                          //     top: 100, left: 20),
-                                          // width: MediaQuery.of(context).size.width / 2,
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
+                              
                           )),
                     ));
         });
