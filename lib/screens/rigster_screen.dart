@@ -855,10 +855,39 @@ class _RegistrationScreenThirdState extends State<RegistrationScreenThird> {
                                                     .set({
                                                   'name': widget.chName,
                                                   'age': widget.age,
+                                                  //add
+                                                  'addLevel1' : [],
+                                                  'addLevel12' : [],
+                                                  'addLevel13' : [],
+
+                                                  //sub
+                                                  'subAhad' : [],
+                                                  'subashrat' : [],
+                                                  'submiat' : [],
+
+                                                  //multiplication
+
+                                                  'mulLevel1' : [],
+                                                  'mulLevel2' : [],
+                                                  'mulLevel3' : [],
+
+                                                  //division
+
+                                                  'divLevel1' : [],
+                                                  'divLevel2' : [],
+                                                  'divLevel3' : [],
+
+
+                                                  
+                                                  
+
+                                                  
                                                   'sex': _value == 0
                                                       ? 'boy'
                                                       : 'girl',
                                                   'email': user.email,
+                                                  
+
                                                 });
                                               }
                                               
@@ -873,7 +902,7 @@ class _RegistrationScreenThirdState extends State<RegistrationScreenThird> {
                                             ;
                                           },
                                           startColor: Colors.amber,
-                                          endColor: Colors.amber.shade400,
+                                          endColor: Color.fromRGBO(255, 202, 40, 1),
                                           borderColor:
                                               Color.fromARGB(255, 231, 162, 0),
                                           textColor: Colors.brown.shade600

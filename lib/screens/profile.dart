@@ -31,6 +31,28 @@ class _ProfilePageState extends State<ProfilePage> {
   var name;
   var age;
   var sex;
+
+  //add
+  var addLevel1 = []; //جمع الآحاد
+  var addLevel2 = []; //جمع العشرات
+  var addLevel3 = []; //جمع المئات
+
+//sub
+  var subLevel1 = []; //طرح الآحاد
+  var subLevel2 = []; //طرح العشرات
+  var subLevel3 = []; //طرح المئات
+
+  //multiplication
+
+  var mulLevel1 = []; // ضرب 0,1,2,4 
+  var mulLevel2 = []; // ضرب 3,6,5,10 
+  var mulLevel3 = []; // ضرب 7,8,9 
+
+  //division
+  var divLevel1 = []; // قسمة 0,2,5,10 
+  var divLevel2 = []; // قسمة 1,3,4,6 
+  var divLevel3 = []; // قسمة 7,8,9 
+
   @override
   void initState() {
     super.initState();
@@ -69,11 +91,25 @@ class _ProfilePageState extends State<ProfilePage> {
           age = doc['age'];
           if (age == '٢') {
             age = 'سنتان';
-          }
-          else {
-            age = age+ ' سنوات ';
+          } else {
+            age = age + ' سنوات ';
           }
           sex = doc['sex'];
+          addLevel1 = doc['addLevel1'];
+          addLevel2 = doc['addLevel2'];
+          addLevel3 = doc['addLevel3'];
+
+          subLevel1 = doc['subLevel1'];
+          subLevel2 = doc['subLevel2'];
+          subLevel3 = doc['subLevel3'];
+
+          mulLevel1 = doc['mulLevel1'];
+          mulLevel2 = doc['mulLevel2'];
+          mulLevel3 = doc['mulLevel3'];
+
+          divLevel1 = doc['divLevel1'];
+          divLevel2 = doc['divLevel2'];
+          divLevel3 = doc['divLevel3'];
           print(name);
         }
       });
@@ -134,8 +170,39 @@ class _ProfilePageState extends State<ProfilePage> {
                             Align(
                               alignment: Alignment.topRight,
                               child: IconButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   Navigator.pop(context);
+                                   
+                                   // add new scores to first level
+                                  // addLevel1 = addLevel1 + [45]; 
+                                  // FirebaseFirestore.instance
+                                  //     .collection("users")
+                                  //     .doc(user.uid)
+                                  //     .update({
+                                  //   "addAhad": addLevel1
+                                  // });
+
+
+
+                                  var i = addLevel1.length - 1;
+                                  var j = 0;
+                                  var current = addLevel1[i];
+                                  var last = addLevel1[i-1];
+                                  var last2 = addLevel1[i-2];
+                                  print(last2);
+                                  for (var j = 0; j < 3; j++) {
+                                    print(addLevel1[i]);
+                                    --i;
+                                  }
+
+                              
+
+                                  // FirebaseFirestore.instance
+                                  //     .collection("users")
+                                  //     .doc(user.uid)
+                                  //     .update({
+                                  //   "addAhad": FieldValue.arrayUnion(addAhad)
+                                  // });
                                 },
                                 icon: Icon(Icons.arrow_back_ios),
                                 color: Color(0xff4A4857),
@@ -183,8 +250,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 )),
 
-
-                              //الجزء الابيض اللي فيه المحتوى
+                            //الجزء الابيض اللي فيه المحتوى
                             Container(
                               margin: EdgeInsets.only(top: 110.0),
                               height: height,
@@ -203,7 +269,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   const EdgeInsets.only(top: 150, right: 20),
                               child: Row(
                                 children: [
-
                                   //الكونتينر الأبيض حق تقاريري
                                   Container(
                                     height: height / 2,
@@ -278,6 +343,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                             Icons.close),
                                                                         backgroundColor:
                                                                             Colors.red,
+                                                                            radius: 15,
+                                                                            
                                                                       ),
                                                                     ),
                                                                   ),
@@ -286,14 +353,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                         width /
                                                                             2,
                                                                     height:
-                                                                        height,
+                                                                        height-20,
                                                                   ),
                                                                 ],
                                                               ),
                                                             );
                                                           });
                                                     },
-
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -488,7 +554,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                   //الكونتينر الابيض حق نقاطي
                                   Container(
-
                                     height: height / 2,
                                     width: width / 2,
                                     decoration: BoxDecoration(
@@ -521,7 +586,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 15.0, vertical: 20),
 
-                                              //النسب المئوية
+                                          //النسب المئوية
                                           child: Row(
                                             children: [
                                               GestureDetector(
@@ -697,8 +762,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
 
-
-                              //معلومات الطفل اللي تطلع فوق
+                            //معلومات الطفل اللي تطلع فوق
                             Padding(
                               padding: const EdgeInsets.only(top: 20.0),
                               child: Row(
@@ -754,7 +818,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 fontWeight: FontWeight.w700),
                                           ),
                                           SizedBox(width: 20, height: 1),
-                                          Text(age ,
+                                          Text(age,
                                               style: TextStyle(
                                                   color: Colors.brown,
                                                   fontSize: 10,
