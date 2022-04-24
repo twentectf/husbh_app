@@ -858,61 +858,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             Container(
                               height: (height / 2 + 70),
-                              width: width * 0.25,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 5,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        0, 3), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SingleChildScrollView(
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 30),
-                                        child: Text(
-                                          'المستوى الحالي',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: 'ReadexPro',
-                                            color: Colors.brown,
-                                            fontWeight: FontWeight.w900,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      currentLevel(total)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Stack(
-                          children: [
-                            Container(
-                              height: (height / 2 + 70),
                               width: width * 0.35,
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -929,8 +874,27 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ],
                               ),
                             ),
+                            Container(
+                              height: (height / 4) -10,
+                              width: width * 0.35,
+                              decoration: BoxDecoration(
+                                color: Colors.amber.shade200,
+                                
+                                    borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(90),
+                                  bottomLeft: Radius.circular(90),
+                                  topLeft: Radius.circular(20), 
+                                  topRight: Radius.circular(20), 
+                                  ),
+                                  
+                               
+                              ),
+                            ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 30,
+                                vertical: 10,
+                              ),
                               child: SingleChildScrollView(
                                 child: Align(
                                   alignment: Alignment.center,
@@ -939,7 +903,83 @@ class _ProfilePageState extends State<ProfilePage> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 30),
+                                            horizontal: 30,
+                                            vertical: 10,
+                                            ),
+                                        child: Text(
+                                          'المستوى الحالي',
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: 'ReadexPro',
+                                            color: Colors.brown,
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      currentLevel(total)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Stack(
+                          children: [
+                            Container(
+                              height: (height / 2 + 70),
+                              width: width * 0.45,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    spreadRadius: 5,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: (height / 4) -10,
+                              width: width * 0.45,
+                              decoration: BoxDecoration(
+                                color: Colors.amber.shade200,
+                                
+                                    borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(90),
+                                  bottomLeft: Radius.circular(90),
+                                  topLeft: Radius.circular(20), 
+                                  topRight: Radius.circular(20), 
+                                  ),
+                                  
+                               
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 30,
+                                vertical: 10,
+                              ),
+                              child: SingleChildScrollView(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 40),
                                         child: SizedBox(
                                           width: width * 0.25,
                                           child: Text(
@@ -947,7 +987,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               
-                                              fontSize: 20,
+                                              fontSize: 25,
                                               fontFamily: 'ReadexPro',
                                               color: Colors.brown,
                                               fontWeight: FontWeight.w900,
@@ -985,7 +1025,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Container(
-                  width: width / 2,
+                  width: width *0.70 ,
                   height: height - 20,
                 ),
               ],
