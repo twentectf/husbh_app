@@ -857,13 +857,13 @@ class _RegistrationScreenThirdState extends State<RegistrationScreenThird> {
                                                   'age': widget.age,
                                                   //add
                                                   'addLevel1' : [],
-                                                  'addLevel12' : [],
-                                                  'addLevel13' : [],
+                                                  'addLevel2' : [],
+                                                  'addLevel3' : [],
 
                                                   //sub
-                                                  'subAhad' : [],
-                                                  'subashrat' : [],
-                                                  'submiat' : [],
+                                                  'subLevel1' : [],
+                                                  'subLevel2' : [],
+                                                  'subLevel3' : [],
 
                                                   //multiplication
 

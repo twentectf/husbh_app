@@ -36,22 +36,26 @@ class _ProfilePageState extends State<ProfilePage> {
   var addLevel1 = []; //جمع الآحاد
   var addLevel2 = []; //جمع العشرات
   var addLevel3 = []; //جمع المئات
+  var addTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
-//sub
+  //sub
   var subLevel1 = []; //طرح الآحاد
   var subLevel2 = []; //طرح العشرات
   var subLevel3 = []; //طرح المئات
+  var subTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
   //multiplication
 
-  var mulLevel1 = []; // ضرب 0,1,2,4 
-  var mulLevel2 = []; // ضرب 3,6,5,10 
-  var mulLevel3 = []; // ضرب 7,8,9 
+  var mulLevel1 = []; // ضرب 0,1,2,4
+  var mulLevel2 = []; // ضرب 3,6,5,10
+  var mulLevel3 = []; // ضرب 7,8,9
+  var mulTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
   //division
-  var divLevel1 = []; // قسمة 0,2,5,10 
-  var divLevel2 = []; // قسمة 1,3,4,6 
-  var divLevel3 = []; // قسمة 7,8,9 
+  var divLevel1 = []; // قسمة 0,2,5,10
+  var divLevel2 = []; // قسمة 1,3,4,6
+  var divLevel3 = []; // قسمة 7,8,9
+  var divlTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
   @override
   void initState() {
@@ -102,14 +106,23 @@ class _ProfilePageState extends State<ProfilePage> {
           subLevel1 = doc['subLevel1'];
           subLevel2 = doc['subLevel2'];
           subLevel3 = doc['subLevel3'];
+          subTotal = subLevel1[subLevel1.length - 1] +
+              subLevel2[subLevel2.length - 1] +
+              subLevel3[subLevel3.length - 1];
 
           mulLevel1 = doc['mulLevel1'];
           mulLevel2 = doc['mulLevel2'];
           mulLevel3 = doc['mulLevel3'];
+          mulTotal = mulLevel1[mulLevel1.length - 1] +
+              mulLevel2[mulLevel2.length - 1] +
+              mulLevel3[mulLevel3.length - 1];
 
           divLevel1 = doc['divLevel1'];
           divLevel2 = doc['divLevel2'];
           divLevel3 = doc['divLevel3'];
+          mulTotal = divLevel1[divLevel1.length - 1] +
+              divLevel2[divLevel2.length - 1] +
+              divLevel3[divLevel3.length - 1];
           print(name);
         }
       });
@@ -172,9 +185,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: IconButton(
                                 onPressed: () async {
                                   Navigator.pop(context);
-                                   
-                                   // add new scores to first level
-                                  // addLevel1 = addLevel1 + [45]; 
+
+                                  // add new scores to first level
+                                  // addLevel1 = addLevel1 + [45];
                                   // FirebaseFirestore.instance
                                   //     .collection("users")
                                   //     .doc(user.uid)
@@ -182,20 +195,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                   //   "addAhad": addLevel1
                                   // });
 
-
-
                                   var i = addLevel1.length - 1;
                                   var j = 0;
                                   var current = addLevel1[i];
-                                  var last = addLevel1[i-1];
-                                  var last2 = addLevel1[i-2];
+                                  var last = addLevel1[i - 1];
+                                  var last2 = addLevel1[i - 2];
                                   print(last2);
                                   for (var j = 0; j < 3; j++) {
                                     print(addLevel1[i]);
                                     --i;
                                   }
-
-                              
 
                                   // FirebaseFirestore.instance
                                   //     .collection("users")
@@ -312,53 +321,38 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   //الكونتينر البرتقالي حق الجمع
                                                   GestureDetector(
                                                     onTap: () {
+                                                      addTotal = 0;
                                                       print("add");
+                                                      print(addLevel1[
+                                                          addLevel1.length -
+                                                              1]);
+                                                      if (addLevel1
+                                                          .isNotEmpty) {
+                                                        addTotal += addLevel1[
+                                                            addLevel1.length -
+                                                                1] as int;
+                                                      }
+                                                      if (addLevel2
+                                                          .isNotEmpty) {
+                                                        addTotal += addLevel2[
+                                                            addLevel2.length -
+                                                                1] as int;
+                                                        print('5555');
+                                                      }
+                                                      if (addLevel3
+                                                          .isNotEmpty) {
+                                                        addTotal += addLevel3[
+                                                            addLevel3.length -
+                                                                1] as int;
+                                                      }
+                                                      print(addTotal);
 
                                                       //البوب اب ويندو
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext
-                                                              context) {
-                                                            return AlertDialog(
-                                                              content: Stack(
-                                                                overflow:
-                                                                    Overflow
-                                                                        .visible,
-                                                                children: <
-                                                                    Widget>[
-                                                                  Positioned(
-                                                                    right:
-                                                                        -40.0,
-                                                                    top: -40.0,
-                                                                    child:
-                                                                        InkResponse(
-                                                                      onTap:
-                                                                          () {
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                      },
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        child: Icon(
-                                                                            Icons.close),
-                                                                        backgroundColor:
-                                                                            Colors.red,
-                                                                            radius: 15,
-                                                                            
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  Container(
-                                                                    width:
-                                                                        width /
-                                                                            2,
-                                                                    height:
-                                                                        height-20,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            );
-                                                          });
+                                                      popUpWindow(
+                                                          context,
+                                                          height,
+                                                          width,
+                                                          addTotal);
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -844,5 +838,224 @@ class _ProfilePageState extends State<ProfilePage> {
                     )),
           );
         });
+  }
+
+  Future<dynamic> popUpWindow(
+      BuildContext context, double height, double width, int total) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Stack(
+              overflow: Overflow.visible,
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Row(
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              height: (height / 2 + 70),
+                              width: width * 0.25,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    spreadRadius: 5,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SingleChildScrollView(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 30),
+                                        child: Text(
+                                          'المستوى الحالي',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: 'ReadexPro',
+                                            color: Colors.brown,
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      currentLevel(total)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Stack(
+                          children: [
+                            Container(
+                              height: (height / 2 + 70),
+                              width: width * 0.35,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    spreadRadius: 5,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SingleChildScrollView(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 30),
+                                        child: SizedBox(
+                                          width: width * 0.25,
+                                          child: Text(
+                                            'المستوى في المحاولات السابقة',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              
+                                              fontSize: 20,
+                                              fontFamily: 'ReadexPro',
+                                              color: Colors.brown,
+                                              fontWeight: FontWeight.w900,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: -40.0,
+                  top: -40.0,
+                  child: InkResponse(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: CircleAvatar(
+                      child: Icon(Icons.close),
+                      backgroundColor: Colors.red,
+                      radius: 15,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: width / 2,
+                  height: height - 20,
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  Row currentLevel(score) {
+    String img;
+    var level;
+    Text txt = Text("images/golden.png");
+    return Row(
+      children: [
+        if (score >= 9) ...[
+          //اذا الطفل جاب 9 أو فوق من أصل 12 بوينتز
+          Container(
+            width: 70,
+            child: Image.asset("images/golden.png"),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Text(
+            "متقدم",
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'ReadexPro',
+              color: Colors.brown.shade500,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ] else if (score >= 6) ...[
+          //اذا الطفل جاب 6 أو فوق من أصل 12 بوينتز
+          Container(
+            width: 70,
+            child: Image.asset("images/silver.png"),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Text(
+            "متوسط",
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'ReadexPro',
+              color: Colors.brown.shade500,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ] else ...[
+          //اذا الطفل جاب أقل من 5 من أصل 12 بوينتز
+          Container(
+            width: 70,
+            child: Image.asset("images/bronze.png"),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Text(
+            "مبتدئ",
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'ReadexPro',
+              color: Colors.brown.shade500,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ],
+    );
   }
 }
