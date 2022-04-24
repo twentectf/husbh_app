@@ -7,7 +7,7 @@ import 'package:husbh_app/screens/login_screen.dart';
 import 'WaitingScreen.dart';
 import 'dart:math' as math;
 import 'package:percent_indicator/percent_indicator.dart';
-
+import 'package:timelines/timelines.dart';
 //bool WaitingScreen = false;
 // Future<void> main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -34,27 +34,75 @@ class _ProfilePageState extends State<ProfilePage> {
 
   //add
   var addLevel1 = []; //جمع الآحاد
+  var currentScoreAddL1 = 0;
+  var secondScoreAddL1 = 0;
+  var thirdScoreAddL1 = 0;
+
   var addLevel2 = []; //جمع العشرات
+  var currentScoreAddL2 = 0;
+  var secondScoreAddL2 = 0;
+  var thirdScoreAddL2 = 0;
+
   var addLevel3 = []; //جمع المئات
+  var currentScoreAddL3 = 0;
+  var secondScoreAddL3 = 0;
+  var thirdScoreAddL3 = 0;
+
   var addTotal = 0; //مجموع آخر محاولة من كل ليفيل
+
+  ////////////////////////////////////
 
   //sub
   var subLevel1 = []; //طرح الآحاد
+  var currentScoreSubL1 = 0;
+  var secondScoreSubL1 = 0;
+  var thirdScoreSubL1 = 0;
+
   var subLevel2 = []; //طرح العشرات
+  var currentScoreSubL2 = 0;
+  var secondScoreSubL2= 0;
+  var thirdScoreSubL2= 0;
+
   var subLevel3 = []; //طرح المئات
+  var currentScoreSubL3 = 0;
+  var secondScoreSubL3 = 0;
+  var thirdScoreSubL3 = 0;
   var subTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
   //multiplication
 
   var mulLevel1 = []; // ضرب 0,1,2,4
+  var currentScoreMulL1 = 0;
+  var secondScoreMulL1 = 0;
+  var thirdScoreMulL1 = 0;
+
   var mulLevel2 = []; // ضرب 3,6,5,10
+  var currentScoreMulL2 = 0;
+  var secondScoreMulL2 = 0;
+  var thirdScoreMulL2 = 0;
+
   var mulLevel3 = []; // ضرب 7,8,9
+  var currentScoreMulL3 = 0;
+  var secondScoreMulL3 = 0;
+  var thirdScoreMulL3= 0;
+
   var mulTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
   //division
   var divLevel1 = []; // قسمة 0,2,5,10
+  var currentScoreDivL1 = 0;
+  var secondScoreDivL1 = 0;
+  var thirdScoreDivL1 = 0;
+
   var divLevel2 = []; // قسمة 1,3,4,6
+  var currentScoreDivL2 = 0;
+  var secondScoreDivL2 = 0;
+  var thirdScoreDivL2 = 0;
+
   var divLevel3 = []; // قسمة 7,8,9
+  var currentScoreDivL3 = 0;
+  var secondScoreDivL3 = 0;
+  var thirdScoreDivL3 = 0;
   var divlTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
   @override
@@ -349,10 +397,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                                       //البوب اب ويندو
                                                       popUpWindow(
-                                                          context,
-                                                          height,
-                                                          width,
-                                                          addTotal);
+                                                          context,height, width,
+                                                          addTotal,'جمع الآحاد',"جمع العشرات","جمع المئات",
+                                                          currentScoreAddL1,secondScoreAddL1,thirdScoreAddL1,
+                                                          currentScoreAddL2,secondScoreAddL2,thirdScoreAddL2,
+                                                          currentScoreAddL3,secondScoreAddL3,thirdScoreAddL3
+                                                          );
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -398,6 +448,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   GestureDetector(
                                                     onTap: () {
                                                       print("subtract");
+
+                                                      popUpWindow(
+                                                          context,height, width,
+                                                          subTotal,'طرح الآحاد',"طرح العشرات","طرح المئات",
+                                                          currentScoreSubL1,secondScoreSubL1,thirdScoreSubL1,
+                                                          currentScoreSubL2,secondScoreSubL2,thirdScoreSubL2,
+                                                          currentScoreSubL3,secondScoreSubL3,thirdScoreSubL3
+                                                          );
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -443,6 +501,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   GestureDetector(
                                                     onTap: () {
                                                       print("multiplcation");
+
+                                                      popUpWindow(
+                                                          context,height, width,
+                                                          subTotal,'ضرب (۰,۱,۲,٤)',"ضرب (٥,۱۰, ۳,٦)","ضرب (۹, ٧,۸)",
+                                                          currentScoreMulL1,secondScoreMulL1,thirdScoreMulL1,
+                                                          currentScoreMulL2,secondScoreMulL2,thirdScoreMulL2,
+                                                          currentScoreMulL3,secondScoreMulL3,thirdScoreMulL3
+                                                          );
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -488,6 +554,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   GestureDetector(
                                                     onTap: () {
                                                       print("division");
+
+                                                      popUpWindow(
+                                                          context,height, width,
+                                                          subTotal,'قسمة (۰,۲,٥,۱۰)',"قسمة (٤,٦, ۱,۳)","قسمة (۹, ٧,۸)",
+                                                          currentScoreDivL1,secondScoreDivL1,thirdScoreDivL1,
+                                                          currentScoreDivL2,secondScoreDivL2,thirdScoreDivL2,
+                                                          currentScoreDivL3,secondScoreDivL3,thirdScoreDivL3
+                                                          );
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -841,7 +915,29 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<dynamic> popUpWindow(
-      BuildContext context, double height, double width, int total) {
+      BuildContext context, double height, double width, // هذول دايم نفسهم مايتغيرون
+       int total, String level1,String level2, String level3,
+        int currentScoreLevel1,  int currentScoreLevel2,  int currentScoreLevel3,
+        int secondScoreLevel1,  int secondScoreLevel2,  int secondScoreLevel3,
+        int thirdScoreLevel1,  int thirdScoreLevel2,  int thirdScoreLevel3,
+        ) 
+        {
+        // total --> توتال السكور بكل المهارات من 12
+        // level1 --> اسم المهارة الأولى
+       // level2 --> اسم المهارة الثانية
+       // level3 --> اسم المهارة الثالثة
+       // currentScoreLevel1 --> ناتج سكور آخر محاولة من أول ليفيل أو أول مهارة 
+       // currentScoreLevel2 --> ناتج سكور آخر محاولة من ثاني ليفيل أو ثاني مهارة 
+       // currentScoreLevel2 --> ناتج سكور آخر محاولة من ثالث ليفيل أو ثالث مهارة 
+
+       // secondScoreLevel1 --> ناتج سكور ثاني محاولة من أول ليفيل أو أول مهارة 
+       // secondScoreLevel2 --> ناتج سكور ثاني محاولة من ثاني ليفيل أو ثاني مهارة 
+       // secondScoreLevel3 --> ناتج سكور ثاني محاولة من ثالث ليفيل أو ثالث مهارة 
+
+       // thirdScoreLevel1 --> ناتج سكور ثالث محاولة من أول ليفيل أو أول مهارة 
+       // thirdScoreLevel2 --> ناتج سكور ثالث محاولة من ثاني ليفيل أو ثاني مهارة 
+       // thirdScoreLevel3 --> ناتج سكور ثالث محاولة من ثالث ليفيل أو ثالث مهارة 
+
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -875,14 +971,14 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                             Container(
-                              height: (height / 4) -10,
+                              height: (height / 4) -20,
                               width: width * 0.35,
                               decoration: BoxDecoration(
                                 color: Colors.amber.shade200,
                                 
                                     borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(90),
-                                  bottomLeft: Radius.circular(90),
+                                  bottomRight: Radius.circular(160),
+                                  bottomLeft: Radius.circular(160),
                                   topLeft: Radius.circular(20), 
                                   topRight: Radius.circular(20), 
                                   ),
@@ -897,9 +993,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               child: SingleChildScrollView(
                                 child: Align(
-                                  alignment: Alignment.center,
+                                  // alignment: Alignment.center,
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    // mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -909,7 +1005,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: Text(
                                           'المستوى الحالي',
                                           style: TextStyle(
-                                            fontSize: 25,
+                                            fontSize: 20,
                                             fontFamily: 'ReadexPro',
                                             color: Colors.brown,
                                             fontWeight: FontWeight.w900,
@@ -919,7 +1015,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                       SizedBox(
                                         height: 30,
                                       ),
-                                      currentLevel(total)
+                                      currentLevel(total),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                     
+
                                     ],
                                   ),
                                 ),
@@ -951,14 +1052,14 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                             Container(
-                              height: (height / 4) -10,
+                              height: (height / 4) -20,
                               width: width * 0.45,
                               decoration: BoxDecoration(
                                 color: Colors.amber.shade200,
                                 
                                     borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(90),
-                                  bottomLeft: Radius.circular(90),
+                                  bottomRight: Radius.circular(160),
+                                  bottomLeft: Radius.circular(160),
                                   topLeft: Radius.circular(20), 
                                   topRight: Radius.circular(20), 
                                   ),
@@ -987,7 +1088,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               
-                                              fontSize: 25,
+                                              fontSize: 20,
                                               fontFamily: 'ReadexPro',
                                               color: Colors.brown,
                                               fontWeight: FontWeight.w900,
