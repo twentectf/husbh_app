@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:husbh_app/screens/login_screen.dart';
 import 'WaitingScreen.dart';
 import 'dart:math' as math;
@@ -60,8 +63,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   var subLevel2 = []; //طرح العشرات
   var currentScoreSubL2 = 0;
-  var secondScoreSubL2= 0;
-  var thirdScoreSubL2= 0;
+  var secondScoreSubL2 = 0;
+  var thirdScoreSubL2 = 0;
 
   var subLevel3 = []; //طرح المئات
   var currentScoreSubL3 = 0;
@@ -84,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
   var mulLevel3 = []; // ضرب 7,8,9
   var currentScoreMulL3 = 0;
   var secondScoreMulL3 = 0;
-  var thirdScoreMulL3= 0;
+  var thirdScoreMulL3 = 0;
 
   var mulTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
@@ -150,6 +153,33 @@ class _ProfilePageState extends State<ProfilePage> {
           addLevel1 = doc['addLevel1'];
           addLevel2 = doc['addLevel2'];
           addLevel3 = doc['addLevel3'];
+          if (addLevel1.isNotEmpty) {
+            currentScoreAddL1 = addLevel1[addLevel1.length - 1] as int;
+          }
+          if (addLevel2.isNotEmpty) {
+            currentScoreAddL2 = addLevel2[addLevel2.length - 1] as int;
+          }
+          if (addLevel3.isNotEmpty) {
+            currentScoreAddL3 = addLevel3[addLevel3.length - 1] as int;
+          }
+          if (addLevel1.isNotEmpty) {
+            secondScoreAddL1 = addLevel1[addLevel1.length - 2] as int;
+          }
+          if (addLevel2.isNotEmpty) {
+            secondScoreAddL2 = addLevel2[addLevel2.length - 2] as int;
+          }
+          if (addLevel3.isNotEmpty) {
+            secondScoreAddL3 = addLevel3[addLevel3.length - 2] as int;
+          }
+          if (addLevel1.isNotEmpty) {
+            thirdScoreAddL1 = addLevel1[addLevel1.length - 3] as int;
+          }
+          if (addLevel2.isNotEmpty) {
+            thirdScoreAddL2 = addLevel2[addLevel2.length - 3] as int;
+          }
+          if (addLevel3.isNotEmpty) {
+            thirdScoreAddL3 = addLevel3[addLevel3.length - 3] as int;
+          }
 
           subLevel1 = doc['subLevel1'];
           subLevel2 = doc['subLevel2'];
@@ -157,6 +187,33 @@ class _ProfilePageState extends State<ProfilePage> {
           subTotal = subLevel1[subLevel1.length - 1] +
               subLevel2[subLevel2.length - 1] +
               subLevel3[subLevel3.length - 1];
+          if (subLevel1.isNotEmpty) {
+            currentScoreSubL1 = subLevel1[subLevel1.length - 1] as int;
+          }
+          if (subLevel2.isNotEmpty) {
+            currentScoreSubL2 = subLevel2[subLevel2.length - 1] as int;
+          }
+          if (subLevel3.isNotEmpty) {
+            currentScoreSubL3 = subLevel3[subLevel3.length - 1] as int;
+          }
+          if (subLevel1.isNotEmpty) {
+            secondScoreSubL1 = subLevel1[subLevel1.length - 2] as int;
+          }
+          if (subLevel2.isNotEmpty) {
+            secondScoreSubL2 = subLevel2[subLevel2.length - 2] as int;
+          }
+          if (subLevel3.isNotEmpty) {
+            secondScoreSubL3 = subLevel3[subLevel3.length - 2] as int;
+          }
+          if (subLevel1.isNotEmpty) {
+            thirdScoreMulL1 = subLevel1[subLevel1.length - 3] as int;
+          }
+          if (subLevel2.isNotEmpty) {
+            thirdScoreSubL2 = subLevel2[subLevel2.length - 3] as int;
+          }
+          if (subLevel3.isNotEmpty) {
+            thirdScoreSubL3 = subLevel3[subLevel3.length - 3] as int;
+          }
 
           mulLevel1 = doc['mulLevel1'];
           mulLevel2 = doc['mulLevel2'];
@@ -164,13 +221,66 @@ class _ProfilePageState extends State<ProfilePage> {
           mulTotal = mulLevel1[mulLevel1.length - 1] +
               mulLevel2[mulLevel2.length - 1] +
               mulLevel3[mulLevel3.length - 1];
-
+          if (mulLevel1.isNotEmpty) {
+            currentScoreMulL1 = mulLevel1[mulLevel1.length - 1] as int;
+          }
+          if (mulLevel2.isNotEmpty) {
+            currentScoreMulL2 = mulLevel2[mulLevel2.length - 1] as int;
+          }
+          if (mulLevel3.isNotEmpty) {
+            currentScoreMulL3 = mulLevel3[mulLevel3.length - 1] as int;
+          }
+          if (mulLevel1.isNotEmpty) {
+            secondScoreMulL1 = mulLevel1[mulLevel1.length - 2] as int;
+          }
+          if (mulLevel2.isNotEmpty) {
+            secondScoreMulL2 = mulLevel2[mulLevel2.length - 2] as int;
+          }
+          if (mulLevel3.isNotEmpty) {
+            secondScoreMulL3 = mulLevel3[mulLevel3.length - 2] as int;
+          }
+          if (mulLevel1.isNotEmpty) {
+            thirdScoreMulL1 = mulLevel1[mulLevel1.length - 3] as int;
+          }
+          if (mulLevel2.isNotEmpty) {
+            thirdScoreMulL2 = mulLevel2[mulLevel2.length - 3] as int;
+          }
+          if (mulLevel3.isNotEmpty) {
+            thirdScoreMulL3 = mulLevel3[mulLevel3.length - 3] as int;
+          }
           divLevel1 = doc['divLevel1'];
           divLevel2 = doc['divLevel2'];
           divLevel3 = doc['divLevel3'];
           mulTotal = divLevel1[divLevel1.length - 1] +
               divLevel2[divLevel2.length - 1] +
               divLevel3[divLevel3.length - 1];
+          if (divLevel1.isNotEmpty) {
+            currentScoreDivL1 = divLevel1[divLevel1.length - 1] as int;
+          }
+          if (divLevel2.isNotEmpty) {
+            currentScoreDivL2 = divLevel2[divLevel2.length - 1] as int;
+          }
+          if (divLevel3.isNotEmpty) {
+            currentScoreDivL3 = divLevel3[divLevel3.length - 1] as int;
+          }
+          if (divLevel1.isNotEmpty) {
+            secondScoreDivL1 = divLevel1[divLevel1.length - 2] as int;
+          }
+          if (divLevel2.isNotEmpty) {
+            secondScoreDivL2 = divLevel2[divLevel2.length - 2] as int;
+          }
+          if (divLevel3.isNotEmpty) {
+            secondScoreDivL3 = divLevel3[divLevel3.length - 2] as int;
+          }
+          if (divLevel1.isNotEmpty) {
+            thirdScoreDivL1 = divLevel1[divLevel1.length - 3] as int;
+          }
+          if (divLevel2.isNotEmpty) {
+            thirdScoreDivL2 = divLevel2[divLevel2.length - 3] as int;
+          }
+          if (divLevel3.isNotEmpty) {
+            thirdScoreDivL3 = divLevel3[divLevel3.length - 3] as int;
+          }
           print(name);
         }
       });
@@ -374,6 +484,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                                       print(addLevel1[
                                                           addLevel1.length -
                                                               1]);
+                                                      print(addLevel2[
+                                                          addLevel2.length -
+                                                              1]);
                                                       if (addLevel1
                                                           .isNotEmpty) {
                                                         addTotal += addLevel1[
@@ -394,15 +507,25 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                 1] as int;
                                                       }
                                                       print(addTotal);
-
-                                                      //البوب اب ويندو
+                                                      // البوب اب ويندو
                                                       popUpWindow(
-                                                          context,height, width,
-                                                          addTotal,'جمع الآحاد',"جمع العشرات","جمع المئات",
-                                                          currentScoreAddL1,secondScoreAddL1,thirdScoreAddL1,
-                                                          currentScoreAddL2,secondScoreAddL2,thirdScoreAddL2,
-                                                          currentScoreAddL3,secondScoreAddL3,thirdScoreAddL3
-                                                          );
+                                                        context,
+                                                        height,
+                                                        width,
+                                                        addTotal,
+                                                        '     جمع الآحاد',
+                                                        "جمع العشرات",
+                                                        "    جمع المئات",
+                                                        currentScoreAddL1,
+                                                        secondScoreAddL1,
+                                                        thirdScoreAddL1,
+                                                        currentScoreAddL2,
+                                                        secondScoreAddL2,
+                                                        thirdScoreAddL2,
+                                                        currentScoreAddL3,
+                                                        secondScoreAddL3,
+                                                        thirdScoreAddL3,
+                                                      );
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -450,12 +573,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                                       print("subtract");
 
                                                       popUpWindow(
-                                                          context,height, width,
-                                                          subTotal,'طرح الآحاد',"طرح العشرات","طرح المئات",
-                                                          currentScoreSubL1,secondScoreSubL1,thirdScoreSubL1,
-                                                          currentScoreSubL2,secondScoreSubL2,thirdScoreSubL2,
-                                                          currentScoreSubL3,secondScoreSubL3,thirdScoreSubL3
-                                                          );
+                                                          context,
+                                                          height,
+                                                          width,
+                                                          subTotal,
+                                                          '     طرح الآحاد',
+                                                          "طرح العشرات",
+                                                          "   طرح المئات",
+                                                          currentScoreSubL1,
+                                                          secondScoreSubL1,
+                                                          thirdScoreSubL1,
+                                                          currentScoreSubL2,
+                                                          secondScoreSubL2,
+                                                          thirdScoreSubL2,
+                                                          currentScoreSubL3,
+                                                          secondScoreSubL3,
+                                                          thirdScoreSubL3);
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -503,12 +636,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                                       print("multiplcation");
 
                                                       popUpWindow(
-                                                          context,height, width,
-                                                          subTotal,'ضرب (۰,۱,۲,٤)',"ضرب (٥,۱۰, ۳,٦)","ضرب (۹, ٧,۸)",
-                                                          currentScoreMulL1,secondScoreMulL1,thirdScoreMulL1,
-                                                          currentScoreMulL2,secondScoreMulL2,thirdScoreMulL2,
-                                                          currentScoreMulL3,secondScoreMulL3,thirdScoreMulL3
-                                                          );
+                                                          context,
+                                                          height,
+                                                          width,
+                                                          subTotal,
+                                                          '  ضرب (۰,۱,۲,٤)',
+                                                          "ضرب (٥,۱۰, ۳,٦)",
+                                                          "   ضرب (۹, ٧,۸)",
+                                                          currentScoreMulL1,
+                                                          secondScoreMulL1,
+                                                          thirdScoreMulL1,
+                                                          currentScoreMulL2,
+                                                          secondScoreMulL2,
+                                                          thirdScoreMulL2,
+                                                          currentScoreMulL3,
+                                                          secondScoreMulL3,
+                                                          thirdScoreMulL3);
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -556,12 +699,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                                       print("division");
 
                                                       popUpWindow(
-                                                          context,height, width,
-                                                          subTotal,'قسمة (۰,۲,٥,۱۰)',"قسمة (٤,٦, ۱,۳)","قسمة (۹, ٧,۸)",
-                                                          currentScoreDivL1,secondScoreDivL1,thirdScoreDivL1,
-                                                          currentScoreDivL2,secondScoreDivL2,thirdScoreDivL2,
-                                                          currentScoreDivL3,secondScoreDivL3,thirdScoreDivL3
-                                                          );
+                                                        context,
+                                                        height,
+                                                        width,
+                                                        subTotal,
+                                                        'قسمة (۰,۲,٥,۱۰)',
+                                                        "قسمة (٤,٦, ۱,۳)",
+                                                        "  قسمة (۹, ٧,۸)",
+                                                        currentScoreDivL1,
+                                                        secondScoreDivL1,
+                                                        thirdScoreDivL1,
+                                                        currentScoreDivL2,
+                                                        secondScoreDivL2,
+                                                        thirdScoreDivL2,
+                                                        currentScoreDivL3,
+                                                        secondScoreDivL3,
+                                                        thirdScoreDivL3,
+                                                      );
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -669,7 +823,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   percent: 0.7,
                                                   center: new Text(
                                                     " ٧۰ %",
-                                                    style: new TextStyle(
+                                                    style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 15.0,
@@ -682,7 +836,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         vertical: 8.0),
                                                     child: new Text(
                                                       "عملية الجمع",
-                                                      style: new TextStyle(
+                                                      style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 12.0,
@@ -710,7 +864,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   percent: 0.5,
                                                   center: new Text(
                                                     " ٥۰ %",
-                                                    style: new TextStyle(
+                                                    style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 15.0,
@@ -723,7 +877,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         vertical: 8.0),
                                                     child: new Text(
                                                       "عملية الطرح",
-                                                      style: new TextStyle(
+                                                      style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 12.0,
@@ -752,7 +906,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   percent: 0.35,
                                                   center: new Text(
                                                     " ۳٥ %",
-                                                    style: new TextStyle(
+                                                    style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 15.0,
@@ -765,7 +919,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         vertical: 8.0),
                                                     child: new Text(
                                                       "عملية الضرب",
-                                                      style: new TextStyle(
+                                                      style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 12.0,
@@ -793,7 +947,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   percent: 0.17,
                                                   center: new Text(
                                                     " ۱٧ %",
-                                                    style: new TextStyle(
+                                                    style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 15.0,
@@ -806,7 +960,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         vertical: 8.0),
                                                     child: new Text(
                                                       "عملية القسمة",
-                                                      style: new TextStyle(
+                                                      style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 12.0,
@@ -915,28 +1069,38 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<dynamic> popUpWindow(
-      BuildContext context, double height, double width, // هذول دايم نفسهم مايتغيرون
-       int total, String level1,String level2, String level3,
-        int currentScoreLevel1,  int currentScoreLevel2,  int currentScoreLevel3,
-        int secondScoreLevel1,  int secondScoreLevel2,  int secondScoreLevel3,
-        int thirdScoreLevel1,  int thirdScoreLevel2,  int thirdScoreLevel3,
-        ) 
-        {
-        // total --> توتال السكور بكل المهارات من 12
-        // level1 --> اسم المهارة الأولى
-       // level2 --> اسم المهارة الثانية
-       // level3 --> اسم المهارة الثالثة
-       // currentScoreLevel1 --> ناتج سكور آخر محاولة من أول ليفيل أو أول مهارة 
-       // currentScoreLevel2 --> ناتج سكور آخر محاولة من ثاني ليفيل أو ثاني مهارة 
-       // currentScoreLevel2 --> ناتج سكور آخر محاولة من ثالث ليفيل أو ثالث مهارة 
+    BuildContext context,
+    double height,
+    double width, // هذول دايم نفسهم مايتغيرون
+    int total,
+    String level1,
+    String level2,
+    String level3,
+    int currentScoreLevel1,
+    int secondScoreLevel1,
+    int thirdScoreLevel1,
+    int currentScoreLevel2,
+    int secondScoreLevel2,
+    int thirdScoreLevel2,
+    int currentScoreLevel3,
+    int secondScoreLevel3,
+    int thirdScoreLevel3,
+  ) {
+    // total --> توتال السكور بكل المهارات من 12
+    // level1 --> اسم المهارة الأولى
+    // level2 --> اسم المهارة الثانية
+    // level3 --> اسم المهارة الثالثة
+    // currentScoreLevel1 --> ناتج سكور آخر محاولة من أول ليفيل أو أول مهارة
+    // currentScoreLevel2 --> ناتج سكور آخر محاولة من ثاني ليفيل أو ثاني مهارة
+    // currentScoreLevel2 --> ناتج سكور آخر محاولة من ثالث ليفيل أو ثالث مهارة
 
-       // secondScoreLevel1 --> ناتج سكور ثاني محاولة من أول ليفيل أو أول مهارة 
-       // secondScoreLevel2 --> ناتج سكور ثاني محاولة من ثاني ليفيل أو ثاني مهارة 
-       // secondScoreLevel3 --> ناتج سكور ثاني محاولة من ثالث ليفيل أو ثالث مهارة 
+    // secondScoreLevel1 --> ناتج سكور ثاني محاولة من أول ليفيل أو أول مهارة
+    // secondScoreLevel2 --> ناتج سكور ثاني محاولة من ثاني ليفيل أو ثاني مهارة
+    // secondScoreLevel3 --> ناتج سكور ثاني محاولة من ثالث ليفيل أو ثالث مهارة
 
-       // thirdScoreLevel1 --> ناتج سكور ثالث محاولة من أول ليفيل أو أول مهارة 
-       // thirdScoreLevel2 --> ناتج سكور ثالث محاولة من ثاني ليفيل أو ثاني مهارة 
-       // thirdScoreLevel3 --> ناتج سكور ثالث محاولة من ثالث ليفيل أو ثالث مهارة 
+    // thirdScoreLevel1 --> ناتج سكور ثالث محاولة من أول ليفيل أو أول مهارة
+    // thirdScoreLevel2 --> ناتج سكور ثالث محاولة من ثاني ليفيل أو ثاني مهارة
+    // thirdScoreLevel3 --> ناتج سكور ثالث محاولة من ثالث ليفيل أو ثالث مهارة
 
     return showDialog(
         context: context,
@@ -971,19 +1135,16 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                             Container(
-                              height: (height / 4) -20,
+                              height: (height / 4) - 20,
                               width: width * 0.35,
                               decoration: BoxDecoration(
                                 color: Colors.amber.shade200,
-                                
-                                    borderRadius: BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   bottomRight: Radius.circular(160),
                                   bottomLeft: Radius.circular(160),
-                                  topLeft: Radius.circular(20), 
-                                  topRight: Radius.circular(20), 
-                                  ),
-                                  
-                               
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
                               ),
                             ),
                             Padding(
@@ -999,9 +1160,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 30,
-                                            vertical: 10,
-                                            ),
+                                          horizontal: 30,
+                                          vertical: 10,
+                                        ),
                                         child: Text(
                                           'المستوى الحالي',
                                           style: TextStyle(
@@ -1013,14 +1174,21 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 30,
+                                        height: 40,
                                       ),
                                       currentLevel(total),
                                       SizedBox(
                                         height: 10,
                                       ),
-                                     
-
+                                      currentLevelPer(
+                                          currentScoreLevel1, level1),
+                                      currentLevelPer(
+                                          currentScoreLevel2, level2),
+                                      currentLevelPer(
+                                          currentScoreLevel3, level3),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -1052,19 +1220,16 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                             Container(
-                              height: (height / 4) -20,
+                              height: (height / 4) - 20,
                               width: width * 0.45,
                               decoration: BoxDecoration(
                                 color: Colors.amber.shade200,
-                                
-                                    borderRadius: BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   bottomRight: Radius.circular(160),
                                   bottomLeft: Radius.circular(160),
-                                  topLeft: Radius.circular(20), 
-                                  topRight: Radius.circular(20), 
-                                  ),
-                                  
-                               
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
                               ),
                             ),
                             Padding(
@@ -1087,7 +1252,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                             'المستوى في المحاولات السابقة',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              
                                               fontSize: 20,
                                               fontFamily: 'ReadexPro',
                                               color: Colors.brown,
@@ -1097,9 +1261,62 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 12,
+                                        height: 30,
                                       ),
-                                      
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 20.0),
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                //        Padding(
+                                                //         padding: const EdgeInsets.only(left:40,bottom: 10),
+                                                //          child: Text(
+                                                //   "المحاولة الثانية: ",
+                                                //   //textAlign: TextAlign.center,
+                                                //   style: TextStyle(
+                                                //     fontSize: 12,
+                                                //     fontFamily: 'ReadexPro',
+                                                //     color: Colors.brown,
+                                                //     fontWeight: FontWeight.w900,
+                                                //   ),
+                                                // ),
+                                                //  ),
+                                                currentLevelPer(
+                                                    secondScoreLevel1, level1),
+                                                currentLevelPer(
+                                                    secondScoreLevel2, level2),
+                                                currentLevelPer(
+                                                    secondScoreLevel3, level3),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                //         Padding(
+                                                //           padding: const EdgeInsets.only(left:40,bottom: 10),
+                                                //           child: Text(
+                                                //   "المحاولة الثالة: ",
+                                                //   //textAlign: TextAlign.center,
+                                                //   style: TextStyle(
+                                                //     fontSize: 12,
+                                                //     fontFamily: 'ReadexPro',
+                                                //     color: Colors.brown,
+                                                //     fontWeight: FontWeight.w900,
+                                                //   ),
+                                                // ),
+                                                //         ),
+                                                currentLevelPer(
+                                                    thirdScoreLevel1, level1),
+                                                currentLevelPer(
+                                                    thirdScoreLevel2, level2),
+                                                currentLevelPer(
+                                                    thirdScoreLevel3, level3),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -1126,13 +1343,385 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Container(
-                  width: width *0.70 ,
+                  width: width * 0.70,
                   height: height - 20,
                 ),
               ],
             ),
           );
         });
+  }
+
+  Row currentLevelPer(score, name) {
+    double per = ((score / 12));
+
+    return Row(children: [
+      if (score == 0) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٠.٠٠",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.red,
+          ),
+        ))
+      ] else if (score == 1) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٨.٣٣",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.red,
+          ),
+        ))
+      ] else if (score == 2) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%١٦.٦٦",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.red,
+          ),
+        ))
+      ] else if (score == 3) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٢٥",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.orange,
+          ),
+        ))
+      ] else if (score == 4) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٣٣.٣٣",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.orange,
+          ),
+        ))
+      ] else if (score == 5) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٤١.٦٦",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.orange,
+          ),
+        ))
+      ] else if (score == 6) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٥٠",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.lightBlue,
+          ),
+        ))
+      ] else if (score == 7) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٥٨.٣٣",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.lightBlue,
+          ),
+        ))
+      ] else if (score == 8) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٦٦.٦٦",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.lightBlue,
+          ),
+        ))
+      ] else if (score == 9) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٧٥",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.greenAccent,
+          ),
+        ))
+      ] else if (score == 10) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٨٣.٣٣",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.greenAccent,
+          ),
+        ))
+      ] else if (score == 11) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 120,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%٩١.٦٦",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.greenAccent,
+          ),
+        ))
+      ] else if (score == 12) ...[
+        Container(
+            child: Padding(
+          padding: EdgeInsets.only(top: 13, bottom: 13),
+          child: new LinearPercentIndicator(
+            width: 95,
+            lineHeight: 14.0,
+            animation: true,
+            leading: new Text(
+              name,
+              style: TextStyle(
+                fontSize: 8,
+                fontFamily: 'ReadexPro',
+                color: Colors.brown.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            animationDuration: 1500,
+            percent: per,
+            center: Text(
+              "%١٠٠",
+              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+            ),
+            barRadius: Radius.circular(25),
+            backgroundColor: Color.fromARGB(255, 200, 199, 199),
+            progressColor: Colors.greenAccent,
+          ),
+        ))
+      ]
+    ]);
   }
 
   Row currentLevel(score) {
@@ -1144,7 +1733,7 @@ class _ProfilePageState extends State<ProfilePage> {
         if (score >= 9) ...[
           //اذا الطفل جاب 9 أو فوق من أصل 12 بوينتز
           Container(
-            width: 70,
+            width: 30,
             child: Image.asset("images/golden.png"),
           ),
           SizedBox(
@@ -1162,7 +1751,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ] else if (score >= 6) ...[
           //اذا الطفل جاب 6 أو فوق من أصل 12 بوينتز
           Container(
-            width: 70,
+            width: 30,
             child: Image.asset("images/silver.png"),
           ),
           SizedBox(
@@ -1180,7 +1769,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ] else ...[
           //اذا الطفل جاب أقل من 5 من أصل 12 بوينتز
           Container(
-            width: 70,
+            width: 30,
             child: Image.asset("images/bronze.png"),
           ),
           SizedBox(
