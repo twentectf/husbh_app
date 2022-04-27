@@ -209,6 +209,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.1.0"
+<<<<<<< HEAD
   flutter_svg:
     dependency: "direct main"
     description:
@@ -216,6 +217,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+=======
+  flutter_staggered_grid_view:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_grid_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.1"
+>>>>>>> a486fa7a044138db0ba927c1e733871955229227
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -233,6 +243,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.5+1"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "10.1.0"
   fwfh_text_style:
     dependency: transitive
     description:
@@ -387,6 +404,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  percent_indicator:
+    dependency: "direct main"
+    description:
+      name: percent_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   petitparser:
     dependency: transitive
     description:
@@ -469,6 +493,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.8"
+  timeline_tile:
+    dependency: "direct main"
+    description:
+      name: timeline_tile
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  timelines:
+    dependency: "direct main"
+    description:
+      name: timelines
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   typed_data:
     dependency: transitive
     description:

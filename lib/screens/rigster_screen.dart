@@ -1,14 +1,13 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:husbh_app/screens/home_page.dart';
+import 'package:husbh_app/screens/verify_screen.dart';
 import '../widgets/back_arrow.dart';
 import '../widgets/check_if_email_used.dart';
 import '../widgets/my_button.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'verify_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -856,12 +855,42 @@ class _RegistrationScreenThirdState extends State<RegistrationScreenThird> {
                                                     .set({
                                                   'name': widget.chName,
                                                   'age': widget.age,
+                                                  //add
+                                                  'addLevel1' : [],
+                                                  'addLevel2' : [],
+                                                  'addLevel3' : [],
+
+                                                  //sub
+                                                  'subLevel1' : [],
+                                                  'subLevel2' : [],
+                                                  'subLevel3' : [],
+
+                                                  //multiplication
+
+                                                  'mulLevel1' : [],
+                                                  'mulLevel2' : [],
+                                                  'mulLevel3' : [],
+
+                                                  //division
+
+                                                  'divLevel1' : [],
+                                                  'divLevel2' : [],
+                                                  'divLevel3' : [],
+
+
+                                                  
+                                                  
+
+                                                  
                                                   'sex': _value == 0
                                                       ? 'boy'
                                                       : 'girl',
                                                   'email': user.email,
+                                                  
+
                                                 });
                                               }
+                                              
 
                                               inputData();
                                               Navigator.pushReplacement(
@@ -873,7 +902,7 @@ class _RegistrationScreenThirdState extends State<RegistrationScreenThird> {
                                             ;
                                           },
                                           startColor: Colors.amber,
-                                          endColor: Colors.amber.shade400,
+                                          endColor: Color.fromRGBO(255, 202, 40, 1),
                                           borderColor:
                                               Color.fromARGB(255, 231, 162, 0),
                                           textColor: Colors.brown.shade600
