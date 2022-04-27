@@ -1,3 +1,5 @@
+import 'dart:collection';
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -44,7 +46,11 @@ class _ProfilePageState extends State<ProfilePage> {
   var addLevel2 = []; //جمع العشرات
   var currentScoreAddL2 = 0;
   var secondScoreAddL2 = 0;
+  var yearSecondAdd = 'لايوجد بعد';
+  var timeSecondAdd = 'لايوجد بعد';
   var thirdScoreAddL2 = 0;
+  var yearThirdAdd = 'لايوجد بعد';
+  var timeThirdAdd = 'لايوجد بعد';
 
   var addLevel3 = []; //جمع المئات
   var currentScoreAddL3 = 0;
@@ -154,132 +160,144 @@ class _ProfilePageState extends State<ProfilePage> {
           addLevel2 = doc['addLevel2'];
           addLevel3 = doc['addLevel3'];
           if (addLevel1.isNotEmpty) {
-            currentScoreAddL1 = addLevel1[addLevel1.length - 1] as int;
+            currentScoreAddL1 = addLevel1[addLevel1.length - 1]['score'] as int;
           }
           if (addLevel2.isNotEmpty) {
-            currentScoreAddL2 = addLevel2[addLevel2.length - 1] as int;
+            currentScoreAddL2 = addLevel2[addLevel2.length - 1]['score'] as int;
+            
           }
           if (addLevel3.isNotEmpty) {
-            currentScoreAddL3 = addLevel3[addLevel3.length - 1] as int;
+            currentScoreAddL3 = addLevel3[addLevel3.length - 1]['score'] as int;
           }
           if (addLevel1.isNotEmpty) {
-            secondScoreAddL1 = addLevel1[addLevel1.length - 2] as int;
+            secondScoreAddL1 = addLevel1[addLevel1.length - 2]['score'] as int;
+            yearSecondAdd = addLevel2[addLevel2.length - 1]['year'];
           }
           if (addLevel2.isNotEmpty) {
-            secondScoreAddL2 = addLevel2[addLevel2.length - 2] as int;
+            secondScoreAddL2 = addLevel2[addLevel2.length - 2]['score'] as int;
+            yearSecondAdd = addLevel2[addLevel2.length - 2]['year'];
+            timeSecondAdd= addLevel2[addLevel2.length - 2]['time'];
           }
           if (addLevel3.isNotEmpty) {
-            secondScoreAddL3 = addLevel3[addLevel3.length - 2] as int;
+            secondScoreAddL3 = addLevel3[addLevel3.length - 2]['score'] as int;
+            yearSecondAdd = addLevel3[addLevel3.length - 2]['year'];
+            timeSecondAdd= addLevel3[addLevel3.length - 2]['time'];
           }
           if (addLevel1.isNotEmpty) {
-            thirdScoreAddL1 = addLevel1[addLevel1.length - 3] as int;
+            thirdScoreAddL1 = addLevel1[addLevel1.length - 3]['score'] as int;
+            yearThirdAdd= addLevel1[addLevel1.length - 3]['year'];
+            timeThirdAdd= addLevel1[addLevel1.length - 3]['time'];
           }
           if (addLevel2.isNotEmpty) {
-            thirdScoreAddL2 = addLevel2[addLevel2.length - 3] as int;
+            thirdScoreAddL2 = addLevel2[addLevel2.length - 3]['score'] as int;
+            yearThirdAdd= addLevel2[addLevel2.length - 3]['year'];
+            timeThirdAdd= addLevel2[addLevel2.length - 3]['time'];
           }
           if (addLevel3.isNotEmpty) {
-            thirdScoreAddL3 = addLevel3[addLevel3.length - 3] as int;
+            thirdScoreAddL3 = addLevel3[addLevel3.length - 3]['score'] as int;
+            yearThirdAdd= addLevel3[addLevel3.length - 3]['year'];
+            timeThirdAdd= addLevel3[addLevel3.length - 3]['time'];
           }
 
           subLevel1 = doc['subLevel1'];
           subLevel2 = doc['subLevel2'];
           subLevel3 = doc['subLevel3'];
-          subTotal = subLevel1[subLevel1.length - 1] +
-              subLevel2[subLevel2.length - 1] +
-              subLevel3[subLevel3.length - 1];
+          subTotal = subLevel1[subLevel1.length - 1]['score'] +
+              subLevel2[subLevel2.length - 1]['score'] +
+              subLevel3[subLevel3.length - 1]['score'];
           if (subLevel1.isNotEmpty) {
-            currentScoreSubL1 = subLevel1[subLevel1.length - 1] as int;
+            currentScoreSubL1 = subLevel1[subLevel1.length - 1]['score'] as int;
           }
           if (subLevel2.isNotEmpty) {
-            currentScoreSubL2 = subLevel2[subLevel2.length - 1] as int;
+            currentScoreSubL2 = subLevel2[subLevel2.length - 1]['score'] as int;
           }
           if (subLevel3.isNotEmpty) {
-            currentScoreSubL3 = subLevel3[subLevel3.length - 1] as int;
+            currentScoreSubL3 = subLevel3[subLevel3.length - 1]['score'] as int;
           }
           if (subLevel1.isNotEmpty) {
-            secondScoreSubL1 = subLevel1[subLevel1.length - 2] as int;
+            secondScoreSubL1 = subLevel1[subLevel1.length - 2]['score'] as int;
           }
           if (subLevel2.isNotEmpty) {
-            secondScoreSubL2 = subLevel2[subLevel2.length - 2] as int;
+            secondScoreSubL2 = subLevel2[subLevel2.length - 2]['score'] as int;
           }
           if (subLevel3.isNotEmpty) {
-            secondScoreSubL3 = subLevel3[subLevel3.length - 2] as int;
+            secondScoreSubL3 = subLevel3[subLevel3.length - 2]['score'] as int;
           }
           if (subLevel1.isNotEmpty) {
-            thirdScoreMulL1 = subLevel1[subLevel1.length - 3] as int;
+            thirdScoreMulL1 = subLevel1[subLevel1.length - 3]['score'] as int;
           }
           if (subLevel2.isNotEmpty) {
-            thirdScoreSubL2 = subLevel2[subLevel2.length - 3] as int;
+            thirdScoreSubL2 = subLevel2[subLevel2.length - 3]['score'] as int;
           }
           if (subLevel3.isNotEmpty) {
-            thirdScoreSubL3 = subLevel3[subLevel3.length - 3] as int;
+            thirdScoreSubL3 = subLevel3[subLevel3.length - 3]['score'] as int;
           }
 
           mulLevel1 = doc['mulLevel1'];
           mulLevel2 = doc['mulLevel2'];
           mulLevel3 = doc['mulLevel3'];
-          mulTotal = mulLevel1[mulLevel1.length - 1] +
-              mulLevel2[mulLevel2.length - 1] +
-              mulLevel3[mulLevel3.length - 1];
+          mulTotal = mulLevel1[mulLevel1.length - 1]['score'] +
+              mulLevel2[mulLevel2.length - 1]['score'] +
+              mulLevel3[mulLevel3.length - 1]['score'];
           if (mulLevel1.isNotEmpty) {
-            currentScoreMulL1 = mulLevel1[mulLevel1.length - 1] as int;
+            currentScoreMulL1 = mulLevel1[mulLevel1.length - 1]['score'] as int;
           }
           if (mulLevel2.isNotEmpty) {
-            currentScoreMulL2 = mulLevel2[mulLevel2.length - 1] as int;
+            currentScoreMulL2 = mulLevel2[mulLevel2.length - 1]['score'] as int;
           }
           if (mulLevel3.isNotEmpty) {
-            currentScoreMulL3 = mulLevel3[mulLevel3.length - 1] as int;
+            currentScoreMulL3 = mulLevel3[mulLevel3.length - 1]['score'] as int;
           }
           if (mulLevel1.isNotEmpty) {
-            secondScoreMulL1 = mulLevel1[mulLevel1.length - 2] as int;
+            secondScoreMulL1 = mulLevel1[mulLevel1.length - 2]['score'] as int;
           }
           if (mulLevel2.isNotEmpty) {
-            secondScoreMulL2 = mulLevel2[mulLevel2.length - 2] as int;
+            secondScoreMulL2 = mulLevel2[mulLevel2.length - 2]['score'] as int;
           }
           if (mulLevel3.isNotEmpty) {
-            secondScoreMulL3 = mulLevel3[mulLevel3.length - 2] as int;
+            secondScoreMulL3 = mulLevel3[mulLevel3.length - 2]['score'] as int;
           }
           if (mulLevel1.isNotEmpty) {
-            thirdScoreMulL1 = mulLevel1[mulLevel1.length - 3] as int;
+            thirdScoreMulL1 = mulLevel1[mulLevel1.length - 3]['score'] as int;
           }
           if (mulLevel2.isNotEmpty) {
-            thirdScoreMulL2 = mulLevel2[mulLevel2.length - 3] as int;
+            thirdScoreMulL2 = mulLevel2[mulLevel2.length - 3]['score'] as int;
           }
           if (mulLevel3.isNotEmpty) {
-            thirdScoreMulL3 = mulLevel3[mulLevel3.length - 3] as int;
+            thirdScoreMulL3 = mulLevel3[mulLevel3.length - 3]['score'] as int;
           }
           divLevel1 = doc['divLevel1'];
           divLevel2 = doc['divLevel2'];
           divLevel3 = doc['divLevel3'];
-          mulTotal = divLevel1[divLevel1.length - 1] +
-              divLevel2[divLevel2.length - 1] +
-              divLevel3[divLevel3.length - 1];
+          mulTotal = divLevel1[divLevel1.length - 1]['score'] +
+              divLevel2[divLevel2.length - 1]['score'] +
+              divLevel3[divLevel3.length - 1]['score'];
           if (divLevel1.isNotEmpty) {
-            currentScoreDivL1 = divLevel1[divLevel1.length - 1] as int;
+            currentScoreDivL1 = divLevel1[divLevel1.length - 1]['score'] as int;
           }
           if (divLevel2.isNotEmpty) {
-            currentScoreDivL2 = divLevel2[divLevel2.length - 1] as int;
+            currentScoreDivL2 = divLevel2[divLevel2.length - 1]['score'] as int;
           }
           if (divLevel3.isNotEmpty) {
-            currentScoreDivL3 = divLevel3[divLevel3.length - 1] as int;
+            currentScoreDivL3 = divLevel3[divLevel3.length - 1]['score'] as int;
           }
           if (divLevel1.isNotEmpty) {
-            secondScoreDivL1 = divLevel1[divLevel1.length - 2] as int;
+            secondScoreDivL1 = divLevel1[divLevel1.length - 2]['score'] as int;
           }
           if (divLevel2.isNotEmpty) {
-            secondScoreDivL2 = divLevel2[divLevel2.length - 2] as int;
+            secondScoreDivL2 = divLevel2[divLevel2.length - 2]['score'] as int;
           }
           if (divLevel3.isNotEmpty) {
-            secondScoreDivL3 = divLevel3[divLevel3.length - 2] as int;
+            secondScoreDivL3 = divLevel3[divLevel3.length - 2]['score'] as int;
           }
           if (divLevel1.isNotEmpty) {
-            thirdScoreDivL1 = divLevel1[divLevel1.length - 3] as int;
+            thirdScoreDivL1 = divLevel1[divLevel1.length - 3]['score'] as int;
           }
           if (divLevel2.isNotEmpty) {
-            thirdScoreDivL2 = divLevel2[divLevel2.length - 3] as int;
+            thirdScoreDivL2 = divLevel2[divLevel2.length - 3]['score'] as int;
           }
           if (divLevel3.isNotEmpty) {
-            thirdScoreDivL3 = divLevel3[divLevel3.length - 3] as int;
+            thirdScoreDivL3 = divLevel3[divLevel3.length - 3]['score'] as int;
           }
           print(name);
         }
@@ -342,7 +360,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               alignment: Alignment.topRight,
                               child: IconButton(
                                 onPressed: () async {
-                                  Navigator.pop(context);
+                                  // Navigator.pop(context);
 
                                   // add new scores to first level
                                   // addLevel1 = addLevel1 + [45];
@@ -350,26 +368,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                   //     .collection("users")
                                   //     .doc(user.uid)
                                   //     .update({
-                                  //   "addAhad": addLevel1
+                                  //   "addAhad": addLevel1,
+                                  //    'time':  FieldValue.serverTimestamp(),
                                   // });
 
-                                  var i = addLevel1.length - 1;
-                                  var j = 0;
-                                  var current = addLevel1[i];
-                                  var last = addLevel1[i - 1];
-                                  var last2 = addLevel1[i - 2];
-                                  print(last2);
-                                  for (var j = 0; j < 3; j++) {
-                                    print(addLevel1[i]);
-                                    --i;
-                                  }
+                                  Map<String, dynamic> addScore = {
+                                    'score': 3,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
 
-                                  // FirebaseFirestore.instance
-                                  //     .collection("users")
-                                  //     .doc(user.uid)
-                                  //     .update({
-                                  //   "addAhad": FieldValue.arrayUnion(addAhad)
-                                  // });
+                                  FirebaseFirestore.instance
+                                      .collection("users")
+                                      .doc(user.uid)
+                                      .update({
+                                    'addLevel3':
+                                        FieldValue.arrayUnion([addScore])
+                                  });
                                 },
                                 icon: Icon(Icons.arrow_back_ios),
                                 color: Color(0xff4A4857),
@@ -481,30 +496,36 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     onTap: () {
                                                       addTotal = 0;
                                                       print("add");
-                                                      print(addLevel1[
-                                                          addLevel1.length -
-                                                              1]);
-                                                      print(addLevel2[
-                                                          addLevel2.length -
-                                                              1]);
+                                                      // print(addLevel1[
+                                                      //     addLevel1.length -
+                                                      //         1]);
+                                                      // print(addLevel2[
+                                                      //     addLevel2.length -
+                                                      //         1]);
                                                       if (addLevel1
                                                           .isNotEmpty) {
                                                         addTotal += addLevel1[
-                                                            addLevel1.length -
-                                                                1] as int;
+                                                                addLevel1
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
                                                       }
                                                       if (addLevel2
                                                           .isNotEmpty) {
                                                         addTotal += addLevel2[
-                                                            addLevel2.length -
-                                                                1] as int;
+                                                                addLevel2
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
                                                         print('5555');
                                                       }
                                                       if (addLevel3
                                                           .isNotEmpty) {
                                                         addTotal += addLevel3[
-                                                            addLevel3.length -
-                                                                1] as int;
+                                                                addLevel3
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
                                                       }
                                                       print(addTotal);
                                                       // البوب اب ويندو
@@ -525,6 +546,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         currentScoreAddL3,
                                                         secondScoreAddL3,
                                                         thirdScoreAddL3,
+                                                        yearSecondAdd,
+                                                        timeSecondAdd,
+                                                        yearThirdAdd,
+                                                        timeThirdAdd
                                                       );
                                                     },
                                                     child: Container(
@@ -572,23 +597,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     onTap: () {
                                                       print("subtract");
 
-                                                      popUpWindow(
-                                                          context,
-                                                          height,
-                                                          width,
-                                                          subTotal,
-                                                          '     طرح الآحاد',
-                                                          "طرح العشرات",
-                                                          "   طرح المئات",
-                                                          currentScoreSubL1,
-                                                          secondScoreSubL1,
-                                                          thirdScoreSubL1,
-                                                          currentScoreSubL2,
-                                                          secondScoreSubL2,
-                                                          thirdScoreSubL2,
-                                                          currentScoreSubL3,
-                                                          secondScoreSubL3,
-                                                          thirdScoreSubL3);
+                                                    //   popUpWindow(
+                                                    //       context,
+                                                    //       height,
+                                                    //       width,
+                                                    //       subTotal,
+                                                    //       '     طرح الآحاد',
+                                                    //       "طرح العشرات",
+                                                    //       "   طرح المئات",
+                                                    //       currentScoreSubL1,
+                                                    //       secondScoreSubL1,
+                                                    //       thirdScoreSubL1,
+                                                    //       currentScoreSubL2,
+                                                    //       secondScoreSubL2,
+                                                    //       thirdScoreSubL2,
+                                                    //       currentScoreSubL3,
+                                                    //       secondScoreSubL3,
+                                                    //       thirdScoreSubL3);
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -635,23 +660,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     onTap: () {
                                                       print("multiplcation");
 
-                                                      popUpWindow(
-                                                          context,
-                                                          height,
-                                                          width,
-                                                          subTotal,
-                                                          '  ضرب (۰,۱,۲,٤)',
-                                                          "ضرب (٥,۱۰, ۳,٦)",
-                                                          "   ضرب (۹, ٧,۸)",
-                                                          currentScoreMulL1,
-                                                          secondScoreMulL1,
-                                                          thirdScoreMulL1,
-                                                          currentScoreMulL2,
-                                                          secondScoreMulL2,
-                                                          thirdScoreMulL2,
-                                                          currentScoreMulL3,
-                                                          secondScoreMulL3,
-                                                          thirdScoreMulL3);
+                                                    //   popUpWindow(
+                                                    //       context,
+                                                    //       height,
+                                                    //       width,
+                                                    //       subTotal,
+                                                    //       '  ضرب (۰,۱,۲,٤)',
+                                                    //       "ضرب (٥,۱۰, ۳,٦)",
+                                                    //       "   ضرب (۹, ٧,۸)",
+                                                    //       currentScoreMulL1,
+                                                    //       secondScoreMulL1,
+                                                    //       thirdScoreMulL1,
+                                                    //       currentScoreMulL2,
+                                                    //       secondScoreMulL2,
+                                                    //       thirdScoreMulL2,
+                                                    //       currentScoreMulL3,
+                                                    //       secondScoreMulL3,
+                                                    //       thirdScoreMulL3);
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -698,24 +723,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     onTap: () {
                                                       print("division");
 
-                                                      popUpWindow(
-                                                        context,
-                                                        height,
-                                                        width,
-                                                        subTotal,
-                                                        'قسمة (۰,۲,٥,۱۰)',
-                                                        "قسمة (٤,٦, ۱,۳)",
-                                                        "  قسمة (۹, ٧,۸)",
-                                                        currentScoreDivL1,
-                                                        secondScoreDivL1,
-                                                        thirdScoreDivL1,
-                                                        currentScoreDivL2,
-                                                        secondScoreDivL2,
-                                                        thirdScoreDivL2,
-                                                        currentScoreDivL3,
-                                                        secondScoreDivL3,
-                                                        thirdScoreDivL3,
-                                                      );
+                                                      // popUpWindow(
+                                                      //   context,
+                                                      //   height,
+                                                      //   width,
+                                                      //   subTotal,
+                                                      //   'قسمة (۰,۲,٥,۱۰)',
+                                                      //   "قسمة (٤,٦, ۱,۳)",
+                                                      //   "  قسمة (۹, ٧,۸)",
+                                                      //   currentScoreDivL1,
+                                                      //   secondScoreDivL1,
+                                                      //   thirdScoreDivL1,
+                                                      //   currentScoreDivL2,
+                                                      //   secondScoreDivL2,
+                                                      //   thirdScoreDivL2,
+                                                      //   currentScoreDivL3,
+                                                      //   secondScoreDivL3,
+                                                      //   thirdScoreDivL3,
+                                                      // );
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -1085,6 +1110,10 @@ class _ProfilePageState extends State<ProfilePage> {
     int currentScoreLevel3,
     int secondScoreLevel3,
     int thirdScoreLevel3,
+    String year2,
+    String time2,
+    String year3,
+    String time3,
   ) {
     // total --> توتال السكور بكل المهارات من 12
     // level1 --> اسم المهارة الأولى
@@ -1101,6 +1130,11 @@ class _ProfilePageState extends State<ProfilePage> {
     // thirdScoreLevel1 --> ناتج سكور ثالث محاولة من أول ليفيل أو أول مهارة
     // thirdScoreLevel2 --> ناتج سكور ثالث محاولة من ثاني ليفيل أو ثاني مهارة
     // thirdScoreLevel3 --> ناتج سكور ثالث محاولة من ثالث ليفيل أو ثالث مهارة
+    // year2 --> the year of the score of the second chance
+    // time2 --> the time of the score of the second chance
+
+    // year3 --> the year of the score of the second chance
+    // time3 --> the time of the score of the second chance
 
     return showDialog(
         context: context,
@@ -1265,24 +1299,27 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(top: 20.0),
+                                            const EdgeInsets.only(top: 0.0),
                                         child: Row(
                                           children: [
                                             Column(
                                               children: [
-                                                //        Padding(
-                                                //         padding: const EdgeInsets.only(left:40,bottom: 10),
-                                                //          child: Text(
-                                                //   "المحاولة الثانية: ",
-                                                //   //textAlign: TextAlign.center,
-                                                //   style: TextStyle(
-                                                //     fontSize: 12,
-                                                //     fontFamily: 'ReadexPro',
-                                                //     color: Colors.brown,
-                                                //     fontWeight: FontWeight.w900,
-                                                //   ),
-                                                // ),
-                                                //  ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 40, bottom: 5),
+                                                  child: Text(
+                                                    time2+'\n'+year2,
+                                                    //textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: 'ReadexPro',
+                                                      color: Colors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w900,
+                                                    ),
+                                                  ),
+                                                ),
                                                 currentLevelPer(
                                                     secondScoreLevel1, level1),
                                                 currentLevelPer(
@@ -1293,19 +1330,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                             ),
                                             Column(
                                               children: [
-                                                //         Padding(
-                                                //           padding: const EdgeInsets.only(left:40,bottom: 10),
-                                                //           child: Text(
-                                                //   "المحاولة الثالة: ",
-                                                //   //textAlign: TextAlign.center,
-                                                //   style: TextStyle(
-                                                //     fontSize: 12,
-                                                //     fontFamily: 'ReadexPro',
-                                                //     color: Colors.brown,
-                                                //     fontWeight: FontWeight.w900,
-                                                //   ),
-                                                // ),
-                                                //         ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 40, bottom: 5),
+                                                  child: Text(
+                                                    time3+'\n'+year3,
+                                                    //textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: 'ReadexPro',
+                                                      color: Colors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w900,
+                                                    ),
+                                                  ),
+                                                ),
                                                 currentLevelPer(
                                                     thirdScoreLevel1, level1),
                                                 currentLevelPer(
@@ -1314,6 +1354,32 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     thirdScoreLevel3, level3),
                                               ],
                                             ),
+                                            // Column(
+                                            //   children: [
+                                            //     Padding(
+                                            //       padding:
+                                            //           const EdgeInsets.only(
+                                            //               left: 40, bottom: 5),
+                                            //       child: Text(
+                                            //         time3+'\n'+year3,
+                                            //         //textAlign: TextAlign.center,
+                                            //         style: TextStyle(
+                                            //           fontSize: 12,
+                                            //           fontFamily: 'ReadexPro',
+                                            //           color: Colors.brown,
+                                            //           fontWeight:
+                                            //               FontWeight.w900,
+                                            //         ),
+                                            //       ),
+                                            //     ),
+                                            //     currentLevelPer(
+                                            //         thirdScoreLevel1, level1),
+                                            //     currentLevelPer(
+                                            //         thirdScoreLevel2, level2),
+                                            //     currentLevelPer(
+                                            //         thirdScoreLevel3, level3),
+                                            //   ],
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -1359,7 +1425,7 @@ class _ProfilePageState extends State<ProfilePage> {
       if (score == 0) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1387,7 +1453,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 1) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1415,7 +1481,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 2) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1443,7 +1509,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 3) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1471,7 +1537,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 4) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1499,7 +1565,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 5) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1527,7 +1593,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 6) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1555,7 +1621,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 7) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1583,7 +1649,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 8) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1611,7 +1677,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 9) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1639,7 +1705,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 10) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1667,7 +1733,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 11) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 120,
             lineHeight: 14.0,
@@ -1695,7 +1761,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ] else if (score == 12) ...[
         Container(
             child: Padding(
-          padding: EdgeInsets.only(top: 13, bottom: 13),
+          padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
             width: 95,
             lineHeight: 14.0,
@@ -1787,5 +1853,41 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ],
     );
+  }
+
+  String replaceFarsiNumber(String input) {
+    const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const farsi = ['۰', '۱', '۲', '۳', '٤', '٥', '٦', '۷', '۸', '۹'];
+
+    for (int i = 0; i < english.length; i++) {
+      input = input.replaceAll(english[i], farsi[i]);
+    }
+
+    return input;
+  }
+
+  String year() {
+    var y = replaceFarsiNumber(DateTime.now().year.toString());
+    var m = replaceFarsiNumber(DateTime.now().month.toString());
+    var d = replaceFarsiNumber(DateTime.now().day.toString());
+
+    var h = replaceFarsiNumber(DateTime.now().hour.toString());
+    var min = replaceFarsiNumber(DateTime.now().minute.toString());
+    var s = replaceFarsiNumber(DateTime.now().second.toString());
+
+    var year = y + '/' + m + '/' + d;
+    var time = h + ' : ' + min + ' : ' + s;
+
+    return year;
+  }
+
+  String time() {
+    var h = replaceFarsiNumber(DateTime.now().hour.toString());
+    var min = replaceFarsiNumber(DateTime.now().minute.toString());
+    var s = replaceFarsiNumber(DateTime.now().second.toString());
+
+    var time = h + ' : ' + min + ' : ' + s;
+
+    return time;
   }
 }
