@@ -5,6 +5,7 @@ import '../widgets/question_widget.dart';
 import '../widgets/next_button.dart';
 import '../widgets/option_card.dart';
 import 'learn_page.dart';
+import 'dart:math';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({Key? key}) : super(key: key);
@@ -14,13 +15,14 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-//Array of questions
+  // ignore: prefer_final_fields
   List<Question> _questions = [
     Question(
       id: '1',
       title: '----- =   ٥   +   ٢',
-      options: {'٣': false, '٥': false, '٢': false, '٧': true},
+      options: {'٤': false, '٥': false, '٢': false, '٧': true},
       image: 'assets/q1.png',
+      // image: ccc,
     ),
     Question(
       id: '2',
@@ -112,7 +114,32 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     return images[index];
   }
 
+  var numberMap = {
+    0: '۰',
+    1: '۱',
+    2: '۲',
+    3: '۳',
+    4: '٤',
+    5: '٥',
+    6: '٦',
+    7: '٧',
+    8: '۸',
+    9: '۹'
+  };
+
+  var x = Random().nextInt(10);
+  var y = Random().nextInt(10);
+
+  void randomization() {
+    while (x + y > 10) {
+      x = Random().nextInt(10);
+      y = Random().nextInt(10);
+    }
+  }
+
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(children: [
         //image container
@@ -164,16 +191,20 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     child: index < 2
                         ? Image(
                             image: AssetImage(imageExists()),
-                            width: 500,
-                            height: 250,
+                            width: width * 0.50,
+                            height: height * 0.44,
+                            // width: width * 500,
+                            // height: height * 250,
                           )
                         : 2 <= index && index <= 5
                             ? Padding(
                                 padding: const EdgeInsets.only(bottom: 30.0),
                                 child: Image(
                                   image: AssetImage(imageExists()),
-                                  width: 350,
-                                  height: 250,
+                                  width: width * 0.30,
+                                  height: height * 0.44,
+                                  // width: width * 350,
+                                  // height: height * 250,
                                 ),
                               )
                             : null,
@@ -210,8 +241,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                   () {
                                 if (index < 5) {
                                   nextQuestion();
-                                } else
+                                } else {
                                   lastQuestion();
+                                }
                               });
                             }),
                     ],
