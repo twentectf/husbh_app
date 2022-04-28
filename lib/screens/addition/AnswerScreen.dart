@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:husbh_app/main.dart';
+import 'package:husbh_app/screens/learn_page.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 // import 'package:fabexdateformatter/fabexdateformatter.dart';
 
@@ -87,7 +88,7 @@ class AnswerScreen extends StatelessWidget {
               width: 80.0,
               height: 60.0,
               onTap: () => Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => MyApp())),
+                  context, MaterialPageRoute(builder: (context) => learn_page())),
               child: Text("حسنا",
                   style: TextStyle(
                       color: Colors.white,
