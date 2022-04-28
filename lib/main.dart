@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:husbh_app/screens/QuizScreen.dart';
+import 'package:husbh_app/screens/addition/QuizScreen.dart';
 import 'package:husbh_app/screens/questions_screen.dart';
 import 'package:video_player/video_player.dart';
 import 'Screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'screens/randomization.dart';
+import 'screens/addition/randomization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -84,28 +84,20 @@ class _SplashScreenState extends State<SplashScreen> {
     ));
   }
 
-<<<<<<< HEAD
   @override
   void dispose() {
     super.dispose();
     _controller.dispose();
   }
-=======
-@override
-void dispose() {
- super.dispose();
- _controller.dispose();
-}
 
-String replaceFarsiNumber(String input) {
-  const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+  String replaceFarsiNumber(String input) {
+    const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
 
-  for (int i = 0; i < english.length; i++) {
-    input = input.replaceAll(english[i], farsi[i]);
+    for (int i = 0; i < english.length; i++) {
+      input = input.replaceAll(english[i], farsi[i]);
+    }
+
+    return input;
   }
-
-  return input;
-}
->>>>>>> a486fa7a044138db0ba927c1e733871955229227
 }

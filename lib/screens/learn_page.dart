@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:husbh_app/screens/home_page.dart';
-import 'package:husbh_app/screens/multiplication_video.dart';
+import 'package:husbh_app/screens/multiplicatio/multiplication_video.dart';
 import 'package:husbh_app/screens/profile.dart';
 
 //import whats needed for styling & properties
@@ -14,10 +14,10 @@ import 'package:nice_buttons/nice_buttons.dart';
 
 //import project's files
 import 'WaitingScreen.dart';
-import 'addition_video.dart';
-import 'division_video.dart';
-import 'subtraction_video.dart';
-import 'multiplication_video.dart';
+import 'addition/addition_video.dart';
+import 'division/division_video.dart';
+import 'subtraction/subtraction_video.dart';
+import 'multiplicatio/multiplication_video.dart';
 
 void main() async {
   //calling to use firebase
