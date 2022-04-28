@@ -1,13 +1,13 @@
 //import needed libraries
 import 'dart:async';
 
-import 'package:husbh_app/screens/Questions.dart';
+import 'package:husbh_app/screens/addition/Questions.dart';
 import 'package:husbh_app/screens/profile.dart';
 import 'package:video_player/video_player.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../questions_screen.dart';
+import 'questions_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

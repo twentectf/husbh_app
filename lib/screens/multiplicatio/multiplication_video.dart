@@ -13,24 +13,24 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   //set the device orientation to landscape
   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
-  runApp(divisionVideo());
+  runApp(multiplicationVideo());
 }
 
 // ignore: camel_case_types
-class divisionVideo extends StatefulWidget {
-  const divisionVideo({Key? key}) : super(key: key);
+class multiplicationVideo extends StatefulWidget {
+  const multiplicationVideo({Key? key}) : super(key: key);
   @override
   _VideoAppState createState() => _VideoAppState();
 }
 
-class _VideoAppState extends State<divisionVideo> {
+class _VideoAppState extends State<multiplicationVideo> {
   late VideoPlayerController _controller; //the controller of the video player
 
   late Timer timer; //timer for the video duration
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset('assets/division.mp4')
+    _controller = VideoPlayerController.asset('assets/multiplication.mp4')
       ..initialize().then((_) {
         _controller.setVolume(1.0); //video sound (volume)
         _controller.setLooping(false); //do not repeat the video when finish
@@ -38,7 +38,7 @@ class _VideoAppState extends State<divisionVideo> {
 
         //nevigate to the question page when the video is finish
         timer = Timer(
-            Duration(seconds: 43),
+            Duration(minutes: 1, seconds: 04),
             () => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
