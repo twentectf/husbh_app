@@ -19,18 +19,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: QuizScreen(),
+       home: QuizScreen(),
       debugShowCheckedModeBanner: false,
       title: 'حًسبة',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Directionality(
+     /* home: Directionality(
         // add this
         textDirection: TextDirection.rtl, // set this property
         child: SplashScreen(),
-      ),
+      ),*/
+      
     );
   }
 }
