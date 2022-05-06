@@ -1,18 +1,15 @@
-import 'dart:collection';
-import 'dart:convert';
-import 'dart:ui';
+
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:husbh_app/screens/login_screen.dart';
+
 import 'WaitingScreen.dart';
 import 'dart:math' as math;
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:timelines/timelines.dart';
 //bool WaitingScreen = false;
 // Future<void> main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -46,11 +43,11 @@ class _ProfilePageState extends State<ProfilePage> {
   var addLevel2 = []; //جمع العشرات
   var currentScoreAddL2 = 0;
   var secondScoreAddL2 = 0;
-  var yearSecondAdd = 'لايوجد بعد';
-  var timeSecondAdd = 'لايوجد بعد';
+  var yearSecondAdd = '';
+  var timeSecondAdd = '';
   var thirdScoreAddL2 = 0;
-  var yearThirdAdd = 'لايوجد بعد';
-  var timeThirdAdd = 'لايوجد بعد';
+  var yearThirdAdd = '';
+  var timeThirdAdd = '';
 
   var addLevel3 = []; //جمع المئات
   var currentScoreAddL3 = 0;
@@ -112,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
   var currentScoreDivL3 = 0;
   var secondScoreDivL3 = 0;
   var thirdScoreDivL3 = 0;
-  var divlTotal = 0; //مجموع آخر محاولة من كل ليفيل
+  var divTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
   @override
   void initState() {
@@ -159,146 +156,19 @@ class _ProfilePageState extends State<ProfilePage> {
           addLevel1 = doc['addLevel1'];
           addLevel2 = doc['addLevel2'];
           addLevel3 = doc['addLevel3'];
-          if (addLevel1.isNotEmpty) {
-            currentScoreAddL1 = addLevel1[addLevel1.length - 1]['score'] as int;
-          }
-          if (addLevel2.isNotEmpty) {
-            currentScoreAddL2 = addLevel2[addLevel2.length - 1]['score'] as int;
-            
-          }
-          if (addLevel3.isNotEmpty) {
-            currentScoreAddL3 = addLevel3[addLevel3.length - 1]['score'] as int;
-          }
-          if (addLevel1.isNotEmpty) {
-            secondScoreAddL1 = addLevel1[addLevel1.length - 2]['score'] as int;
-            yearSecondAdd = addLevel2[addLevel2.length - 1]['year'];
-          }
-          if (addLevel2.isNotEmpty) {
-            secondScoreAddL2 = addLevel2[addLevel2.length - 2]['score'] as int;
-            yearSecondAdd = addLevel2[addLevel2.length - 2]['year'];
-            timeSecondAdd= addLevel2[addLevel2.length - 2]['time'];
-          }
-          if (addLevel3.isNotEmpty) {
-            secondScoreAddL3 = addLevel3[addLevel3.length - 2]['score'] as int;
-            yearSecondAdd = addLevel3[addLevel3.length - 2]['year'];
-            timeSecondAdd= addLevel3[addLevel3.length - 2]['time'];
-          }
-          if (addLevel1.isNotEmpty) {
-            thirdScoreAddL1 = addLevel1[addLevel1.length - 3]['score'] as int;
-            yearThirdAdd= addLevel1[addLevel1.length - 3]['year'];
-            timeThirdAdd= addLevel1[addLevel1.length - 3]['time'];
-          }
-          if (addLevel2.isNotEmpty) {
-            thirdScoreAddL2 = addLevel2[addLevel2.length - 3]['score'] as int;
-            yearThirdAdd= addLevel2[addLevel2.length - 3]['year'];
-            timeThirdAdd= addLevel2[addLevel2.length - 3]['time'];
-          }
-          if (addLevel3.isNotEmpty) {
-            thirdScoreAddL3 = addLevel3[addLevel3.length - 3]['score'] as int;
-            yearThirdAdd= addLevel3[addLevel3.length - 3]['year'];
-            timeThirdAdd= addLevel3[addLevel3.length - 3]['time'];
-          }
 
           subLevel1 = doc['subLevel1'];
           subLevel2 = doc['subLevel2'];
           subLevel3 = doc['subLevel3'];
-          subTotal = subLevel1[subLevel1.length - 1]['score'] +
-              subLevel2[subLevel2.length - 1]['score'] +
-              subLevel3[subLevel3.length - 1]['score'];
-          if (subLevel1.isNotEmpty) {
-            currentScoreSubL1 = subLevel1[subLevel1.length - 1]['score'] as int;
-          }
-          if (subLevel2.isNotEmpty) {
-            currentScoreSubL2 = subLevel2[subLevel2.length - 1]['score'] as int;
-          }
-          if (subLevel3.isNotEmpty) {
-            currentScoreSubL3 = subLevel3[subLevel3.length - 1]['score'] as int;
-          }
-          if (subLevel1.isNotEmpty) {
-            secondScoreSubL1 = subLevel1[subLevel1.length - 2]['score'] as int;
-          }
-          if (subLevel2.isNotEmpty) {
-            secondScoreSubL2 = subLevel2[subLevel2.length - 2]['score'] as int;
-          }
-          if (subLevel3.isNotEmpty) {
-            secondScoreSubL3 = subLevel3[subLevel3.length - 2]['score'] as int;
-          }
-          if (subLevel1.isNotEmpty) {
-            thirdScoreMulL1 = subLevel1[subLevel1.length - 3]['score'] as int;
-          }
-          if (subLevel2.isNotEmpty) {
-            thirdScoreSubL2 = subLevel2[subLevel2.length - 3]['score'] as int;
-          }
-          if (subLevel3.isNotEmpty) {
-            thirdScoreSubL3 = subLevel3[subLevel3.length - 3]['score'] as int;
-          }
 
           mulLevel1 = doc['mulLevel1'];
           mulLevel2 = doc['mulLevel2'];
           mulLevel3 = doc['mulLevel3'];
-          mulTotal = mulLevel1[mulLevel1.length - 1]['score'] +
-              mulLevel2[mulLevel2.length - 1]['score'] +
-              mulLevel3[mulLevel3.length - 1]['score'];
-          if (mulLevel1.isNotEmpty) {
-            currentScoreMulL1 = mulLevel1[mulLevel1.length - 1]['score'] as int;
-          }
-          if (mulLevel2.isNotEmpty) {
-            currentScoreMulL2 = mulLevel2[mulLevel2.length - 1]['score'] as int;
-          }
-          if (mulLevel3.isNotEmpty) {
-            currentScoreMulL3 = mulLevel3[mulLevel3.length - 1]['score'] as int;
-          }
-          if (mulLevel1.isNotEmpty) {
-            secondScoreMulL1 = mulLevel1[mulLevel1.length - 2]['score'] as int;
-          }
-          if (mulLevel2.isNotEmpty) {
-            secondScoreMulL2 = mulLevel2[mulLevel2.length - 2]['score'] as int;
-          }
-          if (mulLevel3.isNotEmpty) {
-            secondScoreMulL3 = mulLevel3[mulLevel3.length - 2]['score'] as int;
-          }
-          if (mulLevel1.isNotEmpty) {
-            thirdScoreMulL1 = mulLevel1[mulLevel1.length - 3]['score'] as int;
-          }
-          if (mulLevel2.isNotEmpty) {
-            thirdScoreMulL2 = mulLevel2[mulLevel2.length - 3]['score'] as int;
-          }
-          if (mulLevel3.isNotEmpty) {
-            thirdScoreMulL3 = mulLevel3[mulLevel3.length - 3]['score'] as int;
-          }
+
           divLevel1 = doc['divLevel1'];
           divLevel2 = doc['divLevel2'];
           divLevel3 = doc['divLevel3'];
-          mulTotal = divLevel1[divLevel1.length - 1]['score'] +
-              divLevel2[divLevel2.length - 1]['score'] +
-              divLevel3[divLevel3.length - 1]['score'];
-          if (divLevel1.isNotEmpty) {
-            currentScoreDivL1 = divLevel1[divLevel1.length - 1]['score'] as int;
-          }
-          if (divLevel2.isNotEmpty) {
-            currentScoreDivL2 = divLevel2[divLevel2.length - 1]['score'] as int;
-          }
-          if (divLevel3.isNotEmpty) {
-            currentScoreDivL3 = divLevel3[divLevel3.length - 1]['score'] as int;
-          }
-          if (divLevel1.isNotEmpty) {
-            secondScoreDivL1 = divLevel1[divLevel1.length - 2]['score'] as int;
-          }
-          if (divLevel2.isNotEmpty) {
-            secondScoreDivL2 = divLevel2[divLevel2.length - 2]['score'] as int;
-          }
-          if (divLevel3.isNotEmpty) {
-            secondScoreDivL3 = divLevel3[divLevel3.length - 2]['score'] as int;
-          }
-          if (divLevel1.isNotEmpty) {
-            thirdScoreDivL1 = divLevel1[divLevel1.length - 3]['score'] as int;
-          }
-          if (divLevel2.isNotEmpty) {
-            thirdScoreDivL2 = divLevel2[divLevel2.length - 3]['score'] as int;
-          }
-          if (divLevel3.isNotEmpty) {
-            thirdScoreDivL3 = divLevel3[divLevel3.length - 3]['score'] as int;
-          }
+
           print(name);
         }
       });
@@ -360,7 +230,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               alignment: Alignment.topRight,
                               child: IconButton(
                                 onPressed: () async {
-                                  // Navigator.pop(context);
+                                  Navigator.pop(context);
 
                                   // add new scores to first level
                                   // addLevel1 = addLevel1 + [45];
@@ -371,20 +241,38 @@ class _ProfilePageState extends State<ProfilePage> {
                                   //   "addAhad": addLevel1,
                                   //    'time':  FieldValue.serverTimestamp(),
                                   // });
+                                  // print(user.uid.runtimeType);
+                                  // Map<String, dynamic> level1 = {
+                                  //   'score': 0,
+                                  //   'year': year(),
+                                  //   'time': time(),
+                                  // };
+                                  // Map<String, dynamic> level2 = {
+                                  //   'score': 0,
+                                  //   'year': year(),
+                                  //   'time': time(),
+                                  // };
+                                  // Map<String, dynamic> level3 = {
+                                  //   'score': 4,
+                                  //   'year': year(),
+                                  //   'time': time(),
+                                  // };
+                                  
 
-                                  Map<String, dynamic> addScore = {
-                                    'score': 3,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
+                                  // FirebaseFirestore.instance
+                                  //     .collection("users")
+                                  //     .doc(user.uid)
+                                  //     .update({
+                                  //   'addLevel1': FieldValue.arrayUnion([level1]),
+                                  //   'addLevel2': FieldValue.arrayUnion([level2]),
+                                  //   'addLevel3': FieldValue.arrayUnion([level3]),
+                                  // });
 
-                                  FirebaseFirestore.instance
-                                      .collection("users")
-                                      .doc(user.uid)
-                                      .update({
-                                    'addLevel3':
-                                        FieldValue.arrayUnion([addScore])
-                                  });
+                                  // Score.increase(user.uid,'subLevel1',2);
+
+                                  // currentScoreAddL1 = 0;
+                                  // currentScoreAddL2 = 0;
+                                  // currentScoreAddL3 = 0;
                                 },
                                 icon: Icon(Icons.arrow_back_ios),
                                 color: Color(0xff4A4857),
@@ -398,13 +286,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: IconButton(
                                     onPressed: () {
                                       AwesomeDialog(
-                                        //if there is missing info this will be displayed
                                         context: context,
                                         dialogType: DialogType.WARNING,
                                         borderSide: BorderSide(
                                             color: Colors.green, width: 2),
                                         width: 280,
-
                                         buttonsBorderRadius: BorderRadius.all(
                                             Radius.circular(2)),
                                         headerAnimationLoop: false,
@@ -413,8 +299,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                             'هل تريد تسجيل الخروج من التطبيق؟',
                                         btnCancelText: "إلغاء",
                                         btnOkText: "نعم",
-                                        // desc:
-                                        //     'هل أنت متأكد؟',
                                         btnCancelOnPress: () {},
                                         btnOkOnPress: () {
                                           Navigator.push(
@@ -496,12 +380,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     onTap: () {
                                                       addTotal = 0;
                                                       print("add");
-                                                      // print(addLevel1[
-                                                      //     addLevel1.length -
-                                                      //         1]);
-                                                      // print(addLevel2[
-                                                      //     addLevel2.length -
-                                                      //         1]);
+
                                                       if (addLevel1
                                                           .isNotEmpty) {
                                                         addTotal += addLevel1[
@@ -527,30 +406,171 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                     1]['score']
                                                             as int;
                                                       }
-                                                      print(addTotal);
+                                                      print(currentScoreAddL1);
+                                                      currentScoreAddL1 = 0;
+                                                      currentScoreAddL2 = 0;
+                                                      currentScoreAddL3 = 0;
+                                                      secondScoreAddL1 = 0;
+                                                      secondScoreAddL2 = 0;
+                                                      secondScoreAddL3 = 0;
+                                                      thirdScoreAddL1 = 0;
+                                                      thirdScoreAddL2 = 0;
+                                                      thirdScoreAddL3 = 0;
+                                                      yearSecondAdd =
+                                                          'لايوجد بعد';
+                                                      timeSecondAdd = '';
+                                                      yearThirdAdd =
+                                                          'لايوجد بعد';
+                                                      timeThirdAdd = '';
+                                                      if ((addLevel1.length) >
+                                                          0) {
+                                                        currentScoreAddL1 =
+                                                            addLevel1[addLevel1
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((addLevel2.length) >
+                                                          0) {
+                                                        currentScoreAddL2 =
+                                                            addLevel2[addLevel2
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((addLevel3.length) >
+                                                          0) {
+                                                        currentScoreAddL3 =
+                                                            addLevel3[addLevel3
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((addLevel1.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreAddL1 =
+                                                            addLevel1[addLevel1
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondAdd =
+                                                            addLevel1[addLevel1
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondAdd =
+                                                            addLevel1[addLevel1
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((addLevel2.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreAddL2 =
+                                                            addLevel2[addLevel2
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondAdd =
+                                                            addLevel2[addLevel2
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondAdd =
+                                                            addLevel2[addLevel2
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((addLevel3.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreAddL3 =
+                                                            addLevel3[addLevel3
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondAdd =
+                                                            addLevel3[addLevel3
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondAdd =
+                                                            addLevel3[addLevel3
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((addLevel1.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreAddL1 =
+                                                            addLevel1[addLevel1
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdAdd =
+                                                            addLevel1[addLevel1
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdAdd =
+                                                            addLevel1[addLevel1
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+                                                      if ((addLevel2.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreAddL2 =
+                                                            addLevel2[addLevel2
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdAdd =
+                                                            addLevel2[addLevel2
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdAdd =
+                                                            addLevel2[addLevel2
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+                                                      if ((addLevel3.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreAddL3 =
+                                                            addLevel3[addLevel3
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdAdd =
+                                                            addLevel3[addLevel3
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdAdd =
+                                                            addLevel3[addLevel3
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
                                                       // البوب اب ويندو
+
                                                       popUpWindow(
-                                                        context,
-                                                        height,
-                                                        width,
-                                                        addTotal,
-                                                        '     جمع الآحاد',
-                                                        "جمع العشرات",
-                                                        "    جمع المئات",
-                                                        currentScoreAddL1,
-                                                        secondScoreAddL1,
-                                                        thirdScoreAddL1,
-                                                        currentScoreAddL2,
-                                                        secondScoreAddL2,
-                                                        thirdScoreAddL2,
-                                                        currentScoreAddL3,
-                                                        secondScoreAddL3,
-                                                        thirdScoreAddL3,
-                                                        yearSecondAdd,
-                                                        timeSecondAdd,
-                                                        yearThirdAdd,
-                                                        timeThirdAdd
-                                                      );
+                                                          context,
+                                                          height,
+                                                          width,
+                                                          addTotal,
+                                                          '     جمع الآحاد',
+                                                          "جمع العشرات",
+                                                          "    جمع المئات",
+                                                          currentScoreAddL1,
+                                                          secondScoreAddL1,
+                                                          thirdScoreAddL1,
+                                                          currentScoreAddL2,
+                                                          secondScoreAddL2,
+                                                          thirdScoreAddL2,
+                                                          currentScoreAddL3,
+                                                          secondScoreAddL3,
+                                                          thirdScoreAddL3,
+                                                          yearSecondAdd,
+                                                          timeSecondAdd,
+                                                          yearThirdAdd,
+                                                          timeThirdAdd);
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -595,25 +615,198 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   //الكونتينر البرتقالي حق الطرح
                                                   GestureDetector(
                                                     onTap: () {
-                                                      print("subtract");
+                                                      subTotal = 0;
+                                                      print("sub");
 
-                                                    //   popUpWindow(
-                                                    //       context,
-                                                    //       height,
-                                                    //       width,
-                                                    //       subTotal,
-                                                    //       '     طرح الآحاد',
-                                                    //       "طرح العشرات",
-                                                    //       "   طرح المئات",
-                                                    //       currentScoreSubL1,
-                                                    //       secondScoreSubL1,
-                                                    //       thirdScoreSubL1,
-                                                    //       currentScoreSubL2,
-                                                    //       secondScoreSubL2,
-                                                    //       thirdScoreSubL2,
-                                                    //       currentScoreSubL3,
-                                                    //       secondScoreSubL3,
-                                                    //       thirdScoreSubL3);
+                                                      if (subLevel1
+                                                          .isNotEmpty) {
+                                                        subTotal += subLevel1[
+                                                                subLevel1
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
+                                                      }
+                                                      if (subLevel2
+                                                          .isNotEmpty) {
+                                                        subTotal += subLevel2[
+                                                                subLevel2
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
+                                                      }
+                                                      if (subLevel3
+                                                          .isNotEmpty) {
+                                                        subTotal += subLevel3[
+                                                                subLevel3
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
+                                                      }
+
+                                                      currentScoreSubL1 = 0;
+                                                      currentScoreSubL2 = 0;
+                                                      currentScoreSubL3 = 0;
+                                                      secondScoreSubL1 = 0;
+                                                      secondScoreSubL2 = 0;
+                                                      secondScoreSubL3 = 0;
+                                                      thirdScoreSubL1 = 0;
+                                                      thirdScoreSubL2 = 0;
+                                                      thirdScoreSubL3 = 0;
+
+                                                      var yearSecondSub =
+                                                          'لايوجد بعد';
+                                                      var timeSecondSub = '';
+                                                      var yearThirdSub =
+                                                          'لايوجد بعد';
+                                                      var timeThirdSub = '';
+                                                      if ((subLevel1.length) >
+                                                          0) {
+                                                        currentScoreSubL1 =
+                                                            subLevel1[subLevel1
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((subLevel2.length) >
+                                                          0) {
+                                                        currentScoreSubL2 =
+                                                            subLevel2[subLevel2
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((subLevel3.length) >
+                                                          0) {
+                                                        currentScoreSubL3 =
+                                                            subLevel3[subLevel3
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((subLevel1.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreSubL1 =
+                                                            subLevel1[subLevel1
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondSub =
+                                                            subLevel1[subLevel1
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondSub =
+                                                            subLevel1[subLevel1
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((subLevel2.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreSubL2 =
+                                                            subLevel2[subLevel2
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondSub =
+                                                            subLevel2[subLevel2
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondSub =
+                                                            subLevel2[subLevel2
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((subLevel3.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreSubL3 =
+                                                            subLevel3[subLevel3
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondSub =
+                                                            subLevel3[subLevel3
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondSub =
+                                                            subLevel3[subLevel3
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((subLevel1.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreSubL1 =
+                                                            subLevel1[subLevel1
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdSub =
+                                                            subLevel1[subLevel1
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdSub =
+                                                            subLevel1[subLevel1
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+                                                      if ((subLevel2.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreSubL2 =
+                                                            subLevel2[subLevel2
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdSub =
+                                                            subLevel2[subLevel2
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdSub =
+                                                            subLevel2[subLevel2
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+                                                      if ((subLevel3.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreSubL3 =
+                                                            subLevel3[subLevel3
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdSub =
+                                                            subLevel3[subLevel3
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdSub =
+                                                            subLevel3[subLevel3
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+
+                                                      popUpWindow(
+                                                          context,
+                                                          height,
+                                                          width,
+                                                          subTotal,
+                                                          '     طرح الآحاد',
+                                                          "طرح العشرات",
+                                                          "   طرح المئات",
+                                                          currentScoreSubL1,
+                                                          secondScoreSubL1,
+                                                          thirdScoreSubL1,
+                                                          currentScoreSubL2,
+                                                          secondScoreSubL2,
+                                                          thirdScoreSubL2,
+                                                          currentScoreSubL3,
+                                                          secondScoreSubL3,
+                                                          thirdScoreSubL3,
+                                                          yearSecondSub,
+                                                          timeSecondSub,
+                                                          yearThirdSub,
+                                                          timeThirdSub);
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -658,25 +851,198 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   //الكونتينر البرتقالي حق الضرب
                                                   GestureDetector(
                                                     onTap: () {
-                                                      print("multiplcation");
+                                                      mulTotal = 0;
+                                                      print("mul");
 
-                                                    //   popUpWindow(
-                                                    //       context,
-                                                    //       height,
-                                                    //       width,
-                                                    //       subTotal,
-                                                    //       '  ضرب (۰,۱,۲,٤)',
-                                                    //       "ضرب (٥,۱۰, ۳,٦)",
-                                                    //       "   ضرب (۹, ٧,۸)",
-                                                    //       currentScoreMulL1,
-                                                    //       secondScoreMulL1,
-                                                    //       thirdScoreMulL1,
-                                                    //       currentScoreMulL2,
-                                                    //       secondScoreMulL2,
-                                                    //       thirdScoreMulL2,
-                                                    //       currentScoreMulL3,
-                                                    //       secondScoreMulL3,
-                                                    //       thirdScoreMulL3);
+                                                      if (mulLevel1
+                                                          .isNotEmpty) {
+                                                        mulTotal += mulLevel1[
+                                                                mulLevel1
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
+                                                      }
+                                                      if (mulLevel2
+                                                          .isNotEmpty) {
+                                                        mulTotal += mulLevel2[
+                                                                mulLevel2
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
+                                                      }
+                                                      if (mulLevel3
+                                                          .isNotEmpty) {
+                                                        mulTotal += mulLevel3[
+                                                                mulLevel3
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
+                                                      }
+
+                                                      currentScoreMulL1 = 0;
+                                                      currentScoreMulL2 = 0;
+                                                      currentScoreMulL3 = 0;
+                                                      secondScoreMulL1 = 0;
+                                                      secondScoreMulL2 = 0;
+                                                      secondScoreMulL3 = 0;
+                                                      thirdScoreMulL1 = 0;
+                                                      thirdScoreMulL2 = 0;
+                                                      thirdScoreMulL3 = 0;
+
+                                                      var yearSecondMul =
+                                                          'لايوجد بعد';
+                                                      var timeSecondMul = '';
+                                                      var yearThirdMul =
+                                                          'لايوجد بعد';
+                                                      var timeThirdMul = '';
+                                                      if ((mulLevel1.length) >
+                                                          0) {
+                                                        currentScoreMulL1 =
+                                                            mulLevel1[mulLevel1
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((mulLevel2.length) >
+                                                          0) {
+                                                        currentScoreMulL2 =
+                                                            mulLevel2[mulLevel2
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((mulLevel3.length) >
+                                                          0) {
+                                                        currentScoreMulL3 =
+                                                            mulLevel3[mulLevel3
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((mulLevel1.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreMulL1 =
+                                                            mulLevel1[mulLevel1
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondMul =
+                                                            mulLevel1[mulLevel1
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondMul =
+                                                            mulLevel1[mulLevel1
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((mulLevel2.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreMulL2 =
+                                                            mulLevel2[mulLevel2
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondMul =
+                                                            mulLevel2[mulLevel2
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondMul =
+                                                            mulLevel2[mulLevel2
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((mulLevel3.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreMulL3 =
+                                                            mulLevel3[mulLevel3
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondMul =
+                                                            mulLevel3[mulLevel3
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondMul =
+                                                            mulLevel3[mulLevel3
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((mulLevel1.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreMulL1 =
+                                                            mulLevel1[mulLevel1
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdMul =
+                                                            mulLevel1[mulLevel1
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdMul =
+                                                            mulLevel1[mulLevel1
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+                                                      if ((mulLevel2.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreMulL2 =
+                                                            mulLevel2[mulLevel2
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdMul =
+                                                            mulLevel2[mulLevel2
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdMul =
+                                                            mulLevel2[mulLevel2
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+                                                      if ((mulLevel3.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreMulL3 =
+                                                            mulLevel3[mulLevel3
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdMul =
+                                                            mulLevel3[mulLevel3
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdMul =
+                                                            mulLevel3[mulLevel3
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+
+                                                      popUpWindow(
+                                                          context,
+                                                          height,
+                                                          width,
+                                                          mulTotal,
+                                                          '  ضرب (۰,۱,۲,۳)',
+                                                          "ضرب (٦,٧, ٤,٥)",
+                                                          "   ضرب (۹,۱۰, ۸)",
+                                                          currentScoreMulL1,
+                                                          secondScoreMulL1,
+                                                          thirdScoreMulL1,
+                                                          currentScoreMulL2,
+                                                          secondScoreMulL2,
+                                                          thirdScoreMulL2,
+                                                          currentScoreMulL3,
+                                                          secondScoreMulL3,
+                                                          thirdScoreMulL3,
+                                                          yearSecondMul,
+                                                          timeSecondMul,
+                                                          yearThirdMul,
+                                                          timeThirdMul);
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -721,26 +1087,200 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   //الكونتينر البرتقالي حق القسمة
                                                   GestureDetector(
                                                     onTap: () {
-                                                      print("division");
+                                                      divTotal = 0;
+                                                      print("div");
 
-                                                      // popUpWindow(
-                                                      //   context,
-                                                      //   height,
-                                                      //   width,
-                                                      //   subTotal,
-                                                      //   'قسمة (۰,۲,٥,۱۰)',
-                                                      //   "قسمة (٤,٦, ۱,۳)",
-                                                      //   "  قسمة (۹, ٧,۸)",
-                                                      //   currentScoreDivL1,
-                                                      //   secondScoreDivL1,
-                                                      //   thirdScoreDivL1,
-                                                      //   currentScoreDivL2,
-                                                      //   secondScoreDivL2,
-                                                      //   thirdScoreDivL2,
-                                                      //   currentScoreDivL3,
-                                                      //   secondScoreDivL3,
-                                                      //   thirdScoreDivL3,
-                                                      // );
+                                                      if (divLevel1
+                                                          .isNotEmpty) {
+                                                        divTotal += divLevel1[
+                                                                divLevel1
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
+                                                      }
+                                                      if (divLevel2
+                                                          .isNotEmpty) {
+                                                        divTotal += divLevel2[
+                                                                divLevel2
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
+                                                        print('5555');
+                                                      }
+                                                      if (divLevel3
+                                                          .isNotEmpty) {
+                                                        divTotal += divLevel3[
+                                                                divLevel3
+                                                                        .length -
+                                                                    1]['score']
+                                                            as int;
+                                                      }
+                                                      print(divTotal);
+
+                                                      currentScoreDivL1 = 0;
+                                                      currentScoreDivL2 = 0;
+                                                      currentScoreDivL3 = 0;
+                                                      secondScoreDivL1 = 0;
+                                                      secondScoreDivL2 = 0;
+                                                      secondScoreDivL3 = 0;
+                                                      thirdScoreDivL1 = 0;
+                                                      thirdScoreDivL2 = 0;
+                                                      thirdScoreDivL3 = 0;
+
+                                                      var yearSecondDiv =
+                                                          'لايوجد بعد';
+                                                      var timeSecondDiv = '';
+                                                      var yearThirdDiv =
+                                                          'لايوجد بعد';
+                                                      var timeThirdDiv = '';
+                                                      if ((divLevel1.length) >
+                                                          0) {
+                                                        currentScoreDivL1 =
+                                                            divLevel1[divLevel1
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((divLevel2.length) >
+                                                          0) {
+                                                        currentScoreDivL2 =
+                                                            divLevel2[divLevel2
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((divLevel3.length) >
+                                                          0) {
+                                                        currentScoreDivL3 =
+                                                            divLevel3[divLevel3
+                                                                        .length -
+                                                                    1]['score']
+                                                                as int;
+                                                      }
+                                                      if ((divLevel1.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreDivL1 =
+                                                            divLevel1[divLevel1
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondDiv =
+                                                            divLevel1[divLevel1
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondDiv =
+                                                            divLevel1[divLevel1
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((divLevel2.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreDivL2 =
+                                                            divLevel2[divLevel2
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondDiv =
+                                                            divLevel2[divLevel2
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondDiv =
+                                                            divLevel2[divLevel2
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((divLevel3.length -
+                                                              2) >=
+                                                          0) {
+                                                        secondScoreDivL3 =
+                                                            divLevel3[divLevel3
+                                                                        .length -
+                                                                    2]['score']
+                                                                as int;
+                                                        yearSecondDiv =
+                                                            divLevel3[divLevel3
+                                                                    .length -
+                                                                2]['year'];
+                                                        timeSecondDiv =
+                                                            divLevel3[divLevel3
+                                                                    .length -
+                                                                2]['time'];
+                                                      }
+                                                      if ((divLevel1.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreDivL1 =
+                                                            divLevel1[divLevel1
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdDiv =
+                                                            divLevel1[divLevel1
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdDiv =
+                                                            divLevel1[divLevel1
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+                                                      if ((divLevel2.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreDivL2 =
+                                                            divLevel2[divLevel2
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdDiv =
+                                                            divLevel2[divLevel2
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdDiv =
+                                                            divLevel2[divLevel2
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+                                                      if ((divLevel3.length -
+                                                              3) >=
+                                                          0) {
+                                                        thirdScoreDivL3 =
+                                                            divLevel3[divLevel3
+                                                                        .length -
+                                                                    3]['score']
+                                                                as int;
+                                                        yearThirdDiv =
+                                                            divLevel3[divLevel3
+                                                                    .length -
+                                                                3]['year'];
+                                                        timeThirdDiv =
+                                                            divLevel3[divLevel3
+                                                                    .length -
+                                                                3]['time'];
+                                                      }
+
+                                                      popUpWindow(
+                                                          context,
+                                                          height,
+                                                          width,
+                                                          divTotal,
+                                                          '  قسمة (۰,۱,۲,۳)',
+                                                          "قسمة (٦,٧, ٤,٥)",
+                                                          "   قسمة (۹,۱۰, ۸)",
+                                                          currentScoreDivL1,
+                                                          secondScoreDivL1,
+                                                          thirdScoreDivL1,
+                                                          currentScoreDivL2,
+                                                          secondScoreDivL2,
+                                                          thirdScoreDivL2,
+                                                          currentScoreDivL3,
+                                                          secondScoreDivL3,
+                                                          thirdScoreDivL3,
+                                                          yearSecondDiv,
+                                                          timeSecondDiv,
+                                                          yearThirdDiv,
+                                                          timeThirdDiv);
                                                     },
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -1151,8 +1691,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         Stack(
                           children: [
                             Container(
-                              height: (height / 2 + 70),
-                              width: width * 0.35,
+                              height: (height / 2 + 50),
+                              width: width / 4,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:
@@ -1169,8 +1709,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                             Container(
-                              height: (height / 4) - 20,
-                              width: width * 0.35,
+                              height: (height / 4) - 30,
+                              width: width / 4,
                               decoration: BoxDecoration(
                                 color: Colors.amber.shade200,
                                 borderRadius: BorderRadius.only(
@@ -1194,13 +1734,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                          horizontal: 30,
+                                          horizontal: 10,
                                           vertical: 10,
                                         ),
                                         child: Text(
                                           'المستوى الحالي',
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: 17,
                                             fontFamily: 'ReadexPro',
                                             color: Colors.brown,
                                             fontWeight: FontWeight.w900,
@@ -1231,13 +1772,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                         SizedBox(
-                          width: 30,
+                          width: 25,
                         ),
                         Stack(
                           children: [
                             Container(
-                              height: (height / 2 + 70),
-                              width: width * 0.45,
+                              height: (height / 2 + 50),
+                              width: width / 2 - 20,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:
@@ -1255,7 +1796,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Container(
                               height: (height / 4) - 20,
-                              width: width * 0.45,
+                              width: width / 2 - 20,
                               decoration: BoxDecoration(
                                 color: Colors.amber.shade200,
                                 borderRadius: BorderRadius.only(
@@ -1269,7 +1810,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 30,
-                                vertical: 10,
+                                vertical: 0,
                               ),
                               child: SingleChildScrollView(
                                 child: Align(
@@ -1279,14 +1820,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 40),
+                                          horizontal: 40,
+                                          vertical: 20,
+                                        ),
                                         child: SizedBox(
                                           width: width * 0.25,
                                           child: Text(
                                             'المستوى في المحاولات السابقة',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 20,
+                                              fontSize: 17,
                                               fontFamily: 'ReadexPro',
                                               color: Colors.brown,
                                               fontWeight: FontWeight.w900,
@@ -1295,24 +1838,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 30,
+                                        height: 15,
                                       ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(top: 0.0),
                                         child: Row(
-                                          children: [
+                                          children: <Widget>[
                                             Column(
                                               children: [
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 40, bottom: 5),
+                                                          left: 20, bottom: 5),
                                                   child: Text(
-                                                    time2+'\n'+year2,
-                                                    //textAlign: TextAlign.center,
+                                                    year2 + '\n' + time2,
+                                                    textAlign: TextAlign.center,
                                                     style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 14,
                                                       fontFamily: 'ReadexPro',
                                                       color: Colors.brown,
                                                       fontWeight:
@@ -1328,17 +1871,29 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     secondScoreLevel3, level3),
                                               ],
                                             ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(top: 5),
+                                              color: Colors.black45,
+                                              height: 100,
+                                              width: 1,
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
                                             Column(
                                               children: [
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 40, bottom: 5),
+                                                          left: 20, bottom: 5),
                                                   child: Text(
-                                                    time3+'\n'+year3,
-                                                    //textAlign: TextAlign.center,
+                                                    year3 + '\n' + time3,
+                                                    textAlign: TextAlign.center,
                                                     style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 14,
                                                       fontFamily: 'ReadexPro',
                                                       color: Colors.brown,
                                                       fontWeight:
@@ -1354,32 +1909,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     thirdScoreLevel3, level3),
                                               ],
                                             ),
-                                            // Column(
-                                            //   children: [
-                                            //     Padding(
-                                            //       padding:
-                                            //           const EdgeInsets.only(
-                                            //               left: 40, bottom: 5),
-                                            //       child: Text(
-                                            //         time3+'\n'+year3,
-                                            //         //textAlign: TextAlign.center,
-                                            //         style: TextStyle(
-                                            //           fontSize: 12,
-                                            //           fontFamily: 'ReadexPro',
-                                            //           color: Colors.brown,
-                                            //           fontWeight:
-                                            //               FontWeight.w900,
-                                            //         ),
-                                            //       ),
-                                            //     ),
-                                            //     currentLevelPer(
-                                            //         thirdScoreLevel1, level1),
-                                            //     currentLevelPer(
-                                            //         thirdScoreLevel2, level2),
-                                            //     currentLevelPer(
-                                            //         thirdScoreLevel3, level3),
-                                            //   ],
-                                            // ),
                                           ],
                                         ),
                                       ),
@@ -1404,13 +1933,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: CircleAvatar(
                       child: Icon(Icons.close),
                       backgroundColor: Colors.red,
-                      radius: 15,
+                      radius: 13,
                     ),
                   ),
                 ),
                 Container(
-                  width: width * 0.70,
-                  height: height - 20,
+                  width: width / 2,
+                  height: height / 2 - 40,
                 ),
               ],
             ),
@@ -1419,7 +1948,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Row currentLevelPer(score, name) {
-    double per = ((score / 12));
+    double per = ((score / 4));
 
     return Row(children: [
       if (score == 0) ...[
@@ -1427,23 +1956,27 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Padding(
           padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
-            width: 95,
+            width: 98,
             lineHeight: 14.0,
             animation: true,
             leading: new Text(
               name,
               style: TextStyle(
-                fontSize: 8,
+                fontSize: 10,
                 fontFamily: 'ReadexPro',
                 color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
               ),
             ),
             animationDuration: 1500,
             percent: per,
             center: Text(
               "%٠.٠٠",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+              style: new TextStyle(
+                fontSize: 10,
+                fontFamily: 'ReadexPro',
+                fontWeight: FontWeight.bold,
+              ),
             ),
             barRadius: Radius.circular(25),
             backgroundColor: Color.fromARGB(255, 200, 199, 199),
@@ -1455,27 +1988,31 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Padding(
           padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
-            width: 95,
+            width: 98,
             lineHeight: 14.0,
             animation: true,
             leading: new Text(
               name,
               style: TextStyle(
-                fontSize: 8,
+                fontSize: 10,
                 fontFamily: 'ReadexPro',
                 color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
               ),
             ),
             animationDuration: 1500,
             percent: per,
             center: Text(
-              "%٨.٣٣",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+              "%۲٥",
+              style: new TextStyle(
+                fontSize: 10,
+                fontFamily: 'ReadexPro',
+                fontWeight: FontWeight.w900,
+              ),
             ),
             barRadius: Radius.circular(25),
             backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.red,
+            progressColor: Colors.yellow,
           ),
         ))
       ] else if (score == 2) ...[
@@ -1483,27 +2020,31 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Padding(
           padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
-            width: 95,
+            width: 98,
             lineHeight: 14.0,
             animation: true,
             leading: new Text(
               name,
               style: TextStyle(
-                fontSize: 8,
+                fontSize: 10,
                 fontFamily: 'ReadexPro',
                 color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
               ),
             ),
             animationDuration: 1500,
             percent: per,
             center: Text(
-              "%١٦.٦٦",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+              "%٥۰",
+              style: new TextStyle(
+                fontSize: 10,
+                fontFamily: 'ReadexPro',
+                fontWeight: FontWeight.bold,
+              ),
             ),
             barRadius: Radius.circular(25),
             backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.red,
+            progressColor: Colors.blue,
           ),
         ))
       ] else if (score == 3) ...[
@@ -1511,23 +2052,27 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Padding(
           padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
-            width: 95,
+            width: 98,
             lineHeight: 14.0,
             animation: true,
             leading: new Text(
               name,
               style: TextStyle(
-                fontSize: 8,
+                fontSize: 10,
                 fontFamily: 'ReadexPro',
                 color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
               ),
             ),
             animationDuration: 1500,
             percent: per,
             center: Text(
-              "%٢٥",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
+              "%٧٥",
+              style: new TextStyle(
+                fontSize: 10,
+                fontFamily: 'ReadexPro',
+                fontWeight: FontWeight.bold,
+              ),
             ),
             barRadius: Radius.circular(25),
             backgroundColor: Color.fromARGB(255, 200, 199, 199),
@@ -1539,251 +2084,31 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Padding(
           padding: EdgeInsets.only(top: 4, bottom: 4),
           child: new LinearPercentIndicator(
-            width: 95,
+            width: 98,
             lineHeight: 14.0,
             animation: true,
             leading: new Text(
               name,
               style: TextStyle(
-                fontSize: 8,
+                fontSize: 10,
                 fontFamily: 'ReadexPro',
                 color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
               ),
             ),
             animationDuration: 1500,
             percent: per,
             center: Text(
-              "%٣٣.٣٣",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
-            ),
-            barRadius: Radius.circular(25),
-            backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.orange,
-          ),
-        ))
-      ] else if (score == 5) ...[
-        Container(
-            child: Padding(
-          padding: EdgeInsets.only(top: 4, bottom: 4),
-          child: new LinearPercentIndicator(
-            width: 95,
-            lineHeight: 14.0,
-            animation: true,
-            leading: new Text(
-              name,
-              style: TextStyle(
-                fontSize: 8,
+              "%۱۰۰",
+              style: new TextStyle(
+                fontSize: 10,
                 fontFamily: 'ReadexPro',
-                color: Colors.brown.shade500,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            animationDuration: 1500,
-            percent: per,
-            center: Text(
-              "%٤١.٦٦",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
-            ),
             barRadius: Radius.circular(25),
             backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.orange,
-          ),
-        ))
-      ] else if (score == 6) ...[
-        Container(
-            child: Padding(
-          padding: EdgeInsets.only(top: 4, bottom: 4),
-          child: new LinearPercentIndicator(
-            width: 95,
-            lineHeight: 14.0,
-            animation: true,
-            leading: new Text(
-              name,
-              style: TextStyle(
-                fontSize: 8,
-                fontFamily: 'ReadexPro',
-                color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            animationDuration: 1500,
-            percent: per,
-            center: Text(
-              "%٥٠",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
-            ),
-            barRadius: Radius.circular(25),
-            backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.lightBlue,
-          ),
-        ))
-      ] else if (score == 7) ...[
-        Container(
-            child: Padding(
-          padding: EdgeInsets.only(top: 4, bottom: 4),
-          child: new LinearPercentIndicator(
-            width: 95,
-            lineHeight: 14.0,
-            animation: true,
-            leading: new Text(
-              name,
-              style: TextStyle(
-                fontSize: 8,
-                fontFamily: 'ReadexPro',
-                color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            animationDuration: 1500,
-            percent: per,
-            center: Text(
-              "%٥٨.٣٣",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
-            ),
-            barRadius: Radius.circular(25),
-            backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.lightBlue,
-          ),
-        ))
-      ] else if (score == 8) ...[
-        Container(
-            child: Padding(
-          padding: EdgeInsets.only(top: 4, bottom: 4),
-          child: new LinearPercentIndicator(
-            width: 95,
-            lineHeight: 14.0,
-            animation: true,
-            leading: new Text(
-              name,
-              style: TextStyle(
-                fontSize: 8,
-                fontFamily: 'ReadexPro',
-                color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            animationDuration: 1500,
-            percent: per,
-            center: Text(
-              "%٦٦.٦٦",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
-            ),
-            barRadius: Radius.circular(25),
-            backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.lightBlue,
-          ),
-        ))
-      ] else if (score == 9) ...[
-        Container(
-            child: Padding(
-          padding: EdgeInsets.only(top: 4, bottom: 4),
-          child: new LinearPercentIndicator(
-            width: 95,
-            lineHeight: 14.0,
-            animation: true,
-            leading: new Text(
-              name,
-              style: TextStyle(
-                fontSize: 8,
-                fontFamily: 'ReadexPro',
-                color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            animationDuration: 1500,
-            percent: per,
-            center: Text(
-              "%٧٥",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
-            ),
-            barRadius: Radius.circular(25),
-            backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.greenAccent,
-          ),
-        ))
-      ] else if (score == 10) ...[
-        Container(
-            child: Padding(
-          padding: EdgeInsets.only(top: 4, bottom: 4),
-          child: new LinearPercentIndicator(
-            width: 95,
-            lineHeight: 14.0,
-            animation: true,
-            leading: new Text(
-              name,
-              style: TextStyle(
-                fontSize: 8,
-                fontFamily: 'ReadexPro',
-                color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            animationDuration: 1500,
-            percent: per,
-            center: Text(
-              "%٨٣.٣٣",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
-            ),
-            barRadius: Radius.circular(25),
-            backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.greenAccent,
-          ),
-        ))
-      ] else if (score == 11) ...[
-        Container(
-            child: Padding(
-          padding: EdgeInsets.only(top: 4, bottom: 4),
-          child: new LinearPercentIndicator(
-            width: 120,
-            lineHeight: 14.0,
-            animation: true,
-            leading: new Text(
-              name,
-              style: TextStyle(
-                fontSize: 8,
-                fontFamily: 'ReadexPro',
-                color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            animationDuration: 1500,
-            percent: per,
-            center: Text(
-              "%٩١.٦٦",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
-            ),
-            barRadius: Radius.circular(25),
-            backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.greenAccent,
-          ),
-        ))
-      ] else if (score == 12) ...[
-        Container(
-            child: Padding(
-          padding: EdgeInsets.only(top: 4, bottom: 4),
-          child: new LinearPercentIndicator(
-            width: 95,
-            lineHeight: 14.0,
-            animation: true,
-            leading: new Text(
-              name,
-              style: TextStyle(
-                fontSize: 8,
-                fontFamily: 'ReadexPro',
-                color: Colors.brown.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            animationDuration: 1500,
-            percent: per,
-            center: Text(
-              "%١٠٠",
-              style: new TextStyle(fontSize: 10, fontFamily: 'ReadexPro'),
-            ),
-            barRadius: Radius.circular(25),
-            backgroundColor: Color.fromARGB(255, 200, 199, 199),
-            progressColor: Colors.greenAccent,
+            progressColor: Colors.lightGreen,
           ),
         ))
       ]
@@ -1799,7 +2124,7 @@ class _ProfilePageState extends State<ProfilePage> {
         if (score >= 9) ...[
           //اذا الطفل جاب 9 أو فوق من أصل 12 بوينتز
           Container(
-            width: 30,
+            width: 60,
             child: Image.asset("images/golden.png"),
           ),
           SizedBox(
@@ -1817,7 +2142,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ] else if (score >= 6) ...[
           //اذا الطفل جاب 6 أو فوق من أصل 12 بوينتز
           Container(
-            width: 30,
+            width: 60,
             child: Image.asset("images/silver.png"),
           ),
           SizedBox(
@@ -1835,7 +2160,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ] else ...[
           //اذا الطفل جاب أقل من 5 من أصل 12 بوينتز
           Container(
-            width: 30,
+            width: 60,
             child: Image.asset("images/bronze.png"),
           ),
           SizedBox(
@@ -1871,12 +2196,7 @@ class _ProfilePageState extends State<ProfilePage> {
     var m = replaceFarsiNumber(DateTime.now().month.toString());
     var d = replaceFarsiNumber(DateTime.now().day.toString());
 
-    var h = replaceFarsiNumber(DateTime.now().hour.toString());
-    var min = replaceFarsiNumber(DateTime.now().minute.toString());
-    var s = replaceFarsiNumber(DateTime.now().second.toString());
-
-    var year = y + '/' + m + '/' + d;
-    var time = h + ' : ' + min + ' : ' + s;
+    var year = d + '/' + m + '/' + y;
 
     return year;
   }
@@ -1886,8 +2206,99 @@ class _ProfilePageState extends State<ProfilePage> {
     var min = replaceFarsiNumber(DateTime.now().minute.toString());
     var s = replaceFarsiNumber(DateTime.now().second.toString());
 
-    var time = h + ' : ' + min + ' : ' + s;
+    if (h == '۱۲') {
+      h = h + " مساءً ";
+    } else if (h == '۱۳') {
+      h = '۰۱';
+      h = h + " مساءً ";
+    } else if (h == '۱٤') {
+      h = '۰۲';
+      h = h + " مساءً ";
+    } else if (h == '۱٥') {
+      h = '۰۳';
+      h = h + " مساءً ";
+    } else if (h == '۱٦') {
+      h = '۰٤';
+      h = h + " مساءً ";
+    } else if (h == '۱٧') {
+      h = '۰٥';
+      h = h + " مساءً ";
+    } else if (h == '۱۸') {
+      h = '۰٦';
+      h = h + " مساءً ";
+    } else if (h == '۱۹') {
+      h = '۰٧';
+      h = h + " مساءً ";
+    } else if (h == '۲۰') {
+      h = '۰۸';
+      h = h + " مساءً ";
+    } else if (h == '۲۱') {
+      h = '۰۹';
+      h = h + " مساءً ";
+    } else if (h == '۲۲') {
+      h = '۱۰';
+      h = h + " مساءً ";
+    } else if (h == '۲۳') {
+      h = '۱۱';
+      h = h + " مساءً ";
+    } else if (h == '۰') {
+      h = '۰۰';
+      h = h + " صباحًا ";
+    } else {
+      h = h + " صباحًا ";
+    }
 
+    if (min == '۰') {
+      min = "۰۰";
+    } else if (min == '۱') {
+      min = '۰۱';
+    } else if (min == '۲') {
+      min = '۰۲';
+    } else if (min == '۳') {
+      h = '۰۳';
+    } else if (min == '٤') {
+      min = '۰٤';
+    } else if (min == '٥') {
+      min = '۰٥';
+    } else if (min == '٦') {
+      min = '۰٦';
+    } else if (min == '٧') {
+      min = '۰٧';
+    } else if (min == '۸') {
+      min = '۰۸';
+    } else if (min == '۹') {
+      min = '۰۹';
+    }
+    if (s == '۰') {
+      s = "۰۰";
+    } else if (s == '۱') {
+      s = '۰۱';
+    } else if (s == '۲') {
+      s = '۰۲';
+    } else if (s == '۳') {
+      s = '۰۳';
+    } else if (s == '٤') {
+      s = '۰٤';
+    } else if (s == '٥') {
+      s = '۰٥';
+    } else if (s == '٦') {
+      s = '۰٦';
+    } else if (s == '٧') {
+      s = '۰٧';
+    } else if (s == '۸') {
+      s = '۰۸';
+    } else if (s == '۹') {
+      s = '۰۹';
+    }
+
+    var time = s + ' : ' + min + ' : ' + h;
+    DateTime now = new DateTime.now();
+    DateTime currentPhoneDate = DateTime.now(); //DateTime
+
+    Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate); //To TimeStamp
+
+    DateTime myDateTime = myTimeStamp.toDate(); // TimeStamp to DateTime
+    print(DateTime.now().toLocal());
     return time;
   }
 }
