@@ -1,22 +1,24 @@
-// ignore_for_file: prefer_const_constructors
-
-// import 'dart:html';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:husbh_app/main.dart';
 import '../../widgets/option_card.dart';
+<<<<<<< HEAD:lib/screens/addition/QuizScreen.dart
 import '../learn_page.dart';
 import 'AnswerScreen.dart';
+=======
+import 'additionResultScreen.dart';
+>>>>>>> c7c49776d3ee5ad4c99092c563a007cc27cec5b6:lib/screens/addition/additionQuizScreen.dart
 import 'dart:async';
-import 'QuizButtonIcon.dart';
+import '../QuizButtonIcon.dart';
+import 'package:husbh_app/screens/QuizButtonIcon.dart';
 import 'package:nice_buttons/nice_buttons.dart';
-// import 'package:fabexdateformatter/fabexdateformatter.dart';
 import 'package:arabic_numbers/arabic_numbers.dart';
+import 'addition_video.dart';
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({Key? key}) : super(key: key);
+class additionQuizScreen extends StatefulWidget {
+  const additionQuizScreen({Key? key}) : super(key: key);
 
   @override
   _QuizScreenState createState() => _QuizScreenState();
@@ -31,7 +33,7 @@ class QuizScreen extends StatefulWidget {
   }
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizScreenState extends State<additionQuizScreen> {
   get width => MediaQuery.of(context).size.width;
   get height => MediaQuery.of(context).size.height;
 
@@ -54,6 +56,7 @@ class _QuizScreenState extends State<QuizScreen> {
   var Tensscore = 0;
   var Hundredscore = 0;
   bool isPressed = false;
+<<<<<<< HEAD:lib/screens/addition/QuizScreen.dart
 
 // //Array of numbers to convert from english to arabic
 //   var numberMap = {
@@ -68,6 +71,8 @@ class _QuizScreenState extends State<QuizScreen> {
 //     8: '۸',
 //     9: '۹'
 //   };
+=======
+>>>>>>> c7c49776d3ee5ad4c99092c563a007cc27cec5b6:lib/screens/addition/additionQuizScreen.dart
 
   String arabicX = "";
   String arabicY = "";
@@ -79,10 +84,13 @@ class _QuizScreenState extends State<QuizScreen> {
     return isPressed;
   }
 
+<<<<<<< HEAD:lib/screens/addition/QuizScreen.dart
   //get isPressed => null;
 
   // get onPressed => null;
 
+=======
+>>>>>>> c7c49776d3ee5ad4c99092c563a007cc27cec5b6:lib/screens/addition/additionQuizScreen.dart
   get startColor => null;
 
   get endColor => null;
@@ -106,7 +114,6 @@ class _QuizScreenState extends State<QuizScreen> {
       Xx.add(x);
       Yy.add(y);
 
-      textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x + y);
@@ -134,7 +141,6 @@ class _QuizScreenState extends State<QuizScreen> {
         y = Random().nextInt(99) + 1;
       }
 
-      textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x + y);
@@ -162,7 +168,6 @@ class _QuizScreenState extends State<QuizScreen> {
         y = Random().nextInt(999);
       }
 
-      textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x + y);
@@ -186,67 +191,34 @@ class _QuizScreenState extends State<QuizScreen> {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
 
-    // if (x.toString().length == 1) {
-    //   arabicX = numberMap[x].toString();
-    // }
-    // if (y.toString().length == 1) {
-    //   arabicY = numberMap[y].toString();
-    // }
-
-    // var numberLengthX = x.toString().length;
-    // if (numberLengthX > 1) {
-    //   var Xstring = x.toString();
-    //   arabicX = Xstring;
-    //   for (var i = 0; i < numberLengthX; i++) {
-    //     var num = int.parse(Xstring[i]);
-    //     arabicX = arabicX.replaceAll(num.toString(), numberMap[num]!);
-    //   }
-    // }
-    // var numberLengthY = y.toString().length;
-    // if (numberLengthY > 1) {
-    //   var Ystring = y.toString();
-    //   arabicY = Ystring;
-    //   for (var s = 0; s < numberLengthY; s++) {
-    //     var num = int.parse(Ystring[s]);
-    //     arabicY = arabicY.replaceAll(num.toString(), numberMap[num]!);
-    //   }
-    // }
     return "$arabicX " + "+" + " $arabicY";
   }
 
   String convertOptionsToArabic(int num) {
     arabicX = arabicNumber.convert(num);
 
-    // if (num.toString().length == 1) {
-    //   arabicX = numberMap[num].toString();
-    // }
-
-    // var numberLengthX = num.toString().length;
-
-    // if (numberLengthX > 1) {
-    //   var Xstring = num.toString();
-    //   arabicX = Xstring;
-    //   for (var i = 0; i < numberLengthX; i++) {
-    //     var number = int.parse(Xstring[i]);
-    //     arabicX = arabicX.replaceAll(number.toString(), numberMap[number]!);
-    //   }
-    // }
     return "$arabicX";
   }
 
   _changeQuestion(ans) {
     userAnswer.add(ans);
+<<<<<<< HEAD:lib/screens/addition/QuizScreen.dart
     //print(userAnswer);
+=======
+>>>>>>> c7c49776d3ee5ad4c99092c563a007cc27cec5b6:lib/screens/addition/additionQuizScreen.dart
 
     if (j + 1 >= 12) {
-      // if (j + 1 >= qustions.length) {
-      // print(userAnswer);
       for (var i = 0; i < 4; i++) {
+<<<<<<< HEAD:lib/screens/addition/QuizScreen.dart
         //print(userAnswer[i].toString());
         //print( convertOptionsToArabic(answers[i]));
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
           //print(userAnswer[i].toString());
+=======
+        if (userAnswer[i].toString() ==
+            convertOptionsToArabic(answers[i]).toString()) {
+>>>>>>> c7c49776d3ee5ad4c99092c563a007cc27cec5b6:lib/screens/addition/additionQuizScreen.dart
           Singlescore++;
         }
       }
@@ -268,7 +240,7 @@ class _QuizScreenState extends State<QuizScreen> {
       }
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (BuildContext context) => AnswerScreen(
+          builder: (BuildContext context) => additionResultScreen(
               maxSingleScore: numOfSingleQuestions,
               maxTensScore: numOfTensQuestions,
               maxHundredScore: numOfHundredQuestions,
@@ -381,7 +353,7 @@ class _QuizScreenState extends State<QuizScreen> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/farm.jpg'),
+                image: AssetImage('images/farm.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -401,6 +373,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           fontWeight: FontWeight.bold)),
                 ),
                 ImagesUnderQuestion(j),
+<<<<<<< HEAD:lib/screens/addition/QuizScreen.dart
 //was commented>>
                 // for (int i = 0; i < 12; i++)
                 //was commented>>
@@ -790,6 +763,82 @@ class _QuizScreenState extends State<QuizScreen> {
                     //was here
 
                     ),
+=======
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    NiceButtons(
+                        onTap: (finish) async {
+                          changeColor();
+                          await Future.delayed(const Duration(seconds: 1),
+                              _changeQuestion(mcq[j][0].toString()));
+                        },
+                        stretch: false,
+                        startColor: Colors.lightBlueAccent,
+                        endColor: Colors.lightBlueAccent,
+                        borderColor: Color(0xFF3489e9),
+                        width: 90.0,
+                        height: 60.0,
+                        borderRadius: 60.0,
+                        gradientOrientation: GradientOrientation.Horizontal,
+                        child: QuizButtonIcon(option: mcq[j][0].toString())),
+                    SizedBox(width: 30),
+// >>>>>>>>>>>>>>>>>>>>second option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+                    NiceButtons(
+                        onTap: (finish) async {
+                          changeColor();
+                          await Future.delayed(const Duration(seconds: 1),
+                              _changeQuestion(mcq[j][1].toString()));
+                        },
+                        stretch: false,
+                        startColor: Colors.lightBlueAccent,
+                        endColor: Colors.lightBlueAccent,
+                        borderColor: Color(0xFF3489e9),
+                        width: 90.0,
+                        height: 60.0,
+                        borderRadius: 60.0,
+                        gradientOrientation: GradientOrientation.Horizontal,
+                        child: QuizButtonIcon(option: mcq[j][1].toString())),
+                    SizedBox(width: 30),
+                    // >>>>>>>>>>>>>>>>>>>>third  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+                    NiceButtons(
+                        onTap: (finish) async {
+                          changeColor();
+                          await Future.delayed(const Duration(seconds: 1),
+                              _changeQuestion(mcq[j][2].toString()));
+                        },
+                        stretch: false,
+                        startColor: Colors.lightBlueAccent,
+                        endColor: Colors.lightBlueAccent,
+                        borderColor: Color(0xFF3489e9),
+                        width: 90.0,
+                        height: 60.0,
+                        borderRadius: 60.0,
+                        gradientOrientation: GradientOrientation.Horizontal,
+                        child: QuizButtonIcon(option: mcq[j][2].toString())),
+                    SizedBox(width: 30),
+                    // >>>>>>>>>>>>>>>>>>>>forth  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+                    NiceButtons(
+                        onTap: (finish) async {
+                          changeColor();
+                          await Future.delayed(const Duration(seconds: 1),
+                              _changeQuestion(mcq[j][3].toString()));
+                        },
+                        stretch: false,
+                        startColor: Colors.lightBlueAccent,
+                        endColor: Colors.lightBlueAccent,
+                        borderColor: Color(0xFF3489e9),
+                        width: 90.0,
+                        height: 60.0,
+                        borderRadius: 60.0,
+                        gradientOrientation: GradientOrientation.Horizontal,
+                        child: QuizButtonIcon(option: mcq[j][3].toString())),
+                  ],
+                ),
+>>>>>>> c7c49776d3ee5ad4c99092c563a007cc27cec5b6:lib/screens/addition/additionQuizScreen.dart
               ])
         ],
       ),

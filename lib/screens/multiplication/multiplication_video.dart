@@ -1,13 +1,12 @@
 //import needed libraries
 import 'dart:async';
 import 'package:husbh_app/screens/multiplication/multiplication_video.dart';
-import 'package:husbh_app/screens/addition/Questions.dart';
+import 'multiplicationQuizScreen.dart';
 import 'package:husbh_app/screens/profile.dart';
 import 'package:video_player/video_player.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../addition/questions_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +41,7 @@ class _VideoAppState extends State<multiplicationVideo> {
             () => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const QuestionsScreen(),
+                  builder: (context) => const multiplicationQuizScreen(),
                 )));
 
         setState(() {});
@@ -85,7 +84,7 @@ class _VideoAppState extends State<multiplicationVideo> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const QuestionsScreen()),
+                        builder: (context) => const multiplicationQuizScreen()),
                   );
                   _controller
                       .pause(); //stop the video when naviagte to the questions page
