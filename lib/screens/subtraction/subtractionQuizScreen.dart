@@ -112,7 +112,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       x = Random().nextInt(99) + 1;
       y = Random().nextInt(99) + 1;
       while (x > y) {
-        while (x < 10 || y < 10 || x - y > 100) {
+        while (x < 10 || y < 10 || x - y < 100) {
           x = Random().nextInt(99) + 1;
           y = Random().nextInt(99) + 1;
         }
@@ -146,7 +146,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
         x = Random().nextInt(999);
         y = Random().nextInt(999);
       }
-      while (x < 100 || y < 100 || x - y > 500 && x > y) {
+      while (x < 100 || y < 100 || x - y > 500) {
         x = Random().nextInt(999);
         y = Random().nextInt(999);
       }
