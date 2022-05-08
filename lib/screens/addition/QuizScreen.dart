@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:husbh_app/main.dart';
 import '../../widgets/option_card.dart';
+import '../learn_page.dart';
 import 'AnswerScreen.dart';
 import 'dart:async';
 import 'QuizButtonIcon.dart';
@@ -21,7 +22,6 @@ class QuizScreen extends StatefulWidget {
   _QuizScreenState createState() => _QuizScreenState();
 
   Widget build(BuildContext context) {
-
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +36,6 @@ class _QuizScreenState extends State<QuizScreen> {
   get height => MediaQuery.of(context).size.height;
 
   ArabicNumbers arabicNumber = ArabicNumbers();
-
 
   List qustions = [];
   List answers = [];
@@ -55,6 +54,7 @@ class _QuizScreenState extends State<QuizScreen> {
   var Tensscore = 0;
   var Hundredscore = 0;
   bool isPressed = false;
+
 // //Array of numbers to convert from english to arabic
 //   var numberMap = {
 //     0: '۰',
@@ -81,7 +81,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   //get isPressed => null;
 
- // get onPressed => null;
+  // get onPressed => null;
 
   get startColor => null;
 
@@ -235,38 +235,38 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   _changeQuestion(ans) {
-   
     userAnswer.add(ans);
     //print(userAnswer);
-    
+
     if (j + 1 >= 12) {
       // if (j + 1 >= qustions.length) {
       // print(userAnswer);
       for (var i = 0; i < 4; i++) {
-         //print(userAnswer[i].toString());
-         //print( convertOptionsToArabic(answers[i]));
-        if (userAnswer[i].toString() ==  convertOptionsToArabic(answers[i]).toString()) {
-           //print(userAnswer[i].toString());
+        //print(userAnswer[i].toString());
+        //print( convertOptionsToArabic(answers[i]));
+        if (userAnswer[i].toString() ==
+            convertOptionsToArabic(answers[i]).toString()) {
+          //print(userAnswer[i].toString());
           Singlescore++;
         }
       }
 
       // var Tensscore = 0;
       for (var i = 4; i < 8; i++) {
-        if (userAnswer[i].toString() == convertOptionsToArabic(answers[i]).toString()) {
+        if (userAnswer[i].toString() ==
+            convertOptionsToArabic(answers[i]).toString()) {
           Tensscore++;
         }
       }
 
       // var Hundredscore = 0;
-      for (var i = 8; i <11 ; i++) {
-        if (userAnswer[i].toString() == convertOptionsToArabic(answers[i]).toString()) {
+      for (var i = 8; i < 12; i++) {
+        if (userAnswer[i].toString() ==
+            convertOptionsToArabic(answers[i]).toString()) {
           Hundredscore++;
         }
       }
       Navigator.of(context).push(
-        // Navigator.pushReplacement(
-        // context,
         MaterialPageRoute(
           builder: (BuildContext context) => AnswerScreen(
               maxSingleScore: numOfSingleQuestions,
@@ -284,17 +284,17 @@ class _QuizScreenState extends State<QuizScreen> {
       setState(() {
         ++j;
         isMarked = false;
-        isPressed=false;
+        isPressed = false;
       });
     }
   }
 
   //objects for questions
   List<String> objects = [
-    'images/GreenApple.png',
-    'images/RedApple.png',
-    'images/Xgreen.png',
-    'images/Xred.png',
+    'images/GreennApple.png',
+    'images/ReddApple.png',
+    'images/Xgreenn.png',
+    'images/Xredd.png',
   ];
 //returns images for value x
   Widget _printImageX(xValue) {
@@ -360,14 +360,13 @@ class _QuizScreenState extends State<QuizScreen> {
       ),
     );
   }
-  
 
-
-  void changeColor(){
+  void changeColor() {
     setState(() {
       isPressed = true;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
@@ -402,229 +401,395 @@ class _QuizScreenState extends State<QuizScreen> {
                           fontWeight: FontWeight.bold)),
                 ),
                 ImagesUnderQuestion(j),
-                
-                    //for(int i=0;i<12;i++)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  //children:<Widget>[
-                    //for (int g=0;g<4;g++) 
-                   /* ElevatedButton(
-                       child: QuizButtonIcon(option: mcq[j][0].toString()),
-                         onPressed: () async {
-                          /*for (int i=0;i<12;i++)
-                          {if(mcq[j][0].toString()==convertOptionsToArabic(answers[i]).toString())
-                           {style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 14, 210, 47)));}
-                          else {style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 210, 79, 14)));
-                          }}*/
-                            await Future.delayed(const Duration(seconds: 1),
-                          _changeQuestion(mcq[j][0].toString()));
+//was commented>>
+                // for (int i = 0; i < 12; i++)
+                //was commented>>
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                    //was commented>>
+                    children: <Widget>[
+                      // for (int g = 0; g < 4; g++)
+                      // for (int i = 0; i < 4; i++)
+                      SizedBox(
+                        height: 55,
+                        width: 100,
+                        child: OptionCard(
+                            // fontFamily: "ReadexPro-Regular",
+                            option: mcq[j][0].toString(),
+                            color: isPressed
+                                ? (mcq[j][0].toString() ==
+                                        convertOptionsToArabic(answers[j])
+                                            .toString())
+                                    ? const Color.fromARGB(
+                                        255, 50, 132, 9) //correct
+                                    : const Color.fromRGBO(
+                                        218, 39, 39, 1) //incorrect
+                                : const Color(0xFF3489e9),
+                            onTap: () async {
+                              changeColor();
+                              //await
+                              await Future.delayed(const Duration(seconds: 1),
+                                  () {
+                                _changeQuestion(mcq[j][0].toString());
+                              });
+                            }),
+                      ),
+                      SizedBox(height: 20, width: 20),
+                      SizedBox(
+                        height: 55,
+                        width: 100,
+                        child: OptionCard(
+                            // fontFamily: "ReadexPro-Regular",
+                            option: mcq[j][1].toString(),
+                            color: isPressed
+                                ? (mcq[j][1].toString() ==
+                                        convertOptionsToArabic(answers[j])
+                                            .toString())
+                                    ? const Color.fromARGB(
+                                        255, 50, 132, 9) //correct
+                                    : const Color.fromRGBO(
+                                        218, 39, 39, 1) //incorrect
+                                : const Color(0xFF3489e9),
+                            onTap: () async {
+                              changeColor();
+                              //await
+                              await Future.delayed(const Duration(seconds: 1),
+                                  () {
+                                _changeQuestion(mcq[j][1].toString());
+                              });
+                            }),
+                      ),
+                      SizedBox(height: 20, width: 20),
+                      SizedBox(
+                        height: 55,
+                        width: 100,
+                        child: OptionCard(
+                            // fontFamily: "ReadexPro-Regular",
+                            option: mcq[j][2].toString(),
+                            color: isPressed
+                                ? (mcq[j][2].toString() ==
+                                        convertOptionsToArabic(answers[j])
+                                            .toString())
+                                    ? const Color.fromARGB(
+                                        255, 50, 132, 9) //correct
+                                    : const Color.fromRGBO(
+                                        218, 39, 39, 1) //incorrect
+                                : const Color(0xFF3489e9),
+                            onTap: () async {
+                              changeColor();
+                              //await
+                              await Future.delayed(const Duration(seconds: 1),
+                                  () {
+                                _changeQuestion(mcq[j][2].toString());
+                              });
+                            }),
+                      ),
+                      SizedBox(height: 20, width: 20),
+                      SizedBox(
+                        height: 55,
+                        width: 100,
+                        child: OptionCard(
+                            // fontFamily: "ReadexPro-Regular",
+                            option: mcq[j][3].toString(),
+                            color: isPressed
+                                ? (mcq[j][3].toString() ==
+                                        convertOptionsToArabic(answers[j])
+                                            .toString())
+                                    ? const Color.fromARGB(
+                                        255, 50, 132, 9) //correct
+                                    : const Color.fromRGBO(
+                                        218, 39, 39, 1) //incorrect
+                                : const Color(0xFF3489e9),
+                            onTap: () async {
+                              changeColor();
+                              //await
+                              await Future.delayed(const Duration(seconds: 1),
+                                  () {
+                                _changeQuestion(mcq[j][3].toString());
+                              });
+                            }),
+                      ),
+                      SizedBox(height: 20, width: 20),
 
-                         },
+                      //////////Delete Above
+                      // SizedBox(
+                      //   height: 50,
+                      //   width: 100,
+                      //   child: ElevatedButton(
+                      //     child: QuizButtonIcon(option: mcq[j][0].toString()),
+                      //     onPressed: () async {
+                      //       changeColor();
 
-                        style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.resolveWith((Set<MaterialState> states){if (states.contains(MaterialState.pressed)){
-                        for (int i=0;i<12;i++)
-                           {if(mcq[j][0].toString()==convertOptionsToArabic(answers[i]).toString())
-                                return Colors.green;
-                                 
-                                }
-                                return Colors.red;}
-                          return Colors.blue;}),
-                       // side: 50,
-                        padding: MaterialStateProperty.all(EdgeInsets.all(0.5)),
-                        
-                           ),
-                            
-                        ),  
+                      //       for (int i = 0; i < 12; i++) {
+                      //         if (mcq[j][0].toString() ==
+                      //             convertOptionsToArabic(answers[i])
+                      //                 .toString()) {
+                      //           style:
+                      //           // ElevatedButton.styleFrom(
+                      //           //   primary: Colors.green,
+                      //           // );
+                      //           ButtonStyle(
+                      //               backgroundColor: MaterialStateProperty.all(
+                      //                   Color.fromARGB(255, 14, 210, 47)));
+                      //         } else {
+                      //           style:
+                      //           ButtonStyle(
+                      //               backgroundColor: MaterialStateProperty.all(
+                      //                   Color.fromARGB(255, 210, 79, 14)));
+                      //         }
+                      //         await Future<void>.delayed(
+                      //             const Duration(seconds: 1),
+                      //             () => _changeQuestion(mcq[j][0].toString()));
+                      //       }
+                      //     },
+                      //     style: ButtonStyle(
+                      //       backgroundColor: MaterialStateProperty.resolveWith(
+                      //           (Set<MaterialState> states) {
+                      //         if (states.contains(MaterialState.pressed)) {
+                      //           for (int i = 0; i < 12; i++) {
+                      //             if (mcq[j][0].toString() ==
+                      //                 convertOptionsToArabic(answers[i])
+                      //                     .toString()) return Colors.green;
+                      //           }
+                      //           return Colors.red;
+                      //         }
+                      //         return Colors.blue;
+                      //       }),
+                      //       // side: 50,
+                      //       padding:
+                      //           MaterialStateProperty.all(EdgeInsets.all(0.5)),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(height: 20, width: 20),
+                      // SizedBox(
+                      //   height: 50,
+                      //   width: 100,
+                      //   child: ElevatedButton(
+                      //     child: QuizButtonIcon(option: mcq[j][1].toString()),
+                      //     onPressed: () async {
+                      //       changeColor();
 
-                         ElevatedButton(
-                       child: QuizButtonIcon(option: mcq[j][1].toString()),
-                         onPressed: () async {
-                          /*for (int i=0;i<12;i++)
-                          {if(mcq[j][1].toString()==convertOptionsToArabic(answers[i]).toString())
-                           {style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 14, 210, 47)));}
-                          else {style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 210, 79, 14)));
-                          }}*/
-                          
-                            await Future.delayed(const Duration(seconds: 1),
-                          _changeQuestion(mcq[j][1].toString()));
+                      //       for (int i = 0; i < 12; i++) {
+                      //         if (mcq[j][1].toString() ==
+                      //             convertOptionsToArabic(answers[i])
+                      //                 .toString()) {
+                      //           style:
+                      //           ButtonStyle(
+                      //               backgroundColor: MaterialStateProperty.all(
+                      //                   Color.fromARGB(255, 14, 210, 47)));
+                      //         } else {
+                      //           style:
+                      //           ButtonStyle(
+                      //               backgroundColor: MaterialStateProperty.all(
+                      //                   Color.fromARGB(255, 210, 79, 14)));
+                      //         }
+                      //       }
 
-                         },
+                      //       await Future.delayed(const Duration(seconds: 1),
+                      //           () => _changeQuestion(mcq[j][1].toString()));
+                      //     },
+                      //     style: ButtonStyle(
+                      //       backgroundColor: MaterialStateProperty.resolveWith(
+                      //           (Set<MaterialState> states) {
+                      //         if (states.contains(MaterialState.pressed)) {
+                      //           for (int i = 0; i < 12; i++) {
+                      //             if (mcq[j][1].toString() ==
+                      //                 convertOptionsToArabic(answers[i])
+                      //                     .toString()) return Colors.green;
+                      //           }
+                      //           return Colors.red;
+                      //         }
+                      //         return Colors.blue;
+                      //       }),
+                      //       padding:
+                      //           MaterialStateProperty.all(EdgeInsets.all(0.5)),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(height: 20, width: 20),
+                      // SizedBox(
+                      //   height: 50,
+                      //   width: 100,
+                      //   child: ElevatedButton(
+                      //     child: QuizButtonIcon(option: mcq[j][2].toString()),
+                      //     onPressed: () async {
+                      //       changeColor();
 
-                        style: ButtonStyle(
-                         backgroundColor: MaterialStateProperty.resolveWith((Set<MaterialState> states){if (states.contains(MaterialState.pressed)){
-                           for (int i=0;i<12;i++)
-                           {if(mcq[j][1].toString()==convertOptionsToArabic(answers[i]).toString())
-                                return Colors.green;
-                                
-                                }
-                            return Colors.red;
-                           }
-                          return Colors.blue;}),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(0.5)),
-                        
-                           ),
-                            
-                        ) , 
-                         ElevatedButton(
-                       child: QuizButtonIcon(option: mcq[j][2].toString()),
-                         onPressed: () async {
-                         /* for (int i=0;i<12;i++)
-                          {
-                            if(mcq[j][2].toString()==convertOptionsToArabic(answers[i]).toString())
-                           {style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 14, 210, 47)));}
-                          else {style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 210, 79, 14)));
-                          }}*/
-                          
-                            await Future.delayed(const Duration(seconds: 1),
-                          _changeQuestion(mcq[j][2].toString()));
+                      //       for (int i = 0; i < 12; i++) {
+                      //         if (mcq[j][2].toString() ==
+                      //             convertOptionsToArabic(answers[i])
+                      //                 .toString()) {
+                      //           style:
+                      //           ButtonStyle(
+                      //               backgroundColor: MaterialStateProperty.all(
+                      //                   Color.fromARGB(255, 14, 210, 47)));
+                      //         } else {
+                      //           style:
+                      //           ButtonStyle(
+                      //               backgroundColor: MaterialStateProperty.all(
+                      //                   Color.fromARGB(255, 210, 79, 14)));
+                      //         }
+                      //       }
 
-                         },
+                      //       await Future.delayed(const Duration(seconds: 1),
+                      //           () => _changeQuestion(mcq[j][2].toString()));
+                      //     },
+                      //     style: ButtonStyle(
+                      //       backgroundColor: MaterialStateProperty.resolveWith(
+                      //           (Set<MaterialState> states) {
+                      //         if (states.contains(MaterialState.pressed)) {
+                      //           for (int i = 0; i < 12; i++) {
+                      //             if (mcq[j][2].toString() ==
+                      //                 convertOptionsToArabic(answers[i])
+                      //                     .toString()) return Colors.green;
+                      //           }
+                      //           return Colors.red;
+                      //         }
+                      //         return Colors.blue;
+                      //       }),
+                      //       padding:
+                      //           MaterialStateProperty.all(EdgeInsets.all(0.5)),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(height: 20, width: 20),
+                      // SizedBox(
+                      //   height: 50,
+                      //   width: 100,
+                      //   child: ElevatedButton(
+                      //     child: QuizButtonIcon(option: mcq[j][3].toString()),
+                      //     onPressed: () async {
+                      //       changeColor();
 
-                        style: ButtonStyle(
-                         backgroundColor: MaterialStateProperty.resolveWith((Set<MaterialState> states){if (states.contains(MaterialState.pressed)){
-                         for (int i=0;i<12;i++)
-                           {if(mcq[j][2].toString()==convertOptionsToArabic(answers[i]).toString())
-                                return Colors.green;
-                               
-                                }
-                                 return Colors.red;}
-                          return Colors.blue;}),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(0.5)),
-                        
-                        
-                           ),
-                            
-                        ) , 
-                         ElevatedButton(
-                       child: QuizButtonIcon(option: mcq[j][3].toString()),
-                         onPressed: () async {
-                           
-                         /* for (int i=0;i<12;i++)
-                          {if(mcq[j][3].toString()==convertOptionsToArabic(answers[i]).toString())
-                           {style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 14, 210, 47)));}
-                          else {style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 210, 79, 14)));
-                          }}*/
-                          
-                            await Future.delayed(const Duration(seconds: 1),
-                          _changeQuestion(mcq[j][3].toString()));
+                      //       for (int i = 0; i < 12; i++) {
+                      //         if (mcq[j][3].toString() ==
+                      //             convertOptionsToArabic(answers[i])
+                      //                 .toString()) {
+                      //           style:
+                      //           ButtonStyle(
+                      //               backgroundColor: MaterialStateProperty.all(
+                      //                   Color.fromARGB(255, 14, 210, 47)));
+                      //         } else {
+                      //           style:
+                      //           ButtonStyle(
+                      //               backgroundColor: MaterialStateProperty.all(
+                      //             Color.fromARGB(255, 210, 79, 14),
+                      //           ));
+                      //         }
+                      //       }
 
-                         },
+                      //       await Future.delayed(const Duration(seconds: 1),
+                      //           () => _changeQuestion(mcq[j][3].toString()));
+                      //     },
+                      //     style: ButtonStyle(
+                      //       backgroundColor: MaterialStateProperty.resolveWith(
+                      //           (Set<MaterialState> states) {
+                      //         if (states.contains(MaterialState.pressed)) {
+                      //           for (int i = 0; i < 12; i++) {
+                      //             if (mcq[j][3].toString() ==
+                      //                 convertOptionsToArabic(answers[i])
+                      //                     .toString()) return Colors.green;
+                      //           }
+                      //           return Colors.red;
+                      //         }
+                      //         return Colors.blue;
+                      //       }),
+                      //       padding:
+                      //           MaterialStateProperty.all(EdgeInsets.all(0.5)),
+                      //     ),
+                      //   ),
+                      // )
+                    ]
 
-                        style: ButtonStyle(
-                         backgroundColor: MaterialStateProperty.resolveWith((Set<MaterialState> states)
-                         {if (states.contains(MaterialState.pressed)){
-                           for (int i=0;i<12;i++)
-                           {if(mcq[j][3].toString()==convertOptionsToArabic(answers[i]).toString())
-                                return Colors.green;
-                                 
-                                }
-                                return Colors.red;}
-                          return Colors.blue;}),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(0.5)),
-                        
-                           ),
-                            
-                        )  
-                  ]*/
-                
-               
-                  children: <Widget>[
+                    //was commented<<
 
-                    NiceButtons(
+                    //was here
+//                   children: <Widget>[
+//                     NiceButtons(
+//                         onTap: (finish) async {
+//                           changeColor();
+//                           await Future.delayed(const Duration(seconds: 1),
+//                               _changeQuestion(mcq[j][0].toString()));
+//                         },
+//                         stretch: false,
+//                         startColor:
 
-                        onTap: (finish) async { 
-                           changeColor();
-     await Future.delayed(const Duration(seconds: 1),
-                            _changeQuestion(mcq[j][0].toString()));
-                          
-                        },
-                        
-                        stretch: false,
-                        startColor: /*isPressed 
-                        ? mcq[j][0].toString()==convertOptionsToArabic(answers[i]).toString()
-                           ?Colors.green
-                           : Colors.red*/
+//                             // isPressed
+//                             //     ? mcq[j][0].toString() ==
+//                             //             convertOptionsToArabic(answers[0])
+//                             //                 .toString()
+//                             //         ? Colors.red
+//                             //         : Colors.green
 
-                        Colors.lightBlueAccent,
-                        
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
+//                             // :
+//                             Colors.lightBlueAccent,
+//                         endColor: Colors.lightBlueAccent,
+//                         borderColor: Color(0xFF3489e9),
+//                         width: 90.0,
+//                         height: 60.0,
+//                         // width: 80.0,
+//                         // height: 80.0,
+//                         borderRadius: 60.0,
+//                         gradientOrientation: GradientOrientation.Horizontal,
+//                         child: QuizButtonIcon(option: mcq[j][0].toString())),
+//                     SizedBox(width: 30),
+// // >>>>>>>>>>>>>>>>>>>>second option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-                        width: 90.0,
-                        height: 60.0,
-                        // width: 80.0,
-                        // height: 80.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][0].toString())),
-                    SizedBox(width: 30),
-// >>>>>>>>>>>>>>>>>>>>second option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                     
-                    NiceButtons(
-                        onTap: (finish)  async {
- changeColor();
-     await Future.delayed(const Duration(seconds: 1),
-                          _changeQuestion(mcq[j][1].toString()));
-                        },
-                        
-                        stretch: false,
-                        startColor: 
-                        Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][1].toString())),
-                    SizedBox(width: 30),
-                    // >>>>>>>>>>>>>>>>>>>>third  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                     
-                    NiceButtons(
-                        onTap: (finish) async {
-                        changeColor();
-     await Future.delayed(const Duration(seconds: 1),
-                          _changeQuestion(mcq[j][2].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][2].toString())),
-                    SizedBox(width: 30),
-                     // >>>>>>>>>>>>>>>>>>>>forth  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                    
-                    NiceButtons(
-                        onTap: (finish)  async {
-                         changeColor();
-     await Future.delayed(const Duration(seconds: 1),
+//                     NiceButtons(
+//                         onTap: (finish) async {
+//                           changeColor();
+//                           await Future.delayed(const Duration(seconds: 1),
+//                               _changeQuestion(mcq[j][1].toString()));
+//                         },
+//                         stretch: false,
+//                         startColor: Colors.lightBlueAccent,
+//                         endColor: Colors.lightBlueAccent,
+//                         borderColor: Color(0xFF3489e9),
+//                         width: 90.0,
+//                         height: 60.0,
+//                         borderRadius: 60.0,
+//                         gradientOrientation: GradientOrientation.Horizontal,
+//                         child: QuizButtonIcon(option: mcq[j][1].toString())),
+//                     SizedBox(width: 30),
+//                     // >>>>>>>>>>>>>>>>>>>>third  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-                          _changeQuestion(mcq[j][3].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][3].toString())),
-                  ],
-                ),
+//                     NiceButtons(
+//                         onTap: (finish) async {
+//                           changeColor();
+//                           await Future.delayed(const Duration(seconds: 1),
+//                               _changeQuestion(mcq[j][2].toString()));
+//                         },
+//                         stretch: false,
+//                         startColor: Colors.lightBlueAccent,
+//                         endColor: Colors.lightBlueAccent,
+//                         borderColor: Color(0xFF3489e9),
+//                         width: 90.0,
+//                         height: 60.0,
+//                         borderRadius: 60.0,
+//                         gradientOrientation: GradientOrientation.Horizontal,
+//                         child: QuizButtonIcon(option: mcq[j][2].toString())),
+//                     SizedBox(width: 30),
+//                     // >>>>>>>>>>>>>>>>>>>>forth  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//                     NiceButtons(
+//                         onTap: (finish) async {
+//                           changeColor();
+//                           await Future.delayed(const Duration(seconds: 1),
+//                               _changeQuestion(mcq[j][3].toString()));
+//                         },
+//                         stretch: false,
+//                         startColor: Colors.lightBlueAccent,
+//                         endColor: Colors.lightBlueAccent,
+//                         borderColor: Color(0xFF3489e9),
+//                         width: 90.0,
+//                         height: 60.0,
+//                         borderRadius: 60.0,
+//                         gradientOrientation: GradientOrientation.Horizontal,
+//                         child: QuizButtonIcon(option: mcq[j][3].toString())),
+//                   ],
+                    //was here
+
+                    ),
               ])
         ],
       ),
@@ -778,7 +943,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/dogFrame.png',
+                      'assets/catFrame.png',
                       height: height * 0.49,
                       width: width * 0.30,
                       // fit: BoxFit.cover,
