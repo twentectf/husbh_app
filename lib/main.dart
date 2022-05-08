@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:husbh_app/screens/addition/QuizScreen.dart';
-import 'package:husbh_app/screens/addition/questions_screen.dart';
 import 'package:video_player/video_player.dart';
 import 'Screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'screens/addition/randomization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
