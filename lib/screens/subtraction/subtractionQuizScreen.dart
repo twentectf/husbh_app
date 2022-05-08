@@ -81,6 +81,11 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       ans = [];
       x = Random().nextInt(9) + 1;
       y = Random().nextInt(9) + 1;
+      while (x > y) {
+        x = Random().nextInt(9) + 1;
+        y = Random().nextInt(9) + 1;
+      }
+
       Xx.add(x);
       Yy.add(y);
 
@@ -106,20 +111,24 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       ans = [];
       x = Random().nextInt(99) + 1;
       y = Random().nextInt(99) + 1;
-      while (x < 10 || y < 10 || x - y > 100) {
-        x = Random().nextInt(99) + 1;
-        y = Random().nextInt(99) + 1;
+      while (x > y) {
+        while (x < 10 || y < 10 || x - y > 100) {
+          x = Random().nextInt(99) + 1;
+          y = Random().nextInt(99) + 1;
+        }
       }
 
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x - y);
-      ansData = [
-        convertOptionsToArabic(x - y),
-        convertOptionsToArabic(x - y + 2),
-        convertOptionsToArabic(x - y + 9),
-        convertOptionsToArabic(x - y + 5),
-      ];
+      while (x > y) {
+        ansData = [
+          convertOptionsToArabic(x - y),
+          convertOptionsToArabic(x - y + 2),
+          convertOptionsToArabic(x - y + 9),
+          convertOptionsToArabic(x - y + 5),
+        ];
+      }
 
       for (var j = 0; j < 4; j++) {
         var rNum = Random().nextInt(ansData.length).round();
@@ -133,7 +142,11 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       ans = [];
       x = Random().nextInt(999);
       y = Random().nextInt(999);
-      while (x < 100 || y < 100 || x - y > 500) {
+      while (x > y) {
+        x = Random().nextInt(999);
+        y = Random().nextInt(999);
+      }
+      while (x < 100 || y < 100 || x - y > 500 && x > y) {
         x = Random().nextInt(999);
         y = Random().nextInt(999);
       }
@@ -141,12 +154,14 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x - y);
-      ansData = [
-        convertOptionsToArabic(x - y),
-        convertOptionsToArabic(x - y + 1),
-        convertOptionsToArabic(x - y + 3),
-        convertOptionsToArabic(x - y + 6),
-      ];
+      while (x > y) {
+        ansData = [
+          convertOptionsToArabic(x - y),
+          convertOptionsToArabic(x - y + 1),
+          convertOptionsToArabic(x - y + 3),
+          convertOptionsToArabic(x - y + 6),
+        ];
+      }
 
       for (var j = 0; j < 4; j++) {
         var rNum = Random().nextInt(ansData.length).round();
