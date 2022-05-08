@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:husbh_app/screens/addition/QuizScreen.dart';
-import 'package:husbh_app/screens/addition/questions_screen.dart';
+import 'package:husbh_app/screens/addition/additionQuizScreen.dart';
+import 'package:husbh_app/screens/learn_page.dart';
+import 'package:husbh_app/screens/subtraction/subtractionQuizScreen.dart';
+import 'package:husbh_app/screens/subtraction/subtraction_video.dart';
 import 'package:video_player/video_player.dart';
 import 'Screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'screens/addition/randomization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,14 +20,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: QuizScreen(),
-      // home: SplashScreen(),
+      // home: additionQuizScreen(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
-      // title: 'حًسبة',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      //   visualDensity: VisualDensity.adaptivePlatformDensity,
-      // ),
+      title: 'حًسبة',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       /* home: Directionality(
         // add this
         textDirection: TextDirection.rtl, // set this property
