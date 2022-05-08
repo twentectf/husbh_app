@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:husbh_app/main.dart';
+import '../../widgets/next_button.dart';
 import '../../widgets/option_card.dart';
 import 'subtractionResultScreen.dart';
 import 'dart:async';
@@ -311,6 +312,11 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       isPressed = true;
     });
   }
+  void nextQuestion() {
+    
+   _changeQuestion('٠');
+   
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -422,6 +428,16 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
                 ),
               ])
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(children: <Widget>[
+             
+                NextButton(nextQuestion:nextQuestion)
+            ])),
       ),
     );
   }

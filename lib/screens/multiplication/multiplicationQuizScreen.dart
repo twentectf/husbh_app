@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:husbh_app/main.dart';
+import '../../widgets/next_button.dart';
 import '../../widgets/option_card.dart';
 import 'multiplicationResultScreen.dart';
 import 'dart:async';
@@ -290,6 +291,11 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
     );
   }
 
+void nextQuestion() {
+    
+   _changeQuestion('٠');
+   
+  }
   void changeColor() {
     setState(() {
       isPressed = true;
@@ -406,6 +412,16 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
                 ),
               ])
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(children: <Widget>[
+             
+                NextButton(nextQuestion:nextQuestion)
+            ])),
       ),
     );
   }

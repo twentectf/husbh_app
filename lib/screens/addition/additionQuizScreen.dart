@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:husbh_app/main.dart';
 import 'package:husbh_app/screens/addition/additionResultScreen.dart';
+import '../../widgets/next_button.dart';
 import '../../widgets/option_card.dart';
 import '../learn_page.dart';
 import 'additionResultScreen.dart';
@@ -355,6 +356,11 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       ),
     );
   }
+  void nextQuestion() {
+    
+   _changeQuestion('٠');
+   
+  }
 
   void changeColor() {
     setState(() {
@@ -415,7 +421,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                         onTap: () async {
                           changeColor();
                           //await
-                          await Future.delayed(const Duration(seconds: 1), () {
+                          await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][0].toString());
                           });
                         }),
@@ -438,7 +444,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                         onTap: () async {
                           changeColor();
                           //await
-                          await Future.delayed(const Duration(seconds: 1), () {
+                          await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][1].toString());
                           });
                         }),
@@ -461,7 +467,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                         onTap: () async {
                           changeColor();
                           //await
-                          await Future.delayed(const Duration(seconds: 1), () {
+                          await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][2].toString());
                           });
                         }),
@@ -484,7 +490,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                         onTap: () async {
                           changeColor();
                           //await
-                          await Future.delayed(const Duration(seconds: 1), () {
+                          await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][3].toString());
                           });
                         }),
@@ -493,6 +499,16 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                 ]),
               ])
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(children: <Widget>[
+             
+                NextButton(nextQuestion:nextQuestion)
+            ])),
       ),
     );
   }
