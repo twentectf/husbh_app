@@ -37,6 +37,8 @@ class additionResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     singlescoreArabic = arabicNumber.convert(singlescore);
     maxSingleScoreArabic = arabicNumber.convert(maxSingleScore);
     tensscoreArabic = arabicNumber.convert(tensscore);
@@ -80,31 +82,43 @@ class additionResultScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   'images/rabbit_result.png',
-                  height: 120,
-                  width: 120,
+                  height: height * 0.26,
+                  width: width * 0.19,
+                  // height: 120,
+                  // width: 120,
                 )
               ],
             ),
             Container(
-              width: 380,
-              height: 200,
+              height: height * 0.49,
+              width: width * 0.44,
+              // width: 380,
+              // height: 200,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 250, 255, 253),
                 // boxShadow: [
                 //   BoxShadow(color: Colors.green, spreadRadius: 0.2)
                 // ],
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Color.fromARGB(255, 33, 120, 36),
-                  width: 1,
-                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 163, 163, 163).withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(2, 8), // changes position of shadow
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(55),
+                // border: Border.all(
+                //   color: Color.fromARGB(255, 33, 120, 36),
+                //   width: 1,
+                // ),
               ),
               child: Column(
                 textDirection: TextDirection.rtl,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    ':النتيجة',
+                    'النتيجة',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         decoration: TextDecoration.none,
@@ -115,14 +129,14 @@ class additionResultScreen extends StatelessWidget {
                   ),
                   //The results
                   Text(
-                    '\u2022 جمع الآحاد: $singlescoreArabic من $maxSingleScoreArabic \n'
-                    '\u2022 جمع العشرات: $tensscoreArabic من $maxtensscoreArabic \n'
-                    '\u2022 جمع المئات: $hundredscoreArabic من $maxhundredscoreArabic',
+                    '\u2022 جمع الآحاد      :  $singlescoreArabic من $maxSingleScoreArabic \n'
+                    '\u2022 جمع العشرات  :   $tensscoreArabic من $maxtensscoreArabic \n'
+                    '\u2022 جمع المئات     :   $hundredscoreArabic من $maxhundredscoreArabic',
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                         decoration: TextDecoration.none,
-                        fontSize: 22.0,
+                        fontSize: 20.0,
                         color: Colors.black,
                         fontFamily: 'ReadexPro-Regular',
                         fontWeight: FontWeight.bold),
