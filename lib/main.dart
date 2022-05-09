@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:husbh_app/screens/addition/additionQuizScreen.dart';
+import 'package:husbh_app/screens/division/divisionQuizScreen.dart';
 import 'package:husbh_app/screens/learn_page.dart';
 import 'package:husbh_app/screens/subtraction/subtractionQuizScreen.dart';
 import 'package:husbh_app/screens/subtraction/subtraction_video.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
        //home: additionQuizScreen(),
       //home: subtractionQuizScreen(),
-      home: SplashScreen(),
+      home:divisionQuizScreen(),
+     // home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       title: 'حًسبة',
       theme: ThemeData(
