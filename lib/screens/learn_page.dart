@@ -144,21 +144,30 @@ class _learnpageState extends State<learn_page> {
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
-                          color: Colors.amber,
-                          image: DecorationImage(
-                            image: sex ==
-                                    "boy" //if the user (child) is boy, show husbh boy, otherwise husbh girl
-                                ? AssetImage('images/husbh_boy.png')
-                                : AssetImage('images/husbh_girl.png'),
-                          ),
-                          //style
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(
-                            //color: Color(0xFF3489e9),
-                            color: Colors.amber,
-                            width: 2,
-                          ),
-                        ),
+                            //color: Colors.amber,
+                            image: DecorationImage(
+                              image: sex ==
+                                      "boy" //if the user (child) is boy, show husbh boy, otherwise husbh girl
+                                  ? AssetImage('images/husbh_boy.png')
+                                  : AssetImage('images/husbh_girl.png'),
+                              scale: 0.02,
+                            ),
+                            //style
+                            borderRadius: BorderRadius.circular(40),
+                            border: Border.all(
+                              //color: Color(0xFF3489e9),
+                              // color: Colors.amber,
+                              color: Colors.grey.shade200,
+                              width: 1,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                // color: Colors
+                                //     .yellow
+                                //     .shade100,
+                                color: Colors.grey.shade300,
+                              )
+                            ]),
                       ),
                     ),
 
@@ -174,10 +183,11 @@ class _learnpageState extends State<learn_page> {
                           '$name'.toString(), //in arabic
                           style: TextStyle(
                             decoration: TextDecoration.none,
-                            fontFamily: 'ReadexPro-Regular',
+                            fontFamily: 'ReadexPro',
                             fontWeight: FontWeight.w700,
-                            fontSize: 30.0,
-                            color: Color.fromARGB(255, 255, 191, 0),
+                            fontSize: 28.0,
+                            color: Colors.brown,
+                            //color: Color.fromARGB(255, 255, 191, 0),
                           ),
                         ))
                   ]),
@@ -215,7 +225,7 @@ class _learnpageState extends State<learn_page> {
                                   decoration: TextDecoration.none,
                                   fontSize: 70.0,
                                   color: Colors.white,
-                                  fontFamily: 'ReadexPro-Regular',
+                                  fontFamily: 'ReadexPro',
                                   fontWeight: FontWeight.bold))),
                       //End addition operation button
 
@@ -246,7 +256,7 @@ class _learnpageState extends State<learn_page> {
                                   decoration: TextDecoration.none,
                                   fontSize: 70.0,
                                   color: Colors.white,
-                                  fontFamily: 'ReadexPro-Regular',
+                                  fontFamily: 'ReadexPro',
                                   fontWeight: FontWeight.bold))),
                       //End subtraction operation button
 
@@ -277,7 +287,7 @@ class _learnpageState extends State<learn_page> {
                                   decoration: TextDecoration.none,
                                   fontSize: 70.0,
                                   color: Colors.white,
-                                  fontFamily: 'ReadexPro-Regular',
+                                  fontFamily: 'ReadexPro',
                                   fontWeight: FontWeight.bold))),
                       //End multiplication operation button
 
@@ -308,7 +318,7 @@ class _learnpageState extends State<learn_page> {
                                   decoration: TextDecoration.none,
                                   fontSize: 70.0,
                                   color: Colors.white,
-                                  fontFamily: 'ReadexPro-Regular',
+                                  fontFamily: 'ReadexPro',
                                   fontWeight: FontWeight.bold))),
                       //End division operation button
                     ],

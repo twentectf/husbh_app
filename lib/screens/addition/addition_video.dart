@@ -96,7 +96,7 @@ class _VideoAppState extends State<additionVideo> {
                         decoration: TextDecoration.none,
                         fontSize: 20.0,
                         color: Colors.white,
-                        fontFamily: 'ReadexPro-Regular',
+                        fontFamily: 'ReadexPro',
                         fontWeight: FontWeight.bold))),
           ),
         ],

@@ -4,9 +4,9 @@ import 'package:husbh_app/screens/learn_page.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 class multiplicationResultScreen extends StatelessWidget {
-  final level1score;
-  final level2score;
-  final level3score;
+  final mullevel1score;
+  final mullevel2score;
+  final mullevel3score;
   final maxLevel1Score;
   final maxLevel2Score;
   final maxLevel3Score;
@@ -14,17 +14,17 @@ class multiplicationResultScreen extends StatelessWidget {
   final List answers;
   final List userAnswer;
   ArabicNumbers arabicNumber = ArabicNumbers();
-  late final level1scoreArabic;
+  late final mullevel1scoreArabic;
   late final maxLevel1ScoreArabic;
-  late final level2sscoreArabic;
+  late final mullevel2sscoreArabic;
   late final maxLevel2ScoreArabic;
-  late final level3scoreArabic;
+  late final mullevel3scoreArabic;
   late final maxLevel3ScoreArabic;
 
   multiplicationResultScreen({
-    this.level1score,
-    this.level2score,
-    this.level3score,
+    this.mullevel1score,
+    this.mullevel2score,
+    this.mullevel3score,
     this.maxLevel1Score,
     this.maxLevel2Score,
     this.maxLevel3Score,
@@ -35,11 +35,13 @@ class multiplicationResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    level1scoreArabic = arabicNumber.convert(level1score);
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    mullevel1scoreArabic = arabicNumber.convert(mullevel1score);
     maxLevel1ScoreArabic = arabicNumber.convert(maxLevel1Score);
-    level2sscoreArabic = arabicNumber.convert(level2score);
+    mullevel2sscoreArabic = arabicNumber.convert(mullevel2score);
     maxLevel2ScoreArabic = arabicNumber.convert(maxLevel2Score);
-    level3scoreArabic = arabicNumber.convert(level3score);
+    mullevel3scoreArabic = arabicNumber.convert(mullevel3score);
     maxLevel3ScoreArabic = arabicNumber.convert(maxLevel3Score);
 
     TextDirection.rtl;
@@ -78,51 +80,63 @@ class multiplicationResultScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   'images/rabbit_result.png',
-                  height: 120,
-                  width: 120,
+                  height: height * 0.26,
+                  width: width * 0.19,
+                  // height: 120,
+                  // width: 120,
                 )
               ],
             ),
             Container(
-              width: 380,
-              height: 200,
+              height: height * 0.49,
+              width: width * 0.44,
+              // width: 380,
+              // height: 200,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 250, 255, 253),
                 // boxShadow: [
                 //   BoxShadow(color: Colors.green, spreadRadius: 0.2)
                 // ],
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Color.fromARGB(255, 33, 120, 36),
-                  width: 1,
-                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 163, 163, 163).withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(2, 8), // changes position of shadow
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(55),
+                // border: Border.all(
+                //   color: Color.fromARGB(255, 33, 120, 36),
+                //   width: 1,
+                // ),
               ),
               child: Column(
                 textDirection: TextDirection.rtl,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    ':النتيجة',
+                    ':النتيجة\n',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         decoration: TextDecoration.none,
                         fontSize: 26.0,
-                        color: Colors.black,
-                        fontFamily: 'ReadexPro-Regular',
+                        color: Colors.brown,
+                        fontFamily: 'ReadexPro',
                         fontWeight: FontWeight.bold),
                   ),
                   //The results
                   Text(
-                    '\u2022 جمع الآحاد: $level1scoreArabic من $maxLevel1ScoreArabic \n'
-                    '\u2022 جمع العشرات: $level2sscoreArabic من $maxLevel2ScoreArabic \n'
-                    '\u2022 جمع المئات: $level3scoreArabic من $maxLevel3ScoreArabic',
+                    '\u2022 جمع الآحاد      :  $mullevel1scoreArabic من $maxLevel1ScoreArabic \n'
+                    '\u2022 جمع العشرات  :   $mullevel2sscoreArabic من $maxLevel2ScoreArabic \n'
+                    '\u2022 جمع المئات     :   $mullevel3scoreArabic من $maxLevel3ScoreArabic',
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                         decoration: TextDecoration.none,
-                        fontSize: 22.0,
-                        color: Colors.black,
-                        fontFamily: 'ReadexPro-Regular',
+                        fontSize: 20.0,
+                        color: Colors.brown,
+                        fontFamily: 'ReadexPro',
                         fontWeight: FontWeight.bold),
                   ),
                   // Text(
@@ -167,7 +181,7 @@ class multiplicationResultScreen extends StatelessWidget {
                         decoration: TextDecoration.none,
                         fontSize: 24.0,
                         color: Colors.white,
-                        fontFamily: 'ReadexPro-Regular',
+                        fontFamily: 'ReadexPro',
                         fontWeight: FontWeight.bold)))
           ]),
         ]),

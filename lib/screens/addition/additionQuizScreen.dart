@@ -52,9 +52,9 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   final int numOfHundredQuestions = 4; //المئات
   List<dynamic> Xx = [];
   List<dynamic> Yy = [];
-  var Singlescore = 0;
-  var Tensscore = 0;
-  var Hundredscore = 0;
+  var addSinglescore = 0;
+  var addTensscore = 0;
+  var addHundredscore = 0;
   bool isPressed = false;
 
 // //Array of numbers to convert from english to arabic
@@ -213,6 +213,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
     //     arabicY = arabicY.replaceAll(num.toString(), numberMap[num]!);
     //   }
     // }
+
     return "$arabicX " + "+" + " $arabicY";
   }
 
@@ -243,7 +244,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       for (var i = 0; i < 4; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Singlescore++;
+          addSinglescore++;
         }
       }
 
@@ -251,7 +252,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       for (var i = 4; i < 8; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Tensscore++;
+          addTensscore++;
         }
       }
 
@@ -259,7 +260,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       for (var i = 8; i < 12; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Hundredscore++;
+          addHundredscore++;
         }
       }
       Navigator.of(context).push(
@@ -268,9 +269,9 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
               maxSingleScore: numOfSingleQuestions,
               maxTensScore: numOfTensQuestions,
               maxHundredScore: numOfHundredQuestions,
-              singlescore: Singlescore,
-              tensscore: Tensscore,
-              hundredscore: Hundredscore,
+              addsinglescore: addSinglescore,
+              addtensscore: addTensscore,
+              addhundredscore: addHundredscore,
               answers: answers,
               qustions: qustions,
               userAnswer: userAnswer),
@@ -356,10 +357,9 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       ),
     );
   }
+
   void nextQuestion() {
-    
-   _changeQuestion('٠');
-   
+    _changeQuestion('٠');
   }
 
   void changeColor() {
@@ -505,10 +505,8 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
         alignment: Alignment.topRight,
         child: Padding(
             padding: const EdgeInsets.all(30.0),
-            child: Column(children: <Widget>[
-             
-                NextButton(nextQuestion:nextQuestion)
-            ])),
+            child: Column(
+                children: <Widget>[NextButton(nextQuestion: nextQuestion)])),
       ),
     );
   }
@@ -526,7 +524,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/dogFrame.png',
+                      'images/dogFrame.png',
                       height: height * 0.49,
                       width: width * 0.30,
                       // fit: BoxFit.cover,
@@ -660,7 +658,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/catFrame.png',
+                      'images/catFrame.png',
                       height: height * 0.49,
                       width: width * 0.30,
                       // fit: BoxFit.cover,

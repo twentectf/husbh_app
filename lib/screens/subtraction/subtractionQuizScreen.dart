@@ -47,9 +47,9 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
   final int numOfHundredQuestions = 4; //المئات
   List<dynamic> Xx = [];
   List<dynamic> Yy = [];
-  var Singlescore = 0;
-  var Tensscore = 0;
-  var Hundredscore = 0;
+  var subSinglescore = 0;
+  var subTensscore = 0;
+  var subHundredscore = 0;
   bool isPressed = false;
 
   String arabicX = "";
@@ -82,14 +82,14 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       ans = [];
       x = Random().nextInt(9) + 1;
       y = Random().nextInt(9) + 1;
-      while (x > y) {
-        x = Random().nextInt(9) + 1;
-        y = Random().nextInt(9) + 1;
-      }
-
       Xx.add(x);
       Yy.add(y);
+      // while (x > y) {
+      //   x = Random().nextInt(9) + 1;
+      //   y = Random().nextInt(9) + 1;
+      // }
 
+      textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x - y);
@@ -112,24 +112,21 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       ans = [];
       x = Random().nextInt(99) + 1;
       y = Random().nextInt(99) + 1;
-      while (x > y) {
-        while (x < 10 || y < 10 || x - y < 100) {
-          x = Random().nextInt(99) + 1;
-          y = Random().nextInt(99) + 1;
-        }
+      while (x < 10 || y < 10 || x + y > 100) {
+        x = Random().nextInt(99) + 1;
+        y = Random().nextInt(99) + 1;
       }
 
+      textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x - y);
-      while (x > y) {
-        ansData = [
-          convertOptionsToArabic(x - y),
-          convertOptionsToArabic(x - y + 2),
-          convertOptionsToArabic(x - y + 9),
-          convertOptionsToArabic(x - y + 5),
-        ];
-      }
+      ansData = [
+        convertOptionsToArabic(x - y),
+        convertOptionsToArabic(x - y + 2),
+        convertOptionsToArabic(x - y + 9),
+        convertOptionsToArabic(x - y + 5),
+      ];
 
       for (var j = 0; j < 4; j++) {
         var rNum = Random().nextInt(ansData.length).round();
@@ -143,26 +140,21 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       ans = [];
       x = Random().nextInt(999);
       y = Random().nextInt(999);
-      while (x > y) {
-        x = Random().nextInt(999);
-        y = Random().nextInt(999);
-      }
-      while (x < 100 || y < 100 || x - y > 500) {
+      while (x < 100 || y < 100 || x + y > 500) {
         x = Random().nextInt(999);
         y = Random().nextInt(999);
       }
 
+      textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x - y);
-      while (x > y) {
-        ansData = [
-          convertOptionsToArabic(x - y),
-          convertOptionsToArabic(x - y + 1),
-          convertOptionsToArabic(x - y + 3),
-          convertOptionsToArabic(x - y + 6),
-        ];
-      }
+      ansData = [
+        convertOptionsToArabic(x - y),
+        convertOptionsToArabic(x - y + 1),
+        convertOptionsToArabic(x - y + 3),
+        convertOptionsToArabic(x - y + 6),
+      ];
 
       for (var j = 0; j < 4; j++) {
         var rNum = Random().nextInt(ansData.length).round();
@@ -193,7 +185,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       for (var i = 0; i < 4; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Singlescore++;
+          subSinglescore++;
         }
       }
 
@@ -201,15 +193,15 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       for (var i = 4; i < 8; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Tensscore++;
+          subTensscore++;
         }
       }
 
       // var Hundredscore = 0;
-      for (var i = 8; i < 11; i++) {
+      for (var i = 8; i < 12; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Hundredscore++;
+          subHundredscore++;
         }
       }
       Navigator.of(context).push(
@@ -218,9 +210,9 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
               maxSingleScore: numOfSingleQuestions,
               maxTensScore: numOfTensQuestions,
               maxHundredScore: numOfHundredQuestions,
-              singlescore: Singlescore,
-              tensscore: Tensscore,
-              hundredscore: Hundredscore,
+              subsinglescore: subSinglescore,
+              subtensscore: subTensscore,
+              subhundredscore: subHundredscore,
               answers: answers,
               qustions: qustions,
               userAnswer: userAnswer),
@@ -312,10 +304,9 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       isPressed = true;
     });
   }
+
   void nextQuestion() {
-    
-   _changeQuestion('٠');
-   
+    _changeQuestion('٠');
   }
 
   @override
@@ -346,86 +337,107 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
                       style: TextStyle(
                           decoration: TextDecoration.none,
                           color: Colors.lightBlue,
-                          fontFamily: "ReadexPro-Regular",
+                          fontFamily: "ReadexPro",
                           fontSize:
                               MediaQuery.of(context).size.width > 500 ? 45 : 20,
                           fontWeight: FontWeight.bold)),
                 ),
                 ImagesUnderQuestion(j),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    NiceButtons(
-                        onTap: (finish) async {
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: <
+                    Widget>[
+                  SizedBox(
+                    height: 55,
+                    width: 100,
+                    child: OptionCard(
+                        option: mcq[j][0].toString(),
+                        color: isPressed
+                            ? (mcq[j][0].toString() ==
+                                    convertOptionsToArabic(answers[j])
+                                        .toString())
+                                ? const Color.fromARGB(
+                                    255, 50, 132, 9) //correct
+                                : const Color.fromRGBO(
+                                    218, 39, 39, 1) //incorrect
+                            : const Color(0xFF3489e9),
+                        onTap: () async {
                           changeColor();
-                          await Future.delayed(const Duration(seconds: 1),
-                              _changeQuestion(mcq[j][0].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][0].toString())),
-                    SizedBox(width: 30),
-// >>>>>>>>>>>>>>>>>>>>second option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-                    NiceButtons(
-                        onTap: (finish) async {
+                          //await
+                          await Future.delayed(const Duration(seconds: 2), () {
+                            _changeQuestion(mcq[j][0].toString());
+                          });
+                        }),
+                  ),
+                  SizedBox(height: 20, width: 20),
+                  SizedBox(
+                    height: 55,
+                    width: 100,
+                    child: OptionCard(
+                        option: mcq[j][1].toString(),
+                        color: isPressed
+                            ? (mcq[j][1].toString() ==
+                                    convertOptionsToArabic(answers[j])
+                                        .toString())
+                                ? const Color.fromARGB(
+                                    255, 50, 132, 9) //correct
+                                : const Color.fromRGBO(
+                                    218, 39, 39, 1) //incorrect
+                            : const Color(0xFF3489e9),
+                        onTap: () async {
                           changeColor();
-                          await Future.delayed(const Duration(seconds: 1),
-                              _changeQuestion(mcq[j][1].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][1].toString())),
-                    SizedBox(width: 30),
-                    // >>>>>>>>>>>>>>>>>>>>third  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-                    NiceButtons(
-                        onTap: (finish) async {
+                          //await
+                          await Future.delayed(const Duration(seconds: 2), () {
+                            _changeQuestion(mcq[j][1].toString());
+                          });
+                        }),
+                  ),
+                  SizedBox(height: 20, width: 20),
+                  SizedBox(
+                    height: 55,
+                    width: 100,
+                    child: OptionCard(
+                        option: mcq[j][2].toString(),
+                        color: isPressed
+                            ? (mcq[j][2].toString() ==
+                                    convertOptionsToArabic(answers[j])
+                                        .toString())
+                                ? const Color.fromARGB(
+                                    255, 50, 132, 9) //correct
+                                : const Color.fromRGBO(
+                                    218, 39, 39, 1) //incorrect
+                            : const Color(0xFF3489e9),
+                        onTap: () async {
                           changeColor();
-                          await Future.delayed(const Duration(seconds: 1),
-                              _changeQuestion(mcq[j][2].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][2].toString())),
-                    SizedBox(width: 30),
-                    // >>>>>>>>>>>>>>>>>>>>forth  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-                    NiceButtons(
-                        onTap: (finish) async {
+                          //await
+                          await Future.delayed(const Duration(seconds: 2), () {
+                            _changeQuestion(mcq[j][2].toString());
+                          });
+                        }),
+                  ),
+                  SizedBox(height: 20, width: 20),
+                  SizedBox(
+                    height: 55,
+                    width: 100,
+                    child: OptionCard(
+                        option: mcq[j][3].toString(),
+                        color: isPressed
+                            ? (mcq[j][3].toString() ==
+                                    convertOptionsToArabic(answers[j])
+                                        .toString())
+                                ? const Color.fromARGB(
+                                    255, 50, 132, 9) //correct
+                                : const Color.fromRGBO(
+                                    218, 39, 39, 1) //incorrect
+                            : const Color(0xFF3489e9),
+                        onTap: () async {
                           changeColor();
-                          await Future.delayed(const Duration(seconds: 1),
-                              _changeQuestion(mcq[j][3].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][3].toString())),
-                  ],
-                ),
+                          //await
+                          await Future.delayed(const Duration(seconds: 2), () {
+                            _changeQuestion(mcq[j][3].toString());
+                          });
+                        }),
+                  ),
+                  SizedBox(height: 20, width: 20),
+                ]),
               ])
         ],
       ),
@@ -434,10 +446,8 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
         alignment: Alignment.topRight,
         child: Padding(
             padding: const EdgeInsets.all(30.0),
-            child: Column(children: <Widget>[
-             
-                NextButton(nextQuestion:nextQuestion)
-            ])),
+            child: Column(
+                children: <Widget>[NextButton(nextQuestion: nextQuestion)])),
       ),
     );
   }
@@ -455,7 +465,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/dogFrame.png',
+                      'images/dogFrame.png',
                       height: height * 0.49,
                       width: width * 0.30,
                       // fit: BoxFit.cover,
@@ -589,7 +599,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/dogFrame.png',
+                      'images/catFrame.png',
                       height: height * 0.49,
                       width: width * 0.30,
                       // fit: BoxFit.cover,

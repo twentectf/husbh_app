@@ -26,7 +26,10 @@ class NextButton extends StatelessWidget {
         child: const Text(
           'التالي',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 27.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 27.0,
+              fontFamily: 'ReadexPro',
+              fontWeight: FontWeight.bold),
         ),
       ),
     );

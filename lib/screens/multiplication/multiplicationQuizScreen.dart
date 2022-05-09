@@ -13,6 +13,7 @@ import 'package:nice_buttons/nice_buttons.dart';
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'multiplication_video.dart';
 
+//×
 class multiplicationQuizScreen extends StatefulWidget {
   const multiplicationQuizScreen({Key? key}) : super(key: key);
 
@@ -48,9 +49,9 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
   final int numOfLevel3Questions = 4; //(8,9,10)
   List<dynamic> Xx = [];
   List<dynamic> Yy = [];
-  var Level1Score = 0; //(0,1,2,3)
-  var Level2Score = 0; //(4,5,6,7)
-  var Level3Score = 0; //(8,9,10)
+  var mulLevel1Score = 0; //(0,1,2,3)
+  var mulLevel2Score = 0; //(4,5,6,7)
+  var mulLevel3Score = 0; //(8,9,10)
   bool isPressed = false;
 
   String arabicX = "";
@@ -179,21 +180,21 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
       for (var i = 0; i < 4; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Level1Score++;
+          mulLevel1Score++;
         }
       }
 
       for (var i = 4; i < 8; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Level2Score++;
+          mulLevel2Score++;
         }
       }
 
       for (var i = 8; i < 12; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Level3Score++;
+          mulLevel3Score++;
         }
       }
       Navigator.of(context).push(
@@ -202,9 +203,9 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
               maxLevel1Score: numOfLevel1Questions,
               maxLevel2Score: numOfLevel2Questions,
               maxLevel3Score: numOfLevel3Questions,
-              level1score: Level1Score,
-              level2score: Level2Score,
-              level3score: Level3Score,
+              mullevel1score: mulLevel1Score,
+              mullevel2score: mulLevel2Score,
+              mullevel3score: mulLevel3Score,
               answers: answers,
               qustions: qustions,
               userAnswer: userAnswer),
@@ -223,8 +224,8 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
   List<String> objects = [
     'images/egg.png',
     'images/egg2.png',
-    'images/Xegg.png',
-    'images/Xegg2.png',
+    // 'images/Xegg.png',
+    // 'images/Xegg2.png',
   ];
 //returns images for value x
   Widget _printImageX(xValue) {
@@ -236,7 +237,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
           children: <Widget>[
             Image.asset(
               //xgreen
-              objects[2],
+              objects[1],
               width: width * 0.13,
               height: height * 0.12,
             )
@@ -268,7 +269,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
           direction: Axis.horizontal,
           children: <Widget>[
             Image.asset(
-              objects[3],
+              objects[1],
               width: width * 0.13,
               height: height * 0.12,
             )
@@ -282,7 +283,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
         children: <Widget>[
           for (var i = 0; i < yValue; i++)
             Image.asset(
-              objects[1],
+              objects[0],
               width: width * 0.13,
               height: height * 0.12,
             )
@@ -291,11 +292,10 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
     );
   }
 
-void nextQuestion() {
-    
-   _changeQuestion('٠');
-   
+  void nextQuestion() {
+    _changeQuestion('٠');
   }
+
   void changeColor() {
     setState(() {
       isPressed = true;
@@ -330,86 +330,107 @@ void nextQuestion() {
                       style: TextStyle(
                           decoration: TextDecoration.none,
                           color: Colors.lightBlue,
-                          fontFamily: "ReadexPro-Regular",
+                          fontFamily: "ReadexPro",
                           fontSize:
                               MediaQuery.of(context).size.width > 500 ? 45 : 20,
                           fontWeight: FontWeight.bold)),
                 ),
                 ImagesUnderQuestion(j),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    NiceButtons(
-                        onTap: (finish) async {
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: <
+                    Widget>[
+                  SizedBox(
+                    height: 55,
+                    width: 100,
+                    child: OptionCard(
+                        option: mcq[j][0].toString(),
+                        color: isPressed
+                            ? (mcq[j][0].toString() ==
+                                    convertOptionsToArabic(answers[j])
+                                        .toString())
+                                ? const Color.fromARGB(
+                                    255, 50, 132, 9) //correct
+                                : const Color.fromRGBO(
+                                    218, 39, 39, 1) //incorrect
+                            : const Color(0xFF3489e9),
+                        onTap: () async {
                           changeColor();
-                          await Future.delayed(const Duration(seconds: 1),
-                              _changeQuestion(mcq[j][0].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][0].toString())),
-                    SizedBox(width: 30),
-// >>>>>>>>>>>>>>>>>>>>second option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-                    NiceButtons(
-                        onTap: (finish) async {
+                          //await
+                          await Future.delayed(const Duration(seconds: 2), () {
+                            _changeQuestion(mcq[j][0].toString());
+                          });
+                        }),
+                  ),
+                  SizedBox(height: 20, width: 20),
+                  SizedBox(
+                    height: 55,
+                    width: 100,
+                    child: OptionCard(
+                        option: mcq[j][1].toString(),
+                        color: isPressed
+                            ? (mcq[j][1].toString() ==
+                                    convertOptionsToArabic(answers[j])
+                                        .toString())
+                                ? const Color.fromARGB(
+                                    255, 50, 132, 9) //correct
+                                : const Color.fromRGBO(
+                                    218, 39, 39, 1) //incorrect
+                            : const Color(0xFF3489e9),
+                        onTap: () async {
                           changeColor();
-                          await Future.delayed(const Duration(seconds: 1),
-                              _changeQuestion(mcq[j][1].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][1].toString())),
-                    SizedBox(width: 30),
-                    // >>>>>>>>>>>>>>>>>>>>third  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-                    NiceButtons(
-                        onTap: (finish) async {
+                          //await
+                          await Future.delayed(const Duration(seconds: 2), () {
+                            _changeQuestion(mcq[j][1].toString());
+                          });
+                        }),
+                  ),
+                  SizedBox(height: 20, width: 20),
+                  SizedBox(
+                    height: 55,
+                    width: 100,
+                    child: OptionCard(
+                        option: mcq[j][2].toString(),
+                        color: isPressed
+                            ? (mcq[j][2].toString() ==
+                                    convertOptionsToArabic(answers[j])
+                                        .toString())
+                                ? const Color.fromARGB(
+                                    255, 50, 132, 9) //correct
+                                : const Color.fromRGBO(
+                                    218, 39, 39, 1) //incorrect
+                            : const Color(0xFF3489e9),
+                        onTap: () async {
                           changeColor();
-                          await Future.delayed(const Duration(seconds: 1),
-                              _changeQuestion(mcq[j][2].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][2].toString())),
-                    SizedBox(width: 30),
-                    // >>>>>>>>>>>>>>>>>>>>forth  option on left >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-                    NiceButtons(
-                        onTap: (finish) async {
+                          //await
+                          await Future.delayed(const Duration(seconds: 2), () {
+                            _changeQuestion(mcq[j][2].toString());
+                          });
+                        }),
+                  ),
+                  SizedBox(height: 20, width: 20),
+                  SizedBox(
+                    height: 55,
+                    width: 100,
+                    child: OptionCard(
+                        option: mcq[j][3].toString(),
+                        color: isPressed
+                            ? (mcq[j][3].toString() ==
+                                    convertOptionsToArabic(answers[j])
+                                        .toString())
+                                ? const Color.fromARGB(
+                                    255, 50, 132, 9) //correct
+                                : const Color.fromRGBO(
+                                    218, 39, 39, 1) //incorrect
+                            : const Color(0xFF3489e9),
+                        onTap: () async {
                           changeColor();
-                          await Future.delayed(const Duration(seconds: 1),
-                              _changeQuestion(mcq[j][3].toString()));
-                        },
-                        stretch: false,
-                        startColor: Colors.lightBlueAccent,
-                        endColor: Colors.lightBlueAccent,
-                        borderColor: Color(0xFF3489e9),
-                        width: 90.0,
-                        height: 60.0,
-                        borderRadius: 60.0,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        child: QuizButtonIcon(option: mcq[j][3].toString())),
-                  ],
-                ),
+                          //await
+                          await Future.delayed(const Duration(seconds: 2), () {
+                            _changeQuestion(mcq[j][3].toString());
+                          });
+                        }),
+                  ),
+                  SizedBox(height: 20, width: 20),
+                ]),
               ])
         ],
       ),
@@ -418,10 +439,8 @@ void nextQuestion() {
         alignment: Alignment.topRight,
         child: Padding(
             padding: const EdgeInsets.all(30.0),
-            child: Column(children: <Widget>[
-             
-                NextButton(nextQuestion:nextQuestion)
-            ])),
+            child: Column(
+                children: <Widget>[NextButton(nextQuestion: nextQuestion)])),
       ),
     );
   }

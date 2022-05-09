@@ -1,5 +1,3 @@
-
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -257,7 +255,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   //   'year': year(),
                                   //   'time': time(),
                                   // };
-                                  
 
                                   // FirebaseFirestore.instance
                                   //     .collection("users")
@@ -1070,7 +1067,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                       ),
                                                       child: Center(
                                                         child: Text(
-                                                          'x',
+                                                          '×',
                                                           style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 30,

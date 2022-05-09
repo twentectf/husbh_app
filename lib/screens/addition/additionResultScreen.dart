@@ -4,9 +4,9 @@ import 'package:husbh_app/screens/learn_page.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 class additionResultScreen extends StatelessWidget {
-  final singlescore;
-  final tensscore;
-  final hundredscore;
+  final addsinglescore;
+  final addtensscore;
+  final addhundredscore;
   final maxSingleScore;
   final maxTensScore;
   final maxHundredScore;
@@ -14,18 +14,18 @@ class additionResultScreen extends StatelessWidget {
   final List answers;
   final List userAnswer;
   ArabicNumbers arabicNumber = ArabicNumbers();
-  late final singlescoreArabic;
+  late final addsinglescoreArabic;
   late final maxSingleScoreArabic;
-  late final tensscoreArabic;
+  late final addtensscoreArabic;
   late final maxtensscoreArabic;
-  late final hundredscoreArabic;
+  late final addhundredscoreArabic;
   late final maxhundredscoreArabic;
   // final singlescoreArabic = arabicNumber.convert(singlescore),
 
   additionResultScreen({
-    this.singlescore,
-    this.tensscore,
-    this.hundredscore,
+    this.addsinglescore,
+    this.addtensscore,
+    this.addhundredscore,
     this.maxSingleScore,
     this.maxTensScore,
     // this.singlescoreArabic,
@@ -39,11 +39,11 @@ class additionResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    singlescoreArabic = arabicNumber.convert(singlescore);
+    addsinglescoreArabic = arabicNumber.convert(addsinglescore);
     maxSingleScoreArabic = arabicNumber.convert(maxSingleScore);
-    tensscoreArabic = arabicNumber.convert(tensscore);
+    addtensscoreArabic = arabicNumber.convert(addtensscore);
     maxtensscoreArabic = arabicNumber.convert(maxTensScore);
-    hundredscoreArabic = arabicNumber.convert(hundredscore);
+    addhundredscoreArabic = arabicNumber.convert(addhundredscore);
     maxhundredscoreArabic = arabicNumber.convert(maxHundredScore);
 
     TextDirection.rtl;
@@ -118,27 +118,27 @@ class additionResultScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'النتيجة',
+                    ':النتيجة\n',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         decoration: TextDecoration.none,
                         fontSize: 26.0,
-                        color: Colors.black,
-                        fontFamily: 'ReadexPro-Regular',
+                        color: Colors.brown,
+                        fontFamily: 'ReadexPro',
                         fontWeight: FontWeight.bold),
                   ),
                   //The results
                   Text(
-                    '\u2022 جمع الآحاد      :  $singlescoreArabic من $maxSingleScoreArabic \n'
-                    '\u2022 جمع العشرات  :   $tensscoreArabic من $maxtensscoreArabic \n'
-                    '\u2022 جمع المئات     :   $hundredscoreArabic من $maxhundredscoreArabic',
+                    '\u2022 جمع الآحاد      :  $addsinglescoreArabic من $maxSingleScoreArabic \n'
+                    '\u2022 جمع العشرات  :   $addtensscoreArabic من $maxtensscoreArabic \n'
+                    '\u2022 جمع المئات     :   $addhundredscoreArabic من $maxhundredscoreArabic',
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                         decoration: TextDecoration.none,
                         fontSize: 20.0,
-                        color: Colors.black,
-                        fontFamily: 'ReadexPro-Regular',
+                        color: Colors.brown,
+                        fontFamily: 'ReadexPro',
                         fontWeight: FontWeight.bold),
                   ),
                   // Text(
@@ -183,7 +183,7 @@ class additionResultScreen extends StatelessWidget {
                         decoration: TextDecoration.none,
                         fontSize: 24.0,
                         color: Colors.white,
-                        fontFamily: 'ReadexPro-Regular',
+                        fontFamily: 'ReadexPro',
                         fontWeight: FontWeight.bold)))
           ]),
         ]),

@@ -15,7 +15,7 @@ class QuizButtonIcon extends StatelessWidget {
               style: TextStyle(
                   decoration: TextDecoration.none,
                   color: Colors.white,
-                  fontFamily: "ReadexPro-Regular",
+                  fontFamily: "ReadexPro",
                   fontSize: 25))),
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       width: MediaQuery.of(context).size.width > 550
