@@ -20,7 +20,7 @@ class divisionQuizScreen extends StatefulWidget {
   const divisionQuizScreen({Key? key}) : super(key: key);
 
   @override
-   _divisionQuizScreenState createState() => _divisionQuizScreenState();
+  _divisionQuizScreenState createState() => _divisionQuizScreenState();
 
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -31,8 +31,6 @@ class divisionQuizScreen extends StatefulWidget {
     return Container();
   }
 }
-
-
 
 class _divisionQuizScreenState extends State<divisionQuizScreen> {
   get width => MediaQuery.of(context).size.width;
@@ -48,14 +46,14 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   var ansData;
   List<dynamic> ans = [];
   var j = 0;
-  final int numOfLeval1Questions = 4; //الآحاد
-  final int numOfLeval2Questions = 4; //العشرات
-  final int numOfLeval3Questions = 3; //المئات
+  final int numOfLeval1Questions = 4;
+  final int numOfLeval2Questions = 4;
+  final int numOfLeval3Questions = 3;
   List<dynamic> Xx = [];
   List<dynamic> Yy = [];
-  var  Level1Score = 0;
-  var  Level2Score= 0;
-  var  Level3Score = 0;
+  var divLevel1Score = 0;
+  var divLevel2Score = 0;
+  var divLevel3Score = 0;
   bool isPressed = false;
 
 // //Array of numbers to convert from english to arabic
@@ -74,11 +72,11 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
   String arabicX = "";
   String arabicY = "";
- var divisionLeval1=[2,5,10,0];
- 
-  var divisionLeval2=[1,3,4,6];
-   var divisionLeval3=[7,8,9];
- var x = Random().nextInt(9) + 1;
+  var divisionLeval1 = [2, 5, 10, 0];
+
+  var divisionLeval2 = [1, 3, 4, 6];
+  var divisionLeval3 = [7, 8, 9];
+  var x = Random().nextInt(9) + 1;
   var y = Random().nextInt(9) + 1;
 
   bool getIsPressed() {
@@ -107,25 +105,26 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
     for (var i = 1; i < numOfLeval1Questions + 1; i++) {
       ans = [];
-      x = divisionLeval1[Random().nextInt(divisionLeval1.length)] ;
-      y = Random().nextInt(99)+1;
-      
+      x = divisionLeval1[Random().nextInt(divisionLeval1.length)];
+      y = Random().nextInt(99) + 1;
+
       Xx.add(x);
-      for(var g = 1; g < 100; i++)
-      {if (x % y==0)
-      {Yy.add(y);
-      break;}
-      else
-       y = Random().nextInt(99)+1;}
+      for (var g = 1; g < 100; i++) {
+        if (x % y == 0) {
+          Yy.add(y);
+          break;
+        } else
+          y = Random().nextInt(99) + 1;
+      }
 
       textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x ~/ y);
       ansData = [
-        convertOptionsToArabic(x ~/y),
+        convertOptionsToArabic(x ~/ y),
         convertOptionsToArabic(x ~/ y + 1),
-        convertOptionsToArabic(x  ~/ y + 7),
+        convertOptionsToArabic(x ~/ y + 7),
         convertOptionsToArabic(x ~/ y + 3),
       ];
 
@@ -139,15 +138,15 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
     for (var i = 1; i < numOfLeval2Questions + 1; i++) {
       ans = [];
-      x = divisionLeval2[Random().nextInt(divisionLeval2.length)] ;
-      y = Random().nextInt(9)+1;
+      x = divisionLeval2[Random().nextInt(divisionLeval2.length)];
+      y = Random().nextInt(9) + 1;
       Xx.add(x);
       Yy.add(y);
 
       textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
-      answers.add(x ~/y);
+      answers.add(x ~/ y);
       ansData = [
         convertOptionsToArabic(x ~/ y),
         convertOptionsToArabic(x ~/ y + 2),
@@ -165,8 +164,8 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
     for (var i = 1; i < numOfLeval3Questions + 1; i++) {
       ans = [];
-      x = divisionLeval3[Random().nextInt(divisionLeval3.length)] ;
-      y = Random().nextInt(9)+1;
+      x = divisionLeval3[Random().nextInt(divisionLeval3.length)];
+      y = Random().nextInt(9) + 1;
       Xx.add(x);
       Yy.add(y);
 
@@ -176,9 +175,9 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       answers.add(x ~/ y);
       ansData = [
         convertOptionsToArabic(x ~/ y),
-        convertOptionsToArabic(x ~/y + 1),
-        convertOptionsToArabic(x ~/y + 3),
-        convertOptionsToArabic(x ~/y + 6),
+        convertOptionsToArabic(x ~/ y + 1),
+        convertOptionsToArabic(x ~/ y + 3),
+        convertOptionsToArabic(x ~/ y + 6),
       ];
 
       for (var j = 0; j < 4; j++) {
@@ -194,14 +193,12 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
 
-   
     return "$arabicX " + "÷" + " $arabicY";
   }
 
   String convertOptionsToArabic(int num) {
     arabicX = arabicNumber.convert(num);
 
-   
     return "$arabicX";
   }
 
@@ -212,7 +209,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       for (var i = 0; i < 4; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Level1Score++;
+          divLevel1Score++;
         }
       }
 
@@ -220,7 +217,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       for (var i = 4; i < 8; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Level2Score++;
+          divLevel2Score++;
         }
       }
 
@@ -228,7 +225,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       for (var i = 8; i < 11; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
-          Level3Score++;
+          divLevel3Score++;
         }
       }
       Navigator.of(context).push(
@@ -237,9 +234,9 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
               maxLevel1Score: numOfLeval1Questions,
               maxLevel2Score: numOfLeval2Questions,
               maxLevel3Score: numOfLeval3Questions,
-              Level1Score: Level1Score,
-              Level2Score: Level2Score,
-              Level3Score: Level3Score,
+              divlevel1Score: divLevel1Score,
+              divlevel2Score: divLevel2Score,
+              divlevel3Score: divLevel3Score,
               answers: answers,
               qustions: qustions,
               userAnswer: userAnswer),
@@ -279,7 +276,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
         ),
       );
     }
-    //else show the 
+    //else show the
     return Center(
       child: Wrap(
         direction: Axis.horizontal,
@@ -325,10 +322,9 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       ),
     );
   }
+
   void nextQuestion() {
-    
-   _changeQuestion('٠');
-   
+    _changeQuestion('٠');
   }
 
   void changeColor() {
@@ -474,18 +470,15 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
         alignment: Alignment.topRight,
         child: Padding(
             padding: const EdgeInsets.all(30.0),
-            child: Column(children: <Widget>[
-             
-                NextButton(nextQuestion:nextQuestion)
-            ])),
+            child: Column(
+                children: <Widget>[NextButton(nextQuestion: nextQuestion)])),
       ),
     );
   }
 
   // ignore: non_constant_identifier_names
   ImagesUnderQuestion(int j) {
-                      
-  if (j < 11) {
+    if (j < 11) {
       return SizedBox(
         height: 200,
         child: Align(
@@ -505,11 +498,6 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
           ),
         ),
       );
-    } 
-               
-                            
-                        
-          
-  
+    }
   }
 }

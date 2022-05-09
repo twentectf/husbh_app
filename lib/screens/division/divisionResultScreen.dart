@@ -4,9 +4,9 @@ import 'package:husbh_app/screens/learn_page.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 class divisionResultScreen extends StatelessWidget {
-  final Level1Score;
-  final Level2Score;
-  final Level3Score;
+  final divlevel1Score;
+  final divlevel2Score;
+  final divlevel3Score;
   final maxLevel1Score;
   final maxLevel2Score;
   final maxLevel3Score;
@@ -14,18 +14,18 @@ class divisionResultScreen extends StatelessWidget {
   final List answers;
   final List userAnswer;
   ArabicNumbers arabicNumber = ArabicNumbers();
-  late final level1scoreArabic;
+  late final divlevel1scoreArabic;
   late final maxLevel1ScoreArabic;
-  late final level2scoreArabic;
+  late final divlevel2scoreArabic;
   late final maxLevel2scoreArabic;
-  late final level3scoreArabic;
+  late final divlevel3scoreArabic;
   late final maxLevel3scoreArabic;
   // final singlescoreArabic = arabicNumber.convert(singlescore),
 
   divisionResultScreen({
-    this.Level1Score,
-    this.Level2Score,
-    this.Level3Score,
+    this.divlevel1Score,
+    this.divlevel2Score,
+    this.divlevel3Score,
     this.maxLevel1Score,
     this.maxLevel2Score,
     // this.singlescoreArabic,
@@ -39,11 +39,11 @@ class divisionResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    level1scoreArabic = arabicNumber.convert(Level1Score);
+    divlevel1scoreArabic = arabicNumber.convert(divlevel1Score);
     maxLevel1ScoreArabic = arabicNumber.convert(maxLevel1Score);
-    level2scoreArabic = arabicNumber.convert(Level2Score);
+    divlevel2scoreArabic = arabicNumber.convert(divlevel2Score);
     maxLevel2scoreArabic = arabicNumber.convert(maxLevel2Score);
-    level3scoreArabic = arabicNumber.convert(Level3Score);
+    divlevel3scoreArabic = arabicNumber.convert(divlevel3Score);
     maxLevel3scoreArabic = arabicNumber.convert(maxLevel3Score);
 
     TextDirection.rtl;
@@ -129,9 +129,9 @@ class divisionResultScreen extends StatelessWidget {
                   ),
                   //The results
                   Text(
-                    '\u2022 المستوى الأول من القسمة :  $level1scoreArabic من $maxLevel1ScoreArabic \n'
-                    '\u2022 المستوى الثاني من القسمة :   $level2scoreArabic من $maxLevel2scoreArabic \n'
-                    '\u2022 المستوى الثالث من القسمة :   $level3scoreArabic من $maxLevel3scoreArabic',
+                    '\u2022 المستوى الأول من القسمة :  $divlevel1scoreArabic من $maxLevel1ScoreArabic \n'
+                    '\u2022 المستوى الثاني من القسمة :   $divlevel2scoreArabic من $maxLevel2scoreArabic \n'
+                    '\u2022 المستوى الثالث من القسمة :   $divlevel3scoreArabic من $maxLevel3scoreArabic',
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                     style: TextStyle(

@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //home: additionQuizScreen(),
       //home: subtractionQuizScreen(),
-      home:divisionQuizScreen(),
-     // home: SplashScreen(),
+      home: SplashScreen(),
+      // home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       title: 'حًسبة',
       theme: ThemeData(
