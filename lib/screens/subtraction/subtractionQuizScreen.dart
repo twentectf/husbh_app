@@ -80,15 +80,15 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
 
     for (var i = 1; i < numOfSingleQuestions + 1; i++) {
       ans = [];
-      x = Random().nextInt(11);
-      y = Random().nextInt(11);
+      x = Random().nextInt(10);
+      y = Random().nextInt(10);
       //  x = Random().nextInt(9) + 1;
       // y = Random().nextInt(9) + 1;
       while (x - y < 0) {
         //   x = Random().nextInt(9) + 1;
         // y = Random().nextInt(9) + 1;
-        x = Random().nextInt(11);
-        y = Random().nextInt(11);
+        x = Random().nextInt(10);
+        y = Random().nextInt(10);
       }
       Xx.add(x);
       Yy.add(y);
@@ -259,7 +259,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
           direction: Axis.horizontal,
           children: <Widget>[
             Image.asset(
-              //xgreen
+              //xcarrot
               objects[2],
               width: width * 0.13,
               height: height * 0.12,
@@ -268,7 +268,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
         ),
       );
     }
-    //else show the apples
+    //else show the carrots
     return Center(
       child: Wrap(
         direction: Axis.horizontal,
@@ -461,7 +461,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
       floatingActionButton: Align(
         alignment: Alignment.topRight,
         child: Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(35.0),
             child: Column(
                 children: <Widget>[NextButton(nextQuestion: nextQuestion)])),
       ),
