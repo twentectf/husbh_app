@@ -20,6 +20,7 @@ class additionResultScreen extends StatelessWidget {
   late final maxtensscoreArabic;
   late final addhundredscoreArabic;
   late final maxhundredscoreArabic;
+  //late final totalScore =
   // final singlescoreArabic = arabicNumber.convert(singlescore),
 
   additionResultScreen({
@@ -33,6 +34,7 @@ class additionResultScreen extends StatelessWidget {
     required this.qustions,
     required this.answers,
     required this.userAnswer,
+    //this.totalScore
   });
 
   @override
@@ -56,25 +58,6 @@ class additionResultScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         )),
-        //Row to have the home button
-        // Row(
-        //   children: [
-        //     IconButton(
-        //       padding: EdgeInsets.all(23.0),
-        //       onPressed: () {
-        //         Navigator.push(
-        //           context,
-        //           MaterialPageRoute(builder: (context) => home_page()),
-        //         );
-        //       },
-        //       //icon: Icon(Icons.arrow_back_ios),
-        //       icon: Icon(Icons.home_rounded),
-        //       color: Colors.brown.shade600,
-        //       //color: Colors.blue,
-        //       iconSize: 60.0,
-        //     ),
-        //   ],
-        // ),
         Stack(children: [
           Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Row(
@@ -150,6 +133,17 @@ class additionResultScreen extends StatelessWidget {
                   //       fontSize: 28.0,
                   //       color: Colors.black,
                   //       fontFamily: 'ReadexPro-Regular',
+                  //       fontWeight: FontWeight.bold),
+                  // ),
+                  // Text(
+                  //   '',
+                  //   textDirection: TextDirection.rtl,
+                  //   textAlign: TextAlign.right,
+                  //   style: TextStyle(
+                  //       decoration: TextDecoration.none,
+                  //       fontSize: 20.0,
+                  //       color: Colors.brown,
+                  //       fontFamily: 'ReadexPro',
                   //       fontWeight: FontWeight.bold),
                   // ),
                 ],

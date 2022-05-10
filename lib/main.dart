@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // home: additionQuizScreen(),
-      home: subtractionQuizScreen(),
+      home: SplashScreen(),
       // home: multiplicationQuizScreen(),
       // home: SplashScreen(),
       debugShowCheckedModeBanner: false,
