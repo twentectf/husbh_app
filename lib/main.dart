@@ -23,15 +23,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // home: additionQuizScreen(),
-      home: subtractionQuizScreen(),
+      // home: subtractionQuizScreen(),
+      // home: divisionQuizScreen(),
       // home: multiplicationQuizScreen(),
-      // home: SplashScreen(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
-      // title: 'حًسبة',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      //   visualDensity: VisualDensity.adaptivePlatformDensity,
-      // ),
+      title: 'حًسبة',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       /* home: Directionality(
         // add this
         textDirection: TextDirection.rtl, // set this property
