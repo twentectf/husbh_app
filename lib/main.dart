@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:husbh_app/screens/addition/additionQuizScreen.dart';
 import 'package:husbh_app/screens/division/divisionQuizScreen.dart';
+import 'package:husbh_app/screens/multiplication/multiplicationQuizScreen.dart';
 import 'package:husbh_app/screens/learn_page.dart';
 import 'package:husbh_app/screens/subtraction/subtractionQuizScreen.dart';
 import 'package:husbh_app/screens/subtraction/subtraction_video.dart';
@@ -21,16 +22,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //home: additionQuizScreen(),
-      //home: subtractionQuizScreen(),
-      home: SplashScreen(),
+      // home: additionQuizScreen(),
+      home: subtractionQuizScreen(),
+      // home: multiplicationQuizScreen(),
       // home: SplashScreen(),
       debugShowCheckedModeBanner: false,
-      title: 'حًسبة',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      // title: 'حًسبة',
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      //   visualDensity: VisualDensity.adaptivePlatformDensity,
+      // ),
       /* home: Directionality(
         // add this
         textDirection: TextDirection.rtl, // set this property

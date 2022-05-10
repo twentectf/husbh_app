@@ -116,7 +116,7 @@ class multiplicationResultScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    ':النتيجة\n',
+                    'النتيجة\n',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         decoration: TextDecoration.none,
@@ -127,9 +127,9 @@ class multiplicationResultScreen extends StatelessWidget {
                   ),
                   //The results
                   Text(
-                    '\u2022 جمع الآحاد      :  $mullevel1scoreArabic من $maxLevel1ScoreArabic \n'
-                    '\u2022 جمع العشرات  :   $mullevel2sscoreArabic من $maxLevel2ScoreArabic \n'
-                    '\u2022 جمع المئات     :   $mullevel3scoreArabic من $maxLevel3ScoreArabic',
+                    '\u2022 الضرب في ٣/٢/١/٠    :   $mullevel1scoreArabic من $maxLevel1ScoreArabic \n'
+                    '\u2022  الضرب في ٧/٦/٥/٤  :   $mullevel2sscoreArabic من $maxLevel2ScoreArabic \n'
+                    '\u2022   الضرب في ١٠/٩/٨    :   $mullevel3scoreArabic من  $maxLevel3ScoreArabic',
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                     style: TextStyle(

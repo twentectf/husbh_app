@@ -296,7 +296,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
 //returns images for value x
   Widget _printImageX(xValue) {
     //if value = 0 show its image
-    if (x == 0) {
+    if (xValue == 0) {
       return Center(
         child: Wrap(
           direction: Axis.horizontal,
@@ -329,7 +329,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
 
 //returns images for value y
   Widget _printImageY(yValue) {
-    if (y == 0) {
+    if (yValue == 0) {
       return Center(
         child: Wrap(
           direction: Axis.horizontal,

@@ -76,14 +76,46 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
 
   get states => null;
 
+  int getX(QuestionNumber) {
+    if (QuestionNumber == 0) {
+      x = 0;
+    } else if (QuestionNumber == 1) {
+      x = 1;
+    } else if (QuestionNumber == 2) {
+      x = 2;
+    } else if (QuestionNumber == 3) {
+      x = 3;
+    } else if (QuestionNumber == 4) {
+      x = 4;
+    } else if (QuestionNumber == 5) {
+      x = 5;
+    } else if (QuestionNumber == 6) {
+      x = 6;
+    } else if (QuestionNumber == 7) {
+      x = 7;
+    } else if (QuestionNumber == 8) {
+      x = 8;
+    } else if (QuestionNumber == 9) {
+      x = 9;
+    } else if (QuestionNumber == 10) {
+      x = 10;
+    } else if (QuestionNumber == 11) {
+      x = Random().nextInt(2) +
+          8; //becaue in the third level we only have 3 values (8-9-10) and the fourth question will either repeat (8-9-10)
+    }
+    return x;
+  }
+
   void initState() {
     TextDirection.rtl;
     super.initState();
 //(0,1,2,3)
     for (var i = 1; i < numOfLevel1Questions + 1; i++) {
       ans = [];
-      x = Random().nextInt(4) + 1;
-      y = Random().nextInt(4) + 1;
+      x = getX(i - 1);
+      // x = Random().nextInt(4) + 1;
+      y = Random().nextInt(11);
+      // y = Random().nextInt(4) + 1;
       Xx.add(x);
       Yy.add(y);
 
@@ -107,12 +139,14 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
 //(4,5,6,7)
     for (var i = 1; i < numOfLevel2Questions + 1; i++) {
       ans = [];
-      x = Random().nextInt(9) + 1;
-      y = Random().nextInt(9) + 1;
-      while (x > 3 && x < 8 || y > 3 && y < 8) {
-        x = Random().nextInt(9) + 1;
-        y = Random().nextInt(9) + 1;
-      }
+      x = getX(i + 3);
+      // x = Random().nextInt(9) + 1;
+      y = Random().nextInt(11);
+      // y = Random().nextInt(9) + 1;
+      // while (!(x > 3 && x < 8) || !(y > 3 && y < 8)) {
+      //   x = Random().nextInt(9) + 1;
+      //   y = Random().nextInt(9) + 1;
+      // }
 
       TextDirection.rtl;
       qustions.add(convertToArabic());
@@ -134,12 +168,14 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
 //(8,9,10)
     for (var i = 1; i < numOfLevel3Questions + 1; i++) {
       ans = [];
-      x = Random().nextInt(9);
-      y = Random().nextInt(9);
-      while (x > 7 && x < 11 || y > 7 && y < 11) {
-        x = Random().nextInt(9);
-        y = Random().nextInt(9);
-      }
+      x = getX(i + 7);
+      // x = Random().nextInt(9)+1;
+      // y = Random().nextInt(9)+1;
+      y = Random().nextInt(11);
+      // while (x > 7 && x < 11 || y > 7 && y < 11) {
+      //   x = Random().nextInt(9);
+      //   y = Random().nextInt(9);
+      // }
 
       TextDirection.rtl;
       qustions.add(convertToArabic());
@@ -164,7 +200,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
 
-    return "$arabicX " + "×" + " $arabicY";
+    return "$arabicX  " + "×" + "  $arabicY ";
   }
 
   String convertOptionsToArabic(int num) {
@@ -223,20 +259,21 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
   //objects for questions
   List<String> objects = [
     'images/egg.png',
-    'images/egg2.png',
+    'images/Xegg.png',
+    //WAS 'images/egg2.png',
     // 'images/Xegg.png',
     // 'images/Xegg2.png',
   ];
 //returns images for value x
   Widget _printImageX(xValue) {
     //if value = 0 show its image
-    if (x == 0) {
+    if (xValue == 0) {
       return Center(
         child: Wrap(
           direction: Axis.horizontal,
           children: <Widget>[
             Image.asset(
-              //xgreen
+              //X egg
               objects[1],
               width: width * 0.13,
               height: height * 0.12,
@@ -245,7 +282,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
         ),
       );
     }
-    //else show the apples
+    //else show the eggs
     return Center(
       child: Wrap(
         direction: Axis.horizontal,
@@ -263,7 +300,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
 
 //returns images for value y
   Widget _printImageY(yValue) {
-    if (y == 0) {
+    if (yValue == 0) {
       return Center(
         child: Wrap(
           direction: Axis.horizontal,
@@ -330,7 +367,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
                       style: TextStyle(
                           decoration: TextDecoration.none,
                           color: Colors.lightBlue,
-                          fontFamily: "ReadexPro",
+                          fontFamily: "ReadexPro-Regular",
                           fontSize:
                               MediaQuery.of(context).size.width > 500 ? 45 : 20,
                           fontWeight: FontWeight.bold)),
@@ -465,6 +502,234 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
               SizedBox(width: 300, child: _printImageX(Xx[j])),
             ],
           ),
+        ),
+      );
+    } else if (j == 4 || j == 5 || j == 6 || j == 7) {
+      return SizedBox(
+        height: 200,
+        child: Column(
+          children: [
+            Center(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      'images/dogFrame.png',
+                      height: height * 0.49,
+                      width: width * 0.30,
+                      // fit: BoxFit.cover,
+                    ),
+                  ),
+                  Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                            child: Text(
+                              "  ",
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 30,
+                            height: 50,
+                            child: Text(
+                              " ",
+                              style: TextStyle(fontSize: 33.0),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 35,
+                            height: 34,
+                            child: Text(
+                              qustions[j].toString().substring(0, 2),
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 32.0),
+                            ),
+                          ),
+                          Align(
+                            heightFactor: 0.01,
+                            child: Column(
+                              textDirection: TextDirection.rtl,
+                              children: [
+                                SizedBox(
+                                  width: 67,
+                                  height: 30,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    textDirection: TextDirection.rtl,
+                                    children: [
+                                      SizedBox(
+                                        // width: 63,
+                                        // height: 44,
+                                        child: Text(
+                                          ' × ',
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 33.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 37,
+                            height: 40,
+                            child: Text(
+                              qustions[j].toString().substring(6),
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 32.0),
+                            ),
+                          ),
+                          Align(
+                            heightFactor: 0.75,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: 63,
+                                  height: 44,
+                                  child: Text(
+                                    "________",
+                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17.0),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return SizedBox(
+        height: 200,
+        child: Column(
+          children: [
+            Center(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      'images/catFrame.png',
+                      height: height * 0.49,
+                      width: width * 0.30,
+                      // fit: BoxFit.cover,
+                    ),
+                  ),
+                  Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                            child: Text(
+                              "  ",
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 30,
+                            height: 50,
+                            child: Text(
+                              " ",
+                              style: TextStyle(fontSize: 33.0),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 35,
+                            height: 34,
+                            child: Text(
+                              qustions[j].toString().substring(0, 2),
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 32.0),
+                            ),
+                          ),
+                          Align(
+                            heightFactor: 0.01,
+                            child: Column(
+                              textDirection: TextDirection.rtl,
+                              children: [
+                                SizedBox(
+                                  width: 67,
+                                  height: 30,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    textDirection: TextDirection.rtl,
+                                    children: [
+                                      SizedBox(
+                                        // width: 63,
+                                        // height: 44,
+                                        child: Text(
+                                          ' × ',
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 33.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 37,
+                            height: 40,
+                            child: Text(
+                              qustions[j].toString().substring(6),
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 32.0),
+                            ),
+                          ),
+                          Align(
+                            heightFactor: 0.75,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: 63,
+                                  height: 44,
+                                  child: Text(
+                                    "________",
+                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17.0),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )),
+                ],
+              ),
+            ),
+          ],
         ),
       );
     }

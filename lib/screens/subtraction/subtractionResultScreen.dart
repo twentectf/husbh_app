@@ -119,7 +119,7 @@ class subtractionResultScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    ':النتيجة\n',
+                    'النتيجة\n',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         decoration: TextDecoration.none,

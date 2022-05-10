@@ -80,8 +80,16 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
 
     for (var i = 1; i < numOfSingleQuestions + 1; i++) {
       ans = [];
-      x = Random().nextInt(9) + 1;
-      y = Random().nextInt(9) + 1;
+      x = Random().nextInt(11);
+      y = Random().nextInt(11);
+      //  x = Random().nextInt(9) + 1;
+      // y = Random().nextInt(9) + 1;
+      while (x - y < 0) {
+        //   x = Random().nextInt(9) + 1;
+        // y = Random().nextInt(9) + 1;
+        x = Random().nextInt(11);
+        y = Random().nextInt(11);
+      }
       Xx.add(x);
       Yy.add(y);
       // while (x > y) {
@@ -110,11 +118,15 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
 
     for (var i = 1; i < numOfTensQuestions + 1; i++) {
       ans = [];
-      x = Random().nextInt(99) + 1;
-      y = Random().nextInt(99) + 1;
-      while (x < 10 || y < 10 || x + y > 100) {
-        x = Random().nextInt(99) + 1;
-        y = Random().nextInt(99) + 1;
+      x = Random().nextInt(100); //Range : 10 -> 99
+      y = Random().nextInt(100); //Range : 10 -> 99
+      // x = Random().nextInt(99) + 1;
+      // y = Random().nextInt(99) + 1;
+      while (x < 10 || y < 10 || x - y < 0) {
+        x = Random().nextInt(100); //Range : 10 -> 99
+        y = Random().nextInt(100); //Range : 10 -> 99
+        // x = Random().nextInt(99) + 1;
+        // y = Random().nextInt(99) + 1;
       }
 
       textDirection:
@@ -138,11 +150,15 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
 
     for (var i = 1; i < numOfHundredQuestions + 1; i++) {
       ans = [];
-      x = Random().nextInt(999);
-      y = Random().nextInt(999);
-      while (x < 100 || y < 100 || x + y > 500) {
-        x = Random().nextInt(999);
-        y = Random().nextInt(999);
+      x = Random().nextInt(1000); //Range : 100 -> 999
+      y = Random().nextInt(1000); //Range : 100 -> 999
+      // x = Random().nextInt(999);
+      // y = Random().nextInt(999);
+      while (x < 100 || y < 100 || x - y < 0) {
+        x = Random().nextInt(1000);
+        y = Random().nextInt(1000);
+        // x = Random().nextInt(999);
+        // y = Random().nextInt(999);
       }
 
       textDirection:
@@ -237,7 +253,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
 //returns images for value x
   Widget _printImageX(xValue) {
     //if value = 0 show its image
-    if (x == 0) {
+    if (xValue == 0) {
       return Center(
         child: Wrap(
           direction: Axis.horizontal,
@@ -270,7 +286,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
 
 //returns images for value y
   Widget _printImageY(yValue) {
-    if (y == 0) {
+    if (yValue == 0) {
       return Center(
         child: Wrap(
           direction: Axis.horizontal,
@@ -337,7 +353,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
                       style: TextStyle(
                           decoration: TextDecoration.none,
                           color: Colors.lightBlue,
-                          fontFamily: "ReadexPro",
+                          fontFamily: "ReadexPro-Regular",
                           fontSize:
                               MediaQuery.of(context).size.width > 500 ? 45 : 20,
                           fontWeight: FontWeight.bold)),
