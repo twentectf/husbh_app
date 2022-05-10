@@ -151,26 +151,54 @@ class _ProfilePageState extends State<ProfilePage> {
             age = age + ' سنوات ';
           }
           sex = doc['sex'];
-          addLevel1 = doc['addLevel1'];
-          addLevel2 = doc['addLevel2'];
-          addLevel3 = doc['addLevel3'];
-
-          subLevel1 = doc['subLevel1'];
-          subLevel2 = doc['subLevel2'];
-          subLevel3 = doc['subLevel3'];
-
-          mulLevel1 = doc['mulLevel1'];
-          mulLevel2 = doc['mulLevel2'];
-          mulLevel3 = doc['mulLevel3'];
-
-          divLevel1 = doc['divLevel1'];
-          divLevel2 = doc['divLevel2'];
-          divLevel3 = doc['divLevel3'];
 
           print(name);
         }
       });
     });
+  }
+
+  Future<void> getScoreLearning() async {
+    DocumentSnapshot<Map<String, dynamic>> ADD = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .collection('Score').doc('Add')
+        .get();
+        DocumentSnapshot<Map<String, dynamic>> SUB = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .collection('Score').doc('Sub')
+        .get();
+        DocumentSnapshot<Map<String, dynamic>> MUL = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .collection('Score').doc('Mul')
+        .get();
+        DocumentSnapshot<Map<String, dynamic>> DIV = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .collection('Score').doc('Div')
+        .get();
+
+
+        addLevel1 = ADD['addLevel1'];
+        addLevel2 = ADD['addLevel2'];
+        addLevel3 = ADD['addLevel3'];
+
+        subLevel1 = SUB['subLevel1'];
+        subLevel2 = SUB['subLevel2'];
+        subLevel3 = SUB['subLevel3'];
+
+        mulLevel1 = MUL['mulLevel1'];
+        mulLevel2 = MUL['mulLevel2'];
+        mulLevel3 = MUL['mulLevel3'];
+
+        divLevel1 = DIV['divLevel1'];
+        divLevel2 = DIV['divLevel2'];
+        divLevel3 = DIV['divLevel3'];
+
+    print(addLevel1[0]['time']);
+   
   }
 
   Future<void> _signOut() async {
@@ -190,6 +218,7 @@ class _ProfilePageState extends State<ProfilePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     getData();
+    // getScoreLearning();
     return StreamBuilder<Object>(
         stream: FirebaseFirestore.instance.collection("users").snapshots(),
         builder: (context, snapshot) {
@@ -228,7 +257,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               alignment: Alignment.topRight,
                               child: IconButton(
                                 onPressed: () async {
-                                  Navigator.pop(context);
+                                  // Navigator.pop(context);
+                                  getScoreLearning();
 
                                   // add new scores to first level
                                   // addLevel1 = addLevel1 + [45];
@@ -240,36 +270,37 @@ class _ProfilePageState extends State<ProfilePage> {
                                   //    'time':  FieldValue.serverTimestamp(),
                                   // });
                                   // print(user.uid.runtimeType);
-                                  // Map<String, dynamic> level1 = {
-                                  //   'score': 0,
-                                  //   'year': year(),
-                                  //   'time': time(),
-                                  // };
-                                  // Map<String, dynamic> level2 = {
-                                  //   'score': 0,
-                                  //   'year': year(),
-                                  //   'time': time(),
-                                  // };
-                                  // Map<String, dynamic> level3 = {
-                                  //   'score': 4,
-                                  //   'year': year(),
-                                  //   'time': time(),
-                                  // };
+                                  Map<String, dynamic> level1 = {
+                                    'score': 0,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+                                  Map<String, dynamic> level2 = {
+                                    'score': 0,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+                                  Map<String, dynamic> level3 = {
+                                    'score': 4,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
 
-                                  // FirebaseFirestore.instance
-                                  //     .collection("users")
-                                  //     .doc(user.uid)
-                                  //     .update({
-                                  //   'addLevel1': FieldValue.arrayUnion([level1]),
-                                  //   'addLevel2': FieldValue.arrayUnion([level2]),
-                                  //   'addLevel3': FieldValue.arrayUnion([level3]),
-                                  // });
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(user.uid)
+                                      .collection('Score')
+                                      .doc('Add')
+                                      .update({
+                                    'addLevel1':
+                                        FieldValue.arrayUnion([level1]),
+                                    'addLevel2':
+                                        FieldValue.arrayUnion([level2]),
+                                    'addLevel3':
+                                        FieldValue.arrayUnion([level3]),
+                                  });
 
-                                  // Score.increase(user.uid,'subLevel1',2);
-
-                                  // currentScoreAddL1 = 0;
-                                  // currentScoreAddL2 = 0;
-                                  // currentScoreAddL3 = 0;
+                                  
                                 },
                                 icon: Icon(Icons.arrow_back_ios),
                                 color: Color(0xff4A4857),
