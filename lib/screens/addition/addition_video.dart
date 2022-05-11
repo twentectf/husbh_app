@@ -90,7 +90,7 @@ class _VideoAppState extends State<additionVideo> {
                       .pause(); //stop the video when naviagte to the questions page
                   timer.cancel(); //canel the timer if the skip button is used
                 },
-                child: Text('تخطي',
+                child: const Text('تخطي',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         decoration: TextDecoration.none,

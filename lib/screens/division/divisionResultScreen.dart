@@ -13,6 +13,8 @@ class divisionResultScreen extends StatelessWidget {
   final List qustions;
   final List answers;
   final List userAnswer;
+  late final totalDivScore;
+  late final maxTotalDivScore;
   ArabicNumbers arabicNumber = ArabicNumbers();
   late final divlevel1scoreArabic;
   late final maxLevel1ScoreArabic;
@@ -20,7 +22,9 @@ class divisionResultScreen extends StatelessWidget {
   late final maxLevel2scoreArabic;
   late final divlevel3scoreArabic;
   late final maxLevel3scoreArabic;
-  // final singlescoreArabic = arabicNumber.convert(singlescore),
+  //total score & in arabic
+  late final totalDivScoreArabic;
+  late final maxTotalDivScoreArabic;
 
   divisionResultScreen({
     this.divlevel1Score,
@@ -37,6 +41,9 @@ class divisionResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //calculate the total score
+    totalDivScore = divlevel1Score + divlevel2Score + divlevel3Score;
+    maxTotalDivScore = maxLevel1Score + maxLevel2Score + maxLevel3Score;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     divlevel1scoreArabic = arabicNumber.convert(divlevel1Score);
@@ -45,6 +52,10 @@ class divisionResultScreen extends StatelessWidget {
     maxLevel2scoreArabic = arabicNumber.convert(maxLevel2Score);
     divlevel3scoreArabic = arabicNumber.convert(divlevel3Score);
     maxLevel3scoreArabic = arabicNumber.convert(maxLevel3Score);
+
+    //convert total score to arabic
+    totalDivScoreArabic = arabicNumber.convert(totalDivScore);
+    maxTotalDivScoreArabic = arabicNumber.convert(maxTotalDivScore);
 
     TextDirection.rtl;
     return Stack(

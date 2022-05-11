@@ -14,6 +14,9 @@ class subtractionResultScreen extends StatelessWidget {
   final List qustions;
   final List answers;
   final List userAnswer;
+  //total score
+  late final totalSubScore;
+  late final maxTotalSubScore;
   ArabicNumbers arabicNumber = ArabicNumbers();
   late final subsinglescoreArabic;
   late final maxSingleScoreArabic;
@@ -21,7 +24,9 @@ class subtractionResultScreen extends StatelessWidget {
   late final maxtensscoreArabic;
   late final subhundredscoreArabic;
   late final maxhundredscoreArabic;
-  // final singlescoreArabic = arabicNumber.convert(singlescore),
+  //total score in arabic
+  late final totalSubScoreArabic;
+  late final maxTotalSubScoreArabic;
 
   subtractionResultScreen({
     this.subsinglescore,
@@ -29,7 +34,6 @@ class subtractionResultScreen extends StatelessWidget {
     this.subhundredscore,
     this.maxSingleScore,
     this.maxTensScore,
-    // this.singlescoreArabic,
     this.maxHundredScore,
     required this.qustions,
     required this.answers,
@@ -38,6 +42,9 @@ class subtractionResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //calculate total score
+    totalSubScore = subsinglescore + subtensscore + subhundredscore;
+    maxTotalSubScore = maxSingleScore + maxTensScore + maxHundredScore;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     subsinglescoreArabic = arabicNumber.convert(subsinglescore);
@@ -46,6 +53,9 @@ class subtractionResultScreen extends StatelessWidget {
     maxtensscoreArabic = arabicNumber.convert(maxTensScore);
     subhundredscoreArabic = arabicNumber.convert(subhundredscore);
     maxhundredscoreArabic = arabicNumber.convert(maxHundredScore);
+    //convert total score to arabic
+    totalSubScoreArabic = arabicNumber.convert(totalSubScore);
+    maxTotalSubScoreArabic = arabicNumber.convert(maxTotalSubScore);
 
     TextDirection.rtl;
     return Stack(

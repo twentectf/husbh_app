@@ -13,6 +13,9 @@ class multiplicationResultScreen extends StatelessWidget {
   final List qustions;
   final List answers;
   final List userAnswer;
+  //total score
+  late final totalMulScore;
+  late final maxTotalMulScore;
   ArabicNumbers arabicNumber = ArabicNumbers();
   late final mullevel1scoreArabic;
   late final maxLevel1ScoreArabic;
@@ -20,6 +23,9 @@ class multiplicationResultScreen extends StatelessWidget {
   late final maxLevel2ScoreArabic;
   late final mullevel3scoreArabic;
   late final maxLevel3ScoreArabic;
+  //total score in arabic
+  late final totalMulScoreArabic;
+  late final maxTotalMulScoreArabic;
 
   multiplicationResultScreen({
     this.mullevel1score,
@@ -35,6 +41,9 @@ class multiplicationResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //calculate the total score
+    totalMulScore = mullevel1score + mullevel2score + mullevel3score;
+    maxTotalMulScore = maxLevel1Score + maxLevel2Score + maxLevel3Score;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     mullevel1scoreArabic = arabicNumber.convert(mullevel1score);
@@ -43,7 +52,9 @@ class multiplicationResultScreen extends StatelessWidget {
     maxLevel2ScoreArabic = arabicNumber.convert(maxLevel2Score);
     mullevel3scoreArabic = arabicNumber.convert(mullevel3score);
     maxLevel3ScoreArabic = arabicNumber.convert(maxLevel3Score);
-
+    //convert total score to arabic
+    totalMulScoreArabic = arabicNumber.convert(totalMulScore);
+    maxTotalMulScoreArabic = arabicNumber.convert(maxTotalMulScore);
     TextDirection.rtl;
     return Stack(
       children: [
