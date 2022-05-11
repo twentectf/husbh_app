@@ -218,7 +218,7 @@ class _ProfilePageState extends State<ProfilePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     getData();
-    // getScoreLearning();
+    getScoreLearning();
     return StreamBuilder<Object>(
         stream: FirebaseFirestore.instance.collection("users").snapshots(),
         builder: (context, snapshot) {
@@ -257,8 +257,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               alignment: Alignment.topRight,
                               child: IconButton(
                                 onPressed: () async {
-                                  // Navigator.pop(context);
-                                  getScoreLearning();
+                                  Navigator.pop(context);
+                                  
 
                                   // add new scores to first level
                                   // addLevel1 = addLevel1 + [45];
@@ -270,35 +270,35 @@ class _ProfilePageState extends State<ProfilePage> {
                                   //    'time':  FieldValue.serverTimestamp(),
                                   // });
                                   // print(user.uid.runtimeType);
-                                  Map<String, dynamic> level1 = {
-                                    'score': 0,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
-                                  Map<String, dynamic> level2 = {
-                                    'score': 0,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
-                                  Map<String, dynamic> level3 = {
-                                    'score': 4,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
+                                  // Map<String, dynamic> level1 = {
+                                  //   'score': 0,
+                                  //   'year': year(),
+                                  //   'time': time(),
+                                  // };
+                                  // Map<String, dynamic> level2 = {
+                                  //   'score': 0,
+                                  //   'year': year(),
+                                  //   'time': time(),
+                                  // };
+                                  // Map<String, dynamic> level3 = {
+                                  //   'score': 4,
+                                  //   'year': year(),
+                                  //   'time': time(),
+                                  // };
 
-                                  FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(user.uid)
-                                      .collection('Score')
-                                      .doc('Add')
-                                      .update({
-                                    'addLevel1':
-                                        FieldValue.arrayUnion([level1]),
-                                    'addLevel2':
-                                        FieldValue.arrayUnion([level2]),
-                                    'addLevel3':
-                                        FieldValue.arrayUnion([level3]),
-                                  });
+                                  // FirebaseFirestore.instance
+                                  //     .collection('users')
+                                  //     .doc(user.uid)
+                                  //     .collection('Score')
+                                  //     .doc('Add')
+                                  //     .update({
+                                  //   'addLevel1':
+                                  //       FieldValue.arrayUnion([level1]),
+                                  //   'addLevel2':
+                                  //       FieldValue.arrayUnion([level2]),
+                                  //   'addLevel3':
+                                  //       FieldValue.arrayUnion([level3]),
+                                  // });
 
                                   
                                 },
