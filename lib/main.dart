@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: additionQuizScreen(),
-      // home: subtractionQuizScreen(),
-      // home: divisionQuizScreen(),
+      //home: additionQuizScreen(),
+      //home: subtractionQuizScreen(),
+       home: divisionQuizScreen(),
       // home: multiplicationQuizScreen(),
-      home: SplashScreen(),
+     // home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       title: 'حًسبة',
       theme: ThemeData(
