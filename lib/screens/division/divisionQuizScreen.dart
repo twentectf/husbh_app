@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter/services.dart';
@@ -193,7 +195,8 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
 
-    return "$arabicX " + "÷" + " $arabicY";
+    // return "$arabicX " + "÷" + " $arabicY";
+    return "$arabicX  " + "÷" + "  $arabicY ";
   }
 
   String convertOptionsToArabic(int num) {
@@ -370,8 +373,8 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: <
                     Widget>[
                   SizedBox(
-                    height: 55,
-                    width: 100,
+                    height: height * 0.155,
+                    width: width * 0.13,
                     child: OptionCard(
                         option: mcq[j][0].toString(),
                         color: isPressed
@@ -391,10 +394,10 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
                           });
                         }),
                   ),
-                  SizedBox(height: 20, width: 20),
+                  SizedBox(height: height * 0.20, width: width * 0.03),
                   SizedBox(
-                    height: 55,
-                    width: 100,
+                    height: height * 0.155,
+                    width: width * 0.13,
                     child: OptionCard(
                         option: mcq[j][1].toString(),
                         color: isPressed
@@ -414,10 +417,10 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
                           });
                         }),
                   ),
-                  SizedBox(height: 20, width: 20),
+                  SizedBox(height: height * 0.20, width: width * 0.03),
                   SizedBox(
-                    height: 55,
-                    width: 100,
+                    height: height * 0.155,
+                    width: width * 0.13,
                     child: OptionCard(
                         option: mcq[j][2].toString(),
                         color: isPressed
@@ -437,10 +440,10 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
                           });
                         }),
                   ),
-                  SizedBox(height: 20, width: 20),
+                  SizedBox(height: height * 0.20, width: width * 0.03),
                   SizedBox(
-                    height: 55,
-                    width: 100,
+                    height: height * 0.155,
+                    width: width * 0.13,
                     child: OptionCard(
                         option: mcq[j][3].toString(),
                         color: isPressed
@@ -460,7 +463,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
                           });
                         }),
                   ),
-                  SizedBox(height: 20, width: 20),
+                  SizedBox(height: height * 0.20, width: width * 0.03),
                 ]),
               ])
         ],
@@ -478,14 +481,16 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
   // ignore: non_constant_identifier_names
   ImagesUnderQuestion(int j) {
-    if (j < 11) {
+    // if (j < 11) {
+    if (j == 0 || j == 1 || j == 2 || j == 3) {
       return SizedBox(
-        height: 200,
+        // height: 200,
+        height: height * 0.57,
         child: Align(
           alignment: Alignment.center,
           child: Wrap(
             children: [
-              SizedBox(width: 300, child: _printImageY(Yy[j])),
+              SizedBox(width: width * 0.40, child: _printImageY(Yy[j])),
               const Text(
                 ' ÷ ',
                 style: TextStyle(
@@ -493,9 +498,201 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
                     fontSize: 60,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(width: 300, child: _printImageX(Xx[j])),
+              SizedBox(width: width * 0.40, child: _printImageX(Xx[j])),
             ],
           ),
+        ),
+      );
+    } else {
+      // return Column(
+      //   children: [
+      //     SizedBox(
+      //       // height: 20,
+      //       // alignment: Alignment.center,
+      //       child: Image.asset(
+      //         'images/division.png',
+      //         height: height * 0.30,
+      //         width: width * 0.30,
+      //         // fit: BoxFit.cover,
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       // height: 200,
+      //       child: Row(
+      //           mainAxisAlignment: MainAxisAlignment.center,
+      //           children: <Widget>[
+      //             // SizedBox(
+      //             // height: 80,
+      //             // width: 100,
+      //             // child: Center(
+
+      //             SizedBox(
+      //               height: 10,
+      //               width: 20,
+      //             ),
+      //             SizedBox(
+      //               // width: 40,
+      //               // height: 200,
+      //               child: Text(
+      //                 qustions[j].toString().substring(4),
+      //                 style: TextStyle(
+      //                     color: Color.fromARGB(255, 255, 0, 0),
+      //                     fontWeight: FontWeight.bold,
+      //                     fontSize: 50.0),
+      //               ),
+      //             ),
+      //             // ),
+      //             // ),
+      //             SizedBox(
+      //               width: 55,
+      //               height: 10,
+      //             ),
+      //             SizedBox(
+      //               // width: 220,
+      //               // height: 100,
+      //               child: Text(
+      //                 qustions[j].toString().substring(0, 2),
+      //                 style: TextStyle(
+      //                     color: Color.fromARGB(255, 0, 0, 0),
+      //                     fontWeight: FontWeight.bold,
+      //                     fontSize: 50.0),
+      //               ),
+      //             ),
+
+      //             // SizedBox(height: 20, width: 20),
+      //           ]),
+      //     ),
+      //   ],
+      // );
+      return SizedBox(
+        height: height * 0.56,
+        child: Column(
+          children: [
+            Center(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                      alignment: Alignment.center,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: width * 0.37,
+                            // height: height * 0.2,
+                            child: Text(
+                              "  ",
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                          ),
+                          // SizedBox(
+                          //   width: width * 0.10,
+                          //   height: 60,
+                          //   child: Text(
+                          //     "    ",
+                          //     style: TextStyle(fontSize: 33.0),
+                          //   ),
+                          // ),
+
+                          // Align(
+                          //   heightFactor: 0.01,
+                          //   // child: Column(
+                          //   //   textDirection: TextDirection.rtl,
+                          //   //   children: [
+                          //   //     SizedBox(
+                          //   //       width: 67,
+                          //   //       height: 21,
+                          //   //       child: Row(
+                          //   //         mainAxisAlignment: MainAxisAlignment.start,
+                          //   //         textDirection: TextDirection.rtl,
+                          //   //         children: [
+                          //   //           SizedBox(
+                          //   //             // width: 63,
+                          //   //             // height: 44,
+                          //   //             child: Text(
+                          //   //               "-",
+                          //   //               style: TextStyle(
+                          //   //                   color:
+                          //   //                       Color.fromARGB(255, 0, 0, 0),
+                          //   //                   fontWeight: FontWeight.bold,
+                          //   //                   fontSize: 25.0),
+                          //   //             ),
+                          //   //           ),
+                          //   //         ],
+                          //   //       ),
+                          //   //     ),
+                          //   //   ],
+                          //   // ),
+                          // ),
+
+                          Column(
+                            children: [
+                              Center(
+                                child: SizedBox(
+                                  width: width * 0.05,
+                                  height: height * 0.55,
+                                  child: Text(
+                                    qustions[j].toString().substring(4),
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 48.0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: width * 0.15,
+                            // height: 10,
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                width: width * 0.23,
+                                // height: height * 0.27,
+                                child: Text(
+                                  qustions[j].toString().substring(0, 2),
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 48.0),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          // Align(
+                          //   heightFactor: 0.75,
+                          //   child: Column(
+                          //     children: [
+                          //       SizedBox(
+                          //         width: 63,
+                          //         height: 44,
+                          //         child: Text(
+                          //           "________",
+                          //           style: TextStyle(
+                          //               color: Color.fromARGB(255, 0, 0, 0),
+                          //               fontWeight: FontWeight.bold,
+                          //               fontSize: 17.0),
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                        ],
+                      )),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      'images/division.png',
+                      height: height * 0.55,
+                      width: width * 0.38,
+                      // fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       );
     }
