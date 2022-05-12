@@ -44,9 +44,9 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
   var ansData;
   List<dynamic> ans = [];
   var j = 0;
-  final int numOfLevel1Questions = 4; //(0,1,2,3)
-  final int numOfLevel2Questions = 4; //(4,5,6,7)
-  final int numOfLevel3Questions = 4; //(8,9,10)
+  final int numOfLevel1QuestionsMul = 4; //(0,1,2,3)
+  final int numOfLevel2QuestionsMul = 4; //(4,5,6,7)
+  final int numOfLevel3QuestionsMul = 4; //(8,9,10)
   List<dynamic> Xx = [];
   List<dynamic> Yy = [];
   var mulLevel1Score = 0; //(0,1,2,3)
@@ -110,7 +110,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
     TextDirection.rtl;
     super.initState();
 //(0,1,2,3)
-    for (var i = 1; i < numOfLevel1Questions + 1; i++) {
+    for (var i = 1; i < numOfLevel1QuestionsMul + 1; i++) {
       ans = [];
       x = getX(i - 1);
       y = Random().nextInt(11);
@@ -135,7 +135,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
       mcq.add(ans);
     }
 //(4,5,6,7)
-    for (var i = 1; i < numOfLevel2Questions + 1; i++) {
+    for (var i = 1; i < numOfLevel2QuestionsMul + 1; i++) {
       ans = [];
       x = getX(i + 3);
       y = Random().nextInt(11);
@@ -158,7 +158,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
       mcq.add(ans);
     }
 //(8,9,10)
-    for (var i = 1; i < numOfLevel3Questions + 1; i++) {
+    for (var i = 1; i < numOfLevel3QuestionsMul + 1; i++) {
       ans = [];
       x = getX(i + 7);
       y = Random().nextInt(11);
@@ -222,9 +222,9 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (BuildContext context) => multiplicationResultScreen(
-              maxLevel1Score: numOfLevel1Questions,
-              maxLevel2Score: numOfLevel2Questions,
-              maxLevel3Score: numOfLevel3Questions,
+              maxLevel1ScoreMul: numOfLevel1QuestionsMul,
+              maxLevel2ScoreMul: numOfLevel2QuestionsMul,
+              maxLevel3ScoreMul: numOfLevel3QuestionsMul,
               mullevel1score: mulLevel1Score,
               mullevel2score: mulLevel2Score,
               mullevel3score: mulLevel3Score,

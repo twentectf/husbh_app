@@ -1,21 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:husbh_app/main.dart';
 import '../../widgets/next_button.dart';
 import '../../widgets/option_card.dart';
 import 'divisionResultScreen.dart';
 import 'dart:async';
-import '../QuizButtonIcon.dart';
-import 'package:husbh_app/screens/QuizButtonIcon.dart';
-import 'package:nice_buttons/nice_buttons.dart';
 import 'package:arabic_numbers/arabic_numbers.dart';
-import 'division_video.dart';
 import 'package:husbh_app/screens/division/divisionResultScreen.dart';
 
 class divisionQuizScreen extends StatefulWidget {
@@ -48,9 +40,9 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   var ansData;
   List<dynamic> ans = [];
   var j = 0;
-  final int numOfLeval1Questions = 4;
-  final int numOfLeval2Questions = 4;
-  final int numOfLeval3Questions = 4;
+  final int numOfLeval1QuestionsDiv = 4;
+  final int numOfLeval2QuestionsDiv = 4;
+  final int numOfLeval3QuestionsDiv = 4;
 
   List<dynamic> Xx = [];
 
@@ -125,7 +117,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     TextDirection.rtl;
     super.initState();
 
-    for (var i = 1; i < numOfLeval1Questions + 1; i++) {
+    for (var i = 1; i < numOfLeval1QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i - 1);
       y = Random().nextInt(11) + 1;
@@ -173,7 +165,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       mcq.add(ans);
     }
 
-    for (var i = 1; i < numOfLeval2Questions + 1; i++) {
+    for (var i = 1; i < numOfLeval2QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i + 3);
       // x = Random().nextInt(9) + 1;
@@ -209,7 +201,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       mcq.add(ans);
     }
 
-    for (var i = 1; i < numOfLeval3Questions + 1; i++) {
+    for (var i = 1; i < numOfLeval3QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i + 7);
       // x = Random().nextInt(9) + 1;
@@ -249,13 +241,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
-    // if (x > y) {
-    //   // return "$arabicX " + "÷" + " $arabicY";
-    //   return "$arabicX  " + "÷" + "  $arabicY ";
-    // } else {
-    //   return "$arabicY  " + "÷" + "  $arabicX ";
-    // }
-    // return "$arabicX  " + "÷" + "   $arabicY ";
+
     return "$arabicX  " + "÷" + "  $arabicY ";
   }
 
@@ -276,7 +262,6 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
         }
       }
 
-      // var Tensscore = 0;
       for (var i = 4; i < 8; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
@@ -294,9 +279,9 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (BuildContext context) => divisionResultScreen(
-              maxLevel1Score: numOfLeval1Questions,
-              maxLevel2Score: numOfLeval2Questions,
-              maxLevel3Score: numOfLeval3Questions,
+              maxLevel1ScoreDiv: numOfLeval1QuestionsDiv,
+              maxLevel2ScoreDiv: numOfLeval2QuestionsDiv,
+              maxLevel3ScoreDiv: numOfLeval3QuestionsDiv,
               divlevel1Score: divLevel1Score,
               divlevel2Score: divLevel2Score,
               divlevel3Score: divLevel3Score,

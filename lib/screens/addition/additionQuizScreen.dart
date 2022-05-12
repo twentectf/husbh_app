@@ -4,18 +4,11 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:husbh_app/main.dart';
-import 'package:husbh_app/screens/addition/additionResultScreen.dart';
 import '../../widgets/next_button.dart';
 import '../../widgets/option_card.dart';
-import '../learn_page.dart';
-import 'additionResultScreen.dart';
 import 'dart:async';
-// import 'QuizButtonIcon.dart';
-import 'package:nice_buttons/nice_buttons.dart';
-// import 'package:fabexdateformatter/fabexdateformatter.dart';
 import 'package:arabic_numbers/arabic_numbers.dart';
+import 'additionResultScreen.dart';
 
 class additionQuizScreen extends StatefulWidget {
   const additionQuizScreen({Key? key}) : super(key: key);
@@ -37,39 +30,28 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   get width => MediaQuery.of(context).size.width;
   get height => MediaQuery.of(context).size.height;
 
+//to convert numbers to arabic
   ArabicNumbers arabicNumber = ArabicNumbers();
 
-  List qustions = [];
-  List answers = [];
+  List qustions = []; //question list
+  List answers = []; //answer list
   bool isMarked = false;
-  List<List<dynamic>> mcq = [];
+  List<List<dynamic>> mcq = []; //multiple choice answers
   List userAnswer = [];
   var ansData;
-  List<dynamic> ans = [];
+  List<dynamic> ans = []; //the random options
   var j = 0;
   final int numOfSingleQuestions = 4; //الآحاد
   final int numOfTensQuestions = 4; //العشرات
   final int numOfHundredQuestions = 4; //المئات
-  List<dynamic> Xx = [];
-  List<dynamic> Yy = [];
+  List<dynamic> Xx = []; //value for the image objects
+  List<dynamic> Yy = []; //value for the image objects
+
+  //skills score
   var addSinglescore = 0;
   var addTensscore = 0;
   var addHundredscore = 0;
   bool isPressed = false;
-
-// //Array of numbers to convert from english to arabic
-//   var numberMap = {
-//     0: '۰',
-//     1: '۱',
-//     2: '۲',
-//     3: '۳',
-//     4: '٤',
-//     5: '٥',
-//     6: '٦',
-//     7: '٧',
-//     8: '۸',
-//     9: '۹'
-//   };
 
   String arabicX = "";
   String arabicY = "";
@@ -80,10 +62,6 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   bool getIsPressed() {
     return isPressed;
   }
-
-  //get isPressed => null;
-
-  // get onPressed => null;
 
   get startColor => null;
 
@@ -101,22 +79,26 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
     TextDirection.rtl;
     super.initState();
 
+    //الاحاد
+    //the loop will be used for the first 4 question which is the 1st level "add singles" dealing with objects
     for (var i = 1; i < numOfSingleQuestions + 1; i++) {
       ans = [];
       x = Random().nextInt(9) + 1;
       y = Random().nextInt(9) + 1;
+      //for objects
       Xx.add(x);
       Yy.add(y);
 
-      textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
+      //question
       answers.add(x + y);
+      //the option in mcq
       ansData = [
-        convertOptionsToArabic(x + y),
-        convertOptionsToArabic(x + y + 1),
-        convertOptionsToArabic(x + y + 7),
-        convertOptionsToArabic(x + y + 3),
+        convertOptionsToArabic(x + y), //option 1 right answer
+        convertOptionsToArabic(x + y + 1), //option 2
+        convertOptionsToArabic(x + y + 7), //option 3
+        convertOptionsToArabic(x + y + 3), //oprion 4
       ];
 
       for (var j = 0; j < 4; j++) {
@@ -127,8 +109,11 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       mcq.add(ans);
     }
 
+    //العشرات
+    //the loop will be used for the first 4 question which is the 2nd level "add tens"
     for (var i = 1; i < numOfTensQuestions + 1; i++) {
       ans = [];
+      //choose random number for x & y with range for them adding them do not exceed 100
       x = Random().nextInt(99) + 1;
       y = Random().nextInt(99) + 1;
       while (x < 10 || y < 10 || x + y > 100) {
@@ -140,11 +125,12 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       TextDirection.rtl;
       qustions.add(convertToArabic());
       answers.add(x + y);
+      //the option in mcq
       ansData = [
-        convertOptionsToArabic(x + y),
-        convertOptionsToArabic(x + y + 2),
-        convertOptionsToArabic(x + y + 9),
-        convertOptionsToArabic(x + y + 5),
+        convertOptionsToArabic(x + y), //option 1 right answer,
+        convertOptionsToArabic(x + y + 2), //option 2
+        convertOptionsToArabic(x + y + 9), //option 3
+        convertOptionsToArabic(x + y + 5), //option 4
       ];
 
       for (var j = 0; j < 4; j++) {
@@ -152,9 +138,11 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
         ans.add(ansData[rNum]);
         ansData.removeAt(rNum);
       }
+      //add the options to the mcq list
       mcq.add(ans);
     }
 
+    //المئات
     for (var i = 1; i < numOfHundredQuestions + 1; i++) {
       ans = [];
       x = Random().nextInt(999);
@@ -184,63 +172,24 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
     }
   }
 
+  //convert the numbers to arabic using package:arabic_numbers
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
-
-    // if (x.toString().length == 1) {
-    //   arabicX = numberMap[x].toString();
-    // }
-    // if (y.toString().length == 1) {
-    //   arabicY = numberMap[y].toString();
-    // }
-
-    // var numberLengthX = x.toString().length;
-    // if (numberLengthX > 1) {
-    //   var Xstring = x.toString();
-    //   arabicX = Xstring;
-    //   for (var i = 0; i < numberLengthX; i++) {
-    //     var num = int.parse(Xstring[i]);
-    //     arabicX = arabicX.replaceAll(num.toString(), numberMap[num]!);
-    //   }
-    // }
-    // var numberLengthY = y.toString().length;
-    // if (numberLengthY > 1) {
-    //   var Ystring = y.toString();
-    //   arabicY = Ystring;
-    //   for (var s = 0; s < numberLengthY; s++) {
-    //     var num = int.parse(Ystring[s]);
-    //     arabicY = arabicY.replaceAll(num.toString(), numberMap[num]!);
-    //   }
-    // }
-
     return "$arabicX " + "+" + " $arabicY";
   }
 
   String convertOptionsToArabic(int num) {
     arabicX = arabicNumber.convert(num);
-
-    // if (num.toString().length == 1) {
-    //   arabicX = numberMap[num].toString();
-    // }
-
-    // var numberLengthX = num.toString().length;
-
-    // if (numberLengthX > 1) {
-    //   var Xstring = num.toString();
-    //   arabicX = Xstring;
-    //   for (var i = 0; i < numberLengthX; i++) {
-    //     var number = int.parse(Xstring[i]);
-    //     arabicX = arabicX.replaceAll(number.toString(), numberMap[number]!);
-    //   }
-    // }
     return "$arabicX";
   }
 
+//change the question method
   _changeQuestion(ans) {
     userAnswer.add(ans);
 
     if (j + 1 >= 12) {
+      //if the user answers right, add score
       for (var i = 0; i < 4; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
@@ -248,7 +197,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
         }
       }
 
-      // var Tensscore = 0;
+      //if the user answers right, add score
       for (var i = 4; i < 8; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
@@ -256,13 +205,14 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
         }
       }
 
-      // var Hundredscore = 0;
+      //if the user answers right, add score
       for (var i = 8; i < 12; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
           addHundredscore++;
         }
       }
+      //when finish navigate to the result page with the scores
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (BuildContext context) => additionResultScreen(
