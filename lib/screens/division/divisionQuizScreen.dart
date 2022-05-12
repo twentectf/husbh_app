@@ -50,34 +50,21 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   var j = 0;
   final int numOfLeval1Questions = 4;
   final int numOfLeval2Questions = 4;
-  final int numOfLeval3Questions = 3;
+  final int numOfLeval3Questions = 4;
+  
   List<dynamic> Xx = [];
+   
   List<dynamic> Yy = [];
   var divLevel1Score = 0;
   var divLevel2Score = 0;
   var divLevel3Score = 0;
   bool isPressed = false;
-
-// //Array of numbers to convert from english to arabic
-//   var numberMap = {
-//     0: '۰',
-//     1: '۱',
-//     2: '۲',
-//     3: '۳',
-//     4: '٤',
-//     5: '٥',
-//     6: '٦',
-//     7: '٧',
-//     8: '۸',
-//     9: '۹'
-//   };
-
   String arabicX = "";
   String arabicY = "";
-  var divisionLeval1 = [2, 5, 10, 0];
+  var divisionLeval1 = [1, 2, 3,4];
 
-  var divisionLeval2 = [1, 3, 4, 6];
-  var divisionLeval3 = [7, 8, 9];
+  var divisionLeval2 = [5, 6, 7];
+  var divisionLeval3 = [8, 9, 10];
   var x = Random().nextInt(9) + 1;
   var y = Random().nextInt(9) + 1;
 
@@ -100,35 +87,91 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   get onPressed => null;
 
   get states => null;
+  int getX(QuestionNumber) {
+    if (QuestionNumber == 0) {
+      x = 0;
+    } else if (QuestionNumber == 1) {
+      x = 1;
+    } else if (QuestionNumber == 2) {
+      x = 2;
+    } else if (QuestionNumber == 3) {
+      x = 3;
+    } else if (QuestionNumber == 4) {
+      x = 4;
+    } else if (QuestionNumber == 5) {
+      x = 5;
+    } else if (QuestionNumber == 6) {
+      x = 6;
+    } else if (QuestionNumber == 7) {
+      x = 7;
+    } else if (QuestionNumber == 8) {
+      x = 8;
+    } else if (QuestionNumber == 9) {
+      x = 9;
+    } else if (QuestionNumber == 10) {
+      x = 10;
+    } else if (QuestionNumber == 11) {
+      x = Random().nextInt(2) +
+          8; //becaue in the third level we only have 3 values (8-9-10) and the fourth question will either repeat (8-9-10)
+    }
+    return x;
+  }
 
   void initState() {
     TextDirection.rtl;
     super.initState();
 
     for (var i = 1; i < numOfLeval1Questions + 1; i++) {
-      ans = [];
-      x = divisionLeval1[Random().nextInt(divisionLeval1.length)];
-      y = Random().nextInt(99) + 1;
-
+      ans = [];   x = getX(i-1);
+      y = Random().nextInt(11)+1;
+     while(x%y!=0)
+      y = Random().nextInt(11)+1;
+   
       Xx.add(x);
-      for (var g = 1; g < 100; i++) {
+    
+      Yy.add(y);  
+    /*for (var k = 0; k<= 4; k++){
+   x = divisionLeval1[Random().nextInt(divisionLeval1.length)];
+  if (!Xx.contains(x)) {Xx.add(x);
+ }
+}
+y = Random().nextInt(9)+1;
+      for (var g = 1; g <= 10; g++) {
         if (x % y == 0) {
           Yy.add(y);
-          break;
+         break;
         } else
-          y = Random().nextInt(99) + 1;
-      }
+          y = Random().nextInt(9)+1;
+      }*/
+
 
       textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
+      if(x==0)
+      { answers.add(x ~/ y);
+      ansData = [
+        convertOptionsToArabic(x ~/ y),
+        convertOptionsToArabic(x ~/ y + 1),
+        convertOptionsToArabic(x ~/ y + 7),
+        convertOptionsToArabic(x ~/ y + 3),
+      ];}
+      else if (x>y){
       answers.add(x ~/ y);
       ansData = [
         convertOptionsToArabic(x ~/ y),
         convertOptionsToArabic(x ~/ y + 1),
         convertOptionsToArabic(x ~/ y + 7),
         convertOptionsToArabic(x ~/ y + 3),
-      ];
+      ];}
+      else { answers.add(y ~/ x);
+      ansData = [
+        convertOptionsToArabic(y ~/ x),
+        convertOptionsToArabic(y ~/ x + 1),
+        convertOptionsToArabic(y ~/ x + 7),
+        convertOptionsToArabic(y ~/ x + 3),
+      ];}
+      
 
       for (var j = 0; j < 4; j++) {
         var rNum = Random().nextInt(ansData.length).round();
@@ -140,21 +183,48 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
     for (var i = 1; i < numOfLeval2Questions + 1; i++) {
       ans = [];
-      x = divisionLeval2[Random().nextInt(divisionLeval2.length)];
-      y = Random().nextInt(9) + 1;
-      Xx.add(x);
-      Yy.add(y);
+      x = getX(i + 3);
+      // x = Random().nextInt(9) + 1;
+      y = Random().nextInt(99)+1;
+      while(x%y!=0)
+      y = Random().nextInt(99)+1;
 
+      /*for (var k = 0; k<= 4; k++){
+   x = divisionLeval2[Random().nextInt(divisionLeval2.length)];
+   
+  if (!Xx.contains(x)) {Xx.add(x);
+}
+}
+      y = Random().nextInt(99) + 1;
+ for (var g = 1; g <= 100; g++) {
+        if (x % y == 0) {
+          Yy.add(y);
+         break;
+        } else
+          y = Random().nextInt(99)+1;
+      }*/
+
+     
       textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
+      if (x>y){
       answers.add(x ~/ y);
       ansData = [
         convertOptionsToArabic(x ~/ y),
         convertOptionsToArabic(x ~/ y + 2),
         convertOptionsToArabic(x ~/ y + 9),
         convertOptionsToArabic(x ~/ y + 5),
-      ];
+      ];}
+      else { answers.add(y ~/ x);
+      ansData = [
+        convertOptionsToArabic(y ~/ x),
+        convertOptionsToArabic(y ~/ x + 2),
+        convertOptionsToArabic(y ~/ x + 9),
+        convertOptionsToArabic(y ~/ x + 5),
+      ];}
+    
+     
 
       for (var j = 0; j < 4; j++) {
         var rNum = Random().nextInt(ansData.length).round();
@@ -166,21 +236,47 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
     for (var i = 1; i < numOfLeval3Questions + 1; i++) {
       ans = [];
-      x = divisionLeval3[Random().nextInt(divisionLeval3.length)];
-      y = Random().nextInt(9) + 1;
-      Xx.add(x);
-      Yy.add(y);
+      x = getX(i + 7);
+      // x = Random().nextInt(9) + 1;
+      y = Random().nextInt(99)+1;
+      while(x%y!=0)
+      y = Random().nextInt(99)+1;
+      /*for (var k = 0; k<= 4; k++){
+   x = divisionLeval3[Random().nextInt(divisionLeval3.length)];
+   
+  if (!Xx.contains(x)) {Xx.add(x);
+}
+}
+ y = Random().nextInt(99) + 1;
+ for (var g = 1; g <= 10; g++) {
+        if (x % y == 0) {
+          Yy.add(y);
+         break;
+        } else
+          y = Random().nextInt(99)+1;
+      }*/
+
+      
 
       textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
+      if (x>y){
       answers.add(x ~/ y);
       ansData = [
-        convertOptionsToArabic(x ~/ y),
+       convertOptionsToArabic(x ~/ y),
         convertOptionsToArabic(x ~/ y + 1),
         convertOptionsToArabic(x ~/ y + 3),
         convertOptionsToArabic(x ~/ y + 6),
-      ];
+      ];}
+      else { answers.add(y ~/ x);
+      ansData = [
+        convertOptionsToArabic(y ~/ x),
+        convertOptionsToArabic(y ~/ x + 1),
+        convertOptionsToArabic(y ~/ x + 3),
+        convertOptionsToArabic(y ~/ x + 6),
+      ];}
+      
 
       for (var j = 0; j < 4; j++) {
         var rNum = Random().nextInt(ansData.length).round();
@@ -194,9 +290,11 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
-
+  if (x>y){
     // return "$arabicX " + "÷" + " $arabicY";
-    return "$arabicX  " + "÷" + "  $arabicY ";
+    return "$arabicX  " + "÷" + "  $arabicY ";}
+    else {return "$arabicY  " + "÷" + "  $arabicX ";}
+
   }
 
   String convertOptionsToArabic(int num) {

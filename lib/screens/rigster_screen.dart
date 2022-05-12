@@ -87,7 +87,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                                   left: 15.0, right: 20),
                                               child: Icon(Icons.email),
                                             ),
-                                            hintText: 'أدخل الإيميل',
+                                            hintText: 'أدخل البريد الإلكتروني',
                                             hintStyle: TextStyle(
                                               fontSize: 15,
                                               fontFamily: 'ReadexPro',
