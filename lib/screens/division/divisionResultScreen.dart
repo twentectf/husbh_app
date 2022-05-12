@@ -9,9 +9,9 @@ class divisionResultScreen extends StatelessWidget {
   final divlevel1Score;
   final divlevel2Score;
   final divlevel3Score;
-  final maxLevel1Score;
-  final maxLevel2Score;
-  final maxLevel3Score;
+  final maxLevel1ScoreDiv;
+  final maxLevel2ScoreDiv;
+  final maxLevel3ScoreDiv;
   final List qustions;
   final List answers;
   final List userAnswer;
@@ -32,10 +32,10 @@ class divisionResultScreen extends StatelessWidget {
     this.divlevel1Score,
     this.divlevel2Score,
     this.divlevel3Score,
-    this.maxLevel1Score,
-    this.maxLevel2Score,
+    this.maxLevel1ScoreDiv,
+    this.maxLevel2ScoreDiv,
     // this.singlescoreArabic,
-    this.maxLevel3Score,
+    this.maxLevel3ScoreDiv,
     required this.qustions,
     required this.answers,
     required this.userAnswer,
@@ -45,15 +45,16 @@ class divisionResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //calculate the total score
     totalDivScore = divlevel1Score + divlevel2Score + divlevel3Score;
-    maxTotalDivScore = maxLevel1Score + maxLevel2Score + maxLevel3Score;
+    maxTotalDivScore =
+        maxLevel1ScoreDiv + maxLevel2ScoreDiv + maxLevel3ScoreDiv;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     divlevel1scoreArabic = arabicNumber.convert(divlevel1Score);
-    maxLevel1ScoreArabic = arabicNumber.convert(maxLevel1Score);
+    maxLevel1ScoreArabic = arabicNumber.convert(maxLevel1ScoreDiv);
     divlevel2scoreArabic = arabicNumber.convert(divlevel2Score);
-    maxLevel2scoreArabic = arabicNumber.convert(maxLevel2Score);
+    maxLevel2scoreArabic = arabicNumber.convert(maxLevel2ScoreDiv);
     divlevel3scoreArabic = arabicNumber.convert(divlevel3Score);
-    maxLevel3scoreArabic = arabicNumber.convert(maxLevel3Score);
+    maxLevel3scoreArabic = arabicNumber.convert(maxLevel3ScoreDiv);
 
     //convert total score to arabic
     totalDivScoreArabic = arabicNumber.convert(totalDivScore);

@@ -9,9 +9,9 @@ class multiplicationResultScreen extends StatelessWidget {
   final mullevel1score;
   final mullevel2score;
   final mullevel3score;
-  final maxLevel1Score;
-  final maxLevel2Score;
-  final maxLevel3Score;
+  final maxLevel1ScoreMul;
+  final maxLevel2ScoreMul;
+  final maxLevel3ScoreMul;
   final List qustions;
   final List answers;
   final List userAnswer;
@@ -33,9 +33,9 @@ class multiplicationResultScreen extends StatelessWidget {
     this.mullevel1score,
     this.mullevel2score,
     this.mullevel3score,
-    this.maxLevel1Score,
-    this.maxLevel2Score,
-    this.maxLevel3Score,
+    this.maxLevel1ScoreMul,
+    this.maxLevel2ScoreMul,
+    this.maxLevel3ScoreMul,
     required this.qustions,
     required this.answers,
     required this.userAnswer,
@@ -45,15 +45,16 @@ class multiplicationResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //calculate the total score
     totalMulScore = mullevel1score + mullevel2score + mullevel3score;
-    maxTotalMulScore = maxLevel1Score + maxLevel2Score + maxLevel3Score;
+    maxTotalMulScore =
+        maxLevel1ScoreMul + maxLevel2ScoreMul + maxLevel3ScoreMul;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     mullevel1scoreArabic = arabicNumber.convert(mullevel1score);
-    maxLevel1ScoreArabic = arabicNumber.convert(maxLevel1Score);
+    maxLevel1ScoreArabic = arabicNumber.convert(maxLevel1ScoreMul);
     mullevel2sscoreArabic = arabicNumber.convert(mullevel2score);
-    maxLevel2ScoreArabic = arabicNumber.convert(maxLevel2Score);
+    maxLevel2ScoreArabic = arabicNumber.convert(maxLevel2ScoreMul);
     mullevel3scoreArabic = arabicNumber.convert(mullevel3score);
-    maxLevel3ScoreArabic = arabicNumber.convert(maxLevel3Score);
+    maxLevel3ScoreArabic = arabicNumber.convert(maxLevel3ScoreMul);
     //convert total score to arabic
     totalMulScoreArabic = arabicNumber.convert(totalMulScore);
     maxTotalMulScoreArabic = arabicNumber.convert(maxTotalMulScore);

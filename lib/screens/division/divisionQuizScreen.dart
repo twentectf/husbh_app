@@ -40,9 +40,9 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   var ansData;
   List<dynamic> ans = [];
   var j = 0;
-  final int numOfLeval1Questions = 4;
-  final int numOfLeval2Questions = 4;
-  final int numOfLeval3Questions = 4;
+  final int numOfLeval1QuestionsDiv = 4;
+  final int numOfLeval2QuestionsDiv = 4;
+  final int numOfLeval3QuestionsDiv = 4;
 
   List<dynamic> Xx = [];
 
@@ -113,7 +113,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     TextDirection.rtl;
     super.initState();
 
-    for (var i = 1; i < numOfLeval1Questions + 1; i++) {
+    for (var i = 1; i < numOfLeval1QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i - 1);
       y = Random().nextInt(11) + 1;
@@ -173,7 +173,7 @@ y = Random().nextInt(9)+1;
       mcq.add(ans);
     }
 
-    for (var i = 1; i < numOfLeval2Questions + 1; i++) {
+    for (var i = 1; i < numOfLeval2QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i + 3);
       // x = Random().nextInt(9) + 1;
@@ -224,7 +224,7 @@ y = Random().nextInt(9)+1;
       mcq.add(ans);
     }
 
-    for (var i = 1; i < numOfLeval3Questions + 1; i++) {
+    for (var i = 1; i < numOfLeval3QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i + 7);
       // x = Random().nextInt(9) + 1;
@@ -319,9 +319,9 @@ y = Random().nextInt(9)+1;
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (BuildContext context) => divisionResultScreen(
-              maxLevel1Score: numOfLeval1Questions,
-              maxLevel2Score: numOfLeval2Questions,
-              maxLevel3Score: numOfLeval3Questions,
+              maxLevel1ScoreDiv: numOfLeval1QuestionsDiv,
+              maxLevel2ScoreDiv: numOfLeval2QuestionsDiv,
+              maxLevel3ScoreDiv: numOfLeval3QuestionsDiv,
               divlevel1Score: divLevel1Score,
               divlevel2Score: divLevel2Score,
               divlevel3Score: divLevel3Score,
