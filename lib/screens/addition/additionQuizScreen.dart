@@ -405,8 +405,8 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: <
                     Widget>[
                   SizedBox(
-                    height: 55,
-                    width: 100,
+                    height: height * 0.155,
+                    width: width * 0.13,
                     child: OptionCard(
                         option: mcq[j][0].toString(),
                         color: isPressed
@@ -426,10 +426,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                           });
                         }),
                   ),
-                  SizedBox(height: 20, width: 20),
+                  SizedBox(height: height * 0.20, width: width * 0.03),
                   SizedBox(
-                    height: 55,
-                    width: 100,
+                    height: height * 0.155,
+                    width: width * 0.13,
                     child: OptionCard(
                         option: mcq[j][1].toString(),
                         color: isPressed
@@ -449,10 +449,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                           });
                         }),
                   ),
-                  SizedBox(height: 20, width: 20),
+                  SizedBox(height: height * 0.20, width: width * 0.03),
                   SizedBox(
-                    height: 55,
-                    width: 100,
+                    height: height * 0.155,
+                    width: width * 0.13,
                     child: OptionCard(
                         option: mcq[j][2].toString(),
                         color: isPressed
@@ -472,10 +472,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                           });
                         }),
                   ),
-                  SizedBox(height: 20, width: 20),
+                  SizedBox(height: height * 0.20, width: width * 0.03),
                   SizedBox(
-                    height: 55,
-                    width: 100,
+                    height: height * 0.155,
+                    width: width * 0.13,
                     child: OptionCard(
                         option: mcq[j][3].toString(),
                         color: isPressed
@@ -495,7 +495,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                           });
                         }),
                   ),
-                  SizedBox(height: 20, width: 20),
+                  SizedBox(height: height * 0.20, width: width * 0.03),
                 ]),
               ])
         ],
@@ -515,7 +515,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   ImagesUnderQuestion(int j) {
     if (j == 4 || j == 5 || j == 6 || j == 7) {
       return SizedBox(
-        height: 200,
+        height: height * 0.55,
         child: Column(
           children: [
             Center(
@@ -535,23 +535,27 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                       child: Column(
                         children: [
                           SizedBox(
-                            width: 20,
+                            // width: 20,
                             child: Text(
                               "  ",
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ),
                           SizedBox(
-                            width: 30,
-                            height: 50,
+                            height: height * 0.14,
+
+                            // width: 30,
+                            // height: 50,
                             child: Text(
                               " ",
                               style: TextStyle(fontSize: 33.0),
                             ),
                           ),
                           SizedBox(
-                            width: 35,
-                            height: 34,
+                            width: width * 0.05,
+                            // width: 35,
+                            height: height * 0.10,
+                            // height: 34,
                             child: Text(
                               qustions[j].toString().substring(0, 2),
                               style: TextStyle(
@@ -566,8 +570,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                               textDirection: TextDirection.rtl,
                               children: [
                                 SizedBox(
-                                  width: 67,
-                                  height: 21,
+                                  width: width * 0.09,
+                                  height: height * 0.09,
+                                  // width: 67,
+                                  // height: 21,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     textDirection: TextDirection.rtl,
@@ -575,6 +581,8 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                                       SizedBox(
                                         // width: 63,
                                         // height: 44,
+
+                                        // height: height * 0.50,
                                         child: Text(
                                           "+",
                                           style: TextStyle(
@@ -591,8 +599,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             ),
                           ),
                           SizedBox(
-                            width: 35,
-                            height: 40,
+                            width: width * 0.05,
+                            height: height * 0.10,
+                            // width: 35,
+                            // height: 40,
                             child: Text(
                               qustions[j].toString().substring(5, 7),
                               style: TextStyle(
@@ -606,8 +616,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  width: 63,
-                                  height: 44,
+                                  width: width * 0.09,
+                                  height: height * 0.12,
+                                  // width: 63,
+                                  // height: 44,
                                   child: Text(
                                     "________",
                                     style: TextStyle(
@@ -629,12 +641,12 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       );
     } else if (j == 0 || j == 1 || j == 2 || j == 3) {
       return SizedBox(
-        height: 200,
+        height: height * 0.55,
         child: Align(
           alignment: Alignment.center,
           child: Wrap(
             children: [
-              SizedBox(width: 300, child: _printImageY(Yy[j])),
+              SizedBox(width: width * 0.40, child: _printImageY(Yy[j])),
               const Text(
                 ' + ',
                 style: TextStyle(
@@ -642,14 +654,15 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                     fontSize: 60,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(width: 300, child: _printImageX(Xx[j])),
+              SizedBox(width: width * 0.40, child: _printImageX(Xx[j])),
             ],
           ),
         ),
       );
     } else {
       return SizedBox(
-        height: 200,
+        height: height * 0.55,
+        // height: 200,
         child: Column(
           children: [
             Center(
@@ -669,23 +682,27 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                       child: Column(
                         children: [
                           SizedBox(
-                            width: 20,
+                            width: width * 0.02,
+                            // width: 20,
                             child: Text(
                               "  ",
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ),
                           SizedBox(
-                            width: 30,
-                            height: 50,
+                            // width: 30,
+                            // height: 50,
+                            height: height * 0.14,
                             child: Text(
                               " ",
                               style: TextStyle(fontSize: 33.0),
                             ),
                           ),
                           SizedBox(
-                            width: 59,
-                            height: 34,
+                            width: width * 0.07,
+                            height: height * 0.10,
+                            // width: 59,
+                            // height: 34,
                             child: Text(
                               qustions[j].toString().substring(0, 3),
                               style: TextStyle(
@@ -701,8 +718,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                               children: [
                                 SizedBox(
                                   //to Change the "+" position
-                                  width: 67,
-                                  height: 21,
+                                  width: width * 0.088,
+                                  height: height * 0.10,
+                                  // width: 67,
+                                  // height: 21,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     textDirection: TextDirection.rtl,
@@ -724,8 +743,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             ),
                           ),
                           SizedBox(
-                            width: 80,
-                            height: 40,
+                            width: width * 0.10,
+                            height: height * 0.10,
+                            // width: 80,
+                            // height: 40,
                             child: Text(
                               qustions[j].toString().substring(5, 9),
                               style: TextStyle(
@@ -740,8 +761,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  width: 63,
-                                  height: 44,
+                                  width: width * 0.09,
+                                  height: height * 0.12,
+                                  // width: 63,
+                                  // height: 44,
                                   child: Text(
                                     "________",
                                     style: TextStyle(

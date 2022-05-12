@@ -644,6 +644,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
                             width: width * 0.15,
                             // height: 10,
                           ),
+
                           Column(
                             children: [
                               SizedBox(
