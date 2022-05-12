@@ -116,8 +116,13 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     for (var i = 1; i < numOfLeval1QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i - 1);
+      if (x==0){
       y = Random().nextInt(11) + 1;
-      while (x % y != 0) y = Random().nextInt(11) + 1;
+      while (x % y != 0 ) y = Random().nextInt(11) + 1;}
+      else if (x==1|| x==2||x==3)
+      {
+      y = Random().nextInt(14) + 1;
+      while ( y % x!=0 || x % y != 0) y = Random().nextInt(14) + 1;}
 
       Xx.add(x);
 
@@ -177,23 +182,25 @@ y = Random().nextInt(9)+1;
       ans = [];
       x = getX(i + 3);
       // x = Random().nextInt(9) + 1;
-      y = Random().nextInt(99) + 1;
-      while (x % y != 0) y = Random().nextInt(99) + 1;
+     
+     if (x==4)
+      {y = Random().nextInt(39) + 1;
+      while ( y % x != 0){ y = Random().nextInt(39) + 1;}}
 
-      /*for (var k = 0; k<= 4; k++){
-   x = divisionLeval2[Random().nextInt(divisionLeval2.length)];
-   
-  if (!Xx.contains(x)) {Xx.add(x);
-}
-}
-      y = Random().nextInt(99) + 1;
- for (var g = 1; g <= 100; g++) {
-        if (x % y == 0) {
-          Yy.add(y);
-         break;
-        } else
-          y = Random().nextInt(99)+1;
-      }*/
+       else if (x==5)
+      {y = Random().nextInt(49) + 1;
+      while ( y % x != 0){ y = Random().nextInt(49) + 1;}}
+       else if (x==6)
+      {y = Random().nextInt(59) + 1;
+      while ( y % x != 0){ y = Random().nextInt(59) + 1;}}
+      else if (x==7)
+      {y = Random().nextInt(69) + 1;
+      while ( y % x != 0){ y = Random().nextInt(69) + 1;}}
+
+       Xx.add(x);
+
+      Yy.add(y);
+    
 
       textDirection:
       TextDirection.rtl;
@@ -227,23 +234,22 @@ y = Random().nextInt(9)+1;
     for (var i = 1; i < numOfLeval3QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i + 7);
-      // x = Random().nextInt(9) + 1;
-      y = Random().nextInt(99) + 1;
-      while (x % y != 0) y = Random().nextInt(99) + 1;
-      /*for (var k = 0; k<= 4; k++){
-   x = divisionLeval3[Random().nextInt(divisionLeval3.length)];
-   
-  if (!Xx.contains(x)) {Xx.add(x);
-}
-}
- y = Random().nextInt(99) + 1;
- for (var g = 1; g <= 10; g++) {
-        if (x % y == 0) {
-          Yy.add(y);
-         break;
-        } else
-          y = Random().nextInt(99)+1;
-      }*/
+     
+      if (x== 8)
+      {y = Random().nextInt(79) + 1;
+      while ( y % x != 0){ y = Random().nextInt(79) + 1;}}
+
+       else if (x==9)
+      {y = Random().nextInt(89) + 1;
+      while ( y % x != 0){ y = Random().nextInt(89) + 1;}}
+       else if (x==10)
+      {y = Random().nextInt(99) + 1;
+      while ( y % x != 0){ y = Random().nextInt(99) + 1;}}
+
+       Xx.add(x);
+
+      Yy.add(y);
+    
 
       textDirection:
       TextDirection.rtl;
@@ -278,12 +284,12 @@ y = Random().nextInt(9)+1;
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
-    if (x > y) {
-      // return "$arabicX " + "÷" + " $arabicY";
+    if (x>= y) {
       return "$arabicX  " + "÷" + "  $arabicY ";
-    } else {
+    } else if (x < y) {
       return "$arabicY  " + "÷" + "  $arabicX ";
     }
+    else return "  ";
   }
 
   String convertOptionsToArabic(int num) {
@@ -295,7 +301,7 @@ y = Random().nextInt(9)+1;
   _changeQuestion(ans) {
     userAnswer.add(ans);
 
-    if (j + 1 >= 11) {
+    if (j + 1 >= 12) {
       for (var i = 0; i < 4; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
