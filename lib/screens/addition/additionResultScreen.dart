@@ -1,6 +1,8 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
+import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:husbh_app/screens/learn_page.dart';
+import 'package:husbh_app/screens/profile.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 class additionResultScreen extends StatelessWidget {
@@ -13,7 +15,6 @@ class additionResultScreen extends StatelessWidget {
   final List qustions;
   final List answers;
   final List userAnswer;
-  //total score
   late final totalAddScore;
   late final maxTotalAddScore;
   ArabicNumbers arabicNumber = ArabicNumbers();
@@ -23,7 +24,7 @@ class additionResultScreen extends StatelessWidget {
   late final maxtensscoreArabic;
   late final addhundredscoreArabic;
   late final maxhundredscoreArabic;
-  //total score in arabic
+//total score & in arabic
   late final totalAddScoreArabic;
   late final maxTotalAddScoreArabic;
 
@@ -41,7 +42,7 @@ class additionResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //calculate total score
+    //calculate the total score
     totalAddScore = addsinglescore + addtensscore + addhundredscore;
     maxTotalAddScore = maxSingleScore + maxTensScore + maxHundredScore;
     double width = MediaQuery.of(context).size.width;
@@ -52,11 +53,11 @@ class additionResultScreen extends StatelessWidget {
     maxtensscoreArabic = arabicNumber.convert(maxTensScore);
     addhundredscoreArabic = arabicNumber.convert(addhundredscore);
     maxhundredscoreArabic = arabicNumber.convert(maxHundredScore);
-    //convert total score to arabic
+//convert total score to arabic
     totalAddScoreArabic = arabicNumber.convert(totalAddScore);
     maxTotalAddScoreArabic = arabicNumber.convert(maxTotalAddScore);
-
     TextDirection.rtl;
+
     return Stack(
       children: [
         Container(
@@ -66,129 +67,155 @@ class additionResultScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         )),
-        Stack(children: [
-          Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'images/rabbit_result.png',
-                  height: height * 0.26,
-                  width: width * 0.19,
-                  // height: 120,
-                  // width: 120,
-                )
-              ],
-            ),
-            Container(
-              height: height * 0.49,
-              width: width * 0.44,
-              // width: 380,
-              // height: 200,
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 250, 255, 253),
-                // boxShadow: [
-                //   BoxShadow(color: Colors.green, spreadRadius: 0.2)
-                // ],
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 163, 163, 163).withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(2, 8), // changes position of shadow
+        Stack(
+          children: [
+            Center(
+              child: Container(
+                height: height * 0.70,
+                width: width * 0.35,
+                //color: Colors.white,
+                //blur: 0,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 244, 247, 247),
+                  borderRadius: BorderRadius.circular(50),
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          Color.fromARGB(255, 163, 163, 163).withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(2, 4),
+                    ),
+                  ],
+                  border: Border.all(
+                    color: Colors.lime,
+                    width: 1,
                   ),
-                ],
-                borderRadius: BorderRadius.circular(55),
-                // border: Border.all(
-                //   color: Color.fromARGB(255, 33, 120, 36),
-                //   width: 1,
-                // ),
+                ),
+                child: Column(
+                  textDirection: TextDirection.rtl,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 25),
+                    Text(
+                      'النتيجة',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          decoration: TextDecoration.none,
+                          fontSize: 29.0,
+                          color: Colors.brown,
+                          fontFamily: 'ReadexPro',
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 20),
+                    //The results المجموع:
+                    Text(
+                      // '\u2022 جمع الآحاد      :  $addsinglescoreArabic من $maxSingleScoreArabic \n'
+                      // '\u2022 جمع العشرات  :   $addtensscoreArabic من $maxtensscoreArabic \n'
+                      'المجموع : $totalAddScoreArabic من $maxTotalAddScoreArabic',
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          decoration: TextDecoration.none,
+                          fontSize: 23.0,
+                          color: Colors.brown,
+                          fontFamily: 'ReadexPro',
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 25),
+                    NiceButtons(
+                        stretch: false,
+                        startColor: Color.fromARGB(255, 118, 205, 64),
+                        endColor: Color.fromARGB(255, 118, 205, 64),
+                        borderColor: Color.fromARGB(255, 47, 119, 48),
+                        // startColor: Colors.lightBlueAccent,
+                        // endColor: Colors.lightBlueAccent,
+                        // borderColor: Color(0xFF3489e9),
+                        width: 250,
+                        height: 50,
+                        borderRadius: 60.0,
+                        gradientOrientation: GradientOrientation.Horizontal,
+                        //Navigate to learn page
+                        onTap: (finish) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()),
+                          );
+                        },
+                        child: Text('التقرير',
+                            //'ارني مستواي'
+                            //'العودة'
+                            //'رؤية النتيجة في الصفحة الشخصية'
+                            //'العودة إلى الصفحة الرئيسية'
+                            //'لعودة الى صفحة التعلم'
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                decoration: TextDecoration.none,
+                                fontSize: 20.0,
+                                color: Colors.white,
+                                fontFamily: 'ReadexPro',
+                                fontWeight: FontWeight.bold))),
+                    SizedBox(height: 10),
+                    NiceButtons(
+                        stretch: false,
+                        startColor: Color.fromARGB(255, 211, 66, 66),
+                        endColor: Color.fromARGB(255, 211, 66, 66),
+                        borderColor: Color.fromARGB(255, 123, 25, 25),
+                        width: 250,
+                        height: 50,
+                        borderRadius: 60.0,
+                        gradientOrientation: GradientOrientation.Horizontal,
+                        //Navigate to learn page
+                        onTap: (finish) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => learn_page()),
+                          );
+                        },
+                        child: Text('انهاء',
+                            //'حسنا'
+                            //'العودة'
+                            //'رؤية النتيجة في الصفحة الشخصية'
+                            //'العودة إلى الصفحة الرئيسية'
+                            //'لعودة الى صفحة التعلم'
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                decoration: TextDecoration.none,
+                                fontSize: 20.0,
+                                color: Colors.white,
+                                fontFamily: 'ReadexPro',
+                                fontWeight: FontWeight.bold))),
+                  ],
+                ),
               ),
-              child: Column(
-                textDirection: TextDirection.rtl,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'النتيجة\n',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 26.0,
-                        color: Colors.brown,
-                        fontFamily: 'ReadexPro',
-                        fontWeight: FontWeight.bold),
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: Color.fromARGB(255, 244, 247, 247),
                   ),
-                  //The results
-                  Text(
-                    '\u2022 جمع الآحاد      :  $addsinglescoreArabic من $maxSingleScoreArabic \n'
-                    '\u2022 جمع العشرات  :   $addtensscoreArabic من $maxtensscoreArabic \n'
-                    '\u2022 جمع المئات     :   $addhundredscoreArabic من $maxhundredscoreArabic',
-                    textDirection: TextDirection.rtl,
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 20.0,
-                        color: Colors.brown,
-                        fontFamily: 'ReadexPro',
-                        fontWeight: FontWeight.bold),
+                  // blur: 1,
+                  height: 120,
+                  width: 120,
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Image.asset(
+                      'images/rabbitresult.png',
+                      height: height * 0.22,
+                      width: width * 0.22,
+                    ),
                   ),
-                  // Text(
-                  //   'المجموع:',
-                  //   textDirection: TextDirection.rtl,
-                  //   textAlign: TextAlign.right,
-                  //   style: TextStyle(
-                  //       decoration: TextDecoration.none,
-                  //       fontSize: 28.0,
-                  //       color: Colors.black,
-                  //       fontFamily: 'ReadexPro-Regular',
-                  //       fontWeight: FontWeight.bold),
-                  // ),
-                  // Text(
-                  //   '',
-                  //   textDirection: TextDirection.rtl,
-                  //   textAlign: TextAlign.right,
-                  //   style: TextStyle(
-                  //       decoration: TextDecoration.none,
-                  //       fontSize: 20.0,
-                  //       color: Colors.brown,
-                  //       fontFamily: 'ReadexPro',
-                  //       fontWeight: FontWeight.bold),
-                  // ),
-                ],
+                ),
               ),
             ),
-            SizedBox(height: 10),
-            NiceButtons(
-                stretch: false,
-                startColor: Colors.lightBlueAccent,
-                endColor: Colors.lightBlueAccent,
-                borderColor: Color(0xFF3489e9),
-                width: 200,
-                height: 60,
-                borderRadius: 60.0,
-                gradientOrientation: GradientOrientation.Horizontal,
-                //Navigate to learn page
-                onTap: (finish) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => learn_page()),
-                  );
-                },
-                child: Text('تم',
-                    //'حسنا'
-                    //'العودة'
-                    //'رؤية النتيجة في الصفحة الشخصية'
-                    //'العودة إلى الصفحة الرئيسية'
-                    //'لعودة الى صفحة التعلم'
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 24.0,
-                        color: Colors.white,
-                        fontFamily: 'ReadexPro',
-                        fontWeight: FontWeight.bold)))
-          ]),
-        ]),
+          ],
+        ),
       ],
     );
   }
