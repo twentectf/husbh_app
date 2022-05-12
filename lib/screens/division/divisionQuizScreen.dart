@@ -51,12 +51,14 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   var divLevel2Score = 0;
   var divLevel3Score = 0;
   bool isPressed = false;
+
   String arabicX = "";
   String arabicY = "";
-  var divisionLeval1 = [1, 2, 3, 4];
 
+  var divisionLeval1 = [1, 2, 3, 4];
   var divisionLeval2 = [5, 6, 7];
   var divisionLeval3 = [8, 9, 10];
+
   var x = Random().nextInt(9) + 1;
   var y = Random().nextInt(9) + 1;
 
@@ -79,6 +81,8 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   get onPressed => null;
 
   get states => null;
+
+//returns the value for x
   int getX(QuestionNumber) {
     if (QuestionNumber == 0) {
       x = 0;
@@ -118,28 +122,20 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       x = getX(i - 1);
       if (x==0){
       y = Random().nextInt(11) + 1;
+<<<<<<< HEAD
       while (x % y != 0 ) y = Random().nextInt(11) + 1;}
       else if (x==1|| x==2||x==3)
       {
       y = Random().nextInt(14) + 1;
       while ( y % x!=0 || x % y != 0) y = Random().nextInt(14) + 1;}
+=======
+      while (x % y != 0) {
+        y = Random().nextInt(11) + 1;
+      }
+>>>>>>> 52385cfa09c3a4b3db5a1534ae7b3d4665a9844e
 
       Xx.add(x);
-
       Yy.add(y);
-      /*for (var k = 0; k<= 4; k++){
-   x = divisionLeval1[Random().nextInt(divisionLeval1.length)];
-  if (!Xx.contains(x)) {Xx.add(x);
- }
-}
-y = Random().nextInt(9)+1;
-      for (var g = 1; g <= 10; g++) {
-        if (x % y == 0) {
-          Yy.add(y);
-         break;
-        } else
-          y = Random().nextInt(9)+1;
-      }*/
 
       textDirection:
       TextDirection.rtl;
@@ -187,6 +183,7 @@ y = Random().nextInt(9)+1;
       {y = Random().nextInt(39) + 1;
       while ( y % x != 0){ y = Random().nextInt(39) + 1;}}
 
+<<<<<<< HEAD
        else if (x==5)
       {y = Random().nextInt(49) + 1;
       while ( y % x != 0){ y = Random().nextInt(49) + 1;}}
@@ -202,6 +199,8 @@ y = Random().nextInt(9)+1;
       Yy.add(y);
     
 
+=======
+>>>>>>> 52385cfa09c3a4b3db5a1534ae7b3d4665a9844e
       textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
@@ -234,6 +233,7 @@ y = Random().nextInt(9)+1;
     for (var i = 1; i < numOfLeval3QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i + 7);
+<<<<<<< HEAD
      
       if (x== 8)
       {y = Random().nextInt(79) + 1;
@@ -250,6 +250,11 @@ y = Random().nextInt(9)+1;
 
       Yy.add(y);
     
+=======
+      // x = Random().nextInt(9) + 1;
+      y = Random().nextInt(99) + 1;
+      while (x % y != 0) y = Random().nextInt(99) + 1;
+>>>>>>> 52385cfa09c3a4b3db5a1534ae7b3d4665a9844e
 
       textDirection:
       TextDirection.rtl;
@@ -284,12 +289,17 @@ y = Random().nextInt(9)+1;
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
+<<<<<<< HEAD
     if (x>= y) {
       return "$arabicX  " + "÷" + "  $arabicY ";
     } else if (x < y) {
       return "$arabicY  " + "÷" + "  $arabicX ";
     }
     else return "  ";
+=======
+
+    return "$arabicX  " + "÷" + "  $arabicY ";
+>>>>>>> 52385cfa09c3a4b3db5a1534ae7b3d4665a9844e
   }
 
   String convertOptionsToArabic(int num) {
@@ -316,6 +326,7 @@ y = Random().nextInt(9)+1;
         }
       }
 
+      // var Hundredscore = 0;
       for (var i = 8; i < 12; i++) {
         if (userAnswer[i].toString() ==
             convertOptionsToArabic(answers[i]).toString()) {
@@ -352,66 +363,32 @@ y = Random().nextInt(9)+1;
     'images/Xhouse.png',
     'images/Xbird.png',
   ];
-//returns images for value x
-  Widget _printImageX(xValue) {
-    //if value = 0 show its image
-    if (x == 0) {
-      return Center(
-        child: Wrap(
-          direction: Axis.horizontal,
-          children: <Widget>[
-            Image.asset(
-              //Xhouse
-              objects[2],
-              width: width * 0.13,
-              height: height * 0.12,
-            )
-          ],
-        ),
-      );
-    }
-    //else show the
-    return Center(
-      child: Wrap(
-        direction: Axis.horizontal,
-        children: <Widget>[
-          for (var i = 0; i < xValue; i++)
-            Image.asset(
-              objects[0],
-              width: width * 0.13,
-              height: height * 0.12,
-            )
-        ],
-      ),
-    );
-  }
 
-//returns images for value y
-  Widget _printImageY(yValue) {
-    if (y == 0) {
+  Widget _printImageY(xValue, yValue) {
+    //if value = 0 show nothing
+    if (xValue == 0) {
       return Center(
-        child: Wrap(
-          direction: Axis.horizontal,
-          children: <Widget>[
-            Image.asset(
-              objects[3],
-              width: width * 0.13,
-              height: height * 0.12,
-            )
-          ],
-        ),
+        child: SizedBox(height: height * 0.0001, child: Text("")),
       );
     }
+    //else show the birds
     return Center(
       child: Wrap(
-        direction: Axis.horizontal,
+        // direction: Axis.horizontal,
         children: <Widget>[
-          for (var i = 0; i < yValue; i++)
-            Image.asset(
-              objects[1],
-              width: width * 0.13,
-              height: height * 0.12,
-            )
+          // for (var i = 0; i < xValue; i++)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisSize: MainAxisSize.max,
+            children: [
+              for (var i = 0; i < xValue; i++)
+                Image.asset(
+                  objects[1],
+                  width: width * 0.09,
+                  height: height * 0.15,
+                ),
+            ],
+          )
         ],
       ),
     );
@@ -461,6 +438,9 @@ y = Random().nextInt(9)+1;
                           fontWeight: FontWeight.bold)),
                 ),
                 ImagesUnderQuestion(j),
+                // SizedBox(
+                //   height: height * 0.14,
+                // ),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: <
                     Widget>[
                   SizedBox(
@@ -570,91 +550,59 @@ y = Random().nextInt(9)+1;
     );
   }
 
+  String strReturned() {
+    String str = "";
+    if (qustions[j].toString().substring(4, 5) == "÷") {
+      str = qustions[j].toString().substring(5);
+    } else {
+      str = qustions[j].toString().substring(4);
+    }
+    return str;
+  }
+
   // ignore: non_constant_identifier_names
   ImagesUnderQuestion(int j) {
     // if (j < 11) {
     if (j == 0 || j == 1 || j == 2 || j == 3) {
-      return SizedBox(
-        // height: 200,
-        height: height * 0.57,
-        child: Align(
-          alignment: Alignment.center,
-          child: Wrap(
-            children: [
-              SizedBox(width: width * 0.40, child: _printImageY(Yy[j])),
-              const Text(
-                ' ÷ ',
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 60,
-                    fontWeight: FontWeight.bold),
+      return Expanded(
+        child: SizedBox(
+          height: double.infinity,
+          child: Stack(
+            fit: StackFit.expand,
+            alignment: Alignment.topCenter,
+            children: <Widget>[
+              new Positioned(
+                top: 1,
+                // left: 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    SizedBox(
+                      // height: height * 0.90,
+                      child: Expanded(
+                        // flex: 2,
+                        child: Image.asset(
+                          'images/birdHousee.png',
+                          height: height * 0.60,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(width: width * 0.40, child: _printImageX(Xx[j])),
+              Center(
+                child: new Positioned(
+                  top: 80,
+                  left: 285,
+                  child: _printImageY(Xx[j], Yy[j]),
+                ),
+              ),
             ],
           ),
         ),
       );
     } else {
-      // return Column(
-      //   children: [
-      //     SizedBox(
-      //       // height: 20,
-      //       // alignment: Alignment.center,
-      //       child: Image.asset(
-      //         'images/division.png',
-      //         height: height * 0.30,
-      //         width: width * 0.30,
-      //         // fit: BoxFit.cover,
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       // height: 200,
-      //       child: Row(
-      //           mainAxisAlignment: MainAxisAlignment.center,
-      //           children: <Widget>[
-      //             // SizedBox(
-      //             // height: 80,
-      //             // width: 100,
-      //             // child: Center(
-
-      //             SizedBox(
-      //               height: 10,
-      //               width: 20,
-      //             ),
-      //             SizedBox(
-      //               // width: 40,
-      //               // height: 200,
-      //               child: Text(
-      //                 qustions[j].toString().substring(4),
-      //                 style: TextStyle(
-      //                     color: Color.fromARGB(255, 255, 0, 0),
-      //                     fontWeight: FontWeight.bold,
-      //                     fontSize: 50.0),
-      //               ),
-      //             ),
-      //             // ),
-      //             // ),
-      //             SizedBox(
-      //               width: 55,
-      //               height: 10,
-      //             ),
-      //             SizedBox(
-      //               // width: 220,
-      //               // height: 100,
-      //               child: Text(
-      //                 qustions[j].toString().substring(0, 2),
-      //                 style: TextStyle(
-      //                     color: Color.fromARGB(255, 0, 0, 0),
-      //                     fontWeight: FontWeight.bold,
-      //                     fontSize: 50.0),
-      //               ),
-      //             ),
-
-      //             // SizedBox(height: 20, width: 20),
-      //           ]),
-      //     ),
-      //   ],
-      // );
       return SizedBox(
         height: height * 0.56,
         child: Column(
@@ -674,46 +622,6 @@ y = Random().nextInt(9)+1;
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ),
-                          // SizedBox(
-                          //   width: width * 0.10,
-                          //   height: 60,
-                          //   child: Text(
-                          //     "    ",
-                          //     style: TextStyle(fontSize: 33.0),
-                          //   ),
-                          // ),
-
-                          // Align(
-                          //   heightFactor: 0.01,
-                          //   // child: Column(
-                          //   //   textDirection: TextDirection.rtl,
-                          //   //   children: [
-                          //   //     SizedBox(
-                          //   //       width: 67,
-                          //   //       height: 21,
-                          //   //       child: Row(
-                          //   //         mainAxisAlignment: MainAxisAlignment.start,
-                          //   //         textDirection: TextDirection.rtl,
-                          //   //         children: [
-                          //   //           SizedBox(
-                          //   //             // width: 63,
-                          //   //             // height: 44,
-                          //   //             child: Text(
-                          //   //               "-",
-                          //   //               style: TextStyle(
-                          //   //                   color:
-                          //   //                       Color.fromARGB(255, 0, 0, 0),
-                          //   //                   fontWeight: FontWeight.bold,
-                          //   //                   fontSize: 25.0),
-                          //   //             ),
-                          //   //           ),
-                          //   //         ],
-                          //   //       ),
-                          //   //     ),
-                          //   //   ],
-                          //   // ),
-                          // ),
-
                           Column(
                             children: [
                               Center(
@@ -721,7 +629,8 @@ y = Random().nextInt(9)+1;
                                   width: width * 0.05,
                                   height: height * 0.55,
                                   child: Text(
-                                    qustions[j].toString().substring(4),
+                                    strReturned(),
+                                    // qustions[j].toString().substring(4),
                                     style: TextStyle(
                                         color: Colors.blue,
                                         fontWeight: FontWeight.bold,
@@ -733,14 +642,11 @@ y = Random().nextInt(9)+1;
                           ),
                           SizedBox(
                             width: width * 0.15,
-                            // height: 10,
                           ),
-
                           Column(
                             children: [
                               SizedBox(
                                 width: width * 0.23,
-                                // height: height * 0.27,
                                 child: Text(
                                   qustions[j].toString().substring(0, 2),
                                   style: TextStyle(
@@ -751,25 +657,6 @@ y = Random().nextInt(9)+1;
                               ),
                             ],
                           ),
-
-                          // Align(
-                          //   heightFactor: 0.75,
-                          //   child: Column(
-                          //     children: [
-                          //       SizedBox(
-                          //         width: 63,
-                          //         height: 44,
-                          //         child: Text(
-                          //           "________",
-                          //           style: TextStyle(
-                          //               color: Color.fromARGB(255, 0, 0, 0),
-                          //               fontWeight: FontWeight.bold,
-                          //               fontSize: 17.0),
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                         ],
                       )),
                   Container(
@@ -778,7 +665,6 @@ y = Random().nextInt(9)+1;
                       'images/division.png',
                       height: height * 0.55,
                       width: width * 0.38,
-                      // fit: BoxFit.cover,
                     ),
                   ),
                 ],
