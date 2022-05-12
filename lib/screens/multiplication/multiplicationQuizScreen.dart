@@ -113,9 +113,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
     for (var i = 1; i < numOfLevel1Questions + 1; i++) {
       ans = [];
       x = getX(i - 1);
-      // x = Random().nextInt(4) + 1;
       y = Random().nextInt(11);
-      // y = Random().nextInt(4) + 1;
       Xx.add(x);
       Yy.add(y);
 
@@ -140,13 +138,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
     for (var i = 1; i < numOfLevel2Questions + 1; i++) {
       ans = [];
       x = getX(i + 3);
-      // x = Random().nextInt(9) + 1;
       y = Random().nextInt(11);
-      // y = Random().nextInt(9) + 1;
-      // while (!(x > 3 && x < 8) || !(y > 3 && y < 8)) {
-      //   x = Random().nextInt(9) + 1;
-      //   y = Random().nextInt(9) + 1;
-      // }
 
       TextDirection.rtl;
       qustions.add(convertToArabic());
@@ -169,13 +161,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
     for (var i = 1; i < numOfLevel3Questions + 1; i++) {
       ans = [];
       x = getX(i + 7);
-      // x = Random().nextInt(9)+1;
-      // y = Random().nextInt(9)+1;
       y = Random().nextInt(11);
-      // while (x > 7 && x < 11 || y > 7 && y < 11) {
-      //   x = Random().nextInt(9);
-      //   y = Random().nextInt(9);
-      // }
 
       TextDirection.rtl;
       qustions.add(convertToArabic());
@@ -260,9 +246,6 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
   List<String> objects = [
     'images/egg.png',
     'images/Xegg.png',
-    //WAS 'images/egg2.png',
-    // 'images/Xegg.png',
-    // 'images/Xegg2.png',
   ];
 //returns images for value x
   Widget _printImageX(xValue, yValue) {
@@ -270,18 +253,6 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
     if (xValue == 0) {
       return Center(
         child: Text(""),
-
-        // Wrap(
-        //   direction: Axis.horizontal,
-        //   children: <Widget>[
-        //     Image.asset(
-        //       //X egg
-        //       objects[1],
-        //       width: width * 0.13,
-        //       height: height * 0.12,
-        //     )
-        //   ],
-        // ),
       );
     }
     //else show the eggs
@@ -306,41 +277,6 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
       ),
     );
   }
-// //returns images for value x
-//   Widget _printImageX(xValue) {
-//     //if value = 0 show its image
-//     if (xValue == 0) {
-//       return Center(
-//         child: Text(""),
-
-//         // Wrap(
-//         //   direction: Axis.horizontal,
-//         //   children: <Widget>[
-//         //     Image.asset(
-//         //       //X egg
-//         //       objects[1],
-//         //       width: width * 0.13,
-//         //       height: height * 0.12,
-//         //     )
-//         //   ],
-//         // ),
-//       );
-//     }
-//     //else show the eggs
-//     return Center(
-//       child: Wrap(
-//         direction: Axis.horizontal,
-//         children: <Widget>[
-//           for (var i = 0; i < xValue; i++)
-//             Image.asset(
-//               objects[0],
-//               width: width * 0.10,
-//               height: height * 0.09,
-//             )
-//         ],
-//       ),
-//     );
-//   }
 
 //returns images for value y
   Widget _printImageY(yValue) {
@@ -530,46 +466,25 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
   ImagesUnderQuestion(int j) {
     if (j == 0 || j == 1 || j == 2 || j == 3) {
       return SizedBox(
-        // height: height * 0.55,
-        // height: 200,
-        // child: Align(
-        //   alignment: Alignment.center,
-        //   child: Center(
-        //     child:
         child: Column(
           children: [
             Center(
               child: Stack(
                 children: <Widget>[
-                  // SizedBox(width: width * 0.55, child: _printImageY(Yy[j])),
-                  // const Text(
-                  //   ' × ',
-                  //   style: TextStyle(
-                  //       color: Colors.blue,
-                  //       fontSize: 60,
-                  //       fontWeight: FontWeight.bold),
-                  // ),
-                  // SizedBox(
-                  //     width: width * 0.50, child:
-                  // Center(widthFactor: 0.90,
-                  // child:
                   SizedBox(
                       height: height * 0.30, child: _printImageX(Xx[j], Yy[j])),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Center(
                       child: SizedBox(
-                        // alignment: Alignment.center,
                         child: Image.asset(
                           'images/basket.png',
                           height: height * 0.50,
                           width: width * 0.40,
-                          // fit: BoxFit.cover,
                         ),
                       ),
                     ),
                   ),
-
                   Center(
                     child: SizedBox(
                       height: height * 0.01,
@@ -588,7 +503,6 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
     } else if (j == 4 || j == 5 || j == 6 || j == 7) {
       return SizedBox(
         height: height * 0.55,
-        // height: 200,
         child: Column(
           children: [
             Center(
@@ -600,7 +514,6 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
                       'images/dogFrame.png',
                       height: height * 0.49,
                       width: width * 0.30,
-                      // fit: BoxFit.cover,
                     ),
                   ),
                   Container(
@@ -608,16 +521,13 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
                       child: Column(
                         children: [
                           SizedBox(
-                            // width: 20,
                             child: Text(
                               "  ",
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ),
                           SizedBox(
-                            // width: 30,
                             height: height * 0.14,
-                            // height: 50,
                             child: Text(
                               " ",
                               style: TextStyle(fontSize: 33.0),
@@ -625,9 +535,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
                           ),
                           SizedBox(
                             width: width * 0.05,
-                            // width: 35,
                             height: height * 0.10,
-                            // height: 34,
                             child: Text(
                               qustions[j].toString().substring(0, 2),
                               style: TextStyle(
@@ -644,15 +552,11 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
                                 SizedBox(
                                   width: width * 0.09,
                                   height: height * 0.10,
-                                  // width: 67,
-                                  // height: 21,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     textDirection: TextDirection.rtl,
                                     children: [
                                       SizedBox(
-                                        // width: 63,
-                                        // height: 44,
                                         child: Text(
                                           ' × ',
                                           style: TextStyle(
