@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter/services.dart';
@@ -29,6 +30,10 @@ class divisionQuizScreen extends StatefulWidget {
 class _divisionQuizScreenState extends State<divisionQuizScreen> {
   get width => MediaQuery.of(context).size.width;
   get height => MediaQuery.of(context).size.height;
+   late User user;
+final _auth=FirebaseAuth.instance;
+late User signedInUser;
+var id;
 
   ArabicNumbers arabicNumber = ArabicNumbers();
 
@@ -54,10 +59,6 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
   String arabicX = "";
   String arabicY = "";
-
-  var divisionLeval1 = [1, 2, 3, 4];
-  var divisionLeval2 = [5, 6, 7];
-  var divisionLeval3 = [8, 9, 10];
 
   var x = Random().nextInt(9) + 1;
   var y = Random().nextInt(9) + 1;
@@ -122,17 +123,17 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       x = getX(i - 1);
       if (x==0){
       y = Random().nextInt(11) + 1;
-<<<<<<< HEAD
+
       while (x % y != 0 ) y = Random().nextInt(11) + 1;}
       else if (x==1|| x==2||x==3)
       {
       y = Random().nextInt(14) + 1;
       while ( y % x!=0 || x % y != 0) y = Random().nextInt(14) + 1;}
-=======
+
       while (x % y != 0) {
         y = Random().nextInt(11) + 1;
       }
->>>>>>> 52385cfa09c3a4b3db5a1534ae7b3d4665a9844e
+
 
       Xx.add(x);
       Yy.add(y);
@@ -183,7 +184,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       {y = Random().nextInt(39) + 1;
       while ( y % x != 0){ y = Random().nextInt(39) + 1;}}
 
-<<<<<<< HEAD
+
        else if (x==5)
       {y = Random().nextInt(49) + 1;
       while ( y % x != 0){ y = Random().nextInt(49) + 1;}}
@@ -199,8 +200,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       Yy.add(y);
     
 
-=======
->>>>>>> 52385cfa09c3a4b3db5a1534ae7b3d4665a9844e
+
       textDirection:
       TextDirection.rtl;
       qustions.add(convertToArabic());
@@ -233,7 +233,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     for (var i = 1; i < numOfLeval3QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i + 7);
-<<<<<<< HEAD
+
      
       if (x== 8)
       {y = Random().nextInt(79) + 1;
@@ -250,11 +250,10 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
       Yy.add(y);
     
-=======
       // x = Random().nextInt(9) + 1;
       y = Random().nextInt(99) + 1;
       while (x % y != 0) y = Random().nextInt(99) + 1;
->>>>>>> 52385cfa09c3a4b3db5a1534ae7b3d4665a9844e
+
 
       textDirection:
       TextDirection.rtl;
@@ -289,17 +288,13 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
-<<<<<<< HEAD
     if (x>= y) {
       return "$arabicX  " + "÷" + "  $arabicY ";
     } else if (x < y) {
       return "$arabicY  " + "÷" + "  $arabicX ";
     }
     else return "  ";
-=======
 
-    return "$arabicX  " + "÷" + "  $arabicY ";
->>>>>>> 52385cfa09c3a4b3db5a1534ae7b3d4665a9844e
   }
 
   String convertOptionsToArabic(int num) {
