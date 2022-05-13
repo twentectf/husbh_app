@@ -1754,7 +1754,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 30,
+                                // horizontal: 30,
                                 vertical: 10,
                               ),
                               child: SingleChildScrollView(
@@ -1870,7 +1870,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                        horizontal: 40,
+                                        // horizontal: 40,
                                         vertical: 20,
                                       ),
                                       child: SizedBox(
