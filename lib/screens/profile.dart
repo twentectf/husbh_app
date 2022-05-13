@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:husbh_app/screens/login_screen.dart';
-
+import 'learn_page.dart';
 import 'WaitingScreen.dart';
 import 'dart:math' as math;
 import 'package:percent_indicator/percent_indicator.dart';
@@ -159,46 +159,52 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> getScoreLearning() async {
-    DocumentSnapshot<Map<String, dynamic>> ADD = await FirebaseFirestore.instance
+    DocumentSnapshot<Map<String, dynamic>> ADD = await FirebaseFirestore
+        .instance
         .collection('users')
         .doc(user.uid)
-        .collection('Score').doc('Add')
+        .collection('Score')
+        .doc('Add')
         .get();
-        DocumentSnapshot<Map<String, dynamic>> SUB = await FirebaseFirestore.instance
+    DocumentSnapshot<Map<String, dynamic>> SUB = await FirebaseFirestore
+        .instance
         .collection('users')
         .doc(user.uid)
-        .collection('Score').doc('Sub')
+        .collection('Score')
+        .doc('Sub')
         .get();
-        DocumentSnapshot<Map<String, dynamic>> MUL = await FirebaseFirestore.instance
+    DocumentSnapshot<Map<String, dynamic>> MUL = await FirebaseFirestore
+        .instance
         .collection('users')
         .doc(user.uid)
-        .collection('Score').doc('Mul')
+        .collection('Score')
+        .doc('Mul')
         .get();
-        DocumentSnapshot<Map<String, dynamic>> DIV = await FirebaseFirestore.instance
+    DocumentSnapshot<Map<String, dynamic>> DIV = await FirebaseFirestore
+        .instance
         .collection('users')
         .doc(user.uid)
-        .collection('Score').doc('Div')
+        .collection('Score')
+        .doc('Div')
         .get();
 
+    addLevel1 = ADD['addLevel1'];
+    addLevel2 = ADD['addLevel2'];
+    addLevel3 = ADD['addLevel3'];
 
-        addLevel1 = ADD['addLevel1'];
-        addLevel2 = ADD['addLevel2'];
-        addLevel3 = ADD['addLevel3'];
+    subLevel1 = SUB['subLevel1'];
+    subLevel2 = SUB['subLevel2'];
+    subLevel3 = SUB['subLevel3'];
 
-        subLevel1 = SUB['subLevel1'];
-        subLevel2 = SUB['subLevel2'];
-        subLevel3 = SUB['subLevel3'];
+    mulLevel1 = MUL['mulLevel1'];
+    mulLevel2 = MUL['mulLevel2'];
+    mulLevel3 = MUL['mulLevel3'];
 
-        mulLevel1 = MUL['mulLevel1'];
-        mulLevel2 = MUL['mulLevel2'];
-        mulLevel3 = MUL['mulLevel3'];
-
-        divLevel1 = DIV['divLevel1'];
-        divLevel2 = DIV['divLevel2'];
-        divLevel3 = DIV['divLevel3'];
+    divLevel1 = DIV['divLevel1'];
+    divLevel2 = DIV['divLevel2'];
+    divLevel3 = DIV['divLevel3'];
 
     print(addLevel1[0]['time']);
-   
   }
 
   Future<void> _signOut() async {
@@ -257,8 +263,11 @@ class _ProfilePageState extends State<ProfilePage> {
                               alignment: Alignment.topRight,
                               child: IconButton(
                                 onPressed: () async {
-                                  Navigator.pop(context);
-                                  
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => learn_page()),
+                                  );
 
                                   // add new scores to first level
                                   // addLevel1 = addLevel1 + [45];
@@ -299,8 +308,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   //   'addLevel3':
                                   //       FieldValue.arrayUnion([level3]),
                                   // });
-
-                                  
                                 },
                                 icon: Icon(Icons.arrow_back_ios),
                                 color: Color(0xff4A4857),
@@ -1387,7 +1394,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                     child: Column(
                                       children: [
-                                        SizedBox(height: height * 0.03,),
+                                        SizedBox(
+                                          height: height * 0.03,
+                                        ),
                                         Text(
                                           'نقاطي',
                                           style: TextStyle(
@@ -1397,10 +1406,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(height: height * 0.035,),
+                                        SizedBox(
+                                          height: height * 0.035,
+                                        ),
                                         Center(
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               GestureDetector(
                                                 onTap: () {
@@ -1717,8 +1729,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         Stack(
                           children: [
                             Container(
-                              height: height * 0.66 ,
-                              width: width *0.25,
+                              height: height * 0.66,
+                              width: width * 0.25,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:
@@ -1735,35 +1747,31 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                ),
+                                    // horizontal: 24,
+                                    ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                  
                                     SizedBox(
-                                      height: height* 0.24,
+                                      height: height * 0.24,
                                     ),
                                     currentLevel(total),
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    currentLevelPer(
-                                        currentScoreLevel1, level1),
-                                    currentLevelPer(
-                                        currentScoreLevel2, level2),
-                                    currentLevelPer(
-                                        currentScoreLevel3, level3),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
+                                    currentLevelPer(currentScoreLevel1, level1),
+                                    currentLevelPer(currentScoreLevel2, level2),
+                                    currentLevelPer(currentScoreLevel3, level3),
+                                    // SizedBox(
+                                    //   height: 10,
+                                    // ),
                                   ],
                                 ),
                               ),
                             ),
                             Container(
                               height: height * 0.20,
-                              width: width *0.25,
+                              width: width * 0.25,
                               decoration: BoxDecoration(
                                 color: Colors.amber.shade200,
                                 borderRadius: BorderRadius.only(
@@ -1774,22 +1782,21 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 24,
-                                  ),
-                                  child: Text(
-                                                'المستوى الحالي',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontFamily: 'ReadexPro',
-                                                  color: Colors.brown,
-                                                  fontWeight: FontWeight.w900,
-                                                ),
-                                              ),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 24,
                                 ),
+                                child: Text(
+                                  'المستوى الحالي',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontFamily: 'ReadexPro',
+                                    color: Colors.brown,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
                             ),
-                            
                           ],
                         ),
                         SizedBox(
@@ -1819,19 +1826,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      height: height* 0.20,
+                                      height: height * 0.20,
                                     ),
-                                   
                                     Center(
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                          // horizontal: 30,
-                                        ),
+                                            // horizontal: 30,
+                                            ),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: <Widget>[
                                             Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Padding(
                                                   padding:
@@ -1863,7 +1871,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             Container(
                                               margin: EdgeInsets.only(top: 5),
                                               color: Colors.black45,
-                                              height: 100,
+                                              height: height * 0.20,
                                               width: 1,
                                             ),
                                             SizedBox(
@@ -1903,42 +1911,34 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                bottom:50,
-                              ),
-                              child: Container(
-                                height: height  * 0.20,
-                                width: width * 0.50,
-                                decoration: BoxDecoration(
-                                  color: Colors.amber.shade200,
-                                  borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(160),
-                                    bottomLeft: Radius.circular(160),
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                  ),
+                            Container(
+                              height: height * 0.20,
+                              width: width * 0.50,
+                              decoration: BoxDecoration(
+                                color: Colors.amber.shade200,
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(160),
+                                  bottomLeft: Radius.circular(160),
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 24,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 24,
+                                ),
+                                child: Text(
+                                  'المستوى في المحاولات السابقة',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontFamily: 'ReadexPro',
+                                    color: Colors.brown,
+                                    fontWeight: FontWeight.w900,
                                   ),
-                                  child: Text(
-                                                'المستوى في المحاولات السابقة',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontFamily: 'ReadexPro',
-                                                  color: Colors.brown,
-                                                  fontWeight: FontWeight.w900,
-                                                ),
-                                              ),
                                 ),
                               ),
                             ),
-                           
-                            
-                            
                           ],
                         ),
                       ],
