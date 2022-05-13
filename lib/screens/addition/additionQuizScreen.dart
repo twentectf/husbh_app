@@ -438,7 +438,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             : const Color(0xFF3489e9),
                         onTap: () async {
                           changeColor();
-                          // _audioCache.play('CorrectAnswer.mp3');
+                          // _audioCache.play('OptionsSound.mp3');
                           //await
                           await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][0].toString());
@@ -462,8 +462,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             : const Color(0xFF3489e9),
                         onTap: () async {
                           changeColor();
-                          // _audioCache.play('CorrectAnswer.mp3');
-
+                          // _audioCache.play('OptionsSound.mp3');
                           //await
                           await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][1].toString());
@@ -487,8 +486,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             : const Color(0xFF3489e9),
                         onTap: () async {
                           changeColor();
-                          // _audioCache.play('CorrectAnswer.mp3');
-
+                          // _audioCache.play('OptionsSound.mp3');
                           //await
                           await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][2].toString());
@@ -512,8 +510,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             : const Color(0xFF3489e9),
                         onTap: () async {
                           changeColor();
-                          // _audioCache.play('CorrectAnswer.mp3');
-
+                          // _audioCache.play('OptionsSound.mp3');
                           //await
                           await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][3].toString());
