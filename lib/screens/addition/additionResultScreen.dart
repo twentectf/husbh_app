@@ -1,11 +1,15 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:husbh_app/screens/learn_page.dart';
 import 'package:husbh_app/screens/profile.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
+
 class additionResultScreen extends StatelessWidget {
+ 
   final addsinglescore;
   final addtensscore;
   final addhundredscore;
@@ -39,6 +43,9 @@ class additionResultScreen extends StatelessWidget {
     required this.answers,
     required this.userAnswer,
   });
+
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -219,4 +226,6 @@ class additionResultScreen extends StatelessWidget {
       ],
     );
   }
+
+  void setState(Null Function() param0) {}
 }
