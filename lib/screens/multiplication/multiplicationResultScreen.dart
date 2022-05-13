@@ -72,7 +72,7 @@ class multiplicationResultScreen extends StatelessWidget {
           children: [
             Center(
               child: Container(
-                height: height * 0.70,
+                height: height * 0.75,
                 width: width * 0.35,
                 //color: Colors.white,
                 //blur: 0,
