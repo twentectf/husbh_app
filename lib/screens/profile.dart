@@ -1740,7 +1740,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                             Container(
-                              height: (height / 4) - 30,
+                              height: (height / 4) - 20,
                               width: width / 4,
                               decoration: BoxDecoration(
                                 color: Colors.amber.shade200,
@@ -1751,6 +1751,21 @@ class _ProfilePageState extends State<ProfilePage> {
                                   topRight: Radius.circular(20),
                                 ),
                               ),
+                              child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 24,
+                                  ),
+                                  child: Text(
+                                                'المستوى الحالي',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontFamily: 'ReadexPro',
+                                                  color: Colors.brown,
+                                                  fontWeight: FontWeight.w900,
+                                                ),
+                                              ),
+                                ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
@@ -1768,19 +1783,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                           horizontal: 10,
                                           vertical: 10,
                                         ),
-                                        child: Text(
-                                          'المستوى الحالي',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            fontFamily: 'ReadexPro',
-                                            color: Colors.brown,
-                                            fontWeight: FontWeight.w900,
-                                          ),
-                                        ),
+                                        
                                       ),
                                       SizedBox(
-                                        height: 40,
+                                        height: 50,
                                       ),
                                       currentLevel(total),
                                       SizedBox(
@@ -1900,7 +1906,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     year2 + '\n' + time2,
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
-                                                      fontSize: 14,
+                                                      fontSize: 13,
                                                       fontFamily: 'ReadexPro',
                                                       color: Colors.brown,
                                                       fontWeight:
@@ -1938,7 +1944,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     year3 + '\n' + time3,
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
-                                                      fontSize: 14,
+                                                      fontSize: 13,
                                                       fontFamily: 'ReadexPro',
                                                       color: Colors.brown,
                                                       fontWeight:
