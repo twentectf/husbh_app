@@ -251,6 +251,35 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
           addHundredscore++;
         }
       }
+      Map<String, dynamic> level1 = {
+                                    'score': addSinglescore, 
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+                                  Map<String, dynamic> level2 = {
+                                    'score': addTensscore,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+                                  Map<String, dynamic> level3 = {
+                                    'score':addHundredscore,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+
+  FirebaseFirestore.instance
+                                     .collection('users')
+                                     .doc(user.uid)
+                                     .collection('Score')
+                                     .doc('Add')
+                                     .update({
+                                   'addLevel1':
+                                       FieldValue.arrayUnion([level1]),
+                                   'addLevel2':
+                                       FieldValue.arrayUnion([level2]),
+                                   'addLevel3':
+                                       FieldValue.arrayUnion([level3]),
+                                 });
       //when finish navigate to the result page with the scores
       Navigator.of(context).push(
         MaterialPageRoute(

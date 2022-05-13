@@ -258,6 +258,35 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
           mulLevel3Score++;
         }
       }
+       Map<String, dynamic> level1 = {
+                                    'score': mulLevel1Score, 
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+                                  Map<String, dynamic> level2 = {
+                                    'score': mulLevel2Score,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+                                  Map<String, dynamic> level3 = {
+                                    'score':mulLevel2Score,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+
+  FirebaseFirestore.instance
+                                     .collection('users')
+                                     .doc(user.uid)
+                                     .collection('Score')
+                                     .doc('Add')
+                                     .update({
+                                   'addLevel1':
+                                       FieldValue.arrayUnion([level1]),
+                                   'addLevel2':
+                                       FieldValue.arrayUnion([level2]),
+                                   'addLevel3':
+                                       FieldValue.arrayUnion([level3]),
+                                 });
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (BuildContext context) => multiplicationResultScreen(
