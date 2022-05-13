@@ -127,12 +127,8 @@ var id;
       while (x % y != 0 ) y = Random().nextInt(11) + 1;}
       else if (x==1|| x==2||x==3)
       {
-      y = Random().nextInt(14) + 1;
-      while ( y % x!=0 || x % y != 0) y = Random().nextInt(14) + 1;}
-
-      while (x % y != 0) {
-        y = Random().nextInt(11) + 1;
-      }
+      y = Random().nextInt(11) + 1;
+      while ( y % x!=0) y = Random().nextInt(11) + 1;}
 
 
       Xx.add(x);
@@ -366,8 +362,9 @@ var id;
         child: SizedBox(height: height * 0.0001, child: Text("")),
       );
     }
+    else if(xValue>yValue)
     //else show the birds
-    return Center(
+    {return Center(
       child: Wrap(
         // direction: Axis.horizontal,
         children: <Widget>[
@@ -387,7 +384,26 @@ var id;
         ],
       ),
     );
-  }
+  }return Center(
+      child: Wrap(
+        // direction: Axis.horizontal,
+        children: <Widget>[
+          // for (var i = 0; i < xValue; i++)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisSize: MainAxisSize.max,
+            children: [
+              for (var i = 0; i < yValue; i++)
+                Image.asset(
+                  objects[1],
+                  width: width * 0.09,
+                  height: height * 0.15,
+                ),
+            ],
+          )
+        ],
+      ),
+    );}
 
   void nextQuestion() {
     _changeQuestion('٠');
