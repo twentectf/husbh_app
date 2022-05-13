@@ -34,7 +34,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   get width => MediaQuery.of(context).size.width;
   get height => MediaQuery.of(context).size.height;
   //for firebase
-   late User user;
+  late User user;
   final _auth = FirebaseAuth.instance;
   late User signedInUser;
   var id;
@@ -120,7 +120,6 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   }
 
   void initState() {
-
     //for firebase
     onRefresh(FirebaseAuth.instance.currentUser);
     getCurrentUser();
@@ -132,15 +131,14 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     for (var i = 1; i < numOfLeval1QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i - 1);
-      if (x==0){
-      y = Random().nextInt(11) + 1;
+      if (x == 0) {
+        y = Random().nextInt(11) + 1;
 
-      while (x % y != 0 ) y = Random().nextInt(11) + 1;}
-      else if (x==1|| x==2||x==3)
-      {
-      y = Random().nextInt(11) + 1;
-      while ( y % x!=0) y = Random().nextInt(11) + 1;}
-
+        while (x % y != 0) y = Random().nextInt(11) + 1;
+      } else if (x == 1 || x == 2 || x == 3) {
+        y = Random().nextInt(11) + 1;
+        while (y % x != 0) y = Random().nextInt(11) + 1;
+      }
 
       Xx.add(x);
       Yy.add(y);
@@ -186,27 +184,32 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       ans = [];
       x = getX(i + 3);
       // x = Random().nextInt(9) + 1;
-     
-     if (x==4)
-      {y = Random().nextInt(39) + 1;
-      while ( y % x != 0){ y = Random().nextInt(39) + 1;}}
 
+      if (x == 4) {
+        y = Random().nextInt(39) + 1;
+        while (y % x != 0) {
+          y = Random().nextInt(39) + 1;
+        }
+      } else if (x == 5) {
+        y = Random().nextInt(49) + 1;
+        while (y % x != 0) {
+          y = Random().nextInt(49) + 1;
+        }
+      } else if (x == 6) {
+        y = Random().nextInt(59) + 1;
+        while (y % x != 0) {
+          y = Random().nextInt(59) + 1;
+        }
+      } else if (x == 7) {
+        y = Random().nextInt(69) + 1;
+        while (y % x != 0) {
+          y = Random().nextInt(69) + 1;
+        }
+      }
 
-       else if (x==5)
-      {y = Random().nextInt(49) + 1;
-      while ( y % x != 0){ y = Random().nextInt(49) + 1;}}
-       else if (x==6)
-      {y = Random().nextInt(59) + 1;
-      while ( y % x != 0){ y = Random().nextInt(59) + 1;}}
-      else if (x==7)
-      {y = Random().nextInt(69) + 1;
-      while ( y % x != 0){ y = Random().nextInt(69) + 1;}}
-
-       Xx.add(x);
+      Xx.add(x);
 
       Yy.add(y);
-    
-
 
       textDirection:
       TextDirection.rtl;
@@ -241,26 +244,30 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       ans = [];
       x = getX(i + 7);
 
-     
-      if (x== 8)
-      {y = Random().nextInt(79) + 1;
-      while ( y % x != 0){ y = Random().nextInt(79) + 1;}}
+      if (x == 8) {
+        y = Random().nextInt(79) + 1;
+        while (y % x != 0) {
+          y = Random().nextInt(79) + 1;
+        }
+      } else if (x == 9) {
+        y = Random().nextInt(89) + 1;
+        while (y % x != 0) {
+          y = Random().nextInt(89) + 1;
+        }
+      } else if (x == 10) {
+        y = Random().nextInt(99) + 1;
+        while (y % x != 0) {
+          y = Random().nextInt(99) + 1;
+        }
+      }
 
-       else if (x==9)
-      {y = Random().nextInt(89) + 1;
-      while ( y % x != 0){ y = Random().nextInt(89) + 1;}}
-       else if (x==10)
-      {y = Random().nextInt(99) + 1;
-      while ( y % x != 0){ y = Random().nextInt(99) + 1;}}
-
-       Xx.add(x);
+      Xx.add(x);
 
       Yy.add(y);
-    
+
       // x = Random().nextInt(9) + 1;
       y = Random().nextInt(99) + 1;
       while (x % y != 0) y = Random().nextInt(99) + 1;
-
 
       textDirection:
       TextDirection.rtl;
@@ -294,7 +301,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
   //for firebase
 
-   onRefresh(userCare) {
+  onRefresh(userCare) {
     setState(() {
       user = userCare;
     });
@@ -317,13 +324,12 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
-    if (x>= y) {
+    if (x >= y) {
       return "$arabicX  " + "÷" + "  $arabicY ";
     } else if (x < y) {
       return "$arabicY  " + "÷" + "  $arabicX ";
-    }
-    else return "  ";
-
+    } else
+      return "  ";
   }
 
   String convertOptionsToArabic(int num) {
@@ -333,8 +339,6 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   }
 
   _changeQuestion(ans) {
-    
-
     userAnswer.add(ans);
 
     if (j + 1 >= 12) {
@@ -360,34 +364,31 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
         }
       }
       Map<String, dynamic> level1 = {
-                                    'score': divLevel1Score, 
-                                    'year': year(),
-                                    'time': time(),
-                                  };
-                                  Map<String, dynamic> level2 = {
-                                    'score': divLevel2Score,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
-                                  Map<String, dynamic> level3 = {
-                                    'score':divLevel2Score,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
+        'score': divLevel1Score,
+        'year': year(),
+        'time': time(),
+      };
+      Map<String, dynamic> level2 = {
+        'score': divLevel2Score,
+        'year': year(),
+        'time': time(),
+      };
+      Map<String, dynamic> level3 = {
+        'score': divLevel2Score,
+        'year': year(),
+        'time': time(),
+      };
 
-  FirebaseFirestore.instance
-                                     .collection('users')
-                                     .doc(user.uid)
-                                     .collection('Score')
-                                     .doc('Div')
-                                     .update({
-                                   'divLevel1':
-                                       FieldValue.arrayUnion([level1]),
-                                   'divLevel2':
-                                       FieldValue.arrayUnion([level2]),
-                                   'divLevel3':
-                                       FieldValue.arrayUnion([level3]),
-                                 });
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection('Score')
+          .doc('Div')
+          .update({
+        'divLevel1': FieldValue.arrayUnion([level1]),
+        'divLevel2': FieldValue.arrayUnion([level2]),
+        'divLevel3': FieldValue.arrayUnion([level3]),
+      });
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (BuildContext context) => divisionResultScreen(
@@ -419,16 +420,16 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     'images/Xbird.png',
   ];
 
-  Widget _printImageY(xValue, yValue) {
-    //if value = 0 show nothing
+//returns images for value x (houses)
+  Widget _printImageX(xValue) {
+    //if value = 0 show its image
     if (xValue == 0) {
       return Center(
-        child: SizedBox(height: height * 0.0001, child: Text("")),
+        child: Text(""),
       );
     }
-    else if(xValue>yValue)
-    //else show the birds
-    {return Center(
+    //else show the apples
+    return Center(
       child: Wrap(
         // direction: Axis.horizontal,
         children: <Widget>[
@@ -439,23 +440,32 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
             children: [
               for (var i = 0; i < xValue; i++)
                 Image.asset(
-                  objects[1],
+                  objects[0],
                   width: width * 0.09,
                   height: height * 0.15,
                 ),
             ],
-          )
+          ),
         ],
       ),
     );
-  }return Center(
+  }
+
+//returns images for value y (birds)
+  Widget _printImageY(yValue) {
+    if (yValue == 0) {
+      return Center(
+        child: Text(""),
+      );
+    }
+    return Center(
       child: Wrap(
         // direction: Axis.horizontal,
         children: <Widget>[
           // for (var i = 0; i < xValue; i++)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            // mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.max,
             children: [
               for (var i = 0; i < yValue; i++)
                 Image.asset(
@@ -464,10 +474,74 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
                   height: height * 0.15,
                 ),
             ],
-          )
+          ),
+          SizedBox(
+            height: height * 0.25,
+          ),
         ],
       ),
-    );}
+    );
+  }
+
+  // Widget _printImageX(xValue, yValue) {
+  //   //if value = 0 show nothing
+  //   if (xValue == 0) {
+  //     return Center(
+  //       child: SizedBox(height: height * 0.0001, child: Text("")),
+  //     );
+  //   } else
+  //   //  if (xValue > yValue)
+  //   //else show the birds
+  //   {
+  //     return Center(
+  //       child: Wrap(
+  //         // direction: Axis.horizontal,
+  //         children: <Widget>[
+  //           // for (var i = 0; i < xValue; i++)
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             // mainAxisSize: MainAxisSize.max,
+  //             children: [
+  //               for (var i = 0; i < xValue; i++)
+  //                 Image.asset(
+  //                   objects[1],
+  //                   width: width * 0.09,
+  //                   height: height * 0.15,
+  //                 ),
+  //             ],
+  //           )
+  //         ],
+  //       ),
+  //     );
+  //   }
+  // }
+
+  // Widget _printImageY(xValue, yValue) {
+  //   //if value = 0 show nothing
+  //   if (yValue == 0) {
+  //     return Center(
+  //       child: SizedBox(height: height * 0.0001, child: Text("")),
+  //     );
+  //   } else
+  //   // if(xValue>yValue)
+  //   //else show the birds
+  //   {
+  //     return Center(
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         // mainAxisSize: MainAxisSize.max,
+  //         children: [
+  //           for (var i = 0; i < yValue; i++)
+  //             Image.asset(
+  //               objects[1],
+  //               width: width * 0.09,
+  //               height: height * 0.15,
+  //             ),
+  //         ],
+  //       ),
+  //     );
+  //   }
+  // }
 
   void nextQuestion() {
     _changeQuestion('-١');
@@ -639,40 +713,66 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   ImagesUnderQuestion(int j) {
     // if (j < 11) {
     if (j == 0 || j == 1 || j == 2 || j == 3) {
-      return Expanded(
-        child: SizedBox(
-          height: double.infinity,
-          child: Stack(
-            fit: StackFit.expand,
-            alignment: Alignment.topCenter,
-            children: <Widget>[
-              new Positioned(
-                top: 1,
-                // left: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    SizedBox(
-                      // height: height * 0.90,
-                      child: Expanded(
-                        // flex: 2,
-                        child: Image.asset(
-                          'images/birdHousee.png',
-                          height: height * 0.60,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Center(
-                child: new Positioned(
-                  top: 80,
-                  left: 285,
-                  child: _printImageY(Xx[j], Yy[j]),
-                ),
-              ),
+      // return Expanded(
+      //   child: SizedBox(
+      //     height: double.infinity,
+      //     child: Stack(
+      //       fit: StackFit.expand,
+      //       alignment: Alignment.topCenter,
+      //       children: <Widget>[
+      //         new Positioned(
+      //           top: 1,
+      //           // left: 2,
+      //           child: Row(
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             mainAxisSize: MainAxisSize.max,
+      //             children: [
+      //               // SizedBox(
+      //               //   // height: height * 0.90,
+      //               //   child: Expanded(
+      //               //     // flex: 2,
+      //               //     child: Image.asset(
+      //               //       'images/birdHousee.png',
+      //               //       height: height * 0.60,
+      //               //     ),
+      //               //   ),
+      //               // ),
+      //             ],
+      //           ),
+      //         ),
+      //         SizedBox(
+      //           // child: new Positioned(
+      //           //   top: 80,
+      //           //   left: 285,
+      //           height: height * 0.05,
+
+      //           child: _printImageX(Xx[j]),
+      //           // ),
+      //         ),
+      //         SizedBox(
+      //           height: height * 0.20,
+      //         ),
+      //         SizedBox(
+      //           // child: new Positioned(
+      //           //   top: 80,
+      //           //   left: 285,
+      //           height: height * 0.05,
+      //           child: _printImageY(Yy[j]),
+      //           // ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // );
+      //////////////////////////////////////
+      return SizedBox(
+        height: height * 0.55,
+        child: Align(
+          alignment: Alignment.center,
+          child: Wrap(
+            children: [
+              SizedBox(child: _printImageY(Yy[j])),
+              SizedBox(child: _printImageX(Xx[j])),
             ],
           ),
         ),
@@ -751,7 +851,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     }
   }
 
-String replaceFarsiNumber(String input) {
+  String replaceFarsiNumber(String input) {
     const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const farsi = ['۰', '۱', '۲', '۳', '٤', '٥', '٦', '۷', '۸', '۹'];
 
@@ -872,5 +972,4 @@ String replaceFarsiNumber(String input) {
     print(DateTime.now().toLocal());
     return time;
   }
-
 }

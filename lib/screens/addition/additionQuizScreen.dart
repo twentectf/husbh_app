@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 // import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,6 +9,7 @@ import '../../widgets/option_card.dart';
 import 'dart:async';
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'additionResultScreen.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 //for firebase
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,6 +32,7 @@ class additionQuizScreen extends StatefulWidget {
 }
 
 class _additionQuizScreenState extends State<additionQuizScreen> {
+  // late AudioCache _audioCache;
   get width => MediaQuery.of(context).size.width;
   get height => MediaQuery.of(context).size.height;
 
@@ -297,6 +297,9 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
         ++j;
         isMarked = false;
         isPressed = false;
+        // _audioCache = AudioCache(
+        //     prefix: "assets/",
+        //     fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP));
       });
     }
   }
@@ -435,6 +438,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             : const Color(0xFF3489e9),
                         onTap: () async {
                           changeColor();
+                          // _audioCache.play('OptionsSound.mp3');
                           //await
                           await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][0].toString());
@@ -458,6 +462,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             : const Color(0xFF3489e9),
                         onTap: () async {
                           changeColor();
+                          // _audioCache.play('OptionsSound.mp3');
                           //await
                           await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][1].toString());
@@ -481,6 +486,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             : const Color(0xFF3489e9),
                         onTap: () async {
                           changeColor();
+                          // _audioCache.play('OptionsSound.mp3');
                           //await
                           await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][2].toString());
@@ -504,6 +510,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
                             : const Color(0xFF3489e9),
                         onTap: () async {
                           changeColor();
+                          // _audioCache.play('OptionsSound.mp3');
                           //await
                           await Future.delayed(const Duration(seconds: 2), () {
                             _changeQuestion(mcq[j][3].toString());
