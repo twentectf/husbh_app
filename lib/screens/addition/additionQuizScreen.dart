@@ -1,4 +1,6 @@
 // import 'dart:html';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter/services.dart';
@@ -8,6 +10,10 @@ import 'dart:async';
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'additionResultScreen.dart';
 import 'package:audioplayers/audioplayers.dart';
+
+//for firebase
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class additionQuizScreen extends StatefulWidget {
   const additionQuizScreen({Key? key}) : super(key: key);
@@ -32,6 +38,13 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
 
 //to convert numbers to arabic
   ArabicNumbers arabicNumber = ArabicNumbers();
+
+  //for firebase
+  late User user;
+  final _auth = FirebaseAuth.instance;
+  late User signedInUser;
+  var id;
+  //
 
   List qustions = []; //question list
   List answers = []; //answer list
@@ -76,6 +89,10 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   get states => null;
 
   void initState() {
+    //for firebase
+    onRefresh(FirebaseAuth.instance.currentUser);
+    getCurrentUser();
+    //
     TextDirection.rtl;
     super.initState();
 
@@ -171,8 +188,30 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       mcq.add(ans);
     }
   }
+  //for firebase
+
+  onRefresh(userCare) {
+    setState(() {
+      user = userCare;
+    });
+  }
+
+  void getCurrentUser() {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        signedInUser = user;
+        //  email = signedInUser.email;
+        id = signedInUser.uid;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+  /////
 
   //convert the numbers to arabic using package:arabic_numbers
+
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
@@ -212,6 +251,32 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
           addHundredscore++;
         }
       }
+      Map<String, dynamic> level1 = {
+        'score': addSinglescore,
+        'year': year(),
+        'time': time(),
+      };
+      Map<String, dynamic> level2 = {
+        'score': addTensscore,
+        'year': year(),
+        'time': time(),
+      };
+      Map<String, dynamic> level3 = {
+        'score': addHundredscore,
+        'year': year(),
+        'time': time(),
+      };
+
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection('Score')
+          .doc('Add')
+          .update({
+        'addLevel1': FieldValue.arrayUnion([level1]),
+        'addLevel2': FieldValue.arrayUnion([level2]),
+        'addLevel3': FieldValue.arrayUnion([level3]),
+      });
       //when finish navigate to the result page with the scores
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -312,7 +377,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   }
 
   void nextQuestion() {
-    _changeQuestion('٠');
+    _changeQuestion('-١');
   }
 
   void changeColor() {
@@ -745,5 +810,127 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
         ),
       );
     }
+  }
+
+  String replaceFarsiNumber(String input) {
+    const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const farsi = ['۰', '۱', '۲', '۳', '٤', '٥', '٦', '۷', '۸', '۹'];
+
+    for (int i = 0; i < english.length; i++) {
+      input = input.replaceAll(english[i], farsi[i]);
+    }
+
+    return input;
+  }
+
+  String year() {
+    var y = replaceFarsiNumber(DateTime.now().year.toString());
+    var m = replaceFarsiNumber(DateTime.now().month.toString());
+    var d = replaceFarsiNumber(DateTime.now().day.toString());
+
+    var year = d + '/' + m + '/' + y;
+
+    return year;
+  }
+
+  String time() {
+    var h = replaceFarsiNumber(DateTime.now().hour.toString());
+    var min = replaceFarsiNumber(DateTime.now().minute.toString());
+    var s = replaceFarsiNumber(DateTime.now().second.toString());
+
+    if (h == '۱۲') {
+      h = h + " مساءً ";
+    } else if (h == '۱۳') {
+      h = '۰۱';
+      h = h + " مساءً ";
+    } else if (h == '۱٤') {
+      h = '۰۲';
+      h = h + " مساءً ";
+    } else if (h == '۱٥') {
+      h = '۰۳';
+      h = h + " مساءً ";
+    } else if (h == '۱٦') {
+      h = '۰٤';
+      h = h + " مساءً ";
+    } else if (h == '۱٧') {
+      h = '۰٥';
+      h = h + " مساءً ";
+    } else if (h == '۱۸') {
+      h = '۰٦';
+      h = h + " مساءً ";
+    } else if (h == '۱۹') {
+      h = '۰٧';
+      h = h + " مساءً ";
+    } else if (h == '۲۰') {
+      h = '۰۸';
+      h = h + " مساءً ";
+    } else if (h == '۲۱') {
+      h = '۰۹';
+      h = h + " مساءً ";
+    } else if (h == '۲۲') {
+      h = '۱۰';
+      h = h + " مساءً ";
+    } else if (h == '۲۳') {
+      h = '۱۱';
+      h = h + " مساءً ";
+    } else if (h == '۰') {
+      h = '۰۰';
+      h = h + " صباحًا ";
+    } else {
+      h = h + " صباحًا ";
+    }
+
+    if (min == '۰') {
+      min = "۰۰";
+    } else if (min == '۱') {
+      min = '۰۱';
+    } else if (min == '۲') {
+      min = '۰۲';
+    } else if (min == '۳') {
+      h = '۰۳';
+    } else if (min == '٤') {
+      min = '۰٤';
+    } else if (min == '٥') {
+      min = '۰٥';
+    } else if (min == '٦') {
+      min = '۰٦';
+    } else if (min == '٧') {
+      min = '۰٧';
+    } else if (min == '۸') {
+      min = '۰۸';
+    } else if (min == '۹') {
+      min = '۰۹';
+    }
+    if (s == '۰') {
+      s = "۰۰";
+    } else if (s == '۱') {
+      s = '۰۱';
+    } else if (s == '۲') {
+      s = '۰۲';
+    } else if (s == '۳') {
+      s = '۰۳';
+    } else if (s == '٤') {
+      s = '۰٤';
+    } else if (s == '٥') {
+      s = '۰٥';
+    } else if (s == '٦') {
+      s = '۰٦';
+    } else if (s == '٧') {
+      s = '۰٧';
+    } else if (s == '۸') {
+      s = '۰۸';
+    } else if (s == '۹') {
+      s = '۰۹';
+    }
+
+    var time = s + ' : ' + min + ' : ' + h;
+    DateTime now = new DateTime.now();
+    DateTime currentPhoneDate = DateTime.now(); //DateTime
+
+    Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate); //To TimeStamp
+
+    DateTime myDateTime = myTimeStamp.toDate(); // TimeStamp to DateTime
+    print(DateTime.now().toLocal());
+    return time;
   }
 }

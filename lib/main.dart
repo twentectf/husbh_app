@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:husbh_app/screens/division/divisionQuizScreen.dart';
 import 'package:video_player/video_player.dart';
 import 'Screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,11 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //home: additionQuizScreen(),
-      //home: subtractionQuizScreen(),
       home: SplashScreen(),
-      // home: multiplicationQuizScreen(),
-      // home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       title: 'حًسبة',
       theme: ThemeData(

@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter/services.dart';
@@ -9,6 +10,9 @@ import 'divisionResultScreen.dart';
 import 'dart:async';
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:husbh_app/screens/division/divisionResultScreen.dart';
+
+//for firebase
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class divisionQuizScreen extends StatefulWidget {
   const divisionQuizScreen({Key? key}) : super(key: key);
@@ -29,6 +33,12 @@ class divisionQuizScreen extends StatefulWidget {
 class _divisionQuizScreenState extends State<divisionQuizScreen> {
   get width => MediaQuery.of(context).size.width;
   get height => MediaQuery.of(context).size.height;
+  //for firebase
+   late User user;
+  final _auth = FirebaseAuth.instance;
+  late User signedInUser;
+  var id;
+  //
 
   ArabicNumbers arabicNumber = ArabicNumbers();
 
@@ -54,10 +64,6 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
 
   String arabicX = "";
   String arabicY = "";
-
-  var divisionLeval1 = [1, 2, 3, 4];
-  var divisionLeval2 = [5, 6, 7];
-  var divisionLeval3 = [8, 9, 10];
 
   var x = Random().nextInt(9) + 1;
   var y = Random().nextInt(9) + 1;
@@ -114,16 +120,27 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   }
 
   void initState() {
+
+    //for firebase
+    onRefresh(FirebaseAuth.instance.currentUser);
+    getCurrentUser();
+    //
+
     TextDirection.rtl;
     super.initState();
 
     for (var i = 1; i < numOfLeval1QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i - 1);
+      if (x==0){
       y = Random().nextInt(11) + 1;
-      while (x % y != 0) {
-        y = Random().nextInt(11) + 1;
-      }
+
+      while (x % y != 0 ) y = Random().nextInt(11) + 1;}
+      else if (x==1|| x==2||x==3)
+      {
+      y = Random().nextInt(11) + 1;
+      while ( y % x!=0) y = Random().nextInt(11) + 1;}
+
 
       Xx.add(x);
       Yy.add(y);
@@ -169,8 +186,27 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       ans = [];
       x = getX(i + 3);
       // x = Random().nextInt(9) + 1;
-      y = Random().nextInt(99) + 1;
-      while (x % y != 0) y = Random().nextInt(99) + 1;
+     
+     if (x==4)
+      {y = Random().nextInt(39) + 1;
+      while ( y % x != 0){ y = Random().nextInt(39) + 1;}}
+
+
+       else if (x==5)
+      {y = Random().nextInt(49) + 1;
+      while ( y % x != 0){ y = Random().nextInt(49) + 1;}}
+       else if (x==6)
+      {y = Random().nextInt(59) + 1;
+      while ( y % x != 0){ y = Random().nextInt(59) + 1;}}
+      else if (x==7)
+      {y = Random().nextInt(69) + 1;
+      while ( y % x != 0){ y = Random().nextInt(69) + 1;}}
+
+       Xx.add(x);
+
+      Yy.add(y);
+    
+
 
       textDirection:
       TextDirection.rtl;
@@ -204,9 +240,27 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     for (var i = 1; i < numOfLeval3QuestionsDiv + 1; i++) {
       ans = [];
       x = getX(i + 7);
+
+     
+      if (x== 8)
+      {y = Random().nextInt(79) + 1;
+      while ( y % x != 0){ y = Random().nextInt(79) + 1;}}
+
+       else if (x==9)
+      {y = Random().nextInt(89) + 1;
+      while ( y % x != 0){ y = Random().nextInt(89) + 1;}}
+       else if (x==10)
+      {y = Random().nextInt(99) + 1;
+      while ( y % x != 0){ y = Random().nextInt(99) + 1;}}
+
+       Xx.add(x);
+
+      Yy.add(y);
+    
       // x = Random().nextInt(9) + 1;
       y = Random().nextInt(99) + 1;
       while (x % y != 0) y = Random().nextInt(99) + 1;
+
 
       textDirection:
       TextDirection.rtl;
@@ -238,11 +292,38 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     }
   }
 
+  //for firebase
+
+   onRefresh(userCare) {
+    setState(() {
+      user = userCare;
+    });
+  }
+
+  void getCurrentUser() {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        signedInUser = user;
+        //  email = signedInUser.email;
+        id = signedInUser.uid;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+  /////
+
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
     arabicY = arabicNumber.convert(y);
+    if (x>= y) {
+      return "$arabicX  " + "÷" + "  $arabicY ";
+    } else if (x < y) {
+      return "$arabicY  " + "÷" + "  $arabicX ";
+    }
+    else return "  ";
 
-    return "$arabicX  " + "÷" + "  $arabicY ";
   }
 
   String convertOptionsToArabic(int num) {
@@ -252,6 +333,8 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   }
 
   _changeQuestion(ans) {
+    
+
     userAnswer.add(ans);
 
     if (j + 1 >= 12) {
@@ -276,6 +359,35 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
           divLevel3Score++;
         }
       }
+      Map<String, dynamic> level1 = {
+                                    'score': divLevel1Score, 
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+                                  Map<String, dynamic> level2 = {
+                                    'score': divLevel2Score,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+                                  Map<String, dynamic> level3 = {
+                                    'score':divLevel2Score,
+                                    'year': year(),
+                                    'time': time(),
+                                  };
+
+  FirebaseFirestore.instance
+                                     .collection('users')
+                                     .doc(user.uid)
+                                     .collection('Score')
+                                     .doc('Div')
+                                     .update({
+                                   'divLevel1':
+                                       FieldValue.arrayUnion([level1]),
+                                   'divLevel2':
+                                       FieldValue.arrayUnion([level2]),
+                                   'divLevel3':
+                                       FieldValue.arrayUnion([level3]),
+                                 });
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (BuildContext context) => divisionResultScreen(
@@ -314,8 +426,9 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
         child: SizedBox(height: height * 0.0001, child: Text("")),
       );
     }
+    else if(xValue>yValue)
     //else show the birds
-    return Center(
+    {return Center(
       child: Wrap(
         // direction: Axis.horizontal,
         children: <Widget>[
@@ -335,10 +448,29 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
         ],
       ),
     );
-  }
+  }return Center(
+      child: Wrap(
+        // direction: Axis.horizontal,
+        children: <Widget>[
+          // for (var i = 0; i < xValue; i++)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisSize: MainAxisSize.max,
+            children: [
+              for (var i = 0; i < yValue; i++)
+                Image.asset(
+                  objects[1],
+                  width: width * 0.09,
+                  height: height * 0.15,
+                ),
+            ],
+          )
+        ],
+      ),
+    );}
 
   void nextQuestion() {
-    _changeQuestion('٠');
+    _changeQuestion('-١');
   }
 
   void changeColor() {
@@ -618,4 +750,127 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
       );
     }
   }
+
+String replaceFarsiNumber(String input) {
+    const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const farsi = ['۰', '۱', '۲', '۳', '٤', '٥', '٦', '۷', '۸', '۹'];
+
+    for (int i = 0; i < english.length; i++) {
+      input = input.replaceAll(english[i], farsi[i]);
+    }
+
+    return input;
+  }
+
+  String year() {
+    var y = replaceFarsiNumber(DateTime.now().year.toString());
+    var m = replaceFarsiNumber(DateTime.now().month.toString());
+    var d = replaceFarsiNumber(DateTime.now().day.toString());
+
+    var year = d + '/' + m + '/' + y;
+
+    return year;
+  }
+
+  String time() {
+    var h = replaceFarsiNumber(DateTime.now().hour.toString());
+    var min = replaceFarsiNumber(DateTime.now().minute.toString());
+    var s = replaceFarsiNumber(DateTime.now().second.toString());
+
+    if (h == '۱۲') {
+      h = h + " مساءً ";
+    } else if (h == '۱۳') {
+      h = '۰۱';
+      h = h + " مساءً ";
+    } else if (h == '۱٤') {
+      h = '۰۲';
+      h = h + " مساءً ";
+    } else if (h == '۱٥') {
+      h = '۰۳';
+      h = h + " مساءً ";
+    } else if (h == '۱٦') {
+      h = '۰٤';
+      h = h + " مساءً ";
+    } else if (h == '۱٧') {
+      h = '۰٥';
+      h = h + " مساءً ";
+    } else if (h == '۱۸') {
+      h = '۰٦';
+      h = h + " مساءً ";
+    } else if (h == '۱۹') {
+      h = '۰٧';
+      h = h + " مساءً ";
+    } else if (h == '۲۰') {
+      h = '۰۸';
+      h = h + " مساءً ";
+    } else if (h == '۲۱') {
+      h = '۰۹';
+      h = h + " مساءً ";
+    } else if (h == '۲۲') {
+      h = '۱۰';
+      h = h + " مساءً ";
+    } else if (h == '۲۳') {
+      h = '۱۱';
+      h = h + " مساءً ";
+    } else if (h == '۰') {
+      h = '۰۰';
+      h = h + " صباحًا ";
+    } else {
+      h = h + " صباحًا ";
+    }
+
+    if (min == '۰') {
+      min = "۰۰";
+    } else if (min == '۱') {
+      min = '۰۱';
+    } else if (min == '۲') {
+      min = '۰۲';
+    } else if (min == '۳') {
+      h = '۰۳';
+    } else if (min == '٤') {
+      min = '۰٤';
+    } else if (min == '٥') {
+      min = '۰٥';
+    } else if (min == '٦') {
+      min = '۰٦';
+    } else if (min == '٧') {
+      min = '۰٧';
+    } else if (min == '۸') {
+      min = '۰۸';
+    } else if (min == '۹') {
+      min = '۰۹';
+    }
+    if (s == '۰') {
+      s = "۰۰";
+    } else if (s == '۱') {
+      s = '۰۱';
+    } else if (s == '۲') {
+      s = '۰۲';
+    } else if (s == '۳') {
+      s = '۰۳';
+    } else if (s == '٤') {
+      s = '۰٤';
+    } else if (s == '٥') {
+      s = '۰٥';
+    } else if (s == '٦') {
+      s = '۰٦';
+    } else if (s == '٧') {
+      s = '۰٧';
+    } else if (s == '۸') {
+      s = '۰۸';
+    } else if (s == '۹') {
+      s = '۰۹';
+    }
+
+    var time = s + ' : ' + min + ' : ' + h;
+    DateTime now = new DateTime.now();
+    DateTime currentPhoneDate = DateTime.now(); //DateTime
+
+    Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate); //To TimeStamp
+
+    DateTime myDateTime = myTimeStamp.toDate(); // TimeStamp to DateTime
+    print(DateTime.now().toLocal());
+    return time;
+  }
+
 }
