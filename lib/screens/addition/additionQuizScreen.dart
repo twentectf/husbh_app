@@ -12,6 +12,10 @@ import 'dart:async';
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'additionResultScreen.dart';
 
+//for firebase
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class additionQuizScreen extends StatefulWidget {
   const additionQuizScreen({Key? key}) : super(key: key);
 
@@ -32,12 +36,15 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   get width => MediaQuery.of(context).size.width;
   get height => MediaQuery.of(context).size.height;
 
-late User user;
-final _auth=FirebaseAuth.instance;
-late User signedInUser;
-var id;
 //to convert numbers to arabic
   ArabicNumbers arabicNumber = ArabicNumbers();
+
+  //for firebase
+   late User user;
+  final _auth = FirebaseAuth.instance;
+  late User signedInUser;
+  var id;
+  //
 
   List qustions = []; //question list
   List answers = []; //answer list
@@ -80,17 +87,14 @@ var id;
   get onPressed => null;
 
   get states => null;
- 
-  
-
-
 
   void initState() {
-    TextDirection.rtl;
-    super.initState();
+    //for firebase
     onRefresh(FirebaseAuth.instance.currentUser);
     getCurrentUser();
-
+    //
+    TextDirection.rtl;
+    super.initState();
 
     //الاحاد
     //the loop will be used for the first 4 question which is the 1st level "add singles" dealing with objects
@@ -184,10 +188,9 @@ var id;
       mcq.add(ans);
     }
   }
+  //for firebase
 
-  //convert the numbers to arabic using package:arabic_numbers
-
-  onRefresh(userCare) {
+   onRefresh(userCare) {
     setState(() {
       user = userCare;
     });
@@ -205,6 +208,9 @@ var id;
       print(e);
     }
   }
+  /////
+
+  //convert the numbers to arabic using package:arabic_numbers
 
   String convertToArabic() {
     arabicX = arabicNumber.convert(x);
@@ -352,7 +358,6 @@ var id;
   }
 
   @override
-  
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
     double width = MediaQuery.of(context).size.width;
@@ -770,7 +775,6 @@ var id;
       );
     }
   }
-
 String replaceFarsiNumber(String input) {
     const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const farsi = ['۰', '۱', '۲', '۳', '٤', '٥', '٦', '۷', '۸', '۹'];
@@ -892,38 +896,5 @@ String replaceFarsiNumber(String input) {
     print(DateTime.now().toLocal());
     return time;
   }
-Map<String, dynamic> level1 = {
-                                    'score': addSinglescore, 
-                                    'year': year(),
-                                    'time': time(),
-                                  };
-                                  Map<String, dynamic> level2 = {
-                                    'score': addTensscore,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
-                                  Map<String, dynamic> level3 = {
-                                    'score': addHundredscore,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
-                                  
-
-
-                                  FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(user.uid)
-                                      .collection('Score')
-                                      .doc('Add')
-                                      .update({
-                                    'addLevel1':
-                                        FieldValue.arrayUnion([level1]),
-                                    'addLevel2':
-                                        FieldValue.arrayUnion([level2]),
-                                    'addLevel3':
-                                        FieldValue.arrayUnion([level3]),
-                                  });
 
 }
-
-
