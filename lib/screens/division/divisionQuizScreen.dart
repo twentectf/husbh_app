@@ -424,8 +424,31 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   Widget _printImageX(xValue) {
     //if value = 0 show its image
     if (xValue == 0) {
+      // return Center(
+      //   child: Text(""),
+      // );
       return Center(
-        child: Text(""),
+        child: Wrap(
+          // direction: Axis.horizontal,
+          children: <Widget>[
+            // for (var i = 0; i < xValue; i++)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                // for (var i = 0; i < yValue; i++)
+                Image.asset(
+                  objects[2],
+                  width: width * 0.09,
+                  height: height * 0.15,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: height * 0.25,
+            ),
+          ],
+        ),
       );
     }
     //else show the apples
