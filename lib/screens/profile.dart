@@ -55,7 +55,6 @@ class _ProfilePageState extends State<ProfilePage> {
   var addTotal = 0; //مجموع آخر محاولة من كل ليفيل
 
   ////////////////////////////////////
-
   //sub
   var subLevel1 = []; //طرح الآحاد
   var currentScoreSubL1 = 0;
@@ -159,46 +158,52 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> getScoreLearning() async {
-    DocumentSnapshot<Map<String, dynamic>> ADD = await FirebaseFirestore.instance
+    DocumentSnapshot<Map<String, dynamic>> ADD = await FirebaseFirestore
+        .instance
         .collection('users')
         .doc(user.uid)
-        .collection('Score').doc('Add')
+        .collection('Score')
+        .doc('Add')
         .get();
-        DocumentSnapshot<Map<String, dynamic>> SUB = await FirebaseFirestore.instance
+    DocumentSnapshot<Map<String, dynamic>> SUB = await FirebaseFirestore
+        .instance
         .collection('users')
         .doc(user.uid)
-        .collection('Score').doc('Sub')
+        .collection('Score')
+        .doc('Sub')
         .get();
-        DocumentSnapshot<Map<String, dynamic>> MUL = await FirebaseFirestore.instance
+    DocumentSnapshot<Map<String, dynamic>> MUL = await FirebaseFirestore
+        .instance
         .collection('users')
         .doc(user.uid)
-        .collection('Score').doc('Mul')
+        .collection('Score')
+        .doc('Mul')
         .get();
-        DocumentSnapshot<Map<String, dynamic>> DIV = await FirebaseFirestore.instance
+    DocumentSnapshot<Map<String, dynamic>> DIV = await FirebaseFirestore
+        .instance
         .collection('users')
         .doc(user.uid)
-        .collection('Score').doc('Div')
+        .collection('Score')
+        .doc('Div')
         .get();
 
+    addLevel1 = ADD['addLevel1'];
+    addLevel2 = ADD['addLevel2'];
+    addLevel3 = ADD['addLevel3'];
 
-        addLevel1 = ADD['addLevel1'];
-        addLevel2 = ADD['addLevel2'];
-        addLevel3 = ADD['addLevel3'];
+    subLevel1 = SUB['subLevel1'];
+    subLevel2 = SUB['subLevel2'];
+    subLevel3 = SUB['subLevel3'];
 
-        subLevel1 = SUB['subLevel1'];
-        subLevel2 = SUB['subLevel2'];
-        subLevel3 = SUB['subLevel3'];
+    mulLevel1 = MUL['mulLevel1'];
+    mulLevel2 = MUL['mulLevel2'];
+    mulLevel3 = MUL['mulLevel3'];
 
-        mulLevel1 = MUL['mulLevel1'];
-        mulLevel2 = MUL['mulLevel2'];
-        mulLevel3 = MUL['mulLevel3'];
-
-        divLevel1 = DIV['divLevel1'];
-        divLevel2 = DIV['divLevel2'];
-        divLevel3 = DIV['divLevel3'];
+    divLevel1 = DIV['divLevel1'];
+    divLevel2 = DIV['divLevel2'];
+    divLevel3 = DIV['divLevel3'];
 
     print(addLevel1[0]['time']);
-   
   }
 
   Future<void> _signOut() async {
@@ -258,7 +263,6 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: IconButton(
                                 onPressed: () async {
                                   Navigator.pop(context);
-                                  
 
                                   // add new scores to first level
                                   // addLevel1 = addLevel1 + [45];
@@ -299,14 +303,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                   //   'addLevel3':
                                   //       FieldValue.arrayUnion([level3]),
                                   // });
-
-                                  
                                 },
                                 icon: Icon(Icons.arrow_back_ios),
                                 color: Color(0xff4A4857),
                               ),
                             ),
                             //زر تسجيل الخروج
+
                             Align(
                                 alignment: Alignment.topLeft,
                                 child: Transform.rotate(
@@ -1399,175 +1402,184 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.symmetric(
-                                              horizontal: 15.0, vertical: 20),
+                                              vertical: 20),
 
                                           //النسب المئوية
-                                          child: Row(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  print('add points');
-                                                },
-                                                child:
-                                                    new CircularPercentIndicator(
-                                                  radius: 40.0,
-                                                  lineWidth: 13.0,
-                                                  animation: true,
-                                                  percent: 0.7,
-                                                  center: new Text(
-                                                    " ٧۰ %",
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 15.0,
-                                                      fontFamily: 'ReadexPro',
-                                                    ),
-                                                  ),
-                                                  footer: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 8.0),
-                                                    child: new Text(
-                                                      "عملية الجمع",
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    print('add points');
+                                                  },
+                                                  child:
+                                                      new CircularPercentIndicator(
+                                                    radius: 40.0,
+                                                    lineWidth: 13.0,
+                                                    animation: true,
+                                                    percent: 0.7,
+                                                    center: new Text(
+                                                      " ٧۰ %",
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        fontSize: 12.0,
+                                                        fontSize: 15.0,
                                                         fontFamily: 'ReadexPro',
                                                       ),
                                                     ),
-                                                  ),
-                                                  circularStrokeCap:
-                                                      CircularStrokeCap.round,
-                                                  progressColor: Colors.purple,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 15,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  print('subtraction points');
-                                                },
-                                                child:
-                                                    new CircularPercentIndicator(
-                                                  radius: 40.0,
-                                                  lineWidth: 13.0,
-                                                  animation: true,
-                                                  percent: 0.5,
-                                                  center: new Text(
-                                                    " ٥۰ %",
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 15.0,
-                                                      fontFamily: 'ReadexPro',
+                                                    footer: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: new Text(
+                                                        "عملية الجمع",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 12.0,
+                                                          fontFamily:
+                                                              'ReadexPro',
+                                                        ),
+                                                      ),
                                                     ),
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap.round,
+                                                    progressColor:
+                                                        Colors.purple,
                                                   ),
-                                                  footer: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 8.0),
-                                                    child: new Text(
-                                                      "عملية الطرح",
+                                                ),
+                                                SizedBox(
+                                                  width: 15,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    print('subtraction points');
+                                                  },
+                                                  child:
+                                                      new CircularPercentIndicator(
+                                                    radius: 40.0,
+                                                    lineWidth: 13.0,
+                                                    animation: true,
+                                                    percent: 0.5,
+                                                    center: new Text(
+                                                      " ٥۰ %",
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        fontSize: 12.0,
+                                                        fontSize: 15.0,
                                                         fontFamily: 'ReadexPro',
                                                       ),
                                                     ),
-                                                  ),
-                                                  circularStrokeCap:
-                                                      CircularStrokeCap.round,
-                                                  progressColor: Colors.green,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 15,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  print(
-                                                      'multiplication points');
-                                                },
-                                                child:
-                                                    new CircularPercentIndicator(
-                                                  radius: 40.0,
-                                                  lineWidth: 13.0,
-                                                  animation: true,
-                                                  percent: 0.35,
-                                                  center: new Text(
-                                                    " ۳٥ %",
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 15.0,
-                                                      fontFamily: 'ReadexPro',
+                                                    footer: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: new Text(
+                                                        "عملية الطرح",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 12.0,
+                                                          fontFamily:
+                                                              'ReadexPro',
+                                                        ),
+                                                      ),
                                                     ),
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap.round,
+                                                    progressColor: Colors.green,
                                                   ),
-                                                  footer: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 8.0),
-                                                    child: new Text(
-                                                      "عملية الضرب",
+                                                ),
+                                                SizedBox(
+                                                  width: 15,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    print(
+                                                        'multiplication points');
+                                                  },
+                                                  child:
+                                                      new CircularPercentIndicator(
+                                                    radius: 40.0,
+                                                    lineWidth: 13.0,
+                                                    animation: true,
+                                                    percent: 0.35,
+                                                    center: new Text(
+                                                      " ۳٥ %",
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        fontSize: 12.0,
+                                                        fontSize: 15.0,
                                                         fontFamily: 'ReadexPro',
                                                       ),
                                                     ),
-                                                  ),
-                                                  circularStrokeCap:
-                                                      CircularStrokeCap.round,
-                                                  progressColor: Colors.red,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 15,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  print('division points');
-                                                },
-                                                child:
-                                                    new CircularPercentIndicator(
-                                                  radius: 40.0,
-                                                  lineWidth: 13.0,
-                                                  animation: true,
-                                                  percent: 0.17,
-                                                  center: new Text(
-                                                    " ۱٧ %",
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 15.0,
-                                                      fontFamily: 'ReadexPro',
+                                                    footer: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: new Text(
+                                                        "عملية الضرب",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 12.0,
+                                                          fontFamily:
+                                                              'ReadexPro',
+                                                        ),
+                                                      ),
                                                     ),
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap.round,
+                                                    progressColor: Colors.red,
                                                   ),
-                                                  footer: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 8.0),
-                                                    child: new Text(
-                                                      "عملية القسمة",
+                                                ),
+                                                SizedBox(
+                                                  width: 15,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    print('division points');
+                                                  },
+                                                  child:
+                                                      new CircularPercentIndicator(
+                                                    radius: 40.0,
+                                                    lineWidth: 13.0,
+                                                    animation: true,
+                                                    percent: 0.17,
+                                                    center: new Text(
+                                                      " ۱٧ %",
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        fontSize: 12.0,
+                                                        fontSize: 15.0,
                                                         fontFamily: 'ReadexPro',
                                                       ),
                                                     ),
+                                                    footer: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8.0),
+                                                      child: new Text(
+                                                        "عملية القسمة",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 12.0,
+                                                          fontFamily:
+                                                              'ReadexPro',
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap.round,
+                                                    progressColor:
+                                                        Colors.lightBlue,
                                                   ),
-                                                  circularStrokeCap:
-                                                      CircularStrokeCap.round,
-                                                  progressColor:
-                                                      Colors.lightBlue,
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -1719,7 +1731,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Stack(
                           children: [
                             Container(
-                              height: (height / 2 + 50),
+                              height: (height / 2) + 50,
                               width: width / 4,
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -1751,14 +1763,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 30,
+                                // horizontal: 30,
                                 vertical: 10,
                               ),
                               child: SingleChildScrollView(
-                                child: Align(
+                                child: Center(
                                   // alignment: Alignment.center,
                                   child: Column(
-                                    // mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -1822,58 +1834,71 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ],
                               ),
                             ),
-                            Container(
-                              height: (height / 4) - 20,
-                              width: width / 2 - 20,
-                              decoration: BoxDecoration(
-                                color: Colors.amber.shade200,
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(160),
-                                  bottomLeft: Radius.circular(160),
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 50,
+                              ),
+                              child: Container(
+                                height: (height / 4) - 20,
+                                width: width / 2 - 20,
+                                decoration: BoxDecoration(
+                                  color: Colors.amber.shade200,
+                                  borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(160),
+                                    bottomLeft: Radius.circular(160),
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 24,
+                                  ),
+                                  child: Text(
+                                    'المستوى في المحاولات السابقة',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: 'ReadexPro',
+                                      color: Colors.brown,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 30,
-                                vertical: 0,
-                              ),
-                              child: SingleChildScrollView(
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
+                            SingleChildScrollView(
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 40,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        // horizontal: 40,
+                                        vertical: 20,
+                                      ),
+                                      child: SizedBox(
+                                        width: width * 0.25,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Center(
+                                      child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                          horizontal: 40,
-                                          vertical: 20,
+                                          horizontal: 30,
                                         ),
-                                        child: SizedBox(
-                                          width: width * 0.25,
-                                          child: Text(
-                                            'المستوى في المحاولات السابقة',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                              fontFamily: 'ReadexPro',
-                                              color: Colors.brown,
-                                              fontWeight: FontWeight.w900,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 0.0),
                                         child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: <Widget>[
                                             Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Padding(
                                                   padding:
@@ -1940,8 +1965,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           ],
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -1966,7 +1991,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Container(
-                  width: width / 2,
+                  width: width / 2 - 40,
                   height: height / 2 - 40,
                 ),
               ],
