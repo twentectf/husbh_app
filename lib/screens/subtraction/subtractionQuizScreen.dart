@@ -275,13 +275,13 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
                                      .collection('users')
                                      .doc(user.uid)
                                      .collection('Score')
-                                     .doc('Add')
+                                     .doc('Sub')
                                      .update({
-                                   'addLevel1':
+                                   'subLevel1':
                                        FieldValue.arrayUnion([level1]),
-                                   'addLevel2':
+                                   'subLevel2':
                                        FieldValue.arrayUnion([level2]),
-                                   'addLevel3':
+                                   'subLevel3':
                                        FieldValue.arrayUnion([level3]),
                                  });
       Navigator.of(context).push(
@@ -386,7 +386,7 @@ class _QuizScreenState extends State<subtractionQuizScreen> {
   }
 
   void nextQuestion() {
-    _changeQuestion('٠');
+    _changeQuestion('-١');
   }
 
   @override

@@ -377,7 +377,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   }
 
   void nextQuestion() {
-    _changeQuestion('٠');
+    _changeQuestion('-١');
   }
 
   void changeColor() {

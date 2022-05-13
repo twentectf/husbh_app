@@ -278,13 +278,13 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
                                      .collection('users')
                                      .doc(user.uid)
                                      .collection('Score')
-                                     .doc('Add')
+                                     .doc('Mul')
                                      .update({
-                                   'addLevel1':
+                                   'mulLevel1':
                                        FieldValue.arrayUnion([level1]),
-                                   'addLevel2':
+                                   'mulLevel2':
                                        FieldValue.arrayUnion([level2]),
-                                   'addLevel3':
+                                   'mulLevel3':
                                        FieldValue.arrayUnion([level3]),
                                  });
       Navigator.of(context).push(
@@ -378,7 +378,7 @@ class _QuizScreenState extends State<multiplicationQuizScreen> {
   }
 
   void nextQuestion() {
-    _changeQuestion('٠');
+    _changeQuestion('-١');
   }
 
   void changeColor() {

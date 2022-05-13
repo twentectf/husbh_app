@@ -333,6 +333,8 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
   }
 
   _changeQuestion(ans) {
+    
+
     userAnswer.add(ans);
 
     if (j + 1 >= 12) {
@@ -377,13 +379,13 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
                                      .collection('users')
                                      .doc(user.uid)
                                      .collection('Score')
-                                     .doc('Add')
+                                     .doc('Div')
                                      .update({
-                                   'addLevel1':
+                                   'divLevel1':
                                        FieldValue.arrayUnion([level1]),
-                                   'addLevel2':
+                                   'divLevel2':
                                        FieldValue.arrayUnion([level2]),
-                                   'addLevel3':
+                                   'divLevel3':
                                        FieldValue.arrayUnion([level3]),
                                  });
       Navigator.of(context).push(
@@ -468,7 +470,7 @@ class _divisionQuizScreenState extends State<divisionQuizScreen> {
     );}
 
   void nextQuestion() {
-    _changeQuestion('٠');
+    _changeQuestion('-١');
   }
 
   void changeColor() {

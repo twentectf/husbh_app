@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       //home: subtractionQuizScreen(),
       // home: multiplicationQuizScreen(),
       home: divisionQuizScreen(),
-      // home: SplashScreen(),
+      //home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       title: 'حًسبة',
       theme: ThemeData(
