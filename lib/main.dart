@@ -17,11 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //home: additionQuizScreen(),
-      //home: subtractionQuizScreen(),
-      // home: multiplicationQuizScreen(),
-      home: divisionQuizScreen(),
-      //home: SplashScreen(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       title: 'حًسبة',
       theme: ThemeData(

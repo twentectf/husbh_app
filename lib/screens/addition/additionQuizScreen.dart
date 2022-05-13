@@ -40,7 +40,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   ArabicNumbers arabicNumber = ArabicNumbers();
 
   //for firebase
-   late User user;
+  late User user;
   final _auth = FirebaseAuth.instance;
   late User signedInUser;
   var id;
@@ -190,7 +190,7 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
   }
   //for firebase
 
-   onRefresh(userCare) {
+  onRefresh(userCare) {
     setState(() {
       user = userCare;
     });
@@ -252,34 +252,31 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
         }
       }
       Map<String, dynamic> level1 = {
-                                    'score': addSinglescore, 
-                                    'year': year(),
-                                    'time': time(),
-                                  };
-                                  Map<String, dynamic> level2 = {
-                                    'score': addTensscore,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
-                                  Map<String, dynamic> level3 = {
-                                    'score':addHundredscore,
-                                    'year': year(),
-                                    'time': time(),
-                                  };
+        'score': addSinglescore,
+        'year': year(),
+        'time': time(),
+      };
+      Map<String, dynamic> level2 = {
+        'score': addTensscore,
+        'year': year(),
+        'time': time(),
+      };
+      Map<String, dynamic> level3 = {
+        'score': addHundredscore,
+        'year': year(),
+        'time': time(),
+      };
 
-  FirebaseFirestore.instance
-                                     .collection('users')
-                                     .doc(user.uid)
-                                     .collection('Score')
-                                     .doc('Add')
-                                     .update({
-                                   'addLevel1':
-                                       FieldValue.arrayUnion([level1]),
-                                   'addLevel2':
-                                       FieldValue.arrayUnion([level2]),
-                                   'addLevel3':
-                                       FieldValue.arrayUnion([level3]),
-                                 });
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection('Score')
+          .doc('Add')
+          .update({
+        'addLevel1': FieldValue.arrayUnion([level1]),
+        'addLevel2': FieldValue.arrayUnion([level2]),
+        'addLevel3': FieldValue.arrayUnion([level3]),
+      });
       //when finish navigate to the result page with the scores
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -804,7 +801,8 @@ class _additionQuizScreenState extends State<additionQuizScreen> {
       );
     }
   }
-String replaceFarsiNumber(String input) {
+
+  String replaceFarsiNumber(String input) {
     const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const farsi = ['۰', '۱', '۲', '۳', '٤', '٥', '٦', '۷', '۸', '۹'];
 
@@ -925,5 +923,4 @@ String replaceFarsiNumber(String input) {
     print(DateTime.now().toLocal());
     return time;
   }
-
 }

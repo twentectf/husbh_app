@@ -99,7 +99,7 @@ class divisionResultScreen extends StatelessWidget {
                   textDirection: TextDirection.rtl,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 25),
+                    SizedBox(height: 70),
                     Text(
                       'النتيجة',
                       textAlign: TextAlign.center,
@@ -126,14 +126,14 @@ class divisionResultScreen extends StatelessWidget {
                     SizedBox(height: 25),
                     NiceButtons(
                         stretch: false,
-                        startColor: Color.fromARGB(255, 118, 205, 64),
-                        endColor: Color.fromARGB(255, 118, 205, 64),
+                        startColor: Color.fromARGB(255, 57, 207, 40),
+                        endColor: Color.fromARGB(255, 57, 207, 40),
                         borderColor: Color.fromARGB(255, 47, 119, 48),
                         // startColor: Colors.lightBlueAccent,
                         // endColor: Colors.lightBlueAccent,
                         // borderColor: Color(0xFF3489e9),
-                        width: 250,
-                        height: 50,
+                        width: width * 0.24,
+                        height: height * 0.11,
                         borderRadius: 60.0,
                         gradientOrientation: GradientOrientation.Horizontal,
                         //Navigate to learn page
@@ -163,8 +163,8 @@ class divisionResultScreen extends StatelessWidget {
                         startColor: Color.fromARGB(255, 211, 66, 66),
                         endColor: Color.fromARGB(255, 211, 66, 66),
                         borderColor: Color.fromARGB(255, 123, 25, 25),
-                        width: 250,
-                        height: 50,
+                        width: width * 0.24,
+                        height: height * 0.11,
                         borderRadius: 60.0,
                         gradientOrientation: GradientOrientation.Horizontal,
                         //Navigate to learn page
@@ -200,16 +200,17 @@ class divisionResultScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     color: Color.fromARGB(255, 244, 247, 247),
+                    //color: Colors.black,
                   ),
                   // blur: 1,
-                  height: 120,
-                  width: 120,
+                  height: height * 0.27,
+                  width: width * 0.12,
                   child: Align(
-                    alignment: Alignment.topCenter,
+                    alignment: Alignment.center,
                     child: Image.asset(
-                      'images/rabbitresult.png',
-                      height: height * 0.22,
-                      width: width * 0.22,
+                      'images/rabbit_result.png',
+                      height: height * 0.23,
+                      width: width * 0.23,
                     ),
                   ),
                 ),
