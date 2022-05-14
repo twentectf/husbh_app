@@ -1745,26 +1745,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ],
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    // horizontal: 24,
-                                    ),
+                              child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      height: height * 0.24,
+                                      height: height * 0.15,
                                     ),
                                     currentLevel(total),
                                     SizedBox(
-                                      height: 10,
+                                      height: height * 0.015,
                                     ),
                                     currentLevelPer(currentScoreLevel1, level1),
                                     currentLevelPer(currentScoreLevel2, level2),
                                     currentLevelPer(currentScoreLevel3, level3),
-                                    // SizedBox(
-                                    //   height: 10,
-                                    // ),
+                                  
                                   ],
                                 ),
                               ),
@@ -1781,10 +1777,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   topRight: Radius.circular(20),
                                 ),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 24,
-                                ),
+                              child: Center(
                                 child: Text(
                                   'المستوى الحالي',
                                   textAlign: TextAlign.center,
@@ -1826,85 +1819,82 @@ class _ProfilePageState extends State<ProfilePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      height: height * 0.20,
+                                      height: height * 0.12,
                                     ),
                                     Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            // horizontal: 30,
-                                            ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20, bottom: 5),
-                                                  child: Text(
-                                                    year2 + '\n' + time2,
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontSize: 13,
-                                                      fontFamily: 'ReadexPro',
-                                                      color: Colors.brown,
-                                                      fontWeight:
-                                                          FontWeight.w900,
-                                                    ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.only(
+                                                        // left: 20, bottom: 5
+                                                        ),
+                                                child: Text(
+                                                  year2 + '\n' + time2,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontFamily: 'ReadexPro',
+                                                    color: Colors.brown,
+                                                    fontWeight:
+                                                        FontWeight.w900,
                                                   ),
                                                 ),
-                                                currentLevelPer(
-                                                    secondScoreLevel1, level1),
-                                                currentLevelPer(
-                                                    secondScoreLevel2, level2),
-                                                currentLevelPer(
-                                                    secondScoreLevel3, level3),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(top: 5),
-                                              color: Colors.black45,
-                                              height: height * 0.20,
-                                              width: 1,
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20, bottom: 5),
-                                                  child: Text(
-                                                    year3 + '\n' + time3,
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontSize: 13,
-                                                      fontFamily: 'ReadexPro',
-                                                      color: Colors.brown,
-                                                      fontWeight:
-                                                          FontWeight.w900,
-                                                    ),
+                                              ),
+                                              currentLevelPer(
+                                                  secondScoreLevel1, level1),
+                                              currentLevelPer(
+                                                  secondScoreLevel2, level2),
+                                              currentLevelPer(
+                                                  secondScoreLevel3, level3),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: width *0.015,
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 5),
+                                            color: Colors.black45,
+                                            height: height * 0.27,
+                                            width: 1,
+                                          ),
+                                          SizedBox(
+                                            width: width *0.015,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.only(
+                                                        // left: 20, bottom: 5
+                                                        ),
+                                                child: Text(
+                                                  year3 + '\n' + time3,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontFamily: 'ReadexPro',
+                                                    color: Colors.brown,
+                                                    fontWeight:
+                                                        FontWeight.w900,
                                                   ),
                                                 ),
-                                                currentLevelPer(
-                                                    thirdScoreLevel1, level1),
-                                                currentLevelPer(
-                                                    thirdScoreLevel2, level2),
-                                                currentLevelPer(
-                                                    thirdScoreLevel3, level3),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
+                                              ),
+                                              currentLevelPer(
+                                                  thirdScoreLevel1, level1),
+                                              currentLevelPer(
+                                                  thirdScoreLevel2, level2),
+                                              currentLevelPer(
+                                                  thirdScoreLevel3, level3),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -1923,10 +1913,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   topRight: Radius.circular(20),
                                 ),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 24,
-                                ),
+                              child: Center(
                                 child: Text(
                                   'المستوى في المحاولات السابقة',
                                   textAlign: TextAlign.center,
@@ -1960,8 +1947,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Container(
-                  width: width * 0.60,
-                  height: height * 0.80,
+                  width: width * 0.65,
+                  height: height * 0.85,
                 ),
               ],
             ),
