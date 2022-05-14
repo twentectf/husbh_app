@@ -263,11 +263,12 @@ class _ProfilePageState extends State<ProfilePage> {
                               alignment: Alignment.topRight,
                               child: IconButton(
                                 onPressed: () async {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => learn_page()),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => learn_page()),
+                                  // );
+                                  Navigator.pop(context);
 
                                   // add new scores to first level
                                   // addLevel1 = addLevel1 + [45];
