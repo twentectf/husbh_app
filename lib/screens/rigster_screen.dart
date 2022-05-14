@@ -481,7 +481,7 @@ class _RegistrationScreenSecondState extends State<RegistrationScreenSecond> {
                                             ),
                                             fillColor: Colors.white60,
                                             filled: true,
-                                            hintText: ' اسم طفلك',
+                                            hintText: ' الاسم ',
                                             hintStyle: TextStyle(
                                               fontSize: 15,
                                               fontFamily: 'ReadexPro',
@@ -519,7 +519,7 @@ class _RegistrationScreenSecondState extends State<RegistrationScreenSecond> {
                                       ),
                                       SizedBox(height: 10),
                                       Text(
-                                        "عمر طفلك",
+                                        "العمر ",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 17,
@@ -708,7 +708,7 @@ class _RegistrationScreenThirdState extends State<RegistrationScreenThird> {
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       Text(
-                                        "جنس طفلك",
+                                        " الجنس",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 20,
@@ -839,7 +839,7 @@ class _RegistrationScreenThirdState extends State<RegistrationScreenThird> {
                                                 animType: AnimType.BOTTOMSLIDE,
                                                 title: '! تنبيه',
                                                 desc:
-                                                    'قم باختيار جنس طفلك لإكمال التسجيل',
+                                                    'قم باختيار الجنس لإكمال التسجيل',
                                                 showCloseIcon: true,
                                               ).show();
                                             } else {
